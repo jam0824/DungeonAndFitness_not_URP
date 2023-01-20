@@ -126,7 +126,7 @@ public class ScenarioExec : MonoBehaviour
 
     //会話だった場合
     void CommandShowMessage(string[] line) {
-        ShowWindowCanvas();
+        ShowWindowCanvas(generalSystem);
         StartCoroutine(ShowMessage(FixMessage(line[0])));
         DebugWindow.instance.DFDebug(line[0]);
     }
@@ -150,16 +150,22 @@ public class ScenarioExec : MonoBehaviour
     }
 
     //メッセージキャンバス作成
-    void ShowWindowCanvas() {
+    void ShowWindowCanvas(GeneralSystem generalSystem) {
         if (messageCanvas == null) {
-            Vector3 addPos = gameObject.transform.forward;
-            addPos.x *= 0.5f;
-            addPos.y = MESSAGE_Y;
-            addPos.z *= 0.5f;
+            /*
+            GameObject face = generalSystem.GetFacePrefab();
+            Vector3 addPos = face.transform.forward;
+            addPos.x *= 0.8f;
+            addPos.y = - 0.5f;
+            addPos.z *= 0.8f;
             messageCanvas = generalSystem.MakeInstanceFromTarget(
-                gameObject,
+                face,
                 scenarioSystem.GetWindowCanvasPrefab(),
                 addPos);
+            */
+            messageCanvas = generalSystem.MakeInstanceBetweenTargetAndFace(
+                gameObject, 
+                scenarioSystem.GetWindowCanvasPrefab());
             messageText = messageCanvas.transform.Find("MessageText").GetComponent<Text>();
         }
         else {
@@ -259,11 +265,13 @@ public class ScenarioExec : MonoBehaviour
         StartCoroutine("ResetFlag");
     }
 
+    //各種フラグリセット
     IEnumerator ResetFlag() {
         yield return new WaitForSeconds(0.5f);
         isNowLineExecuting = false;
         isNowScenarioExec = false;
         isLookAt = false;
+        messageCanvas = null;
         scenarioSystem.SetLock(false);
     }
 

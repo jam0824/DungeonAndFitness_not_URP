@@ -114,6 +114,26 @@ public class GeneralSystem : MonoBehaviour
         return returnPrefab;
     }
 
+    //ターゲットとfaceの中間点にインスタンスを作る
+    public GameObject MakeInstanceBetweenTargetAndFace(
+        GameObject targetGameObject,
+        GameObject prefab
+     ) {
+        Vector3 targetPos = targetGameObject.transform.position;
+        Vector3 facePos = face.transform.position;
+
+        Vector3 makePos = new Vector3(
+            (targetPos.x + facePos.x)/2,
+            facePos.y - 0.2f,
+            (targetPos.z + facePos.z) / 2
+            );
+        Quaternion r = face.transform.rotation;
+        r.x = 0.0f;
+        r.z = 0.0f;
+        GameObject returnPrefab = Instantiate(prefab, makePos, r);
+        return returnPrefab;
+    }
+
     public void LookAt(GameObject target, GameObject me) {
         //あるオブジェクトから見た別のオブジェクトの方向を求める
         var direction = target.transform.position - me.transform.position;

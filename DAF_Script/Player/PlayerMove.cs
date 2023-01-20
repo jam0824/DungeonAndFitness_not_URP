@@ -13,6 +13,7 @@ public class PlayerMove : MonoBehaviour
     private float gravity = 9.8f;
     private float moveH;
     private float moveV;
+    private float rotateH;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +32,7 @@ public class PlayerMove : MonoBehaviour
     private void MoveToUseController() {
         moveH = OVRInput.Get(OVRInput.RawAxis2D.LThumbstick).x;
         moveV = OVRInput.Get(OVRInput.RawAxis2D.LThumbstick).y;
+        rotateH = OVRInput.Get(OVRInput.RawAxis2D.RThumbstick).x;
         movement = new Vector3(moveH, 0, moveV);
 
         Vector3 desiredMove =
@@ -38,19 +40,20 @@ public class PlayerMove : MonoBehaviour
         moveDir.x = desiredMove.x * 3f;
         moveDir.z = desiredMove.z * 3f;
         moveDir.y -= gravity * Time.deltaTime;
-
         controller.Move(moveDir * Time.deltaTime * speed);
 
+        //âÒì]ÅBì¸óÕílÇªÇÃÇ‹Ç‹ÇæÇ∆ë¨Ç¢ÇÃÇ≈í≤êÆ
+        transform.Rotate(new Vector3(0, rotateH * 0.5f, 0));
     }
 
     private void MoveToUseKeyboard() {
         moveH = 0.0f;
         moveV = 0.0f;
         if (Input.GetKey(KeyCode.LeftArrow)) {
-            transform.Rotate(new Vector3(0, -3, 0));
+            transform.Rotate(new Vector3(0, -2, 0));
         }
         else if (Input.GetKey(KeyCode.RightArrow)) {
-            transform.Rotate(new Vector3(0, 3, 0));
+            transform.Rotate(new Vector3(0, 2, 0));
         }
 
         if (Input.GetKey(KeyCode.DownArrow)) {
