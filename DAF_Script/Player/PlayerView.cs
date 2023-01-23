@@ -68,6 +68,7 @@ public class PlayerView : MonoBehaviour
         if ((flex > 0.7)&&(index > 0.7)) {
             if(punch.activeSelf == false) {
                 punch.SetActive(true);
+                punch.GetComponent<HandsScript>().SetIsTrigger(true);
                 GameObject shot = Instantiate(
                     config.GetPunchEnablePrefab(),
                     punch.transform.position,

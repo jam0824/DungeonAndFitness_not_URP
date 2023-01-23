@@ -152,20 +152,11 @@ public class ScenarioExec : MonoBehaviour
     //メッセージキャンバス作成
     void ShowWindowCanvas(GeneralSystem generalSystem) {
         if (messageCanvas == null) {
-            /*
-            GameObject face = generalSystem.GetFacePrefab();
-            Vector3 addPos = face.transform.forward;
-            addPos.x *= 0.8f;
-            addPos.y = - 0.5f;
-            addPos.z *= 0.8f;
-            messageCanvas = generalSystem.MakeInstanceFromTarget(
-                face,
-                scenarioSystem.GetWindowCanvasPrefab(),
-                addPos);
-            */
+            Vector3 addPos = new Vector3(0, -0.2f, 0);
             messageCanvas = generalSystem.MakeInstanceBetweenTargetAndFace(
                 gameObject, 
-                scenarioSystem.GetWindowCanvasPrefab());
+                scenarioSystem.GetWindowCanvasPrefab(),
+                addPos);
             messageText = messageCanvas.transform.Find("MessageText").GetComponent<Text>();
         }
         else {

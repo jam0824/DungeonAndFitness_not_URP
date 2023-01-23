@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyView : MonoBehaviour
 {
-    float addForce = 10000.0f;
+    float addForce = 1000.0f;
     public GameObject Player { get; set; }
     public GameObject Face { get; set; }
     public EnemyConfig enemyConfig { get; set; }
@@ -39,31 +39,31 @@ public class EnemyView : MonoBehaviour
     {
         
     }
-
-    private void OnTriggerEnter(Collider other) {
-        int damage = 0;
-        if (other.gameObject.tag == "PlayerAttack") {
-            HandsScript handsScript = other.GetComponent<HandsScript>();
-            if (handsScript.GetIsHit()) return;
-            damage = enemyDamage.Damage(other, Player, enemyConfig, Face);
+    private void OnCollisionEnter(Collision collision) {
+        if (collision.gameObject.tag == "PlayerAttack") {
+            HandsScript handsScript = collision.gameObject.GetComponent<HandsScript>();
+            //ArmorのIsTriggerをtrueにして透過するようにする
+            handsScript.SetIsTrigger(true);
+            float impact = enemyDamage.GetImpact(collision);
+            int damage = enemyDamage.Damage(collision, impact, Player, enemyConfig);
+            DebugWindow.instance.DFDebug("impact:" + impact);
             if (damage > 0) {
-                handsScript.SetIsHit(true);
+                ContactPoint contact = collision.contacts[0];
                 int hp = enemyConfig.calcHp(damage);
-                makeHitEffect(other, damage);
-                makeHitSE("NormalHitToEnemy");
-                DebugWindow.instance.DFDebug("スライムは" + damage + "のダメージ！");
-                SetDamageAnimation(hp, other);
+                makeHitEffect(contact, damage);
+                SetDamageAnimation(contact, hp, impact);
+                DebugWindow.instance.DFDebug("敵は" + damage + "のダメージ！");
             }
         }
     }
 
-    private void SetDamageAnimation(int hp, Collider other) {
+    private void SetDamageAnimation(ContactPoint contact, int hp, float impact) {
         //HPがゼロになったら
         if (hp == 0) {
             enemyMove.StopAttack();
-            enemyDamage.SetBlowOff(other, addForce);
+            SetBlowOff(contact, addForce, impact);
             enemyAnimation.setDieAnim();
-            generalSystem.PlayOneShot(audioSource, "NormalEnemyDie");
+            makeHitSE("NormalEnemyDie");
             /*
              * TODO 吹っ飛ばしたあとどういうアニメーションするか
             enemyAnimation.DieMove(
@@ -74,23 +74,34 @@ public class EnemyView : MonoBehaviour
         }
         else {
             enemyAnimation.SetDamageAnim();
+            makeHitSE("NormalHitToEnemy");
         }
     }
 
-    public void makeHitEffect(Collider other, int damage) {
-        Vector3 hitPos = other.ClosestPointOnBounds(this.transform.position);
+    //最後の吹っ飛ばし
+    public void SetBlowOff(ContactPoint contact, float addForce, float impact) {
+        Vector3 direction = contact.normal;
+        DebugWindow.instance.DFDebug("direction : " + direction);
+        direction.y += 0.3f;
+        direction.x *= addForce * (1 + impact * 0.0001f);
+        direction.y *= addForce * (1 + impact * 0.0001f);
+        direction.z *= addForce * (1 + impact * 0.0001f);
+        GetComponent<Rigidbody>().AddForce(direction, ForceMode.Impulse);
+    }
+
+    public void makeHitEffect(ContactPoint contact, int damage) {
         //向きは顔の向きを取る
         Quaternion r = Face.transform.rotation;
         r.x = 0.0f;
         r.z = 0.0f;
 
         //ダメージエフェクト
-        GameObject hit = Instantiate(PunchHitPrefab, hitPos, r);
+        GameObject hit = Instantiate(PunchHitPrefab, contact.point, r);
 
         //ダメージ数字
         GameObject damageText = Instantiate(
             generalSystem.GetPrefabDamageTextCanvas(),
-            hitPos,
+            contact.point,
             r
         );
         damageText.GetComponent<AlphaAndDestroyObject>().SetDamage(damage);

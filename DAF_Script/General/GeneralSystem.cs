@@ -117,15 +117,16 @@ public class GeneralSystem : MonoBehaviour
     //ターゲットとfaceの中間点にインスタンスを作る
     public GameObject MakeInstanceBetweenTargetAndFace(
         GameObject targetGameObject,
-        GameObject prefab
+        GameObject prefab,
+        Vector3 addPos
      ) {
         Vector3 targetPos = targetGameObject.transform.position;
         Vector3 facePos = face.transform.position;
 
         Vector3 makePos = new Vector3(
-            (targetPos.x + facePos.x)/2,
-            facePos.y - 0.2f,
-            (targetPos.z + facePos.z) / 2
+            ((targetPos.x + facePos.x)/2) + addPos.x,
+            facePos.y + addPos.y,
+            ((targetPos.z + facePos.z) / 2) + addPos.z
             );
         Quaternion r = face.transform.rotation;
         r.x = 0.0f;

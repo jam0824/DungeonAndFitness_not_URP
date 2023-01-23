@@ -42,8 +42,8 @@ public class PlayerMove : MonoBehaviour
         moveDir.y -= gravity * Time.deltaTime;
         controller.Move(moveDir * Time.deltaTime * speed);
 
-        //‰ñ“]B“ü—Í’l‚»‚Ì‚Ü‚Ü‚¾‚Æ‘¬‚¢‚Ì‚Å’²®
-        transform.Rotate(new Vector3(0, rotateH * 0.5f, 0));
+        //‰ñ“]
+        transform.Rotate(new Vector3(0, rotateH, 0));
     }
 
     private void MoveToUseKeyboard() {
