@@ -14,15 +14,21 @@ public class EnemyView : MonoBehaviour
     public GameObject PunchHitPrefab { get; set; }
     public GeneralSystem generalSystem { get; set; }
     public AudioSource audioSource { get; set; }
+    public Rigidbody rigidbody { get; set; }
+
     public bool isGameObjectLoaded = false;
+    DungeonSystem dungeonSystem;
 
 
     // Start is called before the first frame update
     void Start()
     {
         generalSystem = GameObject.Find("GeneralSystem").GetComponent<GeneralSystem>();
+        dungeonSystem = GameObject.Find("DungeonSystem").GetComponent<DungeonSystem>();
+
         Player = GameObject.Find("Player");
         Face = GameObject.Find("HitArea");
+        
 
         PunchHitPrefab = Player.GetComponent<PlayerConfig>().GetPunchHitPrefab();
 
@@ -31,6 +37,7 @@ public class EnemyView : MonoBehaviour
         enemyMove = GetComponent<EnemyMove>();
         enemyAnimation = GetComponent<EnemyAnimation>();
         audioSource = GetComponent<AudioSource>();
+        rigidbody = GetComponent<Rigidbody>();
         isGameObjectLoaded = true;
     }
 
@@ -62,6 +69,8 @@ public class EnemyView : MonoBehaviour
         if (hp == 0) {
             enemyMove.StopAttack();
             SetBlowOff(contact, addForce, impact);
+            //Freeze rotationを解除する
+            rigidbody.constraints = RigidbodyConstraints.None;
             enemyAnimation.setDieAnim();
             makeHitSE("NormalEnemyDie");
             /*
@@ -97,14 +106,9 @@ public class EnemyView : MonoBehaviour
 
         //ダメージエフェクト
         GameObject hit = Instantiate(PunchHitPrefab, contact.point, r);
-
         //ダメージ数字
-        GameObject damageText = Instantiate(
-            generalSystem.GetPrefabDamageTextCanvas(),
-            contact.point,
-            r
-        );
-        damageText.GetComponent<AlphaAndDestroyObject>().SetDamage(damage);
+        GameObject damageText = dungeonSystem.GetDamageTextFromPool();
+        damageText.GetComponent<TMP_AlphaAndDestroy>().SetDamage(damage, contact.point, r);
         
     }
 

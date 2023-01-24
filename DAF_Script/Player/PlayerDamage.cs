@@ -8,12 +8,14 @@ public class PlayerDamage : MonoBehaviour
 
     GameObject player;
     GeneralSystem generalSystem;
+    PlayerView playerView;
     AudioSource audioSource;
     // Start is called before the first frame update
+
     void Start()
     {
         generalSystem = GameObject.Find("GeneralSystem").GetComponent<GeneralSystem>();
-        
+        playerView = GameObject.Find("Player").GetComponent<PlayerView>();
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -43,7 +45,7 @@ public class PlayerDamage : MonoBehaviour
     private void MakePlayerDamageText(int damage) {
         Vector3 pos = transform.position;
         Vector3 addPos = transform.forward;
-        addPos.y = -0.5f;
+        addPos.y = -0.1f;
         pos += addPos;
 
         //Œü‚«‚ÍHitArea‚ÌŒü‚«‚ğæ‚é
@@ -52,11 +54,14 @@ public class PlayerDamage : MonoBehaviour
         r.z = 0.0f;
 
         //ƒ_ƒ[ƒW”š
+        /*
         GameObject damageText = Instantiate(
             generalSystem.GetPrefabPlayerDamageTextCanvas(),
             pos,
             r
         );
-        damageText.GetComponent<AlphaAndDestroyObject>().SetDamage(damage);
+        */
+        GameObject damageText = playerView.dungeonSystem.GetPlayerDamageTextFromPool();
+        damageText.GetComponent<TMP_AlphaAndDestroy>().SetDamage(damage, pos, r);
     }
 }

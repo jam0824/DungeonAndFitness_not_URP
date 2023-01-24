@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyDamage : MonoBehaviour
 {
-    float IMPACT_LIMIT = 2000.0f;
+    float IMPACT_LIMIT = 1000.0f;
 
     public int Damage(Collision collision, float impact, GameObject Player, EnemyConfig enemyConfig) {
         //リミット以下の速度だとダメージは0

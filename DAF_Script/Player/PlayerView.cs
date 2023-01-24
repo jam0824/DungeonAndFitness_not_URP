@@ -15,16 +15,20 @@ public class PlayerView : MonoBehaviour
     public GameObject leftPlayerPunch;
     public GameObject HitArea;
 
+    public DungeonSystem dungeonSystem { set; get; }
+
     private void Awake() {
         DontDestroyOnLoad(gameObject);
+        config = GetComponent<PlayerConfig>();
+        generalSystem = GameObject.Find("GeneralSystem").GetComponent<GeneralSystem>();
+        dungeonSystem = GameObject.Find("DungeonSystem").GetComponent<DungeonSystem>();
+        SetPlayerGameObjects();
     }
     
     // Start is called before the first frame update
     void Start()
     {
-        config = GetComponent<PlayerConfig>();
-        generalSystem = GameObject.Find("GeneralSystem").GetComponent<GeneralSystem>();
-        SetPlayerGameObjects();
+       
     }
 
     //GeneralSystemにオブジェクトを登録する

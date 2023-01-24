@@ -115,6 +115,7 @@ public class EnemyMove : MonoBehaviour
     //‘O‚É•à‚­
     void WorkForward(float walkSpeed) {
         transform.position += transform.forward * walkSpeed * Time.deltaTime;
+        //enemyView.rigidbody.AddForce(transform.forward * walkSpeed, ForceMode.Force);
         if (enemyView.enemyAnimation.GetBoolWalkAnim() == false) {
             enemyView.enemyAnimation.SetWalkAnim(true);
         }
