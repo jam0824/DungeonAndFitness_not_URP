@@ -94,6 +94,7 @@ public class GeneralSystem : MonoBehaviour
         dictSeName.Add("ItemSmallSelect", 8);
         dictSeName.Add("ItemMenuClose", 9);
         dictSeName.Add("MessageNormal", 10);
+        dictSeName.Add("NormalFoot", 11);
 
         return dictSeName;
     }

@@ -7,10 +7,12 @@ public class PlayerView : MonoBehaviour
     
     GameObject itemCanvas;
     PlayerConfig config;
-    GeneralSystem generalSystem;
+    public GeneralSystem generalSystem { get; set; }
+    public AudioSource audioSource { get; set; }
     bool isItemCanvas = false;
 
     [SerializeField]
+    public GameObject CameraC;
     public GameObject rightPlayerPunch;
     public GameObject leftPlayerPunch;
     public GameObject HitArea;
@@ -22,6 +24,7 @@ public class PlayerView : MonoBehaviour
         config = GetComponent<PlayerConfig>();
         generalSystem = GameObject.Find("GeneralSystem").GetComponent<GeneralSystem>();
         dungeonSystem = GameObject.Find("DungeonSystem").GetComponent<DungeonSystem>();
+        audioSource = CameraC.GetComponent<AudioSource>();
         SetPlayerGameObjects();
     }
     
