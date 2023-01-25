@@ -6,6 +6,8 @@ public class DungeonSystem : MonoBehaviour
 {
     public GameObject[] Enemies;
     public int ENEMY_MAX;
+    //fixupdate = 0.02ïbÅ@1ï™Ç≈3000
+    public int SPAWN_WAIT;
     public GameObject DamageTextPrefab;
     public GameObject PlayerDamageTextPrefab;
     public int DAMAGE_TEXT_NUM;
@@ -16,7 +18,7 @@ public class DungeonSystem : MonoBehaviour
     GameObject[] Floors;
     List<GameObject> ListEnemy = new List<GameObject>();
 
-    int SPAWN_WAIT = 100;
+    
     int spawnCount = 0;
 
     // Start is called before the first frame update

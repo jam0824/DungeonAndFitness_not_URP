@@ -121,19 +121,28 @@ public class GeneralSystem : MonoBehaviour
         GameObject prefab,
         Vector3 addPos
      ) {
-        Vector3 targetPos = targetGameObject.transform.position;
-        Vector3 facePos = face.transform.position;
+        Vector3 makePos = GetPosBetweenTargetAndFace(targetGameObject, addPos);
+        Quaternion r = GetQuaternionFace();
+        GameObject returnPrefab = Instantiate(prefab, makePos, r);
+        return returnPrefab;
+    }
 
-        Vector3 makePos = new Vector3(
-            ((targetPos.x + facePos.x)/2) + addPos.x,
+    public Vector3 GetPosBetweenTargetAndFace(GameObject targetGameObject, Vector3 addPos) {
+        Vector3 facePos = face.transform.position;
+        Vector3 targetPos = targetGameObject.transform.position;
+
+        return new Vector3(
+            ((targetPos.x + facePos.x) / 2) + addPos.x,
             facePos.y + addPos.y,
             ((targetPos.z + facePos.z) / 2) + addPos.z
             );
+    }
+
+    public Quaternion GetQuaternionFace() {
         Quaternion r = face.transform.rotation;
         r.x = 0.0f;
         r.z = 0.0f;
-        GameObject returnPrefab = Instantiate(prefab, makePos, r);
-        return returnPrefab;
+        return r;
     }
 
     public void LookAt(GameObject target, GameObject me) {

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ScenarioExec : MonoBehaviour
 {
@@ -25,8 +26,7 @@ public class ScenarioExec : MonoBehaviour
     bool isLookAt = false;
     
 
-    GameObject messageCanvas;
-    Text messageText;
+    TextMeshPro messageText;
     
     float messageSpeed = 0.05f;
 
@@ -151,13 +151,12 @@ public class ScenarioExec : MonoBehaviour
 
     //メッセージキャンバス作成
     void ShowWindowCanvas(GeneralSystem generalSystem) {
-        if (messageCanvas == null) {
+        if (messageText == null) {
             Vector3 addPos = new Vector3(0, -0.2f, 0);
-            messageCanvas = generalSystem.MakeInstanceBetweenTargetAndFace(
-                gameObject, 
-                scenarioSystem.GetWindowCanvasPrefab(),
-                addPos);
-            messageText = messageCanvas.transform.Find("MessageText").GetComponent<Text>();
+            Vector3 pos = generalSystem.GetPosBetweenTargetAndFace(gameObject, addPos);
+            messageText = scenarioSystem.ShowMessageWindow(
+                pos, 
+                generalSystem.GetQuaternionFace());
         }
         else {
             messageText.text = "";
@@ -166,8 +165,12 @@ public class ScenarioExec : MonoBehaviour
 
     //メッセージキャンバスクローズ
     void CloseWindowCanvas() {
+        messageText = null;
+        scenarioSystem.CloseMessageWindow();
+        /*
         Destroy(messageCanvas.gameObject);
         messageCanvas = null;
+        */
     }
 
     //select時の旗にはスクリプトでは#は付けない。飛ぶべきハタと区別がつかなくなるため
@@ -262,7 +265,7 @@ public class ScenarioExec : MonoBehaviour
         isNowLineExecuting = false;
         isNowScenarioExec = false;
         isLookAt = false;
-        messageCanvas = null;
+        messageText = null;
         scenarioSystem.SetLock(false);
     }
 

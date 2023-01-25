@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ScenarioSystem : MonoBehaviour
 {
     public GameObject WindowCanvasPrefab;
     public GameObject SelectBoxCanvasPrefab;
+    public GameObject MessageTextObject;
+    TextMeshPro messageText;
     public int[] SWITCH;
     int MAX_SWITCH_NUM = 200;
     bool isLock = false;
@@ -14,6 +17,7 @@ public class ScenarioSystem : MonoBehaviour
     void Start()
     {
         Init();
+        LoadMessageTextObject();
     }
 
     private void Init() {
@@ -21,6 +25,28 @@ public class ScenarioSystem : MonoBehaviour
         for (int i = 0; i < MAX_SWITCH_NUM; i++) {
             SWITCH[i] = 0;
         }
+    }
+
+    //初回のメッセージウィンドウロード
+    private void LoadMessageTextObject() {
+        Vector3 pos = new Vector3(-10f, -10f, -10f);
+        MessageTextObject = Instantiate(WindowCanvasPrefab, pos, transform.rotation);
+        messageText = MessageTextObject.GetComponent<TextMeshPro>();
+        MessageTextObject.SetActive(false);
+    }
+
+    //メッセージウィンドウの表示
+    public TextMeshPro ShowMessageWindow(Vector3 pos, Quaternion r) {
+        MessageTextObject.SetActive(true);
+        MessageTextObject.transform.position = pos;
+        MessageTextObject.transform.rotation = r;
+        return messageText;
+    }
+
+    //メッセージウィンドウの非表示
+    public void CloseMessageWindow() {
+        messageText.text = "";
+        MessageTextObject.SetActive(false);
     }
 
     // Update is called once per frame
