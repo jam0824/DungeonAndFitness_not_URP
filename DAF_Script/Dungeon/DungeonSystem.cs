@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DungeonSystem : MonoBehaviour
 {
+    public GameObject[] Enemies;
+    public int ENEMY_MAX;
     public GameObject DamageTextPrefab;
     public GameObject PlayerDamageTextPrefab;
     public int DAMAGE_TEXT_NUM;
@@ -11,6 +13,11 @@ public class DungeonSystem : MonoBehaviour
 
     List<GameObject> PoolDamageText;
     List<GameObject> PoolPlayerDamageText;
+    GameObject[] Floors;
+    List<GameObject> ListEnemy = new List<GameObject>();
+
+    int SPAWN_WAIT = 100;
+    int spawnCount = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +25,8 @@ public class DungeonSystem : MonoBehaviour
         //poolにオブジェクトをセット
         PoolDamageText = LoadPrefabs(DamageTextPrefab, DAMAGE_TEXT_NUM);
         PoolPlayerDamageText = LoadPrefabs(PlayerDamageTextPrefab, PLAYER_DAMAGE_TEXT_NUM);
+        Floors = GameObject.FindGameObjectsWithTag("Ground");
+        DebugWindow.instance.DFDebug("Floor数" + Floors.Length);
 
         //実際に使うときにFPSが1度だけ下がるので、一旦ここで再生をやっておく
         PlayDamageObject(PoolDamageText);
@@ -30,8 +39,42 @@ public class DungeonSystem : MonoBehaviour
         
     }
 
+    private void FixedUpdate() {
+        spawnCount += 1;
+        if (spawnCount >= SPAWN_WAIT) {
+            spawnCount = 0;
+            Spawn();
+        }
+    }
+
+    void Spawn() {
+        if (canSpawn()) {
+            int floorNo = Random.Range(0, Floors.Length);
+            int enemyNo = Random.Range(0, Enemies.Length);
+            Vector3 pos = Floors[floorNo].transform.position;
+            pos.y = 1.0f;
+            GameObject enemy = Instantiate(Enemies[enemyNo], pos, transform.rotation);
+            ListEnemy.Add(enemy);
+        }
+    }
+
+    bool canSpawn() {
+        List<GameObject> listObject = DeleteNullList(ListEnemy);
+        return (listObject.Count < ENEMY_MAX) ? true : false;
+
+    }
+
+    List<GameObject> DeleteNullList(List<GameObject> listObject) {
+        List<GameObject> listNew = new List<GameObject>();
+        foreach (GameObject obj in listObject) {
+            if (obj != null) listNew.Add(obj);
+        }
+        return listNew;
+    }
+
     //poolのDamageTextを全部起動
     public void PlayDamageObject(List<GameObject> Pool) {
+        //見えないところで
         Vector3 pos = new Vector3(-10f, -10f, -10f);
         Quaternion r = transform.rotation;
         foreach (GameObject obj in Pool) {

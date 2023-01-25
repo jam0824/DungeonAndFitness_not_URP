@@ -10,6 +10,8 @@ public class EnemyMove : MonoBehaviour
     int walkCount = 0;
     int MAX_WALK_COUNT = 600;
 
+    float DELETE_Y = -30.0f;
+
     private void Awake() {
         enemyView = GetComponent<EnemyView>();
     }
@@ -24,9 +26,13 @@ public class EnemyMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //ƒ[ƒh‚ªŠ®—¹‚µ‚Ä‚¢‚È‚©‚Á‚½‚ç–ß‚é
         if(enemyView.isGameObjectLoaded == false) {
             return;
         }
+        //‚ ‚é‚‚³‚æ‚è’á‚­‚È‚Á‚½‚ç—‚¿‚Ä‚¢‚é‚Ì‚Åíœ‚·‚é
+        if (gameObject.transform.position.y < DELETE_Y) Destroy(gameObject);
+
         state = enemyView.enemyConfig.GetEnemyState();
         float dist = FQCommon.Common.GetDistance(transform.position, enemyView.Player.transform.position);
 
@@ -60,6 +66,10 @@ public class EnemyMove : MonoBehaviour
             enemyAnimation.SetWalkAnim(false);
             StartAttack();
         }
+        //ˆê’è‹——£—£‚ê‚½‚çwalk‚É–ß‚é
+        if (dist >= enemyConfig.GetBattleEndDistance()) {
+            ChangeWalkState(enemyConfig, enemyAnimation);
+        }
     }
 
     void WhenWalk(
@@ -82,13 +92,16 @@ public class EnemyMove : MonoBehaviour
         EnemyAnimation enemyAnimation) {
 
         if (dist >= enemyConfig.GetBattleEndDistance()) {
-            DebugWindow.instance.DFDebug("StateCange:Walk");
-            enemyConfig.SetEnemyState("Walk");
-            enemyAnimation.SetWalkAnim(true);
+            ChangeWalkState(enemyConfig, enemyAnimation);
             StopAttack();
         }
+    }
 
-
+    void ChangeWalkState(EnemyConfig enemyConfig,
+        EnemyAnimation enemyAnimation) {
+        DebugWindow.instance.DFDebug("StateCange:Walk");
+        enemyConfig.SetEnemyState("Walk");
+        enemyAnimation.SetWalkAnim(true);
     }
 
     void RandomWalk(EnemyConfig enemyConfig) {
