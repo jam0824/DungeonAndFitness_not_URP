@@ -13,10 +13,11 @@ public class ItemList : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        itemNameText = gameObject.GetComponent<Text>();
+        
     }
 
-    public void Init(ItemView targetItemView) {
+    public void ItemListInit(ItemView targetItemView) {
+        itemNameText = gameObject.GetComponent<Text>();
         itemView = targetItemView;
         description = itemView.itemDescriptionText;
     }
@@ -24,6 +25,10 @@ public class ItemList : MonoBehaviour
     public void SetItemData(Dictionary<string, string> data) {
         itemData = new Dictionary<string, string>();
         itemData = data;
+    }
+
+    public void SetItemName(string itemName) {
+        itemNameText.text = itemName;
     }
 
     public void OnClick() {

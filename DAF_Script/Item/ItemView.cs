@@ -8,7 +8,7 @@ public class ItemView : MonoBehaviour
     ItemLoad itemLoad;
     ItemDB itemDb;
     //アイテム表示のそれぞれの項目
-    List<GameObject> itemListItem;
+    List<ItemList> itemListItem;
     ItemButtonAnimation itemButtonAnimation;
     GameObject itemList;
     GeneralSystem generalSystem;
@@ -41,12 +41,12 @@ public class ItemView : MonoBehaviour
     }
 
     //アイテムリスト欄の各アイテム名表示用objectを取得
-    List<GameObject> GetItemListeItemText(ItemView itemView) {
-        List<GameObject> returnList = new List<GameObject>();
+    List<ItemList> GetItemListeItemText(ItemView itemView) {
+        List<ItemList> returnList = new List<ItemList>();
         for (int i = 0; i < 10; i++) {
             string name = "ItemListItemText" + i;
-            GameObject itemList = GameObject.Find(name);
-            itemList.GetComponent<ItemList>().Init(itemView);
+            ItemList itemList = GameObject.Find(name).GetComponent<ItemList>();
+            itemList.ItemListInit(itemView);
             returnList.Add(itemList);
         }
         return returnList;

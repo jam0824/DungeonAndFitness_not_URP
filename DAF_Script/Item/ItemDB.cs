@@ -42,6 +42,7 @@ public class ItemDB : MonoBehaviour
         return itemDB;
     }
 
+    //文字列型のアイテムナンバーからアイテムのデータを返す
     public Dictionary<string, string> GetItemData(string stringItemNo) {
         Dictionary<string, string> returnData = new Dictionary<string, string>();
         foreach (Dictionary<string, string> data in itemDB) {

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ItemLoad : MonoBehaviour
 {
     ItemDB itemDB;
-    List<GameObject> ItemListItem;
+    List<ItemList> ItemListItem;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +21,7 @@ public class ItemLoad : MonoBehaviour
         int pageNo, 
         ItemDB itemDb, 
         ItemView itemView, 
-        List<GameObject> itemListItem) 
+        List<ItemList> itemListItem) 
     {
         Init(itemDb, itemView);
         ItemListItem = itemListItem;
@@ -35,7 +35,7 @@ public class ItemLoad : MonoBehaviour
         int collectionPageNo, 
         ItemDB itemDb, 
         ItemView itemView, 
-        List<GameObject> itemListItem) 
+        List<ItemList> itemListItem) 
     {
         Init(itemDb, itemView);
         ItemListItem = itemListItem;
@@ -46,7 +46,7 @@ public class ItemLoad : MonoBehaviour
     }
 
     void Init(ItemDB itemDb, ItemView iv) {
-        ItemListItem = new List<GameObject>();
+        ItemListItem = new List<ItemList>();
         itemDB = itemDb;
         ItemView itemView = iv;
 
@@ -66,17 +66,17 @@ public class ItemLoad : MonoBehaviour
     }
 
     //表示されている10件のコレクションリストを作る
-    void MakeCollectionList(List<GameObject> ItemListItem, List<bool> listHasCollection, int pageNo) {
+    void MakeCollectionList(List<ItemList> ItemListItem, List<bool> listHasCollection, int pageNo) {
         int addIndex = pageNo * 10;
         for (int i = 0; i < 10; i++) {
             int index = i + addIndex;
             if (listHasCollection[index] == false) {
-                ItemListItem[i].GetComponent<Text>().text = "No." + AddZeroString(index + 1) + " : ????";
+                ItemListItem[i].SetItemName("No." + AddZeroString(index + 1) + " : ????");
                 continue;
             }
             Dictionary<string, string> itemData = itemDB.GetItemData((index + 1).ToString());
-            ItemListItem[i].GetComponent<Text>().text = "No." + AddZeroString(index + 1) + " : " + itemData["Name"];
-            ItemListItem[i].GetComponent<ItemList>().SetItemData(itemData);
+            ItemListItem[i].SetItemName("No." + AddZeroString(index + 1) + " : " + itemData["Name"]);
+            ItemListItem[i].SetItemData(itemData);
         }
     }
 
@@ -87,19 +87,19 @@ public class ItemLoad : MonoBehaviour
     
 
     //表示されている10件のアイテムリストを作る
-    void MakeItemList(List<GameObject> ItemListItem, List<string> playerItemList, int pageNo) {
+    void MakeItemList(List<ItemList> ItemListItem, List<string> playerItemList, int pageNo) {
         int addIndex = pageNo * 10;
         for (int i = 0; i < 10; i++) {
             int index = i + addIndex;
             //アイテム所持数を超えたら空白で埋める
             if (playerItemList.Count <= index) {
-                ItemListItem[i].GetComponent<Text>().text = "";
+                ItemListItem[i].SetItemName("");
                 continue;
             }
             string stringItemNo = playerItemList[index];
             Dictionary<string, string> itemData = itemDB.GetItemData(stringItemNo);
-            ItemListItem[i].GetComponent<Text>().text = itemData["Name"];
-            ItemListItem[i].GetComponent<ItemList>().SetItemData(itemData);
+            ItemListItem[i].SetItemName(itemData["Name"]);
+            ItemListItem[i].SetItemData(itemData);
         }
 
     }
