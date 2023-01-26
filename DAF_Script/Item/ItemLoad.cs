@@ -15,21 +15,41 @@ public class ItemLoad : MonoBehaviour
 
     }
 
-    void Init() {
-        ItemListItem = new List<GameObject>();
-        itemDB = GameObject.Find("GeneralSystem").GetComponent<ItemDB>();
-        ItemView itemView = GameObject.Find("ItemList").GetComponent<ItemView>();
-        GetItemListeItemText(itemView);
 
+    //アイテムをロードする
+    public void LoadItem(
+        int pageNo, 
+        ItemDB itemDb, 
+        ItemView itemView, 
+        List<GameObject> itemListItem) 
+    {
+        Init(itemDb, itemView);
+        ItemListItem = itemListItem;
+        List<string> playerItemList = FQCommon.Common.LoadTextFile("ItemDB/PlayerItemSave");
+        MakeItemList(ItemListItem, playerItemList, pageNo);
+        itemView.ChangePagingText();
     }
 
     //コレクションデータをロード
-    public void LoadCollection(int collectionPageNo) {
-        Init();
+    public void LoadCollection(
+        int collectionPageNo, 
+        ItemDB itemDb, 
+        ItemView itemView, 
+        List<GameObject> itemListItem) 
+    {
+        Init(itemDb, itemView);
+        ItemListItem = itemListItem;
         List<string> playerCollectionList = FQCommon.Common.LoadTextFile("ItemDB/PlayerCollectionSave");
         List<bool> listHasCollection = GetListHasCollection(playerCollectionList);
         MakeCollectionList(ItemListItem, listHasCollection, collectionPageNo);
-        GetComponent<ItemView>().ChangePagingText();
+        itemView.ChangePagingText();
+    }
+
+    void Init(ItemDB itemDb, ItemView iv) {
+        ItemListItem = new List<GameObject>();
+        itemDB = itemDb;
+        ItemView itemView = iv;
+
     }
 
     //コレクションは一回全部falseで埋めた後、持っているものだけtrueにする
@@ -65,31 +85,13 @@ public class ItemLoad : MonoBehaviour
         return no.ToString("000");
     }
     
-    //アイテムをロードする
-    public void LoadItem(int pageNo) {
-        Init();
-        List<string> playerItemList = FQCommon.Common.LoadTextFile("ItemDB/PlayerItemSave");
-        MakeItemList(ItemListItem, playerItemList, pageNo);
-        GetComponent<ItemView>().ChangePagingText();
-    }
-
-    
-
-    //アイテムリスト欄の各アイテム名表示用objectを取得
-    void GetItemListeItemText(ItemView itemView) {
-        for (int i = 0; i < 10; i++) {
-            string name = "ItemListItemText" + i;
-            GameObject itemList = GameObject.Find(name);
-            itemList.GetComponent<ItemList>().Init(itemView);
-            ItemListItem.Add(itemList);
-        }
-    }
 
     //表示されている10件のアイテムリストを作る
     void MakeItemList(List<GameObject> ItemListItem, List<string> playerItemList, int pageNo) {
         int addIndex = pageNo * 10;
         for (int i = 0; i < 10; i++) {
             int index = i + addIndex;
+            //アイテム所持数を超えたら空白で埋める
             if (playerItemList.Count <= index) {
                 ItemListItem[i].GetComponent<Text>().text = "";
                 continue;

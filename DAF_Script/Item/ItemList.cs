@@ -8,16 +8,17 @@ public class ItemList : MonoBehaviour
     Dictionary<string, string> itemData;
     Text description;
     ItemView itemView;
+    Text itemNameText;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        itemNameText = gameObject.GetComponent<Text>();
     }
 
     public void Init(ItemView targetItemView) {
         itemView = targetItemView;
-        description = GameObject.Find("ItemDescriptionText").GetComponent<Text>();
+        description = itemView.itemDescriptionText;
     }
 
     public void SetItemData(Dictionary<string, string> data) {
@@ -26,8 +27,8 @@ public class ItemList : MonoBehaviour
     }
 
     public void OnClick() {
-        if (gameObject.GetComponent<Text>().text == "") return;
-        if (HasInString(gameObject.GetComponent<Text>().text,"????")) return;
+        if (itemNameText.text == "") return;
+        if (HasInString(itemNameText.text,"????")) return;
         description.text = MakeDescription(itemData);
         itemView.PlayOneShot("ItemSmallSelect");
     }

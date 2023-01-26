@@ -12,20 +12,37 @@ public class GeneralSystem : MonoBehaviour
     GameObject face;
     GameObject rightPlayerPunch;
     GameObject leftPlayerPunch;
+    public GameObject ItemWindow { set; get; }
 
     public List<AudioClip> listBattleSE;
 
     Dictionary<string, int> dictSeName;
 
+    ItemDB itemDb;
+
+    public AudioSource audioSource { set; get; }
+
 
     void Awake() {
         //OVRManager.tiledMultiResLevel = OVRManager.TiledMultiResLevel.LMSHigh;
+        GeneralInit();
         SetDictSeName();
     }
     // Start is called before the first frame update
     void Start()
     {
         
+    }
+
+    //全体的な初期化
+    void GeneralInit() {
+        //ItemDBのロード
+        itemDb = GetComponent<ItemDB>();
+        itemDb.ItemDbInit();
+
+        //ItemWindowの事前作成
+        LoadItemWindow();
+
     }
 
     public GameObject GetPlayerPrefab() {
@@ -73,7 +90,7 @@ public class GeneralSystem : MonoBehaviour
     }
     public void PlayOneShotNoAudioSource(string SeName) {
         AudioClip audioClip = GetSE(SeName);
-        player.GetComponent<AudioSource>().PlayOneShot(audioClip);
+        audioSource.PlayOneShot(audioClip);
     }
 
     AudioClip GetSE(string SeName) {
@@ -152,5 +169,11 @@ public class GeneralSystem : MonoBehaviour
 
         var lookRotation = Quaternion.LookRotation(direction, Vector3.up);
         me.transform.rotation = Quaternion.Lerp(me.transform.rotation, lookRotation, 0.1f);
+    }
+
+    void LoadItemWindow() {
+        Vector3 pos = new Vector3(-10f, -10f, -10f);
+        ItemWindow = Instantiate(ItemCanvas, pos, transform.rotation);
+        ItemWindow.SetActive(false);
     }
 }

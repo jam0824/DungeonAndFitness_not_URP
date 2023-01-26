@@ -40,12 +40,6 @@ public class EnemyAnimation : MonoBehaviour
         anim.SetTrigger("Die");
     }
 
-    public void DieMove(float hight, float deleteTime) {
-        Vector3 pos = gameObject.transform.position;
-        pos.y -= hight;
-        transform.DOMove(pos, deleteTime).OnComplete(() => DieDestroy());
-    }
-
     public void DieDestroy() {
         Destroy(gameObject);
     }

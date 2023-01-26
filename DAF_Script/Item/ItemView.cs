@@ -6,12 +6,16 @@ using UnityEngine.UI;
 public class ItemView : MonoBehaviour
 {
     ItemLoad itemLoad;
+    ItemDB itemDb;
+    //アイテム表示のそれぞれの項目
+    List<GameObject> itemListItem;
     ItemButtonAnimation itemButtonAnimation;
     GameObject itemList;
     GeneralSystem generalSystem;
     PlayerConfig playerConfig;
     Text itemListPagingText;
-    AudioSource audioSource;
+    
+    public Text itemDescriptionText { set; get; }
     string nowListName = "Backpack";
     int pageNo = 0;
     int collectionPageNo = 0;
@@ -19,26 +23,44 @@ public class ItemView : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        generalSystem = GameObject.Find("GeneralSystem").GetComponent<GeneralSystem>();
+        GameObject generalSystemObject = GameObject.Find("GeneralSystem");
+        generalSystem = generalSystemObject.GetComponent<GeneralSystem>();
+        itemDb = generalSystem.GetComponent<ItemDB>();
+
+        playerConfig = GameObject.Find("Player").GetComponent<PlayerConfig>();
+        itemListPagingText = GameObject.Find("ItemListPagingText").GetComponent<Text>();
+        itemDescriptionText = GameObject.Find("ItemDescriptionText").GetComponent<Text>();
+
+        itemListItem = GetItemListeItemText(this);
         itemLoad = GetComponent<ItemLoad>();
         itemButtonAnimation = GetComponent<ItemButtonAnimation>();
         itemButtonAnimation.Init();
         itemList = GameObject.Find("ItemList");
-        playerConfig = GameObject.Find("Player").GetComponent<PlayerConfig>();
-        itemListPagingText = GameObject.Find("ItemListPagingText").GetComponent<Text>();
-        
-        audioSource = GetComponent<AudioSource>();
 
         OnClickBackpack();
     }
 
+    //アイテムリスト欄の各アイテム名表示用objectを取得
+    List<GameObject> GetItemListeItemText(ItemView itemView) {
+        List<GameObject> returnList = new List<GameObject>();
+        for (int i = 0; i < 10; i++) {
+            string name = "ItemListItemText" + i;
+            GameObject itemList = GameObject.Find(name);
+            itemList.GetComponent<ItemList>().Init(itemView);
+            returnList.Add(itemList);
+        }
+        return returnList;
+    }
+
+    //アイテムウィンドウを閉じる
     public void OnClickClose() {
         generalSystem.PlayOneShotNoAudioSource("ItemMenuClose");
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     public void OnClickItemListNext() {
-        generalSystem.PlayOneShot(audioSource, "ItemSmallSelect");
+        generalSystem.PlayOneShotNoAudioSource("ItemSmallSelect");
         if (nowListName == "Backpack") {
             if (pageNo < playerConfig.GetMaxPageNo() - 1) {
                 pageNo++;
@@ -46,7 +68,7 @@ public class ItemView : MonoBehaviour
             else {
                 pageNo = 0;
             }
-            itemLoad.LoadItem(pageNo);
+            itemLoad.LoadItem(pageNo, itemDb, this, itemListItem);
         }
         else if (nowListName == "Collection") {
             if (collectionPageNo < 9) {
@@ -55,12 +77,12 @@ public class ItemView : MonoBehaviour
             else {
                 collectionPageNo = 0;
             }
-            itemLoad.LoadCollection(collectionPageNo);
+            itemLoad.LoadCollection(collectionPageNo, itemDb, this, itemListItem);
         }
     }
 
     public void OnClickItemListPrev() {
-        generalSystem.PlayOneShot(audioSource, "ItemSmallSelect");
+        generalSystem.PlayOneShotNoAudioSource("ItemSmallSelect");
         if (nowListName == "Backpack") {
             if (pageNo > 0) {
                 pageNo--;
@@ -68,7 +90,7 @@ public class ItemView : MonoBehaviour
             else {
                 pageNo = playerConfig.GetMaxPageNo() - 1;
             }
-            itemLoad.LoadItem(pageNo);
+            itemLoad.LoadItem(pageNo, itemDb, this, itemListItem);
         }
         else if (nowListName == "Collection") {
             if (collectionPageNo > 0) {
@@ -77,7 +99,7 @@ public class ItemView : MonoBehaviour
             else {
                 collectionPageNo = 9;
             }
-            itemLoad.LoadCollection(collectionPageNo);
+            itemLoad.LoadCollection(collectionPageNo, itemDb, this, itemListItem);
         }
         
     }
@@ -86,14 +108,14 @@ public class ItemView : MonoBehaviour
         nowListName = "Backpack";
         itemList.SetActive(true);
         ChangeHeaderButtonActive(nowListName);
-        itemLoad.LoadItem(pageNo);
+        itemLoad.LoadItem(pageNo, itemDb, this, itemListItem);
     }
 
     public void OnClickCollection() {
         nowListName = "Collection";
         itemList.SetActive(true);
         ChangeHeaderButtonActive(nowListName);
-        itemLoad.LoadCollection(collectionPageNo);
+        itemLoad.LoadCollection(collectionPageNo, itemDb, this, itemListItem);
     }
 
     public void OnClickStatus() {
@@ -109,7 +131,7 @@ public class ItemView : MonoBehaviour
     }
 
     void ChangeHeaderButtonActive(string nowListName) {
-        generalSystem.PlayOneShot(audioSource, "ItemBigSelect");
+        generalSystem.PlayOneShotNoAudioSource("ItemBigSelect");
         itemButtonAnimation.ChangeHeaderButtonsActive(nowListName);
     }
 
@@ -119,6 +141,7 @@ public class ItemView : MonoBehaviour
         return pageNo;
     }
 
+    //上部の1/2みたいなページ表示
     public void ChangePagingText() {
         if (nowListName == "Backpack") {
             itemListPagingText.text = (pageNo + 1) + "/" + playerConfig.GetMaxPageNo();
@@ -129,7 +152,7 @@ public class ItemView : MonoBehaviour
     }
 
     public void PlayOneShot(string seName) {
-        generalSystem.PlayOneShot(audioSource, seName);
+        generalSystem.PlayOneShotNoAudioSource(seName);
     }
 
 

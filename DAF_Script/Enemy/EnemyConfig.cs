@@ -18,6 +18,7 @@ public class EnemyConfig : MonoBehaviour
     public float BATTLE_DISTANCE;
     public float BATTLE_END_DISTANCE;
     public GameObject PREFAB_ATTACK;
+    public GameObject PREFAB_DIE_EFFECT;
 
     private int nowHp;
     private int nowMp;
@@ -90,6 +91,9 @@ public class EnemyConfig : MonoBehaviour
     }
     public GameObject GetPrefabAttack() {
         return PREFAB_ATTACK;
+    }
+    public GameObject GetPrefabEnemyDieEffect() {
+        return PREFAB_DIE_EFFECT;
     }
 
     public string GetEnemyState() {

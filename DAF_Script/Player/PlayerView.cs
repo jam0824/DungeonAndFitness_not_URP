@@ -5,11 +5,9 @@ using UnityEngine;
 public class PlayerView : MonoBehaviour
 {
     
-    GameObject itemCanvas;
     PlayerConfig config;
     public GeneralSystem generalSystem { get; set; }
     public AudioSource audioSource { get; set; }
-    bool isItemCanvas = false;
 
     [SerializeField]
     public GameObject CameraC;
@@ -40,6 +38,7 @@ public class PlayerView : MonoBehaviour
         generalSystem.SetFacePrefab(HitArea);
         generalSystem.SetLeftArmorPrefab(leftPlayerPunch);
         generalSystem.SetRightArmorPrefab(rightPlayerPunch);
+        generalSystem.audioSource = audioSource;
     }
 
     // Update is called once per frame
@@ -93,25 +92,21 @@ public class PlayerView : MonoBehaviour
     
     //メニュー表示本体
     void EnableItemCanvas(GameObject face) {
-        if (isItemCanvas) {
-            isItemCanvas = false;
-            itemCanvas.GetComponent<ItemView>().OnClickClose();
+        if (generalSystem.ItemWindow.activeSelf) {
+            generalSystem.ItemWindow.GetComponent<ItemView>().OnClickClose();
             return;
         }
         Vector3 pos = face.transform.position;
         Vector3 addPos = face.transform.forward;
-        addPos.y = 1.5f;
+        addPos.y = 0f;
         pos += addPos;
 
         Quaternion r = face.transform.rotation;
         r.x = 0.0f;
         r.z = 0.0f;
-        itemCanvas = Instantiate(
-            generalSystem.GetItemCanvas(),
-            pos,
-            r
-        );
-        isItemCanvas = true;
+        generalSystem.ItemWindow.SetActive(true);
+        generalSystem.ItemWindow.transform.position = pos;
+        generalSystem.ItemWindow.transform.rotation = r;
     }
 
 

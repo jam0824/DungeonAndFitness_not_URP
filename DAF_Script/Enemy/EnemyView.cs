@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyView : MonoBehaviour
 {
     float addForce = 1000.0f;
+    float BLOW_OFF_IMPACT = 2000.0f;
     public GameObject Player { get; set; }
     public GameObject Face { get; set; }
     public EnemyConfig enemyConfig { get; set; }
@@ -68,23 +69,32 @@ public class EnemyView : MonoBehaviour
         //HPがゼロになったら
         if (hp == 0) {
             enemyMove.StopAttack();
-            SetBlowOff(contact, addForce, impact);
             //Freeze rotationを解除する
             rigidbody.constraints = RigidbodyConstraints.None;
-            enemyAnimation.setDieAnim();
-            makeHitSE("NormalEnemyDie");
-            /*
-             * TODO 吹っ飛ばしたあとどういうアニメーションするか
-            enemyAnimation.DieMove(
-                enemyConfig.GetHight(),
-                enemyConfig.GetDeleteTime()
-            );
-            */
+            if (impact > BLOW_OFF_IMPACT) {
+                SetBlowOff(contact, addForce, impact);
+                StartCoroutine(DeleteEnemy(5.0f));
+            }
+            else {
+                enemyAnimation.setDieAnim();
+                makeHitSE("NormalEnemyDie");
+                StartCoroutine(DeleteEnemy(1.5f));
+            }
         }
         else {
             enemyAnimation.SetDamageAnim();
             makeHitSE("NormalHitToEnemy");
         }
+    }
+
+    //敵が死んだときの爆発エフェクトとdestroy
+    IEnumerator DeleteEnemy(float waitTime) {
+        yield return new WaitForSeconds(waitTime);
+        Instantiate(
+            enemyConfig.GetPrefabEnemyDieEffect(), 
+            gameObject.transform.position, 
+            gameObject.transform.rotation);
+        Destroy(gameObject);
     }
 
     //最後の吹っ飛ばし

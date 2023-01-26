@@ -8,9 +8,7 @@ public class ItemDB : MonoBehaviour
     List<Dictionary<string, string>> itemDB = new List<Dictionary<string, string>>();
 
     private void Awake() {
-        itemDB = MakeItemDB(
-            FQCommon.Common.LoadCsvFile("ItemDB/ItemDB")
-        );
+        
         
     }
     // Start is called before the first frame update
@@ -23,6 +21,12 @@ public class ItemDB : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void ItemDbInit() {
+        itemDB = MakeItemDB(
+            FQCommon.Common.LoadCsvFile("ItemDB/ItemDB")
+        );
     }
 
     public List<Dictionary<string, string>> MakeItemDB(List<string[]> csvDatas) {
