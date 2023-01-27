@@ -8,10 +8,12 @@ public class DungeonSystem : MonoBehaviour
     public int ENEMY_MAX;
     //fixupdate = 0.02秒　1分で3000
     public int SPAWN_WAIT;
+    public string[] DUNGEON_DROP_ITEMS_NO;
     public GameObject DamageTextPrefab;
     public GameObject PlayerDamageTextPrefab;
     public int DAMAGE_TEXT_NUM;
     public int PLAYER_DAMAGE_TEXT_NUM;
+    public ItemDB itemDb { set; get; }
 
     List<GameObject> PoolDamageText;
     List<GameObject> PoolPlayerDamageText;
@@ -24,6 +26,7 @@ public class DungeonSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        itemDb = GameObject.Find("GeneralSystem").GetComponent<ItemDB>();
         //poolにオブジェクトをセット
         PoolDamageText = LoadPrefabs(DamageTextPrefab, DAMAGE_TEXT_NUM);
         PoolPlayerDamageText = LoadPrefabs(PlayerDamageTextPrefab, PLAYER_DAMAGE_TEXT_NUM);
@@ -49,6 +52,7 @@ public class DungeonSystem : MonoBehaviour
         }
     }
 
+    //敵キャラをスポーンする
     void Spawn() {
         if (canSpawn()) {
             int floorNo = Random.Range(0, Floors.Length);
@@ -60,18 +64,26 @@ public class DungeonSystem : MonoBehaviour
         }
     }
 
+    //敵キャラがMAXだったらfalseを返す。
     bool canSpawn() {
         List<GameObject> listObject = DeleteNullList(ListEnemy);
         return (listObject.Count < ENEMY_MAX) ? true : false;
 
     }
 
+    //死んだ敵はnullになるので、それらを抜いたリストを返す
     List<GameObject> DeleteNullList(List<GameObject> listObject) {
         List<GameObject> listNew = new List<GameObject>();
         foreach (GameObject obj in listObject) {
             if (obj != null) listNew.Add(obj);
         }
         return listNew;
+    }
+
+    //そのダンジョンに設定されたアイテムNOをランダムで返す。
+    public string GetItemNo() {
+        int no = Random.Range(0, DUNGEON_DROP_ITEMS_NO.Length);
+        return DUNGEON_DROP_ITEMS_NO[no];
     }
 
     //poolのDamageTextを全部起動

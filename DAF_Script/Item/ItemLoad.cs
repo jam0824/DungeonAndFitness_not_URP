@@ -25,7 +25,7 @@ public class ItemLoad : MonoBehaviour
     {
         Init(itemDb, itemView);
         ItemListItem = itemListItem;
-        List<string> playerItemList = FQCommon.Common.LoadTextFile("ItemDB/PlayerItemSave");
+        List<string> playerItemList = FQCommon.Common.LoadSaveFile("PlayerItemSave.txt");
         MakeItemList(ItemListItem, playerItemList, pageNo);
         itemView.ChangePagingText();
     }
@@ -39,7 +39,7 @@ public class ItemLoad : MonoBehaviour
     {
         Init(itemDb, itemView);
         ItemListItem = itemListItem;
-        List<string> playerCollectionList = FQCommon.Common.LoadTextFile("ItemDB/PlayerCollectionSave");
+        List<string> playerCollectionList = FQCommon.Common.LoadSaveFile("PlayerCollectionSave.txt");
         List<bool> listHasCollection = GetListHasCollection(playerCollectionList);
         MakeCollectionList(ItemListItem, listHasCollection, collectionPageNo);
         itemView.ChangePagingText();

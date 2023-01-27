@@ -14,6 +14,7 @@ public class PlayerView : MonoBehaviour
     public GameObject rightPlayerPunch;
     public GameObject leftPlayerPunch;
     public GameObject HitArea;
+    public GameObject ItemBoxObject;
 
     public DungeonSystem dungeonSystem { set; get; }
 
@@ -24,12 +25,13 @@ public class PlayerView : MonoBehaviour
         dungeonSystem = GameObject.Find("DungeonSystem").GetComponent<DungeonSystem>();
         audioSource = CameraC.GetComponent<AudioSource>();
         SetPlayerGameObjects();
+        
     }
     
     // Start is called before the first frame update
     void Start()
     {
-       
+        //FQCommon.Common.AppendStringFile("PlayerItemSave.txt", "101");
     }
 
     //GeneralSystemにオブジェクトを登録する
@@ -64,8 +66,16 @@ public class PlayerView : MonoBehaviour
     //メニュー表示
     void setEnableItemCanvas() {
         if ((OVRInput.GetDown(OVRInput.RawButton.Y))
-            || (Input.GetKeyDown(KeyCode.A))) {
+            || (Input.GetKeyDown(KeyCode.Q))) {
             EnableItemCanvas(HitArea);
+        }
+    }
+
+    //ItemBoxを表示する。ItemBagなどから呼ばれる。
+    public void SetEnableItemBox() {
+        if ((Input.GetKeyDown(KeyCode.A))
+            || (OVRInput.GetDown(OVRInput.RawButton.A))) {
+            EnableItemBox(HitArea);
         }
     }
 
@@ -107,6 +117,12 @@ public class PlayerView : MonoBehaviour
         generalSystem.ItemWindow.SetActive(true);
         generalSystem.ItemWindow.transform.position = pos;
         generalSystem.ItemWindow.transform.rotation = r;
+    }
+
+    //ItemBox表示本体
+    void EnableItemBox(GameObject face) {
+        Vector3 addPos = new Vector3(1.3f,0.7f,1.3f);
+        GameObject itemBox = generalSystem.MakeInstanceFromTarget(face, ItemBoxObject, addPos);
     }
 
 

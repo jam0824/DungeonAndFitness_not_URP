@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GeneralSystem : MonoBehaviour
 {
+    public string NORMAL_ITEM_SAVE_PATH;
+    public string COLLECTION_ITEM_SAVE_PATH;
     public GameObject ItemCanvas;
     public GameObject DamageTextCanvas;
     public GameObject PlayerDamageTextCanvas;
@@ -13,6 +15,7 @@ public class GeneralSystem : MonoBehaviour
     GameObject rightPlayerPunch;
     GameObject leftPlayerPunch;
     public GameObject ItemWindow { set; get; }
+    public List<Dictionary<string, string>> labelDB;
 
     public List<AudioClip> listBattleSE;
 
@@ -21,10 +24,12 @@ public class GeneralSystem : MonoBehaviour
     ItemDB itemDb;
 
     public AudioSource audioSource { set; get; }
+    public string LanguageMode { set; get; }
 
 
     void Awake() {
         //OVRManager.tiledMultiResLevel = OVRManager.TiledMultiResLevel.LMSHigh;
+        LanguageMode = "japanese";
         GeneralInit();
         SetDictSeName();
     }
@@ -36,6 +41,8 @@ public class GeneralSystem : MonoBehaviour
 
     //全体的な初期化
     void GeneralInit() {
+        //Labelのロード
+        labelDB = LoadLabelDB(FQCommon.Common.LoadCsvFile("LabelDB/LabelDB"));
         //ItemDBのロード
         itemDb = GetComponent<ItemDB>();
         itemDb.ItemDbInit();
@@ -93,6 +100,13 @@ public class GeneralSystem : MonoBehaviour
         audioSource.PlayOneShot(audioClip);
     }
 
+    public string GetNormalItemSavePath() {
+        return NORMAL_ITEM_SAVE_PATH;
+    }
+    public string GetCollectionItemSavePath() {
+        return COLLECTION_ITEM_SAVE_PATH;
+    }
+
     AudioClip GetSE(string SeName) {
         int no = dictSeName[SeName];
         return listBattleSE[no];
@@ -124,7 +138,11 @@ public class GeneralSystem : MonoBehaviour
      ) {
 
         Vector3 pos = targetGameObject.transform.position;
-        pos += addPos;
+        pos.x *= addPos.x;
+        pos.y *= addPos.y;
+        pos.z *= addPos.z;
+        //pos += addPos;
+
         Quaternion r = face.transform.rotation;
         r.x = 0.0f;
         r.z = 0.0f;
@@ -175,5 +193,31 @@ public class GeneralSystem : MonoBehaviour
         Vector3 pos = new Vector3(-10f, -10f, -10f);
         ItemWindow = Instantiate(ItemCanvas, pos, transform.rotation);
         ItemWindow.SetActive(false);
+    }
+
+    //LabelDBをロードしてdictionary型のlistにして返す
+    public List<Dictionary<string, string>> LoadLabelDB(List<string[]> csvDatas) {
+        List<Dictionary<string, string>> labelDB = new List<Dictionary<string, string>>();
+        foreach (string[] data in csvDatas) {
+            if (data[0] == "key") continue;
+            Dictionary<string, string> itemData = new Dictionary<string, string>();
+            for (int i = 0; i < data.Length; i++) {
+                itemData[csvDatas[0][i]] = data[i];
+            }
+            labelDB.Add(itemData);
+        }
+        return labelDB;
+    }
+
+    //keyからLanguageModeの言語のラベルを返す
+    public string GetLabel(string key) {
+        string returnData = "";
+        foreach (Dictionary<string, string> data in labelDB) {
+            if (data["key"] == key) {
+                returnData = data[LanguageMode];
+                break;
+            }
+        }
+        return returnData;
     }
 }

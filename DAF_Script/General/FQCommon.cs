@@ -51,5 +51,40 @@ namespace FQCommon
             }
             return textDatas;
         }
+
+        //ファイルリード。ファイルがない場合は空ファイルを作成する
+        static public List<string> LoadSaveFile(string fileName) {
+            List<string> textDatas = new List<string>();
+            string path = Application.persistentDataPath + "/" + fileName;
+            //ファイルが存在しない場合、そのファイルを作って空のListを返す。
+            if (System.IO.File.Exists(path) == false) {
+                File.AppendAllText(path, "");
+                return textDatas;
+            }
+            string data = File.ReadAllText(path);
+            data = data.Replace("\r", "");
+            string[] lines = data.Split("\n");
+            textDatas.AddRange(lines);
+            return DeleteBlankList(textDatas);
+        }
+
+        //空のリストを削除する
+        static List<string> DeleteBlankList(List<string> list) {
+            List<string> returnList = new List<string>();
+            foreach (string tmp in list) {
+                if (tmp == "") continue;
+                returnList.Add(tmp);
+            }
+            return returnList;
+        }
+
+        //追記でセーブする
+        static public void AppendStringFile(string fileName, string addString) {
+            string path = Application.persistentDataPath + "/" + fileName;
+            Debug.Log("save path:" + path);
+            File.AppendAllText(path, addString + "\n");
+        }
+
+
     }
 }

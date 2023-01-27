@@ -53,4 +53,12 @@ public class ItemDB : MonoBehaviour
         }
         return returnData;
     }
+
+    //アイテムデータから文字列を作成し返す。
+    public string MakeDescription(Dictionary<string, string> itemData) {
+        string returnData = "Rank : " + itemData["Rank"] + "\n";
+        returnData += itemData["Name"] + "\n\n";
+        returnData += itemData["Description"];
+        return returnData;
+    }
 }

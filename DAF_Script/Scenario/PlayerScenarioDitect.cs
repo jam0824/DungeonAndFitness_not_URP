@@ -24,7 +24,7 @@ public class PlayerScenarioDitect : MonoBehaviour
 
         //lockがかかっているならイベント中なので、確保したprefabのイベントを進める
         if (scenarioSystem.GetLock()) {
-            if ((Input.GetKeyDown(KeyCode.Q)) || (OVRInput.GetDown(OVRInput.RawButton.A))) {
+            if ((Input.GetKeyDown(KeyCode.A)) || (OVRInput.GetDown(OVRInput.RawButton.A))) {
                 ScenarioExec scenarioExec = isNowScenarioExecPrefab.gameObject.GetComponent<ScenarioExec>();
                 //1行実行中に重複で実行させない
                 if (!scenarioExec.GetIsNowLineExecuting()) scenarioExec.ScenarioExecution();
