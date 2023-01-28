@@ -13,14 +13,8 @@ public class ItemBox : MonoBehaviour
     public int activeCount = 0;
     GeneralSystem generalSystem;
 
-    private void Awake() {
+    public void ItemBoxInit() {
         generalSystem = GameObject.Find("GeneralSystem").GetComponent<GeneralSystem>();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-       
     }
 
     //ItemBox‹N“®Žž‚ÉŒÄ‚Î‚ê‚é

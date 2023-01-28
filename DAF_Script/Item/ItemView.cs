@@ -21,8 +21,7 @@ public class ItemView : MonoBehaviour
     int collectionPageNo = 0;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    public void ItemViewInit() {
         GameObject generalSystemObject = GameObject.Find("GeneralSystem");
         generalSystem = generalSystemObject.GetComponent<GeneralSystem>();
         itemDb = generalSystem.GetComponent<ItemDB>();
@@ -37,7 +36,20 @@ public class ItemView : MonoBehaviour
         itemButtonAnimation.Init();
         itemList = GameObject.Find("ItemList");
 
-        OnClickBackpack();
+        LoadBackpack();
+    }
+
+    //一番最初のロード用（SEをつけたくなかった）
+    public void LoadBackpack() {
+        nowListName = "Backpack";
+        itemList.SetActive(true);
+        itemButtonAnimation.ChangeHeaderButtonsActive(nowListName);
+        itemLoad.LoadItem(pageNo, itemDb, this, itemListItem);
+    }
+
+    void Start()
+    {
+        
     }
 
     //アイテムリスト欄の各アイテム名表示用objectを取得
@@ -52,11 +64,22 @@ public class ItemView : MonoBehaviour
         return returnList;
     }
 
+    //アイテムウィンドウを開く
+    public void EnableItemWindow(Vector3 pos, Quaternion r) {
+        gameObject.SetActive(true);
+        gameObject.transform.position = pos;
+        gameObject.transform.rotation = r;
+    }
+
     //アイテムウィンドウを閉じる
     public void OnClickClose() {
         generalSystem.PlayOneShotNoAudioSource("ItemMenuClose");
         //Destroy(gameObject);
         gameObject.SetActive(false);
+    }
+
+    public bool ActiveSelf() {
+        return gameObject.activeSelf;
     }
 
     public void OnClickItemListNext() {

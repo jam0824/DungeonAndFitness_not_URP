@@ -7,7 +7,7 @@ public class GeneralSystem : MonoBehaviour
     public string NORMAL_ITEM_SAVE_PATH;
     public string COLLECTION_ITEM_SAVE_PATH;
     public GameObject ItemCanvas;
-    public GameObject ItemWindow { set; get; }
+    public ItemView itemWindow { set; get; }
     public GameObject ItemBoxPrefab;
     public ItemBox itemBox { set; get; }
     public GameObject DamageTextCanvas;
@@ -204,10 +204,13 @@ public class GeneralSystem : MonoBehaviour
         me.transform.rotation = Quaternion.Lerp(me.transform.rotation, lookRotation, 0.1f);
     }
 
+    //メニューを作って非アクティブにしておく
     void LoadItemWindow() {
         Vector3 pos = new Vector3(-10f, -10f, -10f);
-        ItemWindow = Instantiate(ItemCanvas, pos, transform.rotation);
-        ItemWindow.SetActive(false);
+        GameObject ItemWindowObject = Instantiate(ItemCanvas, pos, transform.rotation);
+        itemWindow = ItemWindowObject.GetComponent<ItemView>();
+        itemWindow.ItemViewInit();
+        ItemWindowObject.SetActive(false);
     }
 
     //LabelDBをロードしてdictionary型のlistにして返す
@@ -236,10 +239,12 @@ public class GeneralSystem : MonoBehaviour
         return returnData;
     }
 
+    //アイテムボックスを作って非アクティブにしておく
     void LoadItemBox() {
         Vector3 pos = new Vector3(-10f, -10f, -10f);
         GameObject itemBoxObject = Instantiate(ItemBoxPrefab, pos, transform.rotation);
         itemBox = itemBoxObject.GetComponent<ItemBox>();
+        itemBox.ItemBoxInit();
         itemBoxObject.SetActive(false);
         itemBox.UnableItemBox();
     }

@@ -118,8 +118,8 @@ public class PlayerView : MonoBehaviour
     
     //メニュー表示本体
     void EnableItemCanvas(GameObject face) {
-        if (generalSystem.ItemWindow.activeSelf) {
-            generalSystem.ItemWindow.GetComponent<ItemView>().OnClickClose();
+        if (generalSystem.itemWindow.ActiveSelf()) {
+            generalSystem.itemWindow.OnClickClose();
             return;
         }
         Vector3 pos = face.transform.position;
@@ -127,17 +127,14 @@ public class PlayerView : MonoBehaviour
         addPos.y = 0f;
         pos += addPos;
 
-        Quaternion r = face.transform.rotation;
-        r.x = 0.0f;
-        r.z = 0.0f;
-        generalSystem.ItemWindow.SetActive(true);
-        generalSystem.ItemWindow.transform.position = pos;
-        generalSystem.ItemWindow.transform.rotation = r;
+        Quaternion r = generalSystem.GetQuaternionFace();
+
+        generalSystem.itemWindow.EnableItemWindow(pos, r);
     }
 
     //ItemBox表示本体
     void EnableItemBox(GameObject face) {
-        Vector3 addPos = new Vector3(1.3f,0.7f,1.3f);
+        Vector3 addPos = new Vector3(1.2f,0.6f,1.2f);
         generalSystem.itemBox.EnableItemBox(
             generalSystem.GetPosFromTarget(face, addPos),
             generalSystem.GetQuaternionFace()
