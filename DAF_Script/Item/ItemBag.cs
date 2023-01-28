@@ -22,11 +22,15 @@ public class ItemBag : MonoBehaviour
 
     string itemNameDescription;
 
+    private void Awake() {
+        ovrGrabbable = GetComponent<OVRGrabbable>();
+        dungeonSystem = GameObject.Find("DungeonSystem").GetComponent<DungeonSystem>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        ovrGrabbable = GetComponent<OVRGrabbable>();
-        dungeonSystem = GameObject.Find("DungeonSystem").GetComponent<DungeonSystem>();
+        
     }
 
     // Update is called once per frame

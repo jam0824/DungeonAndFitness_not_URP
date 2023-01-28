@@ -17,6 +17,7 @@ public class PlayerView : MonoBehaviour
     public GameObject ItemBoxObject;
 
     public DungeonSystem dungeonSystem { set; get; }
+    GameObject itemBox;
 
     private void Awake() {
         DontDestroyOnLoad(gameObject);
@@ -48,6 +49,7 @@ public class PlayerView : MonoBehaviour
     {
         SetEnablePunch();
         setEnableItemCanvas();
+        UnEnableItemBox();
     }
 
     public void SetEnablePunch() {
@@ -68,6 +70,7 @@ public class PlayerView : MonoBehaviour
         if ((OVRInput.GetDown(OVRInput.RawButton.Y))
             || (Input.GetKeyDown(KeyCode.Q))) {
             EnableItemCanvas(HitArea);
+
         }
     }
 
@@ -75,7 +78,20 @@ public class PlayerView : MonoBehaviour
     public void SetEnableItemBox() {
         if ((Input.GetKeyDown(KeyCode.A))
             || (OVRInput.GetDown(OVRInput.RawButton.A))) {
+            //アイテムボックスがアクティブだったら何も起こさない（消すのはupdate側で行う）
+            if (generalSystem.itemBox.ActiveSelf()) return;
             EnableItemBox(HitArea);
+        }
+    }
+    //ItemBoxを消す。ItemBagを持っていないときにも必要なためplayerViewのupdateから呼ぶ
+    public void UnEnableItemBox() {
+        if ((Input.GetKeyDown(KeyCode.A))
+        || (OVRInput.GetDown(OVRInput.RawButton.A))) {
+            //Aボタンがupdateでもひっかかってitemboxを付けたと同時に消えるため
+            //カウントを設置してある程度以上で発火するようにした
+            if ((generalSystem.itemBox.ActiveSelf())&&(generalSystem.itemBox.activeCount > 72)) {
+                DestroyItemBox();
+            }
         }
     }
 
@@ -122,9 +138,15 @@ public class PlayerView : MonoBehaviour
     //ItemBox表示本体
     void EnableItemBox(GameObject face) {
         Vector3 addPos = new Vector3(1.3f,0.7f,1.3f);
-        GameObject itemBox = generalSystem.MakeInstanceFromTarget(face, ItemBoxObject, addPos);
+        generalSystem.itemBox.EnableItemBox(
+            generalSystem.GetPosFromTarget(face, addPos),
+            generalSystem.GetQuaternionFace()
+            ) ;
     }
-
+    //ItemBox破棄
+    void DestroyItemBox() {
+        generalSystem.itemBox.UnableItemBox();
+    }
 
     
 }

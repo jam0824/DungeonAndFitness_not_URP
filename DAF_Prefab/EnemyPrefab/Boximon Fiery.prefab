@@ -1057,7 +1057,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcc0e921597cc214da2a9699df47033b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MAX_HP: 20
+  MAX_HP: 1
   MAX_MP: 20
   ATK: 5
   DEF: 5
@@ -1071,6 +1071,7 @@ MonoBehaviour:
   BATTLE_DISTANCE: 2.5
   BATTLE_END_DISTANCE: 20
   PREFAB_ATTACK: {fileID: 3921183707856065298, guid: 66cc6b2a20984784c838018407898a12, type: 3}
+  PREFAB_DIE_EFFECT: {fileID: 1570196509073578064, guid: 0393b5b101d4cd44bb0a76d678476350, type: 3}
 --- !u!114 &7215260341367631807
 MonoBehaviour:
   m_ObjectHideFlags: 0

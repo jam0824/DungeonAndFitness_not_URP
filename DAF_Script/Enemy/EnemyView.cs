@@ -20,16 +20,13 @@ public class EnemyView : MonoBehaviour
     public bool isGameObjectLoaded = false;
     DungeonSystem dungeonSystem;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
+    private void Awake() {
         generalSystem = GameObject.Find("GeneralSystem").GetComponent<GeneralSystem>();
         dungeonSystem = GameObject.Find("DungeonSystem").GetComponent<DungeonSystem>();
 
         Player = GameObject.Find("Player");
         Face = GameObject.Find("HitArea");
-        
+
 
         PunchHitPrefab = Player.GetComponent<PlayerConfig>().GetPunchHitPrefab();
 
@@ -40,6 +37,12 @@ public class EnemyView : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         rigidbody = GetComponent<Rigidbody>();
         isGameObjectLoaded = true;
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
     }
 
     // Update is called once per frame

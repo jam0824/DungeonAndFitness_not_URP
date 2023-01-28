@@ -7,6 +7,9 @@ public class GeneralSystem : MonoBehaviour
     public string NORMAL_ITEM_SAVE_PATH;
     public string COLLECTION_ITEM_SAVE_PATH;
     public GameObject ItemCanvas;
+    public GameObject ItemWindow { set; get; }
+    public GameObject ItemBoxPrefab;
+    public ItemBox itemBox { set; get; }
     public GameObject DamageTextCanvas;
     public GameObject PlayerDamageTextCanvas;
     public GameObject NoticeTextCanvas;
@@ -14,7 +17,7 @@ public class GeneralSystem : MonoBehaviour
     GameObject face;
     GameObject rightPlayerPunch;
     GameObject leftPlayerPunch;
-    public GameObject ItemWindow { set; get; }
+    
     public List<Dictionary<string, string>> labelDB;
 
     public List<AudioClip> listBattleSE;
@@ -49,6 +52,9 @@ public class GeneralSystem : MonoBehaviour
 
         //ItemWindowの事前作成
         LoadItemWindow();
+
+        //ItemBoxの事前作成
+        LoadItemBox();
 
     }
 
@@ -99,6 +105,9 @@ public class GeneralSystem : MonoBehaviour
         AudioClip audioClip = GetSE(SeName);
         audioSource.PlayOneShot(audioClip);
     }
+    public void PlayOneShotNoAudioWithClip(AudioClip clip) {
+        audioSource.PlayOneShot(clip);
+    }
 
     public string GetNormalItemSavePath() {
         return NORMAL_ITEM_SAVE_PATH;
@@ -136,18 +145,22 @@ public class GeneralSystem : MonoBehaviour
         GameObject prefab, 
         Vector3 addPos
      ) {
+        Vector3 pos = GetPosFromTarget(targetGameObject, addPos);
+        Quaternion r = GetQuaternionFace();
 
-        Vector3 pos = targetGameObject.transform.position;
-        pos.x *= addPos.x;
-        pos.y *= addPos.y;
-        pos.z *= addPos.z;
-        //pos += addPos;
-
-        Quaternion r = face.transform.rotation;
-        r.x = 0.0f;
-        r.z = 0.0f;
         GameObject returnPrefab = Instantiate(prefab,pos,r);
         return returnPrefab;
+    }
+
+    //ターゲットのgameObjectの前からaddPosだけ離れたところのposを取得する
+    public Vector3 GetPosFromTarget(GameObject targetGameObject, Vector3 addPos) {
+        Vector3 pos = targetGameObject.transform.position;
+        Vector3 forward = targetGameObject.transform.forward;
+        forward.x *= addPos.x;
+        forward.y *= addPos.y;
+        forward.z *= addPos.z;
+        pos += forward;
+        return pos;
     }
 
     //ターゲットとfaceの中間点にインスタンスを作る
@@ -162,6 +175,7 @@ public class GeneralSystem : MonoBehaviour
         return returnPrefab;
     }
 
+    //顔とターゲットのgameObjectの中点posを返す
     public Vector3 GetPosBetweenTargetAndFace(GameObject targetGameObject, Vector3 addPos) {
         Vector3 facePos = face.transform.position;
         Vector3 targetPos = targetGameObject.transform.position;
@@ -173,6 +187,7 @@ public class GeneralSystem : MonoBehaviour
             );
     }
 
+    //顔の回転を取得する
     public Quaternion GetQuaternionFace() {
         Quaternion r = face.transform.rotation;
         r.x = 0.0f;
@@ -219,5 +234,13 @@ public class GeneralSystem : MonoBehaviour
             }
         }
         return returnData;
+    }
+
+    void LoadItemBox() {
+        Vector3 pos = new Vector3(-10f, -10f, -10f);
+        GameObject itemBoxObject = Instantiate(ItemBoxPrefab, pos, transform.rotation);
+        itemBox = itemBoxObject.GetComponent<ItemBox>();
+        itemBoxObject.SetActive(false);
+        itemBox.UnableItemBox();
     }
 }
