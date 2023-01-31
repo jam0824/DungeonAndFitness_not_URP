@@ -105,6 +105,11 @@ MonoBehaviour:
   PEACE_PREFAB: {fileID: 4647717470273211954, guid: 4977ff1c47fca1c4ca2a62e16d2dc803, type: 3}
   BASE_PREFAB: {fileID: 5496262021290657773, guid: 32e93661b50de8043a79aa2d218727b9, type: 3}
   BREAK_SE: {fileID: 8300000, guid: 5a363e8856da0cb41aee1226fb84f6e9, type: 3}
+  ITEM_PREFAB: {fileID: 3983643087674492152, guid: 83aa1f7937429404299b60f0f7c224b4, type: 3}
+  ITEM_PROBABILITY: 0
+  base_y: 0.2
+  peaseNum: 5
+  peaseRandomRange: 0.3
 --- !u!65 &8334008158598665567
 BoxCollider:
   m_ObjectHideFlags: 0

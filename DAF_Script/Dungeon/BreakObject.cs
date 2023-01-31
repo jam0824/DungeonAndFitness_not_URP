@@ -7,7 +7,10 @@ public class BreakObject : MonoBehaviour
     public GameObject PEACE_PREFAB;
     public GameObject BASE_PREFAB;
     public AudioClip BREAK_SE;
+    public GameObject ITEM_PREFAB;
+    public float ITEM_PROBABILITY = 0;
     public float base_y = 0.2f;
+    public float item_base_y = 0.5f;
     public int peaseNum = 5;
     public float peaseRandomRange = 0.3f;
     bool hasBroken = false;
@@ -29,6 +32,7 @@ public class BreakObject : MonoBehaviour
             hasBroken = true;
             float impact = GetImpact(collision);
             ContactPoint contact = collision.contacts[0];
+            MakeItem(ITEM_PREFAB, ITEM_PROBABILITY, item_base_y) ;
             GameObject baseObject = MakeBaseObject(
                 BASE_PREFAB, 
                 gameObject.transform.position, 
@@ -42,6 +46,7 @@ public class BreakObject : MonoBehaviour
                 peaseNum,
                 peaseRandomRange
                 );
+            
             //元のオブジェクトは消すので、残るオブジェクトで音を鳴らす
             baseObject.GetComponent<AudioSource>().PlayOneShot(BREAK_SE);
             Destroy(gameObject);
@@ -85,5 +90,17 @@ public class BreakObject : MonoBehaviour
         if (impact < 1) impact = 1f;
         if (impact > 3f) impact = 3f;
         return impact;
+    }
+
+    //アイテムをprobalilityで設定した確率でaddYに生成する
+    void MakeItem(GameObject item, float probability, float addY) {
+        if (probability == 0) return;
+        float r = Random.Range(0.0f, 1.0f);
+        if (r > probability) return;
+        Vector3 pos = transform.position;
+        pos.y += addY;
+        GameObject itemObject = Instantiate(item, pos, transform.rotation);
+        Vector3 velocity = new Vector3(0f, 1f, 0f);
+        itemObject.GetComponent<Rigidbody>().AddForce(velocity, ForceMode.Impulse);
     }
 }
