@@ -231,7 +231,7 @@ public class ScenarioExec : MonoBehaviour
     }
 
     void CommandLookAt() {
-        generalSystem.LookAt(generalSystem.GetPlayerPrefab(), gameObject);
+        generalSystem.LookAt(generalSystem.GetFacePrefab(), gameObject);
     }
 
     //スイッチの数字の計算。+と-のみ。

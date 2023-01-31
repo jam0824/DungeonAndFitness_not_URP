@@ -18,6 +18,8 @@ public class DebugWindow : MonoBehaviour
         else {
             Destroy(gameObject);
         }
+        //ÉçÉOÇ™î≠çsÇ≥ÇÍÇΩéûÇ…OnReceiveLogÇ™é¿çsÇ≥ÇÍÇÈÇÊÇ§Ç…Ç∑ÇÈ
+        Application.logMessageReceived += OnReceiveLog;
         cText = GameObject.Find("DebugText").GetComponent<Text>();
         cText.text = "testtesttest";
 
@@ -27,12 +29,20 @@ public class DebugWindow : MonoBehaviour
 
     public void DFDebug(string message) {
         Debug.Log(message);
+        /*
         string m = cText.text;
         m = message + "\n" + m;
         cText.text = m;
+        */
     }
 
     public void DFFps(float fps) {
         fpsText.text = "FPS : " + fps;
+    }
+
+    private void OnReceiveLog(string logText, string stackTrace, LogType logType) {
+        string m = cText.text;
+        m = logText + "\n" + m;
+        cText.text = m;
     }
 }

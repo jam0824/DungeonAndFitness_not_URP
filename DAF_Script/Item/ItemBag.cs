@@ -9,7 +9,7 @@ public class ItemBag : MonoBehaviour
     
     OVRGrabbable ovrGrabbable;
     DungeonSystem dungeonSystem;
-    GeneralSystem generalSystem;
+    LabelSystem labelSystem;
     Dictionary<string, string> itemData;
     GameObject face;
     PlayerView playerView;
@@ -68,9 +68,9 @@ public class ItemBag : MonoBehaviour
     void ItemBagInit() {
         //’Í‚Ü‚ê‚½Žž‚É‰½‚ÌƒAƒCƒeƒ€‚©Œˆ’è‚·‚é
         itemNo = dungeonSystem.GetItemNo();
-        generalSystem = GameObject.Find("GeneralSystem").GetComponent<GeneralSystem>();
+        labelSystem = GameObject.Find("GeneralSystem").GetComponent<LabelSystem>();
         playerView = GameObject.Find("Player").GetComponent<PlayerView>();
-        label = generalSystem.GetLabel(labelKey);
+        label = labelSystem.GetLabel(labelKey);
 
         itemData = dungeonSystem.itemDb.GetItemData(itemNo);
         itemNameDescription = MakeItemNameRank(itemData);

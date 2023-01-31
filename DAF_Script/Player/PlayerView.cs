@@ -47,7 +47,7 @@ public class PlayerView : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SetEnablePunch();
+        //SetEnablePunch();
         setEnableItemCanvas();
         UnEnableItemBox();
     }
@@ -98,20 +98,27 @@ public class PlayerView : MonoBehaviour
     //拳表示
     void EnablePunch(float flex, float index, GameObject punch) {
         if ((flex > 0.7)&&(index > 0.7)) {
-            if(punch.activeSelf == false) {
-                punch.SetActive(true);
-                punch.GetComponent<HandsScript>().SetIsTrigger(true);
-                GameObject shot = Instantiate(
-                    config.GetPunchEnablePrefab(),
-                    punch.transform.position,
-                    Quaternion.identity);
-                generalSystem.PlayOneShot(
-                    punch.GetComponent<AudioSource>(), 
-                    "PunchEnableSE");
-            }
+            SetPunch(punch);
         }
         else {
             punch.SetActive(false);
+        }
+    }
+
+    //拳表示メイン
+    void SetPunch(GameObject punch) {
+        if (punch.activeSelf == false) {
+            punch.SetActive(true);
+            //拳出現の時にtriggerにしてないと、
+            //出現ダメージを与えることができるためtriggerにする
+            punch.GetComponent<HandsScript>().SetIsTrigger(true);
+            GameObject shot = Instantiate(
+                config.GetPunchEnablePrefab(),
+                punch.transform.position,
+                Quaternion.identity);
+            generalSystem.PlayOneShot(
+                punch.GetComponent<AudioSource>(),
+                "PunchEnableSE");
         }
     }
 

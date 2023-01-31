@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class GeneralSystem : MonoBehaviour
 {
+    public bool DEBUG_MODE;
     public string NORMAL_ITEM_SAVE_PATH;
     public string COLLECTION_ITEM_SAVE_PATH;
     public GameObject ItemCanvas;
     public ItemView itemWindow { set; get; }
     public GameObject ItemBoxPrefab;
     public ItemBox itemBox { set; get; }
+    public LabelSystem labelSystem { set; get; }
     public GameObject DamageTextCanvas;
     public GameObject PlayerDamageTextCanvas;
     public GameObject NoticeTextCanvas;
@@ -18,7 +20,6 @@ public class GeneralSystem : MonoBehaviour
     GameObject rightPlayerPunch;
     GameObject leftPlayerPunch;
     
-    public List<Dictionary<string, string>> labelDB;
 
     public List<AudioClip> listBattleSE;
 
@@ -45,7 +46,9 @@ public class GeneralSystem : MonoBehaviour
     //全体的な初期化
     void GeneralInit() {
         //Labelのロード
-        labelDB = LoadLabelDB(FQCommon.Common.LoadCsvFile("LabelDB/LabelDB"));
+        labelSystem = GetComponent<LabelSystem>();
+        labelSystem.LabelSystemInit(LanguageMode);
+
         //ItemDBのロード
         itemDb = GetComponent<ItemDB>();
         itemDb.ItemDbInit();
@@ -213,31 +216,7 @@ public class GeneralSystem : MonoBehaviour
         ItemWindowObject.SetActive(false);
     }
 
-    //LabelDBをロードしてdictionary型のlistにして返す
-    public List<Dictionary<string, string>> LoadLabelDB(List<string[]> csvDatas) {
-        List<Dictionary<string, string>> labelDB = new List<Dictionary<string, string>>();
-        foreach (string[] data in csvDatas) {
-            if (data[0] == "key") continue;
-            Dictionary<string, string> itemData = new Dictionary<string, string>();
-            for (int i = 0; i < data.Length; i++) {
-                itemData[csvDatas[0][i]] = data[i];
-            }
-            labelDB.Add(itemData);
-        }
-        return labelDB;
-    }
-
-    //keyからLanguageModeの言語のラベルを返す
-    public string GetLabel(string key) {
-        string returnData = "";
-        foreach (Dictionary<string, string> data in labelDB) {
-            if (data["key"] == key) {
-                returnData = data[LanguageMode];
-                break;
-            }
-        }
-        return returnData;
-    }
+    
 
     //アイテムボックスを作って非アクティブにしておく
     void LoadItemBox() {
