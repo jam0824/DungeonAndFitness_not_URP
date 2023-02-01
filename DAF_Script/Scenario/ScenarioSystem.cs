@@ -9,7 +9,7 @@ public class ScenarioSystem : MonoBehaviour
     public GameObject SelectBoxCanvasPrefab;
     public GameObject MessageTextObject;
     TextMeshPro messageText;
-    public int[] SWITCH;
+    public Dictionary<string, string> dictSwitch;
     int MAX_SWITCH_NUM = 200;
     bool isLock = false;
 
@@ -21,10 +21,7 @@ public class ScenarioSystem : MonoBehaviour
     }
 
     private void Init() {
-        SWITCH = new int[MAX_SWITCH_NUM];
-        for (int i = 0; i < MAX_SWITCH_NUM; i++) {
-            SWITCH[i] = 0;
-        }
+        dictSwitch = new Dictionary<string, string>();
     }
 
     //初回のメッセージウィンドウロード
@@ -55,22 +52,24 @@ public class ScenarioSystem : MonoBehaviour
         
     }
 
-    public void SetSwitch(int swno, int value) {
-        SWITCH[swno] = value;
+    public void SetSwitch(string key, string value) {
+        dictSwitch[key] = value;
     }
-    public void CalcurationSwitch(int swno, string sign, int value) {
+    public void CalcurationSwitch(string key, string sign, string value) {
         switch (sign) {
             case "+":
-                SWITCH[swno] += value;
+                dictSwitch[key] = 
+                    (int.Parse(dictSwitch[key]) + int.Parse(value)).ToString();
                 break;
             case "-":
-                SWITCH[swno] -= value;
+                dictSwitch[key] = 
+                    (int.Parse(dictSwitch[key]) - int.Parse(value)).ToString();
                 break;
         }
     }
 
-    public int GetSwitch(int swno) {
-        return SWITCH[swno];
+    public string GetSwitch(string key) {
+        return dictSwitch[key];
     }
 
     public GameObject GetWindowCanvasPrefab() {
@@ -93,10 +92,15 @@ public class ScenarioSystem : MonoBehaviour
         foreach (string value in listValue) {
             if (value == "") continue;
             string tmp = value.Replace(" ", "");
-            string[] swnoAndValue = tmp.Split("=");
-            int swno = int.Parse(swnoAndValue[0]);
-            int setValue = int.Parse(swnoAndValue[1]);
-            isOk = (SWITCH[swno] == setValue) ? true : false;
+            string[] keyAndValue = tmp.Split("=");
+            string key = keyAndValue[0];
+            string v = keyAndValue[1];
+            if (dictSwitch.ContainsKey(key)) {
+                isOk = (dictSwitch[key] == v) ? true : false;
+            }
+            else {
+                isOk = false;
+            }
         }
         return isOk;
     }

@@ -240,18 +240,18 @@ public class ScenarioExec : MonoBehaviour
     //スイッチの数字の計算。+と-のみ。
     //コマンド,スイッチNo,符号,値
     void CommandSwitchCalcuration(string[] line) {
-        int swno = int.Parse(line[1]);
+        string key = line[1];
         string sign = line[2];
-        int value = int.Parse(line[3]);
-        scenarioSystem.CalcurationSwitch(swno, sign, value);
+        string value = line[3];
+        scenarioSystem.CalcurationSwitch(key, sign, value);
     }
 
     //スイッチの値のセット。
     //コマンド,スイッチNo,値
     void CommandSwitchSet(string[] line) {
-        int swno = int.Parse(line[1]);
-        int value = int.Parse(line[2]);
-        scenarioSystem.SetSwitch(swno, value);
+        string key = line[1];
+        string value = line[2];
+        scenarioSystem.SetSwitch(key, value);
     }
 
     //通常枠のアイテムを追加
@@ -327,7 +327,7 @@ public class ScenarioExec : MonoBehaviour
     }
 
     //switchコマンドが真だった場合。
-    //1=1,2=1のようにswitchno = valueで書く。今は=のみ。
+    //key=1,key=1のようにkey = valueで書く。今は=でアンドのみ。
     bool isSwitch(string[] line) {
         List<string> listValue = new List<string>();
         for (int i = 1; i < line.Length; i++) {

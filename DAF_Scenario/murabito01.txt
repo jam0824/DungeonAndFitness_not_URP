@@ -1,4 +1,8 @@
-switch,1=1,2=1	switch,1=1,2=1
+set,murabito01,0	set,murabito01,0
+【村人】「ここからスタート」	[Village] "Start from here"
+end	end
+	
+switch,murabito01=1,murabito02=1	switch,1=1,2=1
 look	look
 【村人】「スイッチ１も２も１だってさ！」	[Village] "Switch 1 and 2 are both!"
 select	select
@@ -20,17 +24,17 @@ goto,#hata13	goto,#hata13
 #hata13	#hata13
 【村人】「そんなことになっていたなんて驚き」	[Village] "I'm surprised that that was the case"
 【村人】「ま、いいけど」	[Village] "Well, it's okay"
-set,2,0	set,2,0
+set,murabito02,0	set,2,0
 end	end
 	
-switch,1=1	switch,1=1
+switch,murabito01=1	switch,1=1
 look	look
 【村人】「スイッチ1が1だってさ」	[Village] "Switch 1 is 1"
 【村人】「けどなんだってこんなところに来たんだ？」	[Village] "But did you come to this place?"
-set,2,1	set,2,1
+set,murabito02,1	set,2,1
 end	end
 	
-switch,1=0	switch,1=0
+switch,murabito01=0	switch,1=0
 look	look
 #hata3	#hata3
 【村人】「ここは迷宮都市リーベンだよ」	[Village] "This is Leven Labyrinth"
@@ -38,7 +42,7 @@ goto,#hata1	goto,#hata1
 	
 #hata2	#hata2
 【村人】「あなたも冒険者？　最近多いねー。結構来るんだよね、冒険者」	[Villager] "You are an adventurer? There are a lot of these days. It's quite coming, adventurers"
-set,1,1	set,1,1
+set,murabito01,1	set,1,1
 end	end
 	
 	
