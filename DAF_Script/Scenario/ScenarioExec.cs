@@ -10,6 +10,8 @@ public class ScenarioExec : MonoBehaviour
     public string MESSAGE_TYPE = "MessageNormal";
     public float MESSAGE_Y;
     float SELECTBOX_Y = 1.2f;
+    //アイテムがフルだったときのキー
+    string FULL_OF_ITEM_KEY = "FullOfItem";
 
     public ScenarioSystem scenarioSystem { set; get; }
     public GeneralSystem generalSystem { set; get; }
@@ -116,6 +118,11 @@ public class ScenarioExec : MonoBehaviour
                 CommandSelect(no + 1, listScenarioCsv);
                 break;
             }
+            else if (command == "itemget") {
+                CommandNormalItemGet(line[1], generalSystem.itemDb);
+                no++;
+                continue;
+            }
             else {
                 CommandShowMessage(line);
                 break;
@@ -167,10 +174,6 @@ public class ScenarioExec : MonoBehaviour
     void CloseWindowCanvas() {
         messageText = null;
         scenarioSystem.CloseMessageWindow();
-        /*
-        Destroy(messageCanvas.gameObject);
-        messageCanvas = null;
-        */
     }
 
     //select時の旗にはスクリプトでは#は付けない。飛ぶべきハタと区別がつかなくなるため
@@ -249,6 +252,22 @@ public class ScenarioExec : MonoBehaviour
         int swno = int.Parse(line[1]);
         int value = int.Parse(line[2]);
         scenarioSystem.SetSwitch(swno, value);
+    }
+
+    //通常枠のアイテムを追加
+    void CommandNormalItemGet(string itemNo, ItemDB itemDb) {
+        if (itemDb.canAddItem()) {
+            DebugWindow.instance.DFDebug("アイテム追加：" + itemNo);
+            itemDb.AddItem(itemNo);
+        }
+        else {
+            generalSystem.labelInformationText.SetInformationLabel(FULL_OF_ITEM_KEY);
+            Vector3 pos = gameObject.transform.position;
+            pos.y += 1f;
+            itemDb.MakeItemBag(itemNo, pos, gameObject.transform.rotation);
+            DebugWindow.instance.DFDebug("アイテムバッグ作成：" + itemNo);
+        }
+
     }
 
     //会話終了

@@ -23,13 +23,13 @@ public class GeneralSystem : MonoBehaviour
     GameObject leftPlayerPunch;
     public PlayerConfig playerConfig { set; get; }
     public PlayerView playerView { set; get; }
-    
+    public ItemDB itemDb { set; get; }
 
     public List<AudioClip> listBattleSE;
 
     Dictionary<string, int> dictSeName;
 
-    ItemDB itemDb;
+    
 
 
 

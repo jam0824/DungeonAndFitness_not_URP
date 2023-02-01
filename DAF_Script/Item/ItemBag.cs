@@ -56,7 +56,7 @@ public class ItemBag : MonoBehaviour
 
     void Grabing() {
         //はじめて掴まれた時
-        if (itemNo == null) ItemBagInit();
+        if (itemNo == null) ItemBagInit("-1");
 
         if(itemDescription.enabled == false) {
             itemDescription.enabled = true;
@@ -65,9 +65,16 @@ public class ItemBag : MonoBehaviour
         
     }
 
-    void ItemBagInit() {
-        //掴まれた時に何のアイテムか決定する
-        itemNo = dungeonSystem.GetItemNo();
+    public void ItemBagInit(string no) {
+        if(no == "-1") {
+            //noが-1だったときは掴まれた時に何のアイテムか決定する
+            itemNo = dungeonSystem.GetItemNo();
+        }
+        else {
+            //-1以外だったらアイテムno指定で作成する
+            itemNo = no;
+        }
+        
         labelSystem = GameObject.Find("GeneralSystem").GetComponent<LabelSystem>();
         playerView = GameObject.Find("Player").GetComponent<PlayerView>();
         label = labelSystem.GetLabel(labelKey);

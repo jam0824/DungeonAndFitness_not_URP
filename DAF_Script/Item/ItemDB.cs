@@ -5,6 +5,7 @@ using System.IO;
 
 public class ItemDB : MonoBehaviour
 {
+    public GameObject itemBagPrefab;
     GeneralSystem generalSystem;
     List<Dictionary<string, string>> itemDB = new List<Dictionary<string, string>>();
     public List<string> playerItemList { set; get; }
@@ -80,5 +81,17 @@ public class ItemDB : MonoBehaviour
     public bool canAddItem() {
         int max = 10 * generalSystem.playerConfig.GetMaxPageNo();
         return (playerItemList.Count < max) ? true : false;
+    }
+
+    //アイテムをアイテムリストに追加する
+    public void AddItem(string itemNo) {
+        playerItemList.Add(itemNo);
+    }
+
+    //アイテムバッグを指定アイテムNoで作成する
+    public void MakeItemBag(string itemNo, Vector3 pos, Quaternion r) {
+        GameObject itemBagObject = Instantiate(itemBagPrefab, pos, r);
+        ItemBag itemBag = itemBagObject.GetComponent<ItemBag>();
+        itemBag.ItemBagInit(itemNo);
     }
 }

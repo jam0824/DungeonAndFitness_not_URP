@@ -1,2 +1,3 @@
 返事がない。<br>ただの屍のようだ。	no reply. <BR> It's just like a corpse.
+itemget,104	itemget,104
 end	end

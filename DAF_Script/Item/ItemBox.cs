@@ -85,7 +85,7 @@ public class ItemBox : MonoBehaviour
         if (itemBag.itemNo == null) return;
         if (CanAddItem(FULL_OF_ITEM_KEY) == false) return;
 
-        AddItemToList(itemBag.itemNo);
+        itemDb.AddItem(itemBag.itemNo);
         itemBag.DestroyItem();
         PlayOneShot(ITEM_GET_SOUND);
         
@@ -98,16 +98,6 @@ public class ItemBox : MonoBehaviour
         generalSystem.labelInformationText.SetInformationLabel(key);
         PlayOneShot(FULL_SOUND);
         return false;
-    }
-
-    //アイテムをプレイヤーのアイテムリストに追加する
-    void AddItemToList(string itemNo) {
-        if (int.Parse(itemNo) >= 100) {
-            itemDb.playerItemList.Add(itemNo);
-        }
-        else {
-            itemDb.playerCollectionList.Add(itemNo);
-        }
     }
 
     //アイテムを入れた後にボックスを消えるのを少し遅らせる
