@@ -10,9 +10,12 @@ public class ItemBox : MonoBehaviour
     public AudioClip START_SOUND;
     public AudioClip ITEM_GET_SOUND;
     public AudioClip END_SOUND;
+    public AudioClip FULL_SOUND;
     public int activeCount = 0;
     GeneralSystem generalSystem;
     ItemDB itemDb;
+
+    string FULL_OF_ITEM_KEY = "FullOfItem";
 
     public void ItemBoxInit() {
         GameObject generalSystemObject = GameObject.Find("GeneralSystem");
@@ -59,6 +62,7 @@ public class ItemBox : MonoBehaviour
         }
     }
 
+    //アイテムボックス表示時の演出
     void ScaleUp() {
         if (gameObject.transform.localScale.x < SIZE) {
             Vector3 scale = gameObject.transform.localScale;
@@ -75,9 +79,11 @@ public class ItemBox : MonoBehaviour
         }
     }
 
+    //アイテムの追加
     void AddItem(Collider other) {
         ItemBag itemBag = other.gameObject.GetComponent<ItemBag>();
         if (itemBag.itemNo == null) return;
+        if (CanAddItem(FULL_OF_ITEM_KEY) == false) return;
 
         AddItemToList(itemBag.itemNo);
         itemBag.DestroyItem();
@@ -86,6 +92,15 @@ public class ItemBox : MonoBehaviour
         StartCoroutine(CoroutineDestroyItemBox(WAIT_TIME_DELETE));
     }
 
+    //アイテムが追加できるかの判定と、出来ないときはインフォメーション表示
+    bool CanAddItem(string key) {
+        if (itemDb.canAddItem()) return true;
+        generalSystem.labelInformationText.SetInformationLabel(key);
+        PlayOneShot(FULL_SOUND);
+        return false;
+    }
+
+    //アイテムをプレイヤーのアイテムリストに追加する
     void AddItemToList(string itemNo) {
         if (int.Parse(itemNo) >= 100) {
             itemDb.playerItemList.Add(itemNo);
@@ -95,6 +110,7 @@ public class ItemBox : MonoBehaviour
         }
     }
 
+    //アイテムを入れた後にボックスを消えるのを少し遅らせる
     IEnumerator CoroutineDestroyItemBox(float waitTime) {
         yield return new WaitForSeconds(waitTime);
         UnableItemBox();

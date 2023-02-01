@@ -19,6 +19,9 @@ public class PlayerView : MonoBehaviour
     public DungeonSystem dungeonSystem { set; get; }
     GameObject itemBox;
 
+    //ItemBoxを消してすぐEnableになる状態があるので回避のため。
+    bool lockEnableItemBox = false;
+
     private void Awake() {
         DontDestroyOnLoad(gameObject);
         config = GetComponent<PlayerConfig>();
@@ -80,6 +83,8 @@ public class PlayerView : MonoBehaviour
             || (OVRInput.GetDown(OVRInput.RawButton.A))) {
             //アイテムボックスがアクティブだったら何も起こさない（消すのはupdate側で行う）
             if (generalSystem.itemBox.ActiveSelf()) return;
+            //アイテムボックスが消えないことがあったのでロックをつける
+            if (lockEnableItemBox) return;
             EnableItemBox(HitArea);
         }
     }
@@ -89,7 +94,8 @@ public class PlayerView : MonoBehaviour
         || (OVRInput.GetDown(OVRInput.RawButton.A))) {
             //Aボタンがupdateでもひっかかってitemboxを付けたと同時に消えるため
             //カウントを設置してある程度以上で発火するようにした
-            if ((generalSystem.itemBox.ActiveSelf())&&(generalSystem.itemBox.activeCount > 72)) {
+            if ((generalSystem.itemBox.ActiveSelf())&&
+                (generalSystem.itemBox.activeCount > 32)) {
                 DestroyItemBox();
             }
         }
@@ -150,6 +156,14 @@ public class PlayerView : MonoBehaviour
     //ItemBox破棄
     void DestroyItemBox() {
         generalSystem.itemBox.UnableItemBox();
+        lockEnableItemBox = true;
+        StartCoroutine(UnlockEnableItemBox(1.0f));
+    }
+
+    //アイテムボックスが消えると同時に生成があったのでそうならないように処理
+    IEnumerator UnlockEnableItemBox(float waitTime) {
+        yield return new WaitForSeconds(waitTime);
+        lockEnableItemBox = false;
     }
 
     

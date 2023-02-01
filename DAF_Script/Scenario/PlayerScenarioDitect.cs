@@ -35,7 +35,8 @@ public class PlayerScenarioDitect : MonoBehaviour
     private void OnTriggerStay(Collider other) {
         //triggerがNPCで、かつlockがかかっていないなら会話初なのでトリガー
 
-        if (other.gameObject.tag == "NPC") {
+        if ((other.gameObject.tag == "NPC") 
+            ||(other.gameObject.tag == "Investigate")){
             //初回のみオブジェクトのロード
             if (scenarioSystem == null) ObjectLoad();
             if (!scenarioSystem.GetLock()) {

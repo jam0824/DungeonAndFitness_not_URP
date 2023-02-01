@@ -292,7 +292,7 @@ public class ScenarioExec : MonoBehaviour
     }
 
 
-    //実行可能なswitch行を探す。なかった場合は未実装。想定ナシ。
+    //実行可能なswitch行を探す。なかった場合は0(最初の行)を返す。
     int GetScenarioLineNo() {
         int no = 0;
         for (int i = 0; i < listScenarioCsv.Count; i++) {

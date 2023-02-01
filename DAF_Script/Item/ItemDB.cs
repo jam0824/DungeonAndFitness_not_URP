@@ -42,6 +42,7 @@ public class ItemDB : MonoBehaviour
             generalSystem.GetCollectionItemSavePath()) ;
     }
 
+    //ItemDBを作成する
     public List<Dictionary<string, string>> MakeItemDB(List<string[]> csvDatas) {
         List<Dictionary<string, string>> itemDB = new List<Dictionary<string, string>>();
         foreach (string[] data in csvDatas) {
@@ -73,5 +74,11 @@ public class ItemDB : MonoBehaviour
         returnData += itemData["Name"] + "\n\n";
         returnData += itemData["Description"];
         return returnData;
+    }
+
+    //アイテムが追加可能か判定する
+    public bool canAddItem() {
+        int max = 10 * generalSystem.playerConfig.GetMaxPageNo();
+        return (playerItemList.Count < max) ? true : false;
     }
 }

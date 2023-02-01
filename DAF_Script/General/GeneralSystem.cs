@@ -12,6 +12,8 @@ public class GeneralSystem : MonoBehaviour
     public GameObject ItemBoxPrefab;
     public ItemBox itemBox { set; get; }
     public LabelSystem labelSystem { set; get; }
+    public LabelInformationText labelInformationText { set; get; }
+
     public GameObject DamageTextCanvas;
     public GameObject PlayerDamageTextCanvas;
     public GameObject NoticeTextCanvas;
@@ -19,6 +21,8 @@ public class GeneralSystem : MonoBehaviour
     GameObject face;
     GameObject rightPlayerPunch;
     GameObject leftPlayerPunch;
+    public PlayerConfig playerConfig { set; get; }
+    public PlayerView playerView { set; get; }
     
 
     public List<AudioClip> listBattleSE;
@@ -26,6 +30,8 @@ public class GeneralSystem : MonoBehaviour
     Dictionary<string, int> dictSeName;
 
     ItemDB itemDb;
+
+
 
     public AudioSource audioSource { set; get; }
     public string LanguageMode { set; get; }
@@ -45,6 +51,9 @@ public class GeneralSystem : MonoBehaviour
 
     //全体的な初期化
     void GeneralInit() {
+        //Playerのコンポーネントなど取得
+        LoadPlayerObject();
+
         //Labelのロード
         labelSystem = GetComponent<LabelSystem>();
         labelSystem.LabelSystemInit(LanguageMode);
@@ -226,5 +235,15 @@ public class GeneralSystem : MonoBehaviour
         itemBox.ItemBoxInit();
         itemBoxObject.SetActive(false);
         itemBox.UnableItemBox();
+    }
+
+    void LoadPlayerObject() {
+        player = GameObject.Find("Player");
+        face = GameObject.Find("HitArea");
+        playerConfig = player.GetComponent<PlayerConfig>();
+        playerView = player.GetComponent<PlayerView>();
+        labelInformationText = 
+            GameObject.Find("InformationText").
+            GetComponent<LabelInformationText>();
     }
 }
