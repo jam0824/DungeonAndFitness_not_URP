@@ -5,7 +5,10 @@ using System.IO;
 
 public class ItemDB : MonoBehaviour
 {
+    GeneralSystem generalSystem;
     List<Dictionary<string, string>> itemDB = new List<Dictionary<string, string>>();
+    public List<string> playerItemList { set; get; }
+    public List<string> playerCollectionList { set; get; }
 
     private void Awake() {
         
@@ -23,10 +26,19 @@ public class ItemDB : MonoBehaviour
         
     }
 
-    public void ItemDbInit() {
+    public void ItemDbInit(GeneralSystem gs) {
         itemDB = MakeItemDB(
             FQCommon.Common.LoadCsvFile("ItemDB/ItemDB")
         );
+        generalSystem = gs;
+        LoadPlayerItems();
+    }
+
+    void LoadPlayerItems() {
+        playerItemList = FQCommon.Common.LoadSaveFile(
+            generalSystem.GetNormalItemSavePath());
+        playerCollectionList = FQCommon.Common.LoadSaveFile(
+            generalSystem.GetCollectionItemSavePath()) ;
     }
 
     public List<Dictionary<string, string>> MakeItemDB(List<string[]> csvDatas) {

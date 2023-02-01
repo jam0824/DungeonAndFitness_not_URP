@@ -67,8 +67,16 @@ public class ItemView : MonoBehaviour
     //アイテムウィンドウを開く
     public void EnableItemWindow(Vector3 pos, Quaternion r) {
         gameObject.SetActive(true);
+        EnableItemWindowInit();
         gameObject.transform.position = pos;
         gameObject.transform.rotation = r;
+    }
+
+    //アイテムウィンドウを開いたときの初期化
+    void EnableItemWindowInit() {
+        nowListName = "Backpack";
+        pageNo = 0;
+        OnClickBackpack();
     }
 
     //アイテムウィンドウを閉じる

@@ -1,0 +1,47 @@
+switch,1=1,2=1	switch,1=1,2=1
+look	look
+【村人】「スイッチ１も２も１だってさ！」	[Village] "Switch 1 and 2 are both!"
+select	select
+hata10,選択肢1	hata10,選択肢1
+hata11,選択肢2	hata11,選択肢2
+hata12,選択肢3	hata12,選択肢3
+selectend	selectend
+	
+#hata10	#hata10
+【村人】「選択肢1だよ」	[Village] "It's an option 1"
+goto,#hata13	goto,#hata13
+#hata11	#hata11
+【村人】「選択肢2だよ」	[Village] "It's an option 2"
+goto,#hata13	goto,#hata13
+#hata12	#hata12
+【村人】「選択肢3だよ」	[Village] "It's 3 options"
+goto,#hata13	goto,#hata13
+	
+#hata13	#hata13
+【村人】「そんなことになっていたなんて驚き」	[Village] "I'm surprised that that was the case"
+【村人】「ま、いいけど」	[Village] "Well, it's okay"
+set,2,0	set,2,0
+end	end
+	
+switch,1=1	switch,1=1
+look	look
+【村人】「スイッチ1が1だってさ」	[Village] "Switch 1 is 1"
+【村人】「けどなんだってこんなところに来たんだ？」	[Village] "But did you come to this place?"
+set,2,1	set,2,1
+end	end
+	
+switch,1=0	switch,1=0
+look	look
+#hata3	#hata3
+【村人】「ここは迷宮都市リーベンだよ」	[Village] "This is Leven Labyrinth"
+goto,#hata1	goto,#hata1
+	
+#hata2	#hata2
+【村人】「あなたも冒険者？　最近多いねー。結構来るんだよね、冒険者」	[Villager] "You are an adventurer? There are a lot of these days. It's quite coming, adventurers"
+set,1,1	set,1,1
+end	end
+	
+	
+#hata1	#hata1
+【システム】「hata1に飛びました」	[System] "I flew to Hata1"
+goto,#hata2	goto,#hata2

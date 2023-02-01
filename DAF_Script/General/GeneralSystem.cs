@@ -51,7 +51,7 @@ public class GeneralSystem : MonoBehaviour
 
         //ItemDB‚Ìƒ[ƒh
         itemDb = GetComponent<ItemDB>();
-        itemDb.ItemDbInit();
+        itemDb.ItemDbInit(this);
 
         //ItemWindow‚Ì–‘Oì¬
         LoadItemWindow();

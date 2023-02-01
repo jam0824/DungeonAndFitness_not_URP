@@ -39,7 +39,7 @@ public class PlayerScenarioDitect : MonoBehaviour
             //初回のみオブジェクトのロード
             if (scenarioSystem == null) ObjectLoad();
             if (!scenarioSystem.GetLock()) {
-                if ((Input.GetKeyDown(KeyCode.Q)) || (OVRInput.GetDown(OVRInput.RawButton.A))) {
+                if ((Input.GetKeyDown(KeyCode.A)) || (OVRInput.GetDown(OVRInput.RawButton.A))) {
                     ExecuteScenario(other);
                 }
             }

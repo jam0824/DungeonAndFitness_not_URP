@@ -271,8 +271,26 @@ public class ScenarioExec : MonoBehaviour
 
     //シナリオファイルのロード。シナリオはprefabにアタッチされたもの。
     public void LoadScenario() {
-        listScenarioCsv = FQCommon.Common.LoadCsvFileFromTextAsset(scenario);
+        DebugWindow.instance.DFDebug("シナリオ呼び出し");
+        List<string[]> tsvData = FQCommon.Common.LoadTsvFileFromTextAsset(scenario);
+
+        listScenarioCsv = GetLanguageText(tsvData, generalSystem.LanguageMode);
     }
+
+    //日本語と英語はタブ区切りされている。
+    //各言語でのパラメーターはcsv区切りされている
+    List<string[]> GetLanguageText(List<string[]> tsvData, string language) {
+        List<string[]> returnData = new List<string[]>();
+        int languageNo = 0;
+        if (language == "english") languageNo = 1;
+
+        foreach (string[] data in tsvData) {
+            string[] csvLine = data[languageNo].Split(',');
+            returnData.Add(csvLine);
+        }
+        return returnData;
+    }
+
 
     //実行可能なswitch行を探す。なかった場合は未実装。想定ナシ。
     int GetScenarioLineNo() {

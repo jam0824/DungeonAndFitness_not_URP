@@ -29,14 +29,17 @@ namespace FQCommon
             }
             return csvDatas;
         }
-        static public List<string[]> LoadCsvFileFromTextAsset(TextAsset csvFile) {
-            List<string[]> csvDatas = new List<string[]>();
-            StringReader reader = new StringReader(csvFile.text);
+
+        //tsvのファイルを読み込む。string[]のList型で返す。
+        static public List<string[]> LoadTsvFileFromTextAsset(TextAsset tsvFile) {
+            List<string[]> tsvDatas = new List<string[]>();
+            StringReader reader = new StringReader(tsvFile.text);
             while (reader.Peek() != -1) {
                 string line = reader.ReadLine();
-                csvDatas.Add(line.Split(','));
+                string[] data = line.Split('\t');
+                tsvDatas.Add(data);
             }
-            return csvDatas;
+            return tsvDatas;
         }
 
         static public List<string> LoadTextFile(string fileName) {

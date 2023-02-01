@@ -12,9 +12,12 @@ public class ItemBox : MonoBehaviour
     public AudioClip END_SOUND;
     public int activeCount = 0;
     GeneralSystem generalSystem;
+    ItemDB itemDb;
 
     public void ItemBoxInit() {
-        generalSystem = GameObject.Find("GeneralSystem").GetComponent<GeneralSystem>();
+        GameObject generalSystemObject = GameObject.Find("GeneralSystem");
+        generalSystem = generalSystemObject.GetComponent<GeneralSystem>();
+        itemDb = generalSystemObject.GetComponent<ItemDB>();
     }
 
     //ItemBox‹N“®Žž‚ÉŒÄ‚Î‚ê‚é
@@ -76,22 +79,20 @@ public class ItemBox : MonoBehaviour
         ItemBag itemBag = other.gameObject.GetComponent<ItemBag>();
         if (itemBag.itemNo == null) return;
 
-        SaveItem(itemBag.itemNo);
+        AddItemToList(itemBag.itemNo);
         itemBag.DestroyItem();
         PlayOneShot(ITEM_GET_SOUND);
         
         StartCoroutine(CoroutineDestroyItemBox(WAIT_TIME_DELETE));
     }
 
-    void SaveItem(string itemNo) {
-        string fileName = "";
+    void AddItemToList(string itemNo) {
         if (int.Parse(itemNo) >= 100) {
-            fileName = generalSystem.NORMAL_ITEM_SAVE_PATH;
+            itemDb.playerItemList.Add(itemNo);
         }
         else {
-            fileName = generalSystem.COLLECTION_ITEM_SAVE_PATH;
+            itemDb.playerCollectionList.Add(itemNo);
         }
-        FQCommon.Common.AppendStringFile(fileName, itemNo);
     }
 
     IEnumerator CoroutineDestroyItemBox(float waitTime) {
