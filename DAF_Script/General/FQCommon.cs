@@ -20,14 +20,14 @@ namespace FQCommon
         }
 
         static public List<string[]> LoadCsvFile(string fileName) {
-            List<string[]> csvDatas = new List<string[]>();
-            TextAsset csvFile = Resources.Load(fileName) as TextAsset;
-            StringReader reader = new StringReader(csvFile.text);
+            List<string[]> tsvDatas = new List<string[]>();
+            TextAsset tsvFile = Resources.Load(fileName) as TextAsset;
+            StringReader reader = new StringReader(tsvFile.text);
             while (reader.Peek() != -1) {
                 string line = reader.ReadLine();
-                csvDatas.Add(line.Split(','));
+                tsvDatas.Add(line.Split('\t'));
             }
-            return csvDatas;
+            return tsvDatas;
         }
 
         //tsvのファイルを読み込む。string[]のList型で返す。

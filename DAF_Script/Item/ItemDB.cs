@@ -34,6 +34,7 @@ public class ItemDB : MonoBehaviour
         LoadPlayerItems();
     }
 
+    //プレイヤーのアイテムをファイルからロードする
     void LoadPlayerItems() {
         playerItemList = FQCommon.Common.LoadSaveFile(
             generalSystem.GetNormalItemSavePath());
