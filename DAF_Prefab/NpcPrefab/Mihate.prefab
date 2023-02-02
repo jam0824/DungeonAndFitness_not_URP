@@ -3006,7 +3006,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53f61520dad59394bb3afdc143e73cb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scenario: {fileID: 4900000, guid: c75e3843256ccd946acd8fedd874bf65, type: 3}
+  scenario: {fileID: 4900000, guid: 7dcaa5ca3c16ec04e8f0618b32d258d8, type: 3}
   MESSAGE_TYPE: MessageNormal
   MESSAGE_Y: 1.2
 --- !u!1 &7941724269838002564

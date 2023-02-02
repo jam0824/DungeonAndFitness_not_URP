@@ -60,6 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef2a51828889ab445b44061c62329010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DEBUG_MODE: 1
   NORMAL_ITEM_SAVE_PATH: PlayerItemSave.txt
   COLLECTION_ITEM_SAVE_PATH: PlayerCollectionSave.txt
   ItemCanvas: {fileID: 730003842906308724, guid: 6d91edf4163581a40b2c89096cdc594b, type: 3}
@@ -80,6 +81,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: cabe8548c6a2d6b4fac8bef6fdcae1a5, type: 3}
   - {fileID: 8300000, guid: 64d9e9f7f83ec424bb1c7eda4046ea20, type: 3}
   - {fileID: 8300000, guid: 486b1122ba8652b4e8aaf254881bca5f, type: 3}
+  - {fileID: 8300000, guid: fcda781aaf3a48046896a361e582540b, type: 3}
 --- !u!114 &5499128227681359348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,7 +97,6 @@ MonoBehaviour:
   WindowCanvasPrefab: {fileID: 8812617022913101181, guid: 5428646afdfb40846a369e9802b8da0e, type: 3}
   SelectBoxCanvasPrefab: {fileID: 1217089534121423838, guid: 2eada0998e0f8904eb55e5d0e1fd81fe, type: 3}
   MessageTextObject: {fileID: 0}
-  SWITCH: 
 --- !u!114 &5499128227681359349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,6 +109,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4984c62288dc2b4f8a99d3b04758f85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemPrefab:
+  - {fileID: 3983643087674492152, guid: 83aa1f7937429404299b60f0f7c224b4, type: 3}
+  - {fileID: 2440460484108593348, guid: 0b5a3e111d68c964683edeca544cc58e, type: 3}
 --- !u!114 &5499128227681359346
 MonoBehaviour:
   m_ObjectHideFlags: 0

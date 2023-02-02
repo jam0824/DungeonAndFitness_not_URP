@@ -17,6 +17,12 @@ public class EnemyView : MonoBehaviour
     public AudioSource audioSource { get; set; }
     public Rigidbody rigidbody { get; set; }
 
+    Dictionary<string, float> itemDropProbability = new Dictionary<string, float>() {
+        {"HighProbability", 0.5f },
+        {"MiddleProbability", 0.1f },
+        {"RareProbability", 0.01f }
+    };
+
     public bool isGameObjectLoaded = false;
     DungeonSystem dungeonSystem;
 
@@ -74,8 +80,12 @@ public class EnemyView : MonoBehaviour
             enemyMove.StopAttack();
             //Freeze rotationを解除する
             rigidbody.constraints = RigidbodyConstraints.None;
+            //アイテムドロップ
+            DropItem(generalSystem.itemDb);
+
             if (impact > BLOW_OFF_IMPACT) {
                 SetBlowOff(contact, addForce, impact);
+                makeHitSE("BlowOff");
                 StartCoroutine(DeleteEnemy(5.0f));
             }
             else {
@@ -128,6 +138,32 @@ public class EnemyView : MonoBehaviour
     public void makeHitSE(string SeName) {
         //ダメージ音
         generalSystem.PlayOneShot(audioSource, SeName);
+    }
+
+    //アイテムをドロップする
+    void DropItem(ItemDB itemDb) {
+        string itemNo = SelectDropItem();
+        if (itemNo == "") return;
+        Vector3 pos = gameObject.transform.position;
+        pos.y += 1.0f;
+        itemDb.MakeItemBag(
+            itemNo, 
+            pos, 
+            gameObject.transform.rotation);
+    }
+
+    //アイテムドロップ率。高い、低い、レアの3パターン
+    string SelectDropItem() {
+        string itemNo = "";
+        float r = Random.RandomRange(0.0f, 1.0f);
+        DebugWindow.instance.DFDebug("itemDropRate:" + r);
+        if (r <= itemDropProbability["HighProbability"])
+            itemNo = enemyConfig.GetDropItems()[0];
+        if(r <= itemDropProbability["MiddleProbability"])
+            itemNo = enemyConfig.GetDropItems()[1];
+        if (r <= itemDropProbability["RareProbability"])
+            itemNo = enemyConfig.GetDropItems()[2];
+        return itemNo;
     }
 
     

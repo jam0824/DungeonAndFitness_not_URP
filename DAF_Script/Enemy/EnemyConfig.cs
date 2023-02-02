@@ -20,6 +20,8 @@ public class EnemyConfig : MonoBehaviour
     public GameObject PREFAB_ATTACK;
     public GameObject PREFAB_DIE_EFFECT;
 
+    public string[] DROP_ITEMS;
+
     private int nowHp;
     private int nowMp;
 
@@ -98,6 +100,10 @@ public class EnemyConfig : MonoBehaviour
 
     public string GetEnemyState() {
         return ENEMY_STATE;
+    }
+
+    public string[] GetDropItems() {
+        return DROP_ITEMS;
     }
 
 

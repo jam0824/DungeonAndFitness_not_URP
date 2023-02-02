@@ -50,7 +50,7 @@ public class PlayerView : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SetEnablePunch();
+        //SetEnablePunch();
         setEnableItemCanvas();
         UnEnableItemBox();
     }

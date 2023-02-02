@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 2440460484108775338}
   - component: {fileID: 2440460484107539482}
   - component: {fileID: 2440460484106621888}
-  - component: {fileID: 2394325936820692848}
   - component: {fileID: 2440460484108593346}
   - component: {fileID: 2440460484108593347}
   - component: {fileID: 2440460484108593345}
+  - component: {fileID: 1881614205}
   m_Layer: 0
   m_Name: meat01
   m_TagString: Untagged
@@ -88,20 +88,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2394325936820692848
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2440460484108593348}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 43976924817024158, guid: cf42bbc60579f824c9c02622745b9c1d, type: 2}
 --- !u!54 &2440460484108593346
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -150,6 +136,19 @@ MonoBehaviour:
   m_snapOrientation: 0
   m_snapOffset: {fileID: 0}
   m_grabPoints: []
+--- !u!65 &1881614205
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2440460484108593348}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.4, z: 1}
+  m_Center: {x: -0.04697895, y: 0.028263345, z: -0.0000038146973}
 --- !u!1001 &3392357287910444388
 PrefabInstance:
   m_ObjectHideFlags: 0
