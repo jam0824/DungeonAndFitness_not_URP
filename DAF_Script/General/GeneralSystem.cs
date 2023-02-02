@@ -147,6 +147,7 @@ public class GeneralSystem : MonoBehaviour
         dictSeName.Add("ItemMenuClose", 9);
         dictSeName.Add("MessageNormal", 10);
         dictSeName.Add("NormalFoot", 11);
+        dictSeName.Add("NormalItemGet", 12);
 
         return dictSeName;
     }

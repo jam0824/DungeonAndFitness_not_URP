@@ -5,7 +5,8 @@ using System.IO;
 
 public class ItemDB : MonoBehaviour
 {
-    public GameObject itemBagPrefab;
+    public List<GameObject> itemPrefab;
+    Dictionary<string, int> dictItemPrefabName;
     GeneralSystem generalSystem;
     List<Dictionary<string, string>> itemDB = new List<Dictionary<string, string>>();
     public List<string> playerItemList { set; get; }
@@ -33,6 +34,7 @@ public class ItemDB : MonoBehaviour
         );
         generalSystem = gs;
         LoadPlayerItems();
+        dictItemPrefabName = SetDictItemPrefabName();
     }
 
     //プレイヤーのアイテムをファイルからロードする
@@ -90,8 +92,26 @@ public class ItemDB : MonoBehaviour
 
     //アイテムバッグを指定アイテムNoで作成する
     public void MakeItemBag(string itemNo, Vector3 pos, Quaternion r) {
-        GameObject itemBagObject = Instantiate(itemBagPrefab, pos, r);
+        Dictionary<string, string> itemData = GetItemData(itemNo);
+        GameObject itemBagObject = Instantiate(
+            GetItemPrefab(itemData["Prefab"]), 
+            pos, 
+            r);
         ItemBag itemBag = itemBagObject.GetComponent<ItemBag>();
         itemBag.ItemBagInit(itemNo);
+    }
+
+    //アイテムのkeyとItemPrefabの番号を紐づける
+    Dictionary<string, int> SetDictItemPrefabName() {
+        Dictionary<string, int> itemPrefabName = new Dictionary<string, int>();
+        itemPrefabName.Add("bag", 0);
+        itemPrefabName.Add("meat", 1);
+        return itemPrefabName;
+    }
+
+    //Prefabの名前からアイテムのprefabを取得する
+    GameObject GetItemPrefab(string prefabName) {
+        int no = dictItemPrefabName[prefabName];
+        return itemPrefab[no];
     }
 }

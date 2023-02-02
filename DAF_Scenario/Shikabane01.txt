@@ -1,3 +1,5 @@
 返事がない。<br>ただの屍のようだ。	no reply. <BR> It's just like a corpse.
-itemget,104	itemget,104
+se,NormalItemGet	se,NormalItemGet
+itemget,110	itemget,110
+アイテムをゲットした！	I got the item!
 end	end

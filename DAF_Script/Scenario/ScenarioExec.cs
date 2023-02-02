@@ -123,6 +123,11 @@ public class ScenarioExec : MonoBehaviour
                 no++;
                 continue;
             }
+            else if (command == "se") {
+                CommandSe(line[1]);
+                no++;
+                continue;
+            }
             else {
                 CommandShowMessage(line);
                 break;
@@ -220,6 +225,7 @@ public class ScenarioExec : MonoBehaviour
         lineNo = exec(no);
     }
 
+    //指定したラベルに飛ぶ
     int CommandGoto(string flagName, List<string[]> senario) {
         lineNo = 0;
         for (lineNo = 0; lineNo < senario.Count; lineNo++) {
@@ -233,6 +239,7 @@ public class ScenarioExec : MonoBehaviour
         return lineNo;
     }
 
+    //Playerを見るようにする
     void CommandLookAt() {
         generalSystem.LookAt(generalSystem.GetFacePrefab(), gameObject);
     }
@@ -267,7 +274,12 @@ public class ScenarioExec : MonoBehaviour
             itemDb.MakeItemBag(itemNo, pos, gameObject.transform.rotation);
             DebugWindow.instance.DFDebug("アイテムバッグ作成：" + itemNo);
         }
+    }
 
+    //SEを鳴らす
+    void CommandSe(string seName) {
+        DebugWindow.instance.DFDebug("SE:" + seName);
+        generalSystem.PlayOneShotNoAudioSource(seName);
     }
 
     //会話終了
