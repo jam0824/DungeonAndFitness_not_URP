@@ -97,6 +97,7 @@ public class ItemBox : MonoBehaviour
         if (itemDb.canAddItem()) return true;
         generalSystem.labelInformationText.SetInformationLabel(key);
         PlayOneShot(FULL_SOUND);
+        StartCoroutine(CoroutineDestroyItemBox(WAIT_TIME_DELETE));
         return false;
     }
 

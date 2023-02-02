@@ -31,11 +31,11 @@ public class BreakObject : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision) {
         if ((collision.gameObject.tag == "PlayerAttack")&&(!hasBroken)) {
-            hasBroken = true;
             float impact = GetImpact(collision);
             //インパクトが小さかったら壊れない
             if (impact < MIN_BREAK_IMPACT) return;
 
+            hasBroken = true;
             ContactPoint contact = collision.contacts[0];
             MakeItem(ITEM_PREFAB, ITEM_PROBABILITY, item_base_y) ;
             GameObject baseObject = MakeBaseObject(
