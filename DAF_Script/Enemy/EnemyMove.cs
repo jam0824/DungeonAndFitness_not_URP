@@ -176,9 +176,8 @@ public class EnemyMove : MonoBehaviour
             enemyBullet.SetSPD(spd);
             enemyBullet.SetATK(atk);
             enemyBullet.SetEnemyGameObject(gameObject);
-
-        }
-        
+            enemyBullet.enemyConfig = enemyView.enemyConfig;
+        } 
     }
 
     public void MakeNoticeEffect() {

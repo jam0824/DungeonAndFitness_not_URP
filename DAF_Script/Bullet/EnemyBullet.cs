@@ -20,6 +20,7 @@ public class EnemyBullet : MonoBehaviour
     Vector3 scale = new Vector3(0.01f, 0.01f, 0.01f);
     Vector3 addScale;
     AudioSource audioSource;
+    public EnemyConfig enemyConfig { set; get; }
     
 
     // Start is called before the first frame update
@@ -35,6 +36,7 @@ public class EnemyBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (enemyConfig.GetHP() <= 0) HitBullet();
         if (count == waitCount) {
             rigidBullet.velocity = transform.forward.normalized * speed;
             generalSystem.PlayOneShot(audioSource, "NormalShot");
@@ -45,11 +47,19 @@ public class EnemyBullet : MonoBehaviour
             transform.localScale = scale;
             transform.LookAt(player.transform);
         }
+
         count++;
         if(count >= destroyCount) {
             Destroy(gameObject);
         }
+    }
 
+    private void OnTriggerEnter(Collider other) {
+        //ï«Ç‚è∞Ç≈è¡Ç∑
+        if ((other.gameObject.tag == "Wall") || 
+            (other.gameObject.tag == "Ground")) {
+            HitBullet();
+        }
     }
 
     public void HitBullet() {

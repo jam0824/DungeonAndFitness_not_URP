@@ -8,6 +8,7 @@ public class TMP_AlphaAndDestroy : MonoBehaviour
     
     float ALPHA_NUM = 0.01f;
     float ADD_Y = 0.5f;
+    float DEFAULT_SCALE = 0.1f;
     TextMeshPro textMeshPro;
     Rigidbody rb;
     // Start is called before the first frame update
@@ -31,16 +32,25 @@ public class TMP_AlphaAndDestroy : MonoBehaviour
         Color c = textMeshPro.color;
         c.a -= ALPHA_NUM;
         if (c.a <= 0) {
-            gameObject.SetActive(false);
+            UnActive();
         }
         textMeshPro.color = c;
         rb.AddForce(0f, ADD_Y, 0f);
     }
 
-    public void SetDamage(int damage, Vector3 pos, Quaternion r) {
+    void UnActive() {
+        Vector3 scale = new Vector3(DEFAULT_SCALE, DEFAULT_SCALE, DEFAULT_SCALE);
+        gameObject.transform.localScale = scale;
+        gameObject.SetActive(false);
+    }
+
+    public void SetDamage(int damage, Vector3 pos, Quaternion r, float scaleTimes) {
         textMeshPro.text = damage.ToString();
         gameObject.transform.position = pos;
         gameObject.transform.rotation = r;
+        Vector3 scale = gameObject.transform.localScale;
+        scale *= scaleTimes;
+        gameObject.transform.localScale = scale;
         rb.velocity = Vector3.zero;
         Color c = textMeshPro.color;
         c.a = 1.0f;

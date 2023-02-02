@@ -62,6 +62,6 @@ public class PlayerDamage : MonoBehaviour
         );
         */
         GameObject damageText = playerView.dungeonSystem.GetPlayerDamageTextFromPool();
-        damageText.GetComponent<TMP_AlphaAndDestroy>().SetDamage(damage, pos, r);
+        damageText.GetComponent<TMP_AlphaAndDestroy>().SetDamage(damage, pos, r, 1f);
     }
 }

@@ -10,7 +10,6 @@ public class ScenarioSystem : MonoBehaviour
     public GameObject MessageTextObject;
     TextMeshPro messageText;
     public Dictionary<string, string> dictSwitch;
-    int MAX_SWITCH_NUM = 200;
     bool isLock = false;
 
     // Start is called before the first frame update

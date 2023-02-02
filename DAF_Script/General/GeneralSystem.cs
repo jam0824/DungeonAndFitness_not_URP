@@ -149,6 +149,7 @@ public class GeneralSystem : MonoBehaviour
         dictSeName.Add("NormalFoot", 11);
         dictSeName.Add("NormalItemGet", 12);
         dictSeName.Add("BlowOff", 13);
+        dictSeName.Add("BlowOffAndHitWall", 14);
 
         return dictSeName;
     }

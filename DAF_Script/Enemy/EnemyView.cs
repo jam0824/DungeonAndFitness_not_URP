@@ -22,6 +22,8 @@ public class EnemyView : MonoBehaviour
         {"MiddleProbability", 0.1f },
         {"RareProbability", 0.01f }
     };
+    float HIT_STOP = 0.1f;
+    bool isBlowOff = false;
 
     public bool isGameObjectLoaded = false;
     DungeonSystem dungeonSystem;
@@ -67,10 +69,17 @@ public class EnemyView : MonoBehaviour
             if (damage > 0) {
                 ContactPoint contact = collision.contacts[0];
                 int hp = enemyConfig.calcHp(damage);
-                makeHitEffect(contact, damage);
+                makeHitEffect(contact, damage, impact);
                 SetDamageAnimation(contact, hp, impact);
                 DebugWindow.instance.DFDebug("敵は" + damage + "のダメージ！");
             }
+        }
+        //吹っ飛んでいる最中なら
+        if (isBlowOff) {
+            if (collision.gameObject.tag == "Wall") 
+                makeHitSE("BlowOffAndHitWall");
+            if (collision.gameObject.tag == "Ground") 
+                DeleteEnemyMain();
         }
     }
 
@@ -84,9 +93,10 @@ public class EnemyView : MonoBehaviour
             DropItem(generalSystem.itemDb);
 
             if (impact > BLOW_OFF_IMPACT) {
-                SetBlowOff(contact, addForce, impact);
-                makeHitSE("BlowOff");
-                StartCoroutine(DeleteEnemy(5.0f));
+                isBlowOff = true;
+                enemyAnimation.SetDamageAnim();
+                //ヒットストップを試してみる。手触りが変わるらしい
+                StartCoroutine(ExecBlowOff(contact, impact, addForce, HIT_STOP));
             }
             else {
                 enemyAnimation.setDieAnim();
@@ -99,13 +109,28 @@ public class EnemyView : MonoBehaviour
             makeHitSE("NormalHitToEnemy");
         }
     }
+    //BlowOff実行
+    IEnumerator ExecBlowOff(
+        ContactPoint contact,
+        float impact, 
+        float addForce, 
+        float waitTime) 
+    {
+        yield return new WaitForSeconds(waitTime);
+        SetBlowOff(contact, addForce, impact);
+        makeHitSE("BlowOff");
+        StartCoroutine(DeleteEnemy(3.0f));
+    }
 
     //敵が死んだときの爆発エフェクトとdestroy
     IEnumerator DeleteEnemy(float waitTime) {
         yield return new WaitForSeconds(waitTime);
+        DeleteEnemyMain();
+    }
+    void DeleteEnemyMain() {
         Instantiate(
-            enemyConfig.GetPrefabEnemyDieEffect(), 
-            gameObject.transform.position, 
+            enemyConfig.GetPrefabEnemyDieEffect(),
+            gameObject.transform.position,
             gameObject.transform.rotation);
         Destroy(gameObject);
     }
@@ -121,7 +146,7 @@ public class EnemyView : MonoBehaviour
         GetComponent<Rigidbody>().AddForce(direction, ForceMode.Impulse);
     }
 
-    public void makeHitEffect(ContactPoint contact, int damage) {
+    public void makeHitEffect(ContactPoint contact, int damage, float impact) {
         //向きは顔の向きを取る
         Quaternion r = Face.transform.rotation;
         r.x = 0.0f;
@@ -131,7 +156,12 @@ public class EnemyView : MonoBehaviour
         GameObject hit = Instantiate(PunchHitPrefab, contact.point, r);
         //ダメージ数字
         GameObject damageText = dungeonSystem.GetDamageTextFromPool();
-        damageText.GetComponent<TMP_AlphaAndDestroy>().SetDamage(damage, contact.point, r);
+        float scaleTimes = 1 + (impact * 0.0001f);
+        damageText.GetComponent<TMP_AlphaAndDestroy>().SetDamage(
+            damage, 
+            contact.point, 
+            r, 
+            scaleTimes);
         
     }
 

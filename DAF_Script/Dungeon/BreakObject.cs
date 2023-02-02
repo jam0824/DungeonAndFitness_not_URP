@@ -15,6 +15,8 @@ public class BreakObject : MonoBehaviour
     public float peaseRandomRange = 0.3f;
     bool hasBroken = false;
 
+    float MIN_BREAK_IMPACT = 1.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +33,9 @@ public class BreakObject : MonoBehaviour
         if ((collision.gameObject.tag == "PlayerAttack")&&(!hasBroken)) {
             hasBroken = true;
             float impact = GetImpact(collision);
+            //インパクトが小さかったら壊れない
+            if (impact < MIN_BREAK_IMPACT) return;
+
             ContactPoint contact = collision.contacts[0];
             MakeItem(ITEM_PREFAB, ITEM_PROBABILITY, item_base_y) ;
             GameObject baseObject = MakeBaseObject(
@@ -85,10 +90,9 @@ public class BreakObject : MonoBehaviour
 
 
     float GetImpact(Collision collision) {
-        float impact = collision.impulse.magnitude;
+        float impact = collision.impulse.magnitude / Time.fixedDeltaTime;
         impact /= 1000f;
-        if (impact < 1) impact = 1f;
-        if (impact > 3f) impact = 3f;
+        if (impact > 5f) impact = 5f;
         return impact;
     }
 

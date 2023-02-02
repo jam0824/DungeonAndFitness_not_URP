@@ -92,7 +92,7 @@ public class DungeonSystem : MonoBehaviour
         Vector3 pos = new Vector3(-10f, -10f, -10f);
         Quaternion r = transform.rotation;
         foreach (GameObject obj in Pool) {
-            obj.GetComponent<TMP_AlphaAndDestroy>().SetDamage(0, pos, r);
+            obj.GetComponent<TMP_AlphaAndDestroy>().SetDamage(0, pos, r, 1f);
         }
     }
 
