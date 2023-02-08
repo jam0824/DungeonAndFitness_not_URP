@@ -12,14 +12,12 @@ public class ItemBox : MonoBehaviour
     public AudioClip END_SOUND;
     public AudioClip FULL_SOUND;
     public int activeCount = 0;
-    GeneralSystem generalSystem;
     ItemDB itemDb;
 
     string FULL_OF_ITEM_KEY = "FullOfItem";
 
     public void ItemBoxInit() {
         GameObject generalSystemObject = GameObject.Find("GeneralSystem");
-        generalSystem = generalSystemObject.GetComponent<GeneralSystem>();
         itemDb = generalSystemObject.GetComponent<ItemDB>();
     }
 
@@ -50,7 +48,7 @@ public class ItemBox : MonoBehaviour
     void PlayOneShot(AudioClip clip) {
         //activeのときのみ音を鳴らす
         if (gameObject.activeSelf) 
-            generalSystem.PlayOneShotNoAudioWithClip(clip);
+            SingletonGeneral.instance.PlayOneShotNoAudioWithClip(clip);
     }
 
     // Update is called once per frame
@@ -95,7 +93,7 @@ public class ItemBox : MonoBehaviour
     //アイテムが追加できるかの判定と、出来ないときはインフォメーション表示
     bool CanAddItem(string key) {
         if (itemDb.canAddItem()) return true;
-        generalSystem.labelInformationText.SetInformationLabel(key);
+        SingletonGeneral.instance.labelInformationText.SetInformationLabel(key);
         PlayOneShot(FULL_SOUND);
         StartCoroutine(CoroutineDestroyItemBox(WAIT_TIME_DELETE));
         return false;

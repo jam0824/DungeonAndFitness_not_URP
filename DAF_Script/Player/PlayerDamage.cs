@@ -6,15 +6,12 @@ public class PlayerDamage : MonoBehaviour
 {
     //HIT_AREAにこのスクリプトをつける
 
-    GameObject player;
-    GeneralSystem generalSystem;
     PlayerView playerView;
     AudioSource audioSource;
     // Start is called before the first frame update
 
     void Start()
     {
-        generalSystem = GameObject.Find("GeneralSystem").GetComponent<GeneralSystem>();
         playerView = GameObject.Find("Player").GetComponent<PlayerView>();
         audioSource = GetComponent<AudioSource>();
     }
@@ -27,8 +24,8 @@ public class PlayerDamage : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         Debug.Log(other.gameObject.tag);
         if (other.gameObject.tag == "EnemyAttack") {
-            int damage = Damage(other, generalSystem.GetPlayerPrefab());
-            generalSystem.PlayOneShot(audioSource, "NormalHitToPlayer");
+            int damage = Damage(other, SingletonGeneral.instance.player);
+            SingletonGeneral.instance.PlayOneShot(audioSource, "NormalHitToPlayer");
             MakePlayerDamageText(damage);
             DebugWindow.instance.DFDebug("Playerは" + damage + "のダメージ！");
         }

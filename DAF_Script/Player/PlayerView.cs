@@ -28,7 +28,6 @@ public class PlayerView : MonoBehaviour
         generalSystem = GameObject.Find("GeneralSystem").GetComponent<GeneralSystem>();
         dungeonSystem = GameObject.Find("DungeonSystem").GetComponent<DungeonSystem>();
         audioSource = CameraC.GetComponent<AudioSource>();
-        SetPlayerGameObjects();
         
     }
     
@@ -36,15 +35,6 @@ public class PlayerView : MonoBehaviour
     void Start()
     {
         //FQCommon.Common.AppendStringFile("PlayerItemSave.txt", "101");
-    }
-
-    //GeneralSystem‚ÉƒIƒuƒWƒFƒNƒg‚ð“o˜^‚·‚é
-    private void SetPlayerGameObjects() {
-        generalSystem.SetPlayerPrefab(gameObject);
-        generalSystem.SetFacePrefab(HitArea);
-        generalSystem.SetLeftArmorPrefab(leftPlayerPunch);
-        generalSystem.SetRightArmorPrefab(rightPlayerPunch);
-        generalSystem.audioSource = audioSource;
     }
 
     // Update is called once per frame
@@ -122,7 +112,7 @@ public class PlayerView : MonoBehaviour
                 config.GetPunchEnablePrefab(),
                 punch.transform.position,
                 Quaternion.identity);
-            generalSystem.PlayOneShot(
+            SingletonGeneral.instance.PlayOneShot(
                 punch.GetComponent<AudioSource>(),
                 "PunchEnableSE");
         }
@@ -140,7 +130,7 @@ public class PlayerView : MonoBehaviour
         addPos.y = 0f;
         pos += addPos;
 
-        Quaternion r = generalSystem.GetQuaternionFace();
+        Quaternion r = SingletonGeneral.instance.GetQuaternionFace();
 
         generalSystem.itemWindow.EnableItemWindow(pos, r);
     }
@@ -149,8 +139,8 @@ public class PlayerView : MonoBehaviour
     void EnableItemBox(GameObject face) {
         Vector3 addPos = new Vector3(1.2f,0.6f,1.2f);
         generalSystem.itemBox.EnableItemBox(
-            generalSystem.GetPosFromTarget(face, addPos),
-            generalSystem.GetQuaternionFace()
+            SingletonGeneral.instance.GetPosFromTarget(face, addPos),
+            SingletonGeneral.instance.GetQuaternionFace()
             ) ;
     }
     //ItemBox”jŠü

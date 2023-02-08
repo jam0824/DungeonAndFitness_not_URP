@@ -138,7 +138,7 @@ public class ScenarioExec : MonoBehaviour
 
     //会話だった場合
     void CommandShowMessage(string[] line) {
-        ShowWindowCanvas(generalSystem);
+        ShowWindowCanvas();
         StartCoroutine(ShowMessage(FixMessage(line[0])));
         DebugWindow.instance.DFDebug(line[0]);
     }
@@ -154,7 +154,7 @@ public class ScenarioExec : MonoBehaviour
 
         for (int i = 0; i < message.Length; i++) {
             messageText.text += message[i];
-            generalSystem.PlayOneShot(audioSource, MESSAGE_TYPE);
+            SingletonGeneral.instance.PlayOneShot(audioSource, MESSAGE_TYPE);
             yield return new WaitForSeconds(messageSpeed);
         }
         //会話が終わった
@@ -162,13 +162,13 @@ public class ScenarioExec : MonoBehaviour
     }
 
     //メッセージキャンバス作成
-    void ShowWindowCanvas(GeneralSystem generalSystem) {
+    void ShowWindowCanvas() {
         if (messageText == null) {
             Vector3 addPos = new Vector3(0, -0.2f, 0);
-            Vector3 pos = generalSystem.GetPosBetweenTargetAndFace(gameObject, addPos);
+            Vector3 pos = SingletonGeneral.instance.GetPosBetweenTargetAndFace(gameObject, addPos);
             messageText = scenarioSystem.ShowMessageWindow(
                 pos, 
-                generalSystem.GetQuaternionFace());
+                SingletonGeneral.instance.GetQuaternionFace());
         }
         else {
             messageText.text = "";
@@ -202,7 +202,7 @@ public class ScenarioExec : MonoBehaviour
         addPos.x *= 0.5f;
         addPos.y = MESSAGE_Y + SELECTBOX_Y - (float)boxCount * 0.35f;
         addPos.z *= 0.5f;
-        GameObject selectBoxCanvas = generalSystem.MakeInstanceFromTarget(
+        GameObject selectBoxCanvas = SingletonGeneral.instance.MakeInstanceFromTarget(
             gameObject,
             scenarioSystem.GetSelectBoxCanvasPrefab(),
             addPos);
@@ -241,7 +241,9 @@ public class ScenarioExec : MonoBehaviour
 
     //Playerを見るようにする
     void CommandLookAt() {
-        generalSystem.LookAt(generalSystem.GetFacePrefab(), gameObject);
+        SingletonGeneral.instance.LookAt(
+            SingletonGeneral.instance.face, 
+            gameObject);
     }
 
     //スイッチの数字の計算。+と-のみ。
@@ -268,7 +270,7 @@ public class ScenarioExec : MonoBehaviour
             itemDb.AddItem(itemNo);
         }
         else {
-            generalSystem.labelInformationText.SetInformationLabel(FULL_OF_ITEM_KEY);
+            SingletonGeneral.instance.labelInformationText.SetInformationLabel(FULL_OF_ITEM_KEY);
             Vector3 pos = gameObject.transform.position;
             pos.y += 1f;
             itemDb.MakeItemBag(itemNo, pos, gameObject.transform.rotation);
@@ -279,7 +281,7 @@ public class ScenarioExec : MonoBehaviour
     //SEを鳴らす
     void CommandSe(string seName) {
         DebugWindow.instance.DFDebug("SE:" + seName);
-        generalSystem.PlayOneShotNoAudioSource(seName);
+        SingletonGeneral.instance.PlayOneShotNoAudioSource(seName);
     }
 
     //会話終了

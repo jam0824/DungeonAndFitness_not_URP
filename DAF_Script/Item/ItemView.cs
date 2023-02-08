@@ -81,7 +81,7 @@ public class ItemView : MonoBehaviour
 
     //アイテムウィンドウを閉じる
     public void OnClickClose() {
-        generalSystem.PlayOneShotNoAudioSource("ItemMenuClose");
+        SingletonGeneral.instance.PlayOneShotNoAudioSource("ItemMenuClose");
         //Destroy(gameObject);
         gameObject.SetActive(false);
     }
@@ -91,7 +91,7 @@ public class ItemView : MonoBehaviour
     }
 
     public void OnClickItemListNext() {
-        generalSystem.PlayOneShotNoAudioSource("ItemSmallSelect");
+        SingletonGeneral.instance.PlayOneShotNoAudioSource("ItemSmallSelect");
         if (nowListName == "Backpack") {
             if (pageNo < playerConfig.GetMaxPageNo() - 1) {
                 pageNo++;
@@ -113,7 +113,7 @@ public class ItemView : MonoBehaviour
     }
 
     public void OnClickItemListPrev() {
-        generalSystem.PlayOneShotNoAudioSource("ItemSmallSelect");
+        SingletonGeneral.instance.PlayOneShotNoAudioSource("ItemSmallSelect");
         if (nowListName == "Backpack") {
             if (pageNo > 0) {
                 pageNo--;
@@ -162,7 +162,7 @@ public class ItemView : MonoBehaviour
     }
 
     void ChangeHeaderButtonActive(string nowListName) {
-        generalSystem.PlayOneShotNoAudioSource("ItemBigSelect");
+        SingletonGeneral.instance.PlayOneShotNoAudioSource("ItemBigSelect");
         itemButtonAnimation.ChangeHeaderButtonsActive(nowListName);
     }
 
@@ -183,7 +183,7 @@ public class ItemView : MonoBehaviour
     }
 
     public void PlayOneShot(string seName) {
-        generalSystem.PlayOneShotNoAudioSource(seName);
+        SingletonGeneral.instance.PlayOneShotNoAudioSource(seName);
     }
 
 

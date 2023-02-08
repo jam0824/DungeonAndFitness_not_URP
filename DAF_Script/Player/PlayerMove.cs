@@ -41,7 +41,7 @@ public class PlayerMove : MonoBehaviour
         float z = Mathf.Abs(transform.position.z - oldPos.z);
         walkWidth += x + z;
         if(walkWidth > walkMax) {
-            playerView.generalSystem.PlayOneShot(playerView.audioSource, "NormalFoot");
+            SingletonGeneral.instance.PlayOneShot(playerView.audioSource, "NormalFoot");
             walkWidth = 0f;
         }
         oldPos = transform.position;

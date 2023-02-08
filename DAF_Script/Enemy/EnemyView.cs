@@ -173,7 +173,7 @@ public class EnemyView : MonoBehaviour
 
     public void makeHitSE(string SeName) {
         //ダメージ音
-        generalSystem.PlayOneShot(audioSource, SeName);
+        SingletonGeneral.instance.PlayOneShot(audioSource, SeName);
     }
 
     //アイテムをドロップする

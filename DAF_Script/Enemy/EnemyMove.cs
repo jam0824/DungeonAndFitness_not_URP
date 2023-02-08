@@ -38,7 +38,7 @@ public class EnemyMove : MonoBehaviour
 
         switch (state) {
             case "Walk":
-                WhenWalk(dist, enemyView.enemyConfig, enemyView.generalSystem);
+                WhenWalk(dist, enemyView.enemyConfig);
                 break;
             case "Notice":
                 WhenNotice(dist, enemyView.Player, enemyView.enemyConfig, enemyView.enemyAnimation);
@@ -74,14 +74,13 @@ public class EnemyMove : MonoBehaviour
 
     void WhenWalk(
         float dist, 
-        EnemyConfig enemyConfig, 
-        GeneralSystem generalSystem) {
+        EnemyConfig enemyConfig) {
 
         RandomWalk(enemyConfig);
         if (dist <= enemyConfig.GetNoticeDistance()) {
             DebugWindow.instance.DFDebug("StateCange:Notice");
             //MakeNoticeEffect();
-            generalSystem.PlayOneShot(enemyView.audioSource, "EnemyNoticeSE");
+            SingletonGeneral.instance.PlayOneShot(enemyView.audioSource, "EnemyNoticeSE");
             enemyConfig.SetEnemyState("Notice");
         }
     }
@@ -168,11 +167,10 @@ public class EnemyMove : MonoBehaviour
             pos = pos + addPos;
             pos.y += 3.5f;
             GameObject shot = Instantiate(ball, pos, Quaternion.identity);
-            enemyView.generalSystem.PlayOneShot(enemyView.audioSource, "NormalShotAppear");
+            SingletonGeneral.instance.PlayOneShot(enemyView.audioSource, "NormalShotAppear");
 
             EnemyBullet enemyBullet = shot.GetComponent<EnemyBullet>();
             enemyBullet.player = enemyView.Face;
-            enemyBullet.generalSystem = enemyView.generalSystem;
             enemyBullet.SetSPD(spd);
             enemyBullet.SetATK(atk);
             enemyBullet.SetEnemyGameObject(gameObject);

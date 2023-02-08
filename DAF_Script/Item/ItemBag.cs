@@ -8,7 +8,6 @@ public class ItemBag : MonoBehaviour
     public string itemNo { set; get; }
     
     OVRGrabbable ovrGrabbable;
-    GeneralSystem generalSystem;
     DungeonSystem dungeonSystem;
     LabelSystem labelSystem;
     Dictionary<string, string> itemData;
@@ -26,7 +25,6 @@ public class ItemBag : MonoBehaviour
     private void Awake() {
         ovrGrabbable = GetComponent<OVRGrabbable>();
         dungeonSystem = GameObject.Find("DungeonSystem").GetComponent<DungeonSystem>();
-        generalSystem = GameObject.Find("GeneralSystem").GetComponent<GeneralSystem>();
     }
 
     // Start is called before the first frame update
@@ -90,7 +88,7 @@ public class ItemBag : MonoBehaviour
 
     void CheckGrabber() {
         OVRGrabber grabber = ovrGrabbable.grabbedBy;
-        generalSystem.VivrationController(grabber.gameObject.name, 0.2f, 0.2f, 0.1f);
+        SingletonGeneral.instance.VivrationController(grabber.gameObject.name, 0.2f, 0.2f, 0.1f);
         //DebugWindow.instance.DFDebug("hand:" + grabber.gameObject.name);
     }
 

@@ -9,7 +9,6 @@ public class EnemyBullet : MonoBehaviour
 
     public GameObject HitPrefab;
     public GameObject player { set; get; }
-    public GeneralSystem generalSystem { set; get; }
     GameObject Enemy;
     Rigidbody rigidBullet;
     int ATK = 0;
@@ -39,7 +38,7 @@ public class EnemyBullet : MonoBehaviour
         if (enemyConfig.GetHP() <= 0) HitBullet();
         if (count == waitCount) {
             rigidBullet.velocity = transform.forward.normalized * speed;
-            generalSystem.PlayOneShot(audioSource, "NormalShot");
+            SingletonGeneral.instance.PlayOneShot(audioSource, "NormalShot");
             Enemy.GetComponent<EnemyAnimation>().setAttackAnim("Attack 01");
         }
         else if (count < waitCount) {

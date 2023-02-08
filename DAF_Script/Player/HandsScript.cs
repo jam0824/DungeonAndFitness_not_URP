@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class HandsScript : MonoBehaviour
 {
-    GeneralSystem generalSystem;
     bool isHit = false;
     BoxCollider boxCollider;
     Rigidbody rb;
     string objName;
 
     private void Awake() {
-        generalSystem = GameObject.Find("GeneralSystem").GetComponent<GeneralSystem>();
         boxCollider = GetComponent<BoxCollider>();
         rb = GetComponent<Rigidbody>();
         objName = GetObjectName();
@@ -59,7 +57,7 @@ public class HandsScript : MonoBehaviour
     }
 
     public void VivrationArmor(float frequency, float amplitude, float waitTime) {
-        generalSystem.VivrationController(objName, frequency, amplitude, waitTime);
+        SingletonGeneral.instance.VivrationController(objName, frequency, amplitude, waitTime);
     }
 
 
