@@ -4,13 +4,23 @@ using UnityEngine;
 
 public class HandsScript : MonoBehaviour
 {
+    GeneralSystem generalSystem;
     bool isHit = false;
     BoxCollider boxCollider;
+    Rigidbody rb;
+    string objName;
+
+    private void Awake() {
+        generalSystem = GameObject.Find("GeneralSystem").GetComponent<GeneralSystem>();
+        boxCollider = GetComponent<BoxCollider>();
+        rb = GetComponent<Rigidbody>();
+        objName = GetObjectName();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        boxCollider = GetComponent<BoxCollider>();
+        
     }
 
     // Update is called once per frame
@@ -30,6 +40,16 @@ public class HandsScript : MonoBehaviour
         isHit = hit;
     }
 
+    public float GetVelocity() {
+        return rb.velocity.magnitude;
+    }
+
+    string GetObjectName() {
+        return gameObject.name.ToLower();
+    }
+
+    
+
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "HandsDitectArea") {
             //ìGÇ…çUåÇÇ™ìñÇΩÇ¡ÇΩÇÁisTriggerÇtrueÇ…ÇµÇƒìßâﬂÇ∑ÇÈÇÊÇ§Ç…ÇµÇƒÇ¢ÇÈÇÃÇ≈
@@ -37,4 +57,10 @@ public class HandsScript : MonoBehaviour
             SetIsTrigger(false);
         }
     }
+
+    public void VivrationArmor(float frequency, float amplitude, float waitTime) {
+        generalSystem.VivrationController(objName, frequency, amplitude, waitTime);
+    }
+
+
 }

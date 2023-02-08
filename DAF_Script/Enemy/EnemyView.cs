@@ -70,7 +70,7 @@ public class EnemyView : MonoBehaviour
                 ContactPoint contact = collision.contacts[0];
                 int hp = enemyConfig.calcHp(damage);
                 makeHitEffect(contact, damage, impact);
-                SetDamageAnimation(contact, hp, impact);
+                SetDamageAnimation(handsScript, contact, hp, impact);
                 DebugWindow.instance.DFDebug("敵は" + damage + "のダメージ！");
             }
         }
@@ -83,7 +83,7 @@ public class EnemyView : MonoBehaviour
         }
     }
 
-    private void SetDamageAnimation(ContactPoint contact, int hp, float impact) {
+    private void SetDamageAnimation(HandsScript handsScript, ContactPoint contact, int hp, float impact) {
         //HPがゼロになったら
         if (hp == 0) {
             enemyMove.StopAttack();
@@ -93,18 +93,24 @@ public class EnemyView : MonoBehaviour
             DropItem(generalSystem.itemDb);
 
             if (impact > BLOW_OFF_IMPACT) {
+                //コントローラーを振動させる
+                handsScript.VivrationArmor(0.5f, 1f, 1f);
                 isBlowOff = true;
                 enemyAnimation.SetDamageAnim();
                 //ヒットストップを試してみる。手触りが変わるらしい
                 StartCoroutine(ExecBlowOff(contact, impact, addForce, HIT_STOP));
             }
             else {
+                //コントローラーを振動させる
+                handsScript.VivrationArmor(0.5f, 0.5f, 0.2f);
                 enemyAnimation.setDieAnim();
                 makeHitSE("NormalEnemyDie");
                 StartCoroutine(DeleteEnemy(1.5f));
             }
         }
         else {
+            //コントローラーを振動させる
+            handsScript.VivrationArmor(0.5f, 0.5f, 0.2f);
             enemyAnimation.SetDamageAnim();
             makeHitSE("NormalHitToEnemy");
         }

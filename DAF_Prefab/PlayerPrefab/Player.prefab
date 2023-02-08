@@ -78,12 +78,12 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 0
+  m_RenderMode: 2
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -376,7 +376,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 840379314}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.2
@@ -895,7 +895,6 @@ GameObject:
   - component: {fileID: 7759126702173369849}
   - component: {fileID: 7759126702173369848}
   - component: {fileID: 7759126702173369852}
-  - component: {fileID: 7759126702173369855}
   - component: {fileID: 7759126702173369854}
   m_Layer: 7
   m_Name: LeftArmor
@@ -912,8 +911,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7759126702173369851}
   m_LocalRotation: {x: 0.7071068, y: 0, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: -0.2, y: -0.15, z: 0.2}
-  m_LocalScale: {x: 2, y: -2, z: 2}
+  m_LocalPosition: {x: -0.1, y: -0.2, z: 0.2}
+  m_LocalScale: {x: 3, y: -3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7762943979491584627}
@@ -980,18 +979,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e67281af5f17104cb79ebc352e0bc57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7759126702173369855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7759126702173369851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5330d0e1b1f8834c84a1414ce7a14a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!82 &7759126702173369854
@@ -2213,7 +2200,6 @@ GameObject:
   - component: {fileID: 8084770729635542827}
   - component: {fileID: 8084770729635542826}
   - component: {fileID: 8084770729635542821}
-  - component: {fileID: 8084770729635542820}
   - component: {fileID: 8084770729635542823}
   m_Layer: 7
   m_Name: RightArmor
@@ -2230,8 +2216,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8084770729635542817}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.2, y: -0.14999998, z: 0.2}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: 0.1, y: -0.2, z: 0.2}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8084770729913515886}
@@ -2298,18 +2284,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e67281af5f17104cb79ebc352e0bc57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8084770729635542820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8084770729635542817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5330d0e1b1f8834c84a1414ce7a14a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!82 &8084770729635542823
@@ -2944,6 +2918,10 @@ PrefabInstance:
     - target: {fileID: 11400000, guid: 126d619cf4daa52469682f85c1378b4a, type: 3}
       propertyPath: _trackingOriginType
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1131807534445064457, guid: 126d619cf4daa52469682f85c1378b4a, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 126d619cf4daa52469682f85c1378b4a, type: 3}

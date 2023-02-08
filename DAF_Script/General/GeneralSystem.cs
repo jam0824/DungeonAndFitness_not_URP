@@ -249,4 +249,16 @@ public class GeneralSystem : MonoBehaviour
             GameObject.Find("InformationText").
             GetComponent<LabelInformationText>();
     }
+
+    //コントローラーを振動させる
+    public void VivrationController(string objName, float frequency, float amplitude, float waitTime) {
+        StartCoroutine(Vivration(objName.ToLower(), frequency, amplitude, waitTime));
+    }
+    //コントローラーを動かして止めるためのコールチン
+    IEnumerator Vivration(string objName, float frequency, float amplitude, float waitTime) {
+        OVRInput.Controller controller = (objName.Contains("left")) ? OVRInput.Controller.LTouch : OVRInput.Controller.RTouch;
+        OVRInput.SetControllerVibration(frequency, amplitude, controller);
+        yield return new WaitForSeconds(waitTime);
+        OVRInput.SetControllerVibration(0, 0, controller);
+    }
 }
