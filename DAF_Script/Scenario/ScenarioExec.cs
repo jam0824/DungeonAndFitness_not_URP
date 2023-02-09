@@ -14,7 +14,6 @@ public class ScenarioExec : MonoBehaviour
     string FULL_OF_ITEM_KEY = "FullOfItem";
 
     public ScenarioSystem scenarioSystem { set; get; }
-    public GeneralSystem generalSystem { set; get; }
     public AudioSource audioSource { set; get; }
 
     List<string[]> listScenarioCsv;
@@ -119,7 +118,7 @@ public class ScenarioExec : MonoBehaviour
                 break;
             }
             else if (command == "itemget") {
-                CommandNormalItemGet(line[1], generalSystem.itemDb);
+                CommandNormalItemGet(line[1], SingletonGeneral.instance.itemDb);
                 no++;
                 continue;
             }
@@ -307,7 +306,7 @@ public class ScenarioExec : MonoBehaviour
         DebugWindow.instance.DFDebug("シナリオ呼び出し");
         List<string[]> tsvData = FQCommon.Common.LoadTsvFileFromTextAsset(scenario);
 
-        listScenarioCsv = GetLanguageText(tsvData, generalSystem.LanguageMode);
+        listScenarioCsv = GetLanguageText(tsvData, SingletonGeneral.instance.LanguageMode);
     }
 
     //日本語と英語はタブ区切りされている。

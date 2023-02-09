@@ -48,8 +48,7 @@ public class PlayerScenarioDitect : MonoBehaviour
     }
 
     private void ObjectLoad() {
-        generalSystemObject = GameObject.Find("GeneralSystem");
-        scenarioSystem = generalSystemObject.GetComponent<ScenarioSystem>();
+        scenarioSystem = SingletonGeneral.instance.scenarioSystem;
     }
 
     //é¿çsñ{ëÃ
@@ -59,7 +58,7 @@ public class PlayerScenarioDitect : MonoBehaviour
         if (!scenarioExec.GetIsNowLineExecuting()) {
             isNowScenarioExecPrefab = other.gameObject;
             scenarioExec.scenarioSystem = scenarioSystem;
-            scenarioExec.generalSystem = generalSystemObject.GetComponent<GeneralSystem>();
+            
             scenarioExec.audioSource = other.GetComponent<AudioSource>();
             other.gameObject.GetComponent<ScenarioExec>().ScenarioExecution();
         }

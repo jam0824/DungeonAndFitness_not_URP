@@ -18,7 +18,7 @@ public class LabelInformationText : MonoBehaviour
     }
 
     void LabelInformationTextInit() {
-        labelSystem = GameObject.Find("GeneralSystem").GetComponent<LabelSystem>();
+        labelSystem = SingletonGeneral.instance.labelSystem;
         textMeshProComponent = GetComponent<TextMeshPro>();
         textMeshProComponent.enabled = false;
         maxDisplayCount = 72 * displaySecond;

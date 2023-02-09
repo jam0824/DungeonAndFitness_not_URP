@@ -13,7 +13,6 @@ public class EnemyView : MonoBehaviour
     public EnemyMove enemyMove { get; set; }
     public EnemyAnimation enemyAnimation { get; set; }
     public GameObject PunchHitPrefab { get; set; }
-    public GeneralSystem generalSystem { get; set; }
     public AudioSource audioSource { get; set; }
     public Rigidbody rigidbody { get; set; }
 
@@ -29,7 +28,6 @@ public class EnemyView : MonoBehaviour
     DungeonSystem dungeonSystem;
 
     private void Awake() {
-        generalSystem = GameObject.Find("GeneralSystem").GetComponent<GeneralSystem>();
         dungeonSystem = GameObject.Find("DungeonSystem").GetComponent<DungeonSystem>();
 
         Player = GameObject.Find("Player");
@@ -90,7 +88,7 @@ public class EnemyView : MonoBehaviour
             //Freeze rotationを解除する
             rigidbody.constraints = RigidbodyConstraints.None;
             //アイテムドロップ
-            DropItem(generalSystem.itemDb);
+            DropItem(SingletonGeneral.instance.itemDb);
 
             if (impact > BLOW_OFF_IMPACT) {
                 //コントローラーを振動させる

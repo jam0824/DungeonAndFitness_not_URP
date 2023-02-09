@@ -6,7 +6,6 @@ public class PlayerView : MonoBehaviour
 {
     
     PlayerConfig config;
-    public GeneralSystem generalSystem { get; set; }
     public AudioSource audioSource { get; set; }
 
     [SerializeField]
@@ -25,7 +24,6 @@ public class PlayerView : MonoBehaviour
     private void Awake() {
         DontDestroyOnLoad(gameObject);
         config = GetComponent<PlayerConfig>();
-        generalSystem = GameObject.Find("GeneralSystem").GetComponent<GeneralSystem>();
         dungeonSystem = GameObject.Find("DungeonSystem").GetComponent<DungeonSystem>();
         audioSource = CameraC.GetComponent<AudioSource>();
         
@@ -72,7 +70,7 @@ public class PlayerView : MonoBehaviour
         if ((Input.GetKeyDown(KeyCode.A))
             || (OVRInput.GetDown(OVRInput.RawButton.A))) {
             //アイテムボックスがアクティブだったら何も起こさない（消すのはupdate側で行う）
-            if (generalSystem.itemBox.ActiveSelf()) return;
+            if (SingletonGeneral.instance.itemBox.ActiveSelf()) return;
             //アイテムボックスが消えないことがあったのでロックをつける
             if (lockEnableItemBox) return;
             EnableItemBox(HitArea);
@@ -84,8 +82,8 @@ public class PlayerView : MonoBehaviour
         || (OVRInput.GetDown(OVRInput.RawButton.A))) {
             //Aボタンがupdateでもひっかかってitemboxを付けたと同時に消えるため
             //カウントを設置してある程度以上で発火するようにした
-            if ((generalSystem.itemBox.ActiveSelf())&&
-                (generalSystem.itemBox.activeCount > 32)) {
+            if ((SingletonGeneral.instance.itemBox.ActiveSelf())&&
+                (SingletonGeneral.instance.itemBox.activeCount > 32)) {
                 DestroyItemBox();
             }
         }
@@ -121,8 +119,8 @@ public class PlayerView : MonoBehaviour
     
     //メニュー表示本体
     void EnableItemCanvas(GameObject face) {
-        if (generalSystem.itemWindow.ActiveSelf()) {
-            generalSystem.itemWindow.OnClickClose();
+        if (SingletonGeneral.instance.itemWindow.ActiveSelf()) {
+            SingletonGeneral.instance.itemWindow.OnClickClose();
             return;
         }
         Vector3 pos = face.transform.position;
@@ -132,20 +130,20 @@ public class PlayerView : MonoBehaviour
 
         Quaternion r = SingletonGeneral.instance.GetQuaternionFace();
 
-        generalSystem.itemWindow.EnableItemWindow(pos, r);
+        SingletonGeneral.instance.itemWindow.EnableItemWindow(pos, r);
     }
 
     //ItemBox表示本体
     void EnableItemBox(GameObject face) {
         Vector3 addPos = new Vector3(1.2f,0.6f,1.2f);
-        generalSystem.itemBox.EnableItemBox(
+        SingletonGeneral.instance.itemBox.EnableItemBox(
             SingletonGeneral.instance.GetPosFromTarget(face, addPos),
             SingletonGeneral.instance.GetQuaternionFace()
             ) ;
     }
     //ItemBox破棄
     void DestroyItemBox() {
-        generalSystem.itemBox.UnableItemBox();
+        SingletonGeneral.instance.itemBox.UnableItemBox();
         lockEnableItemBox = true;
         StartCoroutine(UnlockEnableItemBox(1.0f));
     }

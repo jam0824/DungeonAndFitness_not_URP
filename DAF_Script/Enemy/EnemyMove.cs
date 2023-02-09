@@ -178,16 +178,4 @@ public class EnemyMove : MonoBehaviour
         } 
     }
 
-    public void MakeNoticeEffect() {
-        Vector3 pos = transform.position;
-        pos.y += 3.0f;
-
-        //ビックリマーク
-        GameObject noticeText = Instantiate(
-            enemyView.generalSystem.GetPrefabNoticeTextCanvas(),
-            pos,
-            enemyView.Face.transform.rotation
-        );
-
-    }
 }

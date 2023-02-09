@@ -5,12 +5,27 @@ using UnityEngine;
 public class SingletonGeneral : MonoBehaviour
 {
     public static SingletonGeneral instance;
+    public string LanguageMode { set; get; }
     public GameObject player { set; get; }
     public GameObject face { set; get; }
     public PlayerConfig playerConfig{set;get;}
     public PlayerView playerView { set; get; }
     public LabelInformationText labelInformationText { set; get; }
     public AudioSource audioSource { set; get; }
+    public ItemBox itemBox { set; get; }
+
+    public ItemView itemWindow { set; get; }
+    public LabelSystem labelSystem { set; get; }
+    public ItemDB itemDb { set; get; }
+    public ScenarioSystem scenarioSystem { set; get; }
+
+    public bool DEBUG_MODE;
+    public string NORMAL_ITEM_SAVE_PATH;
+    public string COLLECTION_ITEM_SAVE_PATH;
+    public GameObject ItemCanvas;
+    public GameObject DamageTextCanvas;
+    public GameObject PlayerDamageTextCanvas;
+    public GameObject ItemBoxPrefab;
 
     public List<AudioClip> listBattleSE;
 
@@ -20,6 +35,7 @@ public class SingletonGeneral : MonoBehaviour
         if (instance == null) {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            SingletonGeneralInit();
         }
         else {
             Destroy(gameObject);
@@ -28,14 +44,37 @@ public class SingletonGeneral : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetDictSeName();
+        
+    }
+
+    void SingletonGeneralInit() {
+        LanguageMode = "japanese";
+
+        itemDb = LoadItemDb();
+        itemWindow = LoadItemWindow();
+
         LoadPlayerObject();
+
+        labelSystem = LoadLabelSystem();
+
+        itemBox = LoadItemBox();
+
+        scenarioSystem = LoadScenarioSystem();
+
+        SetDictSeName();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public string GetNormalItemSavePath() {
+        return NORMAL_ITEM_SAVE_PATH;
+    }
+    public string GetCollectionItemSavePath() {
+        return COLLECTION_ITEM_SAVE_PATH;
     }
 
     //プレイヤーの外部から必要とされるオブジェクトをロード
@@ -48,6 +87,43 @@ public class SingletonGeneral : MonoBehaviour
         labelInformationText =
             GameObject.Find("InformationText").
             GetComponent<LabelInformationText>();
+    }
+    //アイテムボックスを作って非アクティブにしておく
+    ItemBox LoadItemBox() {
+        Vector3 pos = new Vector3(-10f, -10f, -10f);
+        GameObject itemBoxObject = Instantiate(ItemBoxPrefab, pos, transform.rotation);
+        ItemBox ib = itemBoxObject.GetComponent<ItemBox>();
+        ib.ItemBoxInit();
+        itemBoxObject.SetActive(false);
+        ib.UnableItemBox();
+        return ib;
+    }
+    //メニューを作って非アクティブにしておく
+    ItemView LoadItemWindow() {
+        Vector3 pos = new Vector3(-10f, -10f, -10f);
+        GameObject ItemWindowObject = Instantiate(ItemCanvas, pos, transform.rotation);
+        ItemView iW = ItemWindowObject.GetComponent<ItemView>();
+        iW.ItemViewInit();
+        ItemWindowObject.SetActive(false);
+        return iW;
+    }
+
+    ItemDB LoadItemDb() {
+        ItemDB iD = GetComponent<ItemDB>();
+        //ItemDBの初期化
+        iD.ItemDbInit();
+        return iD;
+    }
+
+    LabelSystem LoadLabelSystem() {
+        LabelSystem ls = GetComponent<LabelSystem>();
+        //LabelSystemの初期化
+        ls.LabelSystemInit(LanguageMode);
+        return ls;
+    }
+
+    ScenarioSystem LoadScenarioSystem() {
+        return GetComponent<ScenarioSystem>();
     }
 
     public void PlayOneShot(AudioSource audioSource, string SeName) {
@@ -152,5 +228,7 @@ public class SingletonGeneral : MonoBehaviour
         r.z = 0.0f;
         return r;
     }
+
+
 
 }

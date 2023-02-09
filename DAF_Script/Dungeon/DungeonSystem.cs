@@ -13,7 +13,6 @@ public class DungeonSystem : MonoBehaviour
     public GameObject PlayerDamageTextPrefab;
     public int DAMAGE_TEXT_NUM;
     public int PLAYER_DAMAGE_TEXT_NUM;
-    public ItemDB itemDb { set; get; }
 
     List<GameObject> PoolDamageText;
     List<GameObject> PoolPlayerDamageText;
@@ -26,7 +25,6 @@ public class DungeonSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        itemDb = GameObject.Find("GeneralSystem").GetComponent<ItemDB>();
         //poolにオブジェクトをセット
         PoolDamageText = LoadPrefabs(DamageTextPrefab, DAMAGE_TEXT_NUM);
         PoolPlayerDamageText = LoadPrefabs(PlayerDamageTextPrefab, PLAYER_DAMAGE_TEXT_NUM);

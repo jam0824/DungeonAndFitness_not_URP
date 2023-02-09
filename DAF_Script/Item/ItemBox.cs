@@ -17,8 +17,7 @@ public class ItemBox : MonoBehaviour
     string FULL_OF_ITEM_KEY = "FullOfItem";
 
     public void ItemBoxInit() {
-        GameObject generalSystemObject = GameObject.Find("GeneralSystem");
-        itemDb = generalSystemObject.GetComponent<ItemDB>();
+        itemDb = SingletonGeneral.instance.itemDb;
     }
 
     //ItemBox‹N“®Žž‚ÉŒÄ‚Î‚ê‚é

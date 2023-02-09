@@ -42,7 +42,7 @@ public class DebugWindow : MonoBehaviour
 
     private void OnReceiveLog(string logText, string stackTrace, LogType logType) {
         string m = cText.text;
-        m = logText + "\n" + m;
+        m = logText + "\n" + stackTrace + "\n" + m;
         cText.text = m;
     }
 }

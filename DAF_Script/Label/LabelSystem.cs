@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class LabelSystem : MonoBehaviour
 {
-    string languageMode { set; get; }
+    public string languageMode { set; get; }
     List<Dictionary<string, string>> labelDB;
     string LABEL_DB_PATH = "LabelDB/LabelDB";
+
+
 
     // Start is called before the first frame update
     void Start()

@@ -19,7 +19,7 @@ public class LabelView : MonoBehaviour
     }
 
     void LabelViewInit() {
-        labelSystem = GameObject.Find("GeneralSystem").GetComponent<LabelSystem>();
+        labelSystem = SingletonGeneral.instance.labelSystem;
         labelTextObject = transform.Find("LabelText").GetComponent<TextMeshPro>();
         face = GameObject.Find("HitArea");
     }

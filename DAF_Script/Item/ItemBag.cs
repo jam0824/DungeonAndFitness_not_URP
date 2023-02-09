@@ -75,12 +75,12 @@ public class ItemBag : MonoBehaviour
             //-1以外だったらアイテムno指定で作成する
             itemNo = no;
         }
-        
-        labelSystem = GameObject.Find("GeneralSystem").GetComponent<LabelSystem>();
+
+        labelSystem = SingletonGeneral.instance.labelSystem;
         playerView = GameObject.Find("Player").GetComponent<PlayerView>();
         label = labelSystem.GetLabel(labelKey);
 
-        itemData = dungeonSystem.itemDb.GetItemData(itemNo);
+        itemData = SingletonGeneral.instance.itemDb.GetItemData(itemNo);
         itemNameDescription = MakeItemNameRank(itemData);
         itemDescription.text = AddLabel(itemNameDescription);
         face = GameObject.Find("HitArea");

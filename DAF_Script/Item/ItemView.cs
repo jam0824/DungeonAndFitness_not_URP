@@ -11,7 +11,6 @@ public class ItemView : MonoBehaviour
     List<ItemList> itemListItem;
     ItemButtonAnimation itemButtonAnimation;
     GameObject itemList;
-    GeneralSystem generalSystem;
     PlayerConfig playerConfig;
     Text itemListPagingText;
     
@@ -22,9 +21,7 @@ public class ItemView : MonoBehaviour
 
     // Start is called before the first frame update
     public void ItemViewInit() {
-        GameObject generalSystemObject = GameObject.Find("GeneralSystem");
-        generalSystem = generalSystemObject.GetComponent<GeneralSystem>();
-        itemDb = generalSystem.GetComponent<ItemDB>();
+        itemDb = SingletonGeneral.instance.itemDb;
 
         playerConfig = GameObject.Find("Player").GetComponent<PlayerConfig>();
         itemListPagingText = GameObject.Find("ItemListPagingText").GetComponent<Text>();

@@ -5,17 +5,13 @@ using System.IO;
 
 public class ItemDB : MonoBehaviour
 {
+
     public List<GameObject> itemPrefab;
     Dictionary<string, int> dictItemPrefabName;
-    GeneralSystem generalSystem;
     List<Dictionary<string, string>> itemDB = new List<Dictionary<string, string>>();
     public List<string> playerItemList { set; get; }
     public List<string> playerCollectionList { set; get; }
 
-    private void Awake() {
-        
-        
-    }
     // Start is called before the first frame update
     void Start()
     {
@@ -28,11 +24,10 @@ public class ItemDB : MonoBehaviour
         
     }
 
-    public void ItemDbInit(GeneralSystem gs) {
+    public void ItemDbInit() {
         itemDB = MakeItemDB(
             FQCommon.Common.LoadCsvFile("ItemDB/ItemDB")
         );
-        generalSystem = gs;
         LoadPlayerItems();
         dictItemPrefabName = SetDictItemPrefabName();
     }
@@ -40,9 +35,9 @@ public class ItemDB : MonoBehaviour
     //プレイヤーのアイテムをファイルからロードする
     void LoadPlayerItems() {
         playerItemList = FQCommon.Common.LoadSaveFile(
-            generalSystem.GetNormalItemSavePath());
+            SingletonGeneral.instance.GetNormalItemSavePath());
         playerCollectionList = FQCommon.Common.LoadSaveFile(
-            generalSystem.GetCollectionItemSavePath()) ;
+            SingletonGeneral.instance.GetCollectionItemSavePath()) ;
     }
 
     //ItemDBを作成する
@@ -81,7 +76,8 @@ public class ItemDB : MonoBehaviour
 
     //アイテムが追加可能か判定する
     public bool canAddItem() {
-        int max = 10 * generalSystem.playerConfig.GetMaxPageNo();
+        PlayerConfig playerConfig = GameObject.Find("Player").GetComponent<PlayerConfig>();
+        int max = 10 * playerConfig.GetMaxPageNo();
         return (playerItemList.Count < max) ? true : false;
     }
 
