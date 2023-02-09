@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
-    int NORMAL_SHOT = 0;
-    int NORMAL_HIT = 1;
 
     public GameObject HitPrefab;
     public GameObject player { set; get; }

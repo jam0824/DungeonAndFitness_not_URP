@@ -24,22 +24,6 @@ public class GeneralSystem : MonoBehaviour
     }
 
 
-
-
-    public GameObject GetItemCanvas() {
-        return ItemCanvas;
-    }
-    public GameObject GetPrefabDamageTextCanvas() {
-        return DamageTextCanvas;
-    }
-    public GameObject GetPrefabPlayerDamageTextCanvas() {
-        return PlayerDamageTextCanvas;
-    }
-    public GameObject GetPrefabNoticeTextCanvas() {
-        return NoticeTextCanvas;
-    }
-
-
    
 
 }
