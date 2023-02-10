@@ -33,11 +33,4 @@ public class PlayerWallCollider : MonoBehaviour
 
         }
     }
-
-
-    private void OnTriggerEnter(Collider other) {
-        if(other.gameObject.tag == "Wall") {
-            DebugWindow.instance.DFDebug("Trigger•Ç‚É“–‚½‚Á‚½");
-        }
-    }
 }
