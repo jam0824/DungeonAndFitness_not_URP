@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class PlayerView : MonoBehaviour
 {
-    
-    PlayerConfig config;
+    public static PlayerView instance;
+
+    public PlayerConfig config { set; get; }
+    public HUD hud { set; get; }
     public AudioSource audioSource { get; set; }
 
     [SerializeField]
@@ -22,11 +24,24 @@ public class PlayerView : MonoBehaviour
     bool lockEnableItemBox = false;
 
     private void Awake() {
-        DontDestroyOnLoad(gameObject);
+        if (instance == null) {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+            playerViewInit();
+        }
+        else {
+            Destroy(gameObject);
+        }
+    }
+
+    void playerViewInit() {
         config = GetComponent<PlayerConfig>();
+        hud = transform.Find("HUD").GetComponent<HUD>();
         dungeonSystem = GameObject.Find("DungeonSystem").GetComponent<DungeonSystem>();
         audioSource = CameraC.GetComponent<AudioSource>();
-        
+
+        config.PlayerConfigInit();
+        hud.HudInit();
     }
     
     // Start is called before the first frame update

@@ -235,8 +235,4 @@ public class SingletonGeneral : MonoBehaviour
         return r;
     }
 
-    public string GetDungeonRootName() {
-        return dugeonRootName;
-    }
-
 }

@@ -13,10 +13,16 @@ public class PlayerConfig : MonoBehaviour
     public GameObject PUNCH_ENABLE_PREFAB;
     private int nowHp;
     private int nowMp;
+    private int nowSatiation = 100;
 
     private void Start() {
+        
+    }
+
+    public void PlayerConfigInit() {
         nowHp = MAX_HP;
         nowMp = MAX_MP;
+        ResetSatiation();
     }
 
     public int GetHP() {
@@ -46,6 +52,19 @@ public class PlayerConfig : MonoBehaviour
     }
     public int GetMaxPageNo() {
         return MAX_PAGE_NO;
+    }
+
+    public void SetSatiation(int satiation) {
+        nowSatiation = satiation;
+    }
+
+    public int GetSatiation() {
+        return nowSatiation;
+    }
+
+    public void ResetSatiation() {
+        nowSatiation = 100;
+        return;
     }
 
 
