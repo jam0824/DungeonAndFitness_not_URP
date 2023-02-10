@@ -14,10 +14,10 @@ GameObject:
   - component: {fileID: 6911685214029092173}
   m_Layer: 0
   m_Name: Wall_WIndow
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 12
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &6911685214029092174
 Transform:

@@ -35,6 +35,23 @@ public class PlayerMove : MonoBehaviour
         WalkSE();
     }
 
+    void FixPlayerPosition() {
+        Vector3 posC = cameraC.transform.position;
+
+        Vector3 playerPos = gameObject.transform.position;
+
+        playerPos.x = posC.x;
+        playerPos.z = posC.z;
+
+        gameObject.transform.position = playerPos;
+        cameraC.transform.position = posC;
+
+        Vector3 cameraLocalPosition = cameraC.transform.localPosition;
+        cameraLocalPosition.x = 0;
+        cameraLocalPosition.z = 0;
+        cameraC.transform.localPosition = cameraLocalPosition;
+    }
+
     private void WalkSE() {
         //‘«‰¹—p
         float x = Mathf.Abs(transform.position.x - oldPos.x);

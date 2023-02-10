@@ -37,11 +37,14 @@ public class BreakObject : MonoBehaviour
 
             hasBroken = true;
             ContactPoint contact = collision.contacts[0];
+            GameObject dungeonRoot = GetDungeonRootObject();
+
             MakeItem(ITEM_PREFAB, ITEM_PROBABILITY, item_base_y) ;
             GameObject baseObject = MakeBaseObject(
                 BASE_PREFAB, 
                 gameObject.transform.position, 
-                gameObject.transform.rotation);
+                gameObject.transform.rotation,
+                dungeonRoot);
             
             MakePeaceObjects(
                 PEACE_PREFAB,
@@ -49,22 +52,25 @@ public class BreakObject : MonoBehaviour
                 gameObject.transform.rotation,
                 impact,
                 peaseNum,
-                peaseRandomRange
+                peaseRandomRange,
+                dungeonRoot
                 );
             
             //元のオブジェクトは消すので、残るオブジェクトで音を鳴らす
             baseObject.GetComponent<AudioSource>().PlayOneShot(BREAK_SE);
+            
             Destroy(gameObject);
         }
     }
 
     void MakePeaceObjects(
-        GameObject peacePrefab, 
+        GameObject peacePrefab,
         ContactPoint contact,
         Quaternion r,
-        float impact, 
+        float impact,
         int peaseNum,
-        float range) 
+        float range,
+        GameObject dungeonRoot) 
     {
         DebugWindow.instance.DFDebug("vase_impact:" + impact);
         for (int i = 0; i < peaseNum; i++) {
@@ -73,6 +79,7 @@ public class BreakObject : MonoBehaviour
             velocity *= impact;
             GameObject peace = Instantiate(peacePrefab, pos, r);
             peace.GetComponent<Rigidbody>().AddForce(velocity, ForceMode.Impulse);
+            peace.transform.parent = dungeonRoot.transform;
         }
     }
 
@@ -83,9 +90,16 @@ public class BreakObject : MonoBehaviour
         return pos;
     }
 
-    GameObject MakeBaseObject(GameObject basePrefab, Vector3 pos, Quaternion r) {
+    GameObject MakeBaseObject(
+        GameObject basePrefab, 
+        Vector3 pos, 
+        Quaternion r, 
+        GameObject dungeonRoot) 
+    {
         pos.y += base_y;
-        return Instantiate(basePrefab, pos, r);
+        GameObject baseObject = Instantiate(basePrefab, pos, r);
+        baseObject.transform.parent = dungeonRoot.transform;
+        return baseObject;
     }
 
 
@@ -106,5 +120,9 @@ public class BreakObject : MonoBehaviour
         GameObject itemObject = Instantiate(item, pos, transform.rotation);
         Vector3 velocity = new Vector3(0f, 1f, 0f);
         itemObject.GetComponent<Rigidbody>().AddForce(velocity, ForceMode.Impulse);
+    }
+
+    GameObject GetDungeonRootObject() {
+        return SingletonGeneral.instance.dungeonRoot;
     }
 }

@@ -18,7 +18,7 @@ public class DungeonSystem : MonoBehaviour
     List<GameObject> PoolPlayerDamageText;
     GameObject[] Floors;
     List<GameObject> ListEnemy = new List<GameObject>();
-
+    GameObject dungeonRoot;
     
     int spawnCount = 0;
 
@@ -30,6 +30,8 @@ public class DungeonSystem : MonoBehaviour
         PoolPlayerDamageText = LoadPrefabs(PlayerDamageTextPrefab, PLAYER_DAMAGE_TEXT_NUM);
         Floors = GameObject.FindGameObjectsWithTag("Ground");
         DebugWindow.instance.DFDebug("Floor”" + Floors.Length);
+
+        dungeonRoot = SingletonGeneral.instance.dungeonRoot;
 
         //ÀÛ‚Ég‚¤‚Æ‚«‚ÉFPS‚ª1“x‚¾‚¯‰º‚ª‚é‚Ì‚ÅAˆê’U‚±‚±‚ÅÄ¶‚ğ‚â‚Á‚Ä‚¨‚­
         PlayDamageObject(PoolDamageText);
@@ -58,6 +60,7 @@ public class DungeonSystem : MonoBehaviour
             Vector3 pos = Floors[floorNo].transform.position;
             pos.y = 1.0f;
             GameObject enemy = Instantiate(Enemies[enemyNo], pos, transform.rotation);
+            enemy.transform.parent = dungeonRoot.transform;
             ListEnemy.Add(enemy);
         }
     }

@@ -27,6 +27,7 @@ public class ScenarioSystem : MonoBehaviour
     private void LoadMessageTextObject() {
         Vector3 pos = new Vector3(-10f, -10f, -10f);
         MessageTextObject = Instantiate(WindowCanvasPrefab, pos, transform.rotation);
+        MessageTextObject.transform.parent = SingletonGeneral.instance.dungeonRoot.transform;
         messageText = MessageTextObject.GetComponent<TextMeshPro>();
         MessageTextObject.SetActive(false);
     }

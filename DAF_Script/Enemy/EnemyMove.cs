@@ -167,6 +167,7 @@ public class EnemyMove : MonoBehaviour
             pos = pos + addPos;
             pos.y += 3.5f;
             GameObject shot = Instantiate(ball, pos, Quaternion.identity);
+            shot.transform.parent = SingletonGeneral.instance.dungeonRoot.transform;
             SingletonGeneral.instance.PlayOneShot(enemyView.audioSource, "NormalShotAppear");
 
             EnemyBullet enemyBullet = shot.GetComponent<EnemyBullet>();

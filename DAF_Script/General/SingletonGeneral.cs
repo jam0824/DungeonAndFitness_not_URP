@@ -19,9 +19,13 @@ public class SingletonGeneral : MonoBehaviour
     public ItemDB itemDb { set; get; }
     public ScenarioSystem scenarioSystem { set; get; }
 
+    public GameObject dungeonRoot { set; get; }
+
+
     public bool DEBUG_MODE;
     public string NORMAL_ITEM_SAVE_PATH;
     public string COLLECTION_ITEM_SAVE_PATH;
+    public string dugeonRootName;
     public GameObject ItemCanvas;
     public GameObject DamageTextCanvas;
     public GameObject PlayerDamageTextCanvas;
@@ -60,6 +64,8 @@ public class SingletonGeneral : MonoBehaviour
         itemBox = LoadItemBox();
 
         scenarioSystem = LoadScenarioSystem();
+
+        dungeonRoot = GameObject.Find(dugeonRootName);
 
         SetDictSeName();
     }
@@ -229,6 +235,8 @@ public class SingletonGeneral : MonoBehaviour
         return r;
     }
 
-
+    public string GetDungeonRootName() {
+        return dugeonRootName;
+    }
 
 }

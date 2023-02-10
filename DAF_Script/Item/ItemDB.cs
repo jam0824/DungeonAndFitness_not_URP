@@ -93,6 +93,7 @@ public class ItemDB : MonoBehaviour
             GetItemPrefab(itemData["Prefab"]), 
             pos, 
             r);
+        itemBagObject.transform.parent = SingletonGeneral.instance.dungeonRoot.transform;
         ItemBag itemBag = itemBagObject.GetComponent<ItemBag>();
         itemBag.ItemBagInit(itemNo);
     }
