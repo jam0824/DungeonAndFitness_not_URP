@@ -5,6 +5,7 @@ using TMPro;
 
 public class HUD : MonoBehaviour
 {
+    public float dengerPer;
     public GameObject hudRig;
     public TextMeshPro hpNumber;
     public TextMeshPro mpNumber;
@@ -12,8 +13,11 @@ public class HUD : MonoBehaviour
     public GameObject hpBar;
     public GameObject mpBar;
     public GameObject satiationBar;
+    public Sprite greenBarSprite;
+    public Sprite redBarSprite;
     GameObject face;
     PlayerConfig config;
+    SpriteRenderer hpBarSpriteRenderer;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +28,7 @@ public class HUD : MonoBehaviour
     public void HudInit() {
         face = GameObject.Find("HitArea");
         config = PlayerView.instance.config;
+        hpBarSpriteRenderer = hpBar.GetComponent<SpriteRenderer>();
         RedrawHp();
         RedrawMp();
         RedrawSatiation();
@@ -62,20 +67,34 @@ public class HUD : MonoBehaviour
     }
 
     public void RedrawSatiation() {
-        string txt = config.GetSatiation().ToString() + "%";
+        int satiation = (int)Mathf.Floor(config.GetSatiation());
+        string txt = satiation.ToString() + "%";
         satiationNumber.text = txt;
-        satiationBar = RedrawBar(satiationBar, config.GetSatiation(), 100);
+        satiationBar = RedrawBar(satiationBar, satiation, 100);
     }
 
     GameObject RedrawBar(GameObject bar, int nowValue, int maxValue) {
         float per = (float)nowValue / (float)maxValue;
+        ChangeBarColor(per, bar);
         Vector3 size = new Vector3(per, 1f, 1f);
         bar.transform.localScale = size;
-        float x = (1 - per) / 4f;
+
+        float x = (1.0f - per) / 2.0f;
         Vector3 pos = bar.transform.localPosition;
-        pos.x += x;
+        pos.x = x;
         bar.transform.localPosition = pos;
         return bar;
+    }
+
+    void ChangeBarColor(float per, GameObject bar) {
+        if (bar.name.Contains("Mp")) return;
+
+        if(per < dengerPer) {
+            hpBarSpriteRenderer.sprite = redBarSprite;
+        }
+        else {
+            hpBarSpriteRenderer.sprite = greenBarSprite;
+        }
     }
 
 }

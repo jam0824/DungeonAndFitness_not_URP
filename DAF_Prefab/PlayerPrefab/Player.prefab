@@ -45,7 +45,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5bc1850f45d69042825f1e3ef49d8a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dengerPer: 0.2
   hudRig: {fileID: 731590897}
+  hpNumber: {fileID: 527214073}
+  mpNumber: {fileID: 244999684}
+  satiationNumber: {fileID: 659730332}
+  hpBar: {fileID: 833281450}
+  mpBar: {fileID: 650103869}
+  satiationBar: {fileID: 187788821}
+  greenBarSprite: {fileID: 21300000, guid: 2b630b2eaaa10c14281491f8ac097eb5, type: 3}
+  redBarSprite: {fileID: 21300000, guid: 81be5857fa8676341b95ff38bde08c12, type: 3}
 --- !u!1 &187788821
 GameObject:
   m_ObjectHideFlags: 0
@@ -2640,7 +2649,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6575786699160752401}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2659,7 +2668,7 @@ Transform:
   - {fileID: 187788822}
   m_Father: {fileID: 731590898}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &7757843608932814957
 GameObject:
   m_ObjectHideFlags: 0
@@ -4679,6 +4688,7 @@ MonoBehaviour:
   MAX_MP: 50
   ATK: 5
   DEF: 5
+  DEC_SATIATION: 0.1
   MAX_PAGE_NO: 2
   PUNCH_HIT_PREFAB: {fileID: 8851643778022511373, guid: 22d50fdffa2361647b45215c826ecb54, type: 3}
   PUNCH_ENABLE_PREFAB: {fileID: 708374798541816703, guid: b796cd1327f1969408e40ca7f901c24f, type: 3}

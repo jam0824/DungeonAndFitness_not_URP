@@ -7,12 +7,16 @@ public class PlayerDamage : MonoBehaviour
     //HIT_AREAにこのスクリプトをつける
 
     PlayerView playerView;
+    PlayerConfig config;
+    HUD hud;
     AudioSource audioSource;
     // Start is called before the first frame update
 
     void Start()
     {
-        playerView = GameObject.Find("Player").GetComponent<PlayerView>();
+        playerView = PlayerView.instance;
+        config = PlayerView.instance.config;
+        hud = PlayerView.instance.hud;
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -24,19 +28,29 @@ public class PlayerDamage : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         Debug.Log(other.gameObject.tag);
         if (other.gameObject.tag == "EnemyAttack") {
-            int damage = Damage(other, SingletonGeneral.instance.player);
-            SingletonGeneral.instance.PlayOneShot(audioSource, "NormalHitToPlayer");
-            MakePlayerDamageText(damage);
-            DebugWindow.instance.DFDebug("Playerは" + damage + "のダメージ！");
+            DamageController(other);
         }
 
+    }
+
+    void DamageController(Collider other) {
+        int damage = Damage(other, SingletonGeneral.instance.player);
+        SingletonGeneral.instance.PlayOneShot(audioSource, "NormalHitToPlayer");
+        MakePlayerDamageText(damage);
+        DebugWindow.instance.DFDebug("Playerは" + damage + "のダメージ！");
+
+        if (damage == 0) return;
+        int nowHp = config.CalcHp(damage);
+        hud.RedrawHp();
     }
 
     private int Damage(Collider other, GameObject player) {
         int playerDef = player.GetComponent<PlayerConfig>().GetDEF();
         int enemyAtk = other.GetComponent<EnemyBullet>().GetATK();
         other.GetComponent<EnemyBullet>().HitBullet();
-        return FQCommon.Common.GetDamage(enemyAtk, playerDef);
+        int damage = FQCommon.Common.GetDamage(enemyAtk, playerDef);
+        if (damage < 0) damage = 0;
+        return damage;
     }
 
     private void MakePlayerDamageText(int damage) {

@@ -8,12 +8,13 @@ public class PlayerConfig : MonoBehaviour
     public int MAX_MP;
     public int ATK;
     public int DEF;
+    public float DEC_SATIATION;
     public int MAX_PAGE_NO;
     public GameObject PUNCH_HIT_PREFAB;
     public GameObject PUNCH_ENABLE_PREFAB;
     private int nowHp;
     private int nowMp;
-    private int nowSatiation = 100;
+    private float nowSatiation = 100.0f;
 
     private void Start() {
         
@@ -58,8 +59,12 @@ public class PlayerConfig : MonoBehaviour
         nowSatiation = satiation;
     }
 
-    public int GetSatiation() {
+    public float GetSatiation() {
         return nowSatiation;
+    }
+
+    public float GetDecreaseSatiation() {
+        return DEC_SATIATION;
     }
 
     public void ResetSatiation() {
@@ -90,4 +95,18 @@ public class PlayerConfig : MonoBehaviour
         return PUNCH_ENABLE_PREFAB;
     }
 
+    public int CalcHp(int damage) {
+        nowHp = nowHp - damage;
+        if(nowHp < 0) {
+            nowHp = 0;
+        }
+        return nowHp;
+    }
+
+    public float CalcSatiation(float value) {
+        nowSatiation += value;
+        if (nowSatiation < 0) nowSatiation = 0;
+        if (nowSatiation > 100f) nowSatiation = 100f;
+        return nowSatiation;
+    }
 }

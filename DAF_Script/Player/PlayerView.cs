@@ -42,6 +42,8 @@ public class PlayerView : MonoBehaviour
 
         config.PlayerConfigInit();
         hud.HudInit();
+
+        StartCoroutine(CalcSatiation());
     }
     
     // Start is called before the first frame update
@@ -169,5 +171,13 @@ public class PlayerView : MonoBehaviour
         lockEnableItemBox = false;
     }
 
+    //–ž• “x‚ÌŒvŽZ
+    IEnumerator CalcSatiation() {
+        while (true) {
+            yield return new WaitForSeconds(1f);
+            float nowSatiation = config.CalcSatiation(config.GetDecreaseSatiation() * -1f);
+            hud.RedrawSatiation();
+        }
+    }
     
 }
