@@ -210,18 +210,19 @@ public class ScenarioExec : MonoBehaviour
         Vector3 windowPos = windowPosTransform.position;
         Quaternion r = windowPosTransform.rotation;
         windowPos.y += geta + boxCount * boxHeight;
-        GameObject selectBoxCanvas = Instantiate(
-            scenarioSystem.GetSelectBoxCanvasPrefab(), 
-            windowPos, 
-            r);
+        GameObject selectBoxCanvas = SingletonGeneral.instance.scenarioSystem.GetSelectBoxFromPool();
+        selectBoxCanvas.SetActive(true);
+        selectBoxCanvas.transform.position = windowPos;
+        selectBoxCanvas.transform.rotation = r;
+
         return selectBoxCanvas;
     }
 
-    void DeleteSelectBox() {
-        foreach(GameObject selectBox in this.listSelectBoxCanvas) {
-            Destroy(selectBox);
-        }
-        this.listSelectBoxCanvas.Clear();
+    /// <summary>
+    /// 全てのセレクトボックスを非アクティブにする
+    /// </summary>
+    void UnenableAllSelectBox() {
+        SingletonGeneral.instance.scenarioSystem.UnenableAllSelectBox();
     }
 
     //slectが実行された時
@@ -229,7 +230,7 @@ public class ScenarioExec : MonoBehaviour
         DebugWindow.instance.DFDebug("select flag name:" + flagName);
         int no = CommandGoto(flagName, this.listScenarioCsv);
         DebugWindow.instance.DFDebug("line:" + no);
-        DeleteSelectBox();
+        UnenableAllSelectBox();
         lineNo = exec(no);
     }
 

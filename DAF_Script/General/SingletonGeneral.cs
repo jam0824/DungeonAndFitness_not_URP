@@ -179,6 +179,7 @@ public class SingletonGeneral : MonoBehaviour
         dictSeName.Add("NormalItemGet", 12);
         dictSeName.Add("BlowOff", 13);
         dictSeName.Add("BlowOffAndHitWall", 14);
+        dictSeName.Add("SaveSe", 15);
 
         return dictSeName;
     }

@@ -6,6 +6,7 @@ selectend	selectend
 	
 #yes	#yes
 save	save
+se,SaveSe	se,SaveSe
 end	end
 	
 #no	#no

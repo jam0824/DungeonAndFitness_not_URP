@@ -8,6 +8,8 @@ public class ScenarioSystem : MonoBehaviour
     public GameObject WindowCanvasPrefab;
     public GameObject SelectBoxCanvasPrefab;
     public GameObject MessageTextObject;
+    List<GameObject> poolSelectBox;
+    int SELECT_BOX_MAX = 5;
     TextMeshPro messageText;
     public Dictionary<string, string> dictSwitch { set; get; }
     bool isLock = false;
@@ -20,6 +22,7 @@ public class ScenarioSystem : MonoBehaviour
 
     public void ScenarioSystemInit() {
         LoadMessageTextObject();
+        LoadSelectBoxObject();
         dictSwitch = new Dictionary<string, string>();
     }
 
@@ -32,6 +35,24 @@ public class ScenarioSystem : MonoBehaviour
         MessageTextObject.transform.parent = SingletonGeneral.instance.dungeonRoot.transform;
         messageText = MessageTextObject.GetComponent<TextMeshPro>();
         MessageTextObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// 初回のセレクトボックスロード（poolしておく)
+    /// </summary>
+    void LoadSelectBoxObject() {
+        poolSelectBox = LoadObjects(SelectBoxCanvasPrefab, SELECT_BOX_MAX);
+    }
+
+    List<GameObject> LoadObjects(GameObject obj, int max) {
+        List<GameObject> pool = new List<GameObject>();
+        for (int i = 0; i < max; i++) {
+            GameObject poolObject = Instantiate(obj);
+            poolObject.transform.position = new Vector3(-10f, -10f, -10f);
+            poolObject.SetActive(false);
+            pool.Add(poolObject);
+        }
+        return pool;
     }
 
     /// <summary>
@@ -53,6 +74,27 @@ public class ScenarioSystem : MonoBehaviour
     public void CloseMessageWindow() {
         messageText.text = "";
         MessageTextObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// 非アクティブになっているSelectBoxが使われてないのでそれを返す。
+    /// </summary>
+    /// <returns></returns>
+    public GameObject GetSelectBoxFromPool() {
+
+        foreach (GameObject obj in poolSelectBox) {
+            if (obj.activeSelf == false) return obj;
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// SelectBoxを使い終わったら全部非アクティブにする。
+    /// </summary>
+    public void UnenableAllSelectBox() {
+        foreach (GameObject obj in poolSelectBox) {
+            if (obj.activeSelf == true) obj.SetActive(false);
+        }
     }
 
     // Update is called once per frame

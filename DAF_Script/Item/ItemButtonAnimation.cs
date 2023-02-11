@@ -37,7 +37,6 @@ public class ItemButtonAnimation : MonoBehaviour
 
     void ChangeHeaderButtonsDisable() {
         foreach (string key in dictGameObjectHeaderButton.Keys) {
-            Debug.Log(key);
             dictGameObjectHeaderButton[key].GetComponent<Image>().sprite = listHeaderButtonSprite[0];
             Transform child = dictGameObjectHeaderButton[key].transform.Find("Text");
             child.gameObject.GetComponent<Text>().color = GetDisableFontColor();
