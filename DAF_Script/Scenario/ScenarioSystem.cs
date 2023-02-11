@@ -9,21 +9,23 @@ public class ScenarioSystem : MonoBehaviour
     public GameObject SelectBoxCanvasPrefab;
     public GameObject MessageTextObject;
     TextMeshPro messageText;
-    public Dictionary<string, string> dictSwitch;
+    public Dictionary<string, string> dictSwitch { set; get; }
     bool isLock = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        Init();
-        LoadMessageTextObject();
+        
     }
 
-    private void Init() {
+    public void ScenarioSystemInit() {
+        LoadMessageTextObject();
         dictSwitch = new Dictionary<string, string>();
     }
 
-    //初回のメッセージウィンドウロード
+    /// <summary>
+    /// 初回のメッセージウィンドウロード
+    /// </summary>
     private void LoadMessageTextObject() {
         Vector3 pos = new Vector3(-10f, -10f, -10f);
         MessageTextObject = Instantiate(WindowCanvasPrefab, pos, transform.rotation);
@@ -32,7 +34,12 @@ public class ScenarioSystem : MonoBehaviour
         MessageTextObject.SetActive(false);
     }
 
-    //メッセージウィンドウの表示
+    /// <summary>
+    /// メッセージウィンドウの表示
+    /// </summary>
+    /// <param name="pos"></param>
+    /// <param name="r"></param>
+    /// <returns></returns>
     public TextMeshPro ShowMessageWindow(Vector3 pos, Quaternion r) {
         MessageTextObject.SetActive(true);
         MessageTextObject.transform.position = pos;
@@ -40,7 +47,9 @@ public class ScenarioSystem : MonoBehaviour
         return messageText;
     }
 
-    //メッセージウィンドウの非表示
+    /// <summary>
+    /// メッセージウィンドウの非表示
+    /// </summary>
     public void CloseMessageWindow() {
         messageText.text = "";
         MessageTextObject.SetActive(false);
@@ -52,6 +61,11 @@ public class ScenarioSystem : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// キーと値でswitchを設定する
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="value"></param>
     public void SetSwitch(string key, string value) {
         dictSwitch[key] = value;
     }

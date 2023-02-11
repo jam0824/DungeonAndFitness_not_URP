@@ -33,6 +33,8 @@ public class PlayerMove : MonoBehaviour
         MoveToUseController();
         MoveToUseKeyboard();
         WalkSE();
+
+        DebugSave();
     }
 
     void FixPlayerPosition() {
@@ -109,5 +111,14 @@ public class PlayerMove : MonoBehaviour
 
         controller.Move(moveDir * Time.deltaTime * speed);
 
+    }
+
+    void DebugSave() {
+        if (Input.GetKeyUp(KeyCode.S)) {
+            SingletonGeneral.instance.saveLoadSystem.Save();
+        }
+        if (Input.GetKeyUp(KeyCode.L)) {
+            SingletonGeneral.instance.saveLoadSystem.Load();
+        }
     }
 }

@@ -55,10 +55,6 @@ public class PlayerConfig : MonoBehaviour
         return MAX_PAGE_NO;
     }
 
-    public void SetSatiation(int satiation) {
-        nowSatiation = satiation;
-    }
-
     public float GetSatiation() {
         return nowSatiation;
     }
@@ -67,17 +63,33 @@ public class PlayerConfig : MonoBehaviour
         return DEC_SATIATION;
     }
 
-    public void ResetSatiation() {
-        nowSatiation = 100;
-        return;
+    public void SetMaxHp(int maxHp) {
+        MAX_HP = maxHp;
     }
 
+    public void SetMaxMp(int maxMp) {
+        MAX_MP = maxMp;
+    }
 
-    public void SetATK(int atk) {
+    public void SetHp(int hp) {
+        nowHp = hp;
+    }
+    public void SetMp(int mp) {
+        nowMp = mp;
+    }
+
+    public void SetAtk(int atk) {
         ATK = atk;
     }
-    public void SetDEF(int def) {
+    public void SetDef(int def) {
         DEF = def;
+    }
+    public void SetSatiation(float satiation) {
+        nowSatiation = satiation;
+    }
+    public void ResetSatiation() {
+        nowSatiation = 100f;
+        return;
     }
 
     public void SetMaxPageNo(int pageNo) {
@@ -87,6 +99,9 @@ public class PlayerConfig : MonoBehaviour
     public void SetPunchHitPrefab(GameObject prefab) {
         PUNCH_HIT_PREFAB = prefab;
     }
+
+    
+
     public GameObject GetPunchHitPrefab() {
         return PUNCH_HIT_PREFAB;
     }

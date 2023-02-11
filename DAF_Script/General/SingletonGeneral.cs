@@ -18,11 +18,13 @@ public class SingletonGeneral : MonoBehaviour
     public LabelSystem labelSystem { set; get; }
     public ItemDB itemDb { set; get; }
     public ScenarioSystem scenarioSystem { set; get; }
+    public SaveLoadSystem saveLoadSystem { set; get; }
 
     public GameObject dungeonRoot { set; get; }
 
 
     public bool DEBUG_MODE;
+    public string STATUS_SAVE_PATH;
     public string NORMAL_ITEM_SAVE_PATH;
     public string COLLECTION_ITEM_SAVE_PATH;
     public string dugeonRootName;
@@ -30,6 +32,7 @@ public class SingletonGeneral : MonoBehaviour
     public GameObject DamageTextCanvas;
     public GameObject PlayerDamageTextCanvas;
     public GameObject ItemBoxPrefab;
+    
 
     public List<AudioClip> listBattleSE;
 
@@ -53,6 +56,8 @@ public class SingletonGeneral : MonoBehaviour
 
     void SingletonGeneralInit() {
         LanguageMode = "japanese";
+        dungeonRoot = GameObject.Find(dugeonRootName);
+        saveLoadSystem = GetComponent<SaveLoadSystem>();
 
         itemDb = LoadItemDb();
         itemWindow = LoadItemWindow();
@@ -65,8 +70,6 @@ public class SingletonGeneral : MonoBehaviour
 
         scenarioSystem = LoadScenarioSystem();
 
-        dungeonRoot = GameObject.Find(dugeonRootName);
-
         SetDictSeName();
     }
 
@@ -74,6 +77,10 @@ public class SingletonGeneral : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public string GetStatusSavePath() {
+        return STATUS_SAVE_PATH;
     }
 
     public string GetNormalItemSavePath() {
@@ -129,7 +136,9 @@ public class SingletonGeneral : MonoBehaviour
     }
 
     ScenarioSystem LoadScenarioSystem() {
-        return GetComponent<ScenarioSystem>();
+        ScenarioSystem sS = GetComponent<ScenarioSystem>();
+        sS.ScenarioSystemInit();
+        return sS;
     }
 
     public void PlayOneShot(AudioSource audioSource, string SeName) {

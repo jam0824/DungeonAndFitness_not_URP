@@ -88,6 +88,12 @@ namespace FQCommon
             File.AppendAllText(path, addString + "\n");
         }
 
+        //来たテキストをそのまま保存する
+        static public void SaveStringToFile(string fileName, string text) {
+            string path = Application.persistentDataPath + "/" + fileName;
+            Debug.Log("save path:" + path);
+            File.WriteAllText(path, text);
+        }
 
     }
 }
