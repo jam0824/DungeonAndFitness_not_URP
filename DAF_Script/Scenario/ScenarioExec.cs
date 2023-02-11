@@ -203,7 +203,7 @@ public class ScenarioExec : MonoBehaviour
     //SELECTBOXçÏê¨
     GameObject MakeSelectBox(int boxCount) {
         float geta = 0.3f;
-        float boxHeight = 0.3f; 
+        float boxHeight = 0.2f; 
 
         Transform windowPosTransform = 
             SingletonGeneral.instance.scenarioSystem.MessageTextObject.transform;

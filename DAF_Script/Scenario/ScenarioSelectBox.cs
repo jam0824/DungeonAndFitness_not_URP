@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ScenarioSelectBox : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class ScenarioSelectBox : MonoBehaviour
         character = charGameObject;
         this.flag = flagName;
         Transform box = transform.Find("SelectBoxText");
-        box.gameObject.GetComponent<Text>().text = message;
+        box.gameObject.GetComponent<TextMeshProUGUI>().text = message;
     }
 
     public void OnClick() {
