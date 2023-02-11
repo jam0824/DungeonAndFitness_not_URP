@@ -8,7 +8,10 @@ public class PlayerView : MonoBehaviour
 
     public PlayerConfig config { set; get; }
     public HUD hud { set; get; }
+    public PlayerStatusChange playerStatusChange { set; get; }
+    public PlayerDamage playerDamage { set; get; }
     public AudioSource audioSource { get; set; }
+    public GameObject face { get; set; }
 
     [SerializeField]
     public GameObject CameraC;
@@ -35,15 +38,19 @@ public class PlayerView : MonoBehaviour
     }
 
     void playerViewInit() {
+        face = HitArea;
         config = GetComponent<PlayerConfig>();
+        playerStatusChange = GetComponent<PlayerStatusChange>();
+        playerDamage = face.GetComponent<PlayerDamage>();
+
         hud = transform.Find("HUD").GetComponent<HUD>();
         dungeonSystem = GameObject.Find("DungeonSystem").GetComponent<DungeonSystem>();
         audioSource = CameraC.GetComponent<AudioSource>();
 
         config.PlayerConfigInit();
         hud.HudInit();
-
-        StartCoroutine(CalcSatiation());
+        playerStatusChange.PlayerStatusChangeInit();
+        
     }
     
     // Start is called before the first frame update
@@ -169,15 +176,6 @@ public class PlayerView : MonoBehaviour
     IEnumerator UnlockEnableItemBox(float waitTime) {
         yield return new WaitForSeconds(waitTime);
         lockEnableItemBox = false;
-    }
-
-    //–ž• “x‚ÌŒvŽZ
-    IEnumerator CalcSatiation() {
-        while (true) {
-            yield return new WaitForSeconds(1f);
-            float nowSatiation = config.CalcSatiation(config.GetDecreaseSatiation() * -1f);
-            hud.RedrawSatiation();
-        }
     }
     
 }

@@ -36,6 +36,9 @@ public class DungeonSystem : MonoBehaviour
         //実際に使うときにFPSが1度だけ下がるので、一旦ここで再生をやっておく
         PlayDamageObject(PoolDamageText);
         PlayDamageObject(PoolPlayerDamageText);
+
+        //満腹度スタート
+        PlayerView.instance.playerStatusChange.StartSatiation();
     }
 
     // Update is called once per frame

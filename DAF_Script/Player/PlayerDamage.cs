@@ -33,8 +33,14 @@ public class PlayerDamage : MonoBehaviour
 
     }
 
+    //Playerが攻撃を受けた際に呼ばれる
     void DamageController(Collider other) {
         int damage = Damage(other, SingletonGeneral.instance.player);
+        PlayerDamageExec(damage);
+    }
+
+    //ダメージの表示とHUDの更新
+    public void PlayerDamageExec(int damage) {
         SingletonGeneral.instance.PlayOneShot(audioSource, "NormalHitToPlayer");
         MakePlayerDamageText(damage);
         DebugWindow.instance.DFDebug("Playerは" + damage + "のダメージ！");
@@ -44,6 +50,7 @@ public class PlayerDamage : MonoBehaviour
         hud.RedrawHp();
     }
 
+    //Playerのダメージ計算
     private int Damage(Collider other, GameObject player) {
         int playerDef = player.GetComponent<PlayerConfig>().GetDEF();
         int enemyAtk = other.GetComponent<EnemyBullet>().GetATK();
@@ -53,6 +60,7 @@ public class PlayerDamage : MonoBehaviour
         return damage;
     }
 
+    //ダメージテキストの表示
     private void MakePlayerDamageText(int damage) {
         Vector3 pos = transform.position;
         Vector3 addPos = transform.forward;

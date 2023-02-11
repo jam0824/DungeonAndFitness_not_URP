@@ -18,6 +18,8 @@ public class HUD : MonoBehaviour
     GameObject face;
     PlayerConfig config;
     SpriteRenderer hpBarSpriteRenderer;
+    SpriteRenderer mpBarSpriteRenderer;
+    SpriteRenderer satiationBarSpriteRenderer;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +31,8 @@ public class HUD : MonoBehaviour
         face = GameObject.Find("HitArea");
         config = PlayerView.instance.config;
         hpBarSpriteRenderer = hpBar.GetComponent<SpriteRenderer>();
+        mpBarSpriteRenderer = mpBar.GetComponent<SpriteRenderer>();
+        satiationBarSpriteRenderer = satiationBar.GetComponent<SpriteRenderer>();
         RedrawHp();
         RedrawMp();
         RedrawSatiation();
@@ -57,25 +61,25 @@ public class HUD : MonoBehaviour
         int maxHp = config.GetMaxHP();
         string txt = nowHp.ToString() + "/" + maxHp.ToString();
         hpNumber.text = txt;
-        hpBar = RedrawBar(hpBar, nowHp, maxHp);
+        hpBar = RedrawBar(hpBar, nowHp, maxHp, hpBarSpriteRenderer);
     }
 
     public void RedrawMp() {
         string txt = config.GetMP().ToString() + "/" + config.GetMaxMP().ToString();
         mpNumber.text = txt;
-        mpBar = RedrawBar(mpBar, config.GetMP(), config.GetMaxMP());
+        mpBar = RedrawBar(mpBar, config.GetMP(), config.GetMaxMP(), mpBarSpriteRenderer);
     }
 
     public void RedrawSatiation() {
         int satiation = (int)Mathf.Floor(config.GetSatiation());
         string txt = satiation.ToString() + "%";
         satiationNumber.text = txt;
-        satiationBar = RedrawBar(satiationBar, satiation, 100);
+        satiationBar = RedrawBar(satiationBar, satiation, 100, satiationBarSpriteRenderer);
     }
 
-    GameObject RedrawBar(GameObject bar, int nowValue, int maxValue) {
+    GameObject RedrawBar(GameObject bar, int nowValue, int maxValue, SpriteRenderer renderer) {
         float per = (float)nowValue / (float)maxValue;
-        ChangeBarColor(per, bar);
+        ChangeBarColor(per, bar, renderer);
         Vector3 size = new Vector3(per, 1f, 1f);
         bar.transform.localScale = size;
 
@@ -86,14 +90,14 @@ public class HUD : MonoBehaviour
         return bar;
     }
 
-    void ChangeBarColor(float per, GameObject bar) {
+    void ChangeBarColor(float per, GameObject bar, SpriteRenderer renderer) {
         if (bar.name.Contains("Mp")) return;
 
         if(per < dengerPer) {
-            hpBarSpriteRenderer.sprite = redBarSprite;
+            renderer.sprite = redBarSprite;
         }
         else {
-            hpBarSpriteRenderer.sprite = greenBarSprite;
+            renderer.sprite = greenBarSprite;
         }
     }
 

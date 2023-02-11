@@ -1842,7 +1842,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.2
+  m_Radius: 0.1
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: -0.3, z: 0}
@@ -4611,6 +4611,7 @@ GameObject:
   - component: {fileID: 8084770730241588782}
   - component: {fileID: 139826573}
   - component: {fileID: 139826574}
+  - component: {fileID: 4606194768031097269}
   - component: {fileID: 285360771}
   m_Layer: 6
   m_Name: Player
@@ -4707,6 +4708,18 @@ MonoBehaviour:
   MAX_PAGE_NO: 2
   PUNCH_HIT_PREFAB: {fileID: 8851643778022511373, guid: 22d50fdffa2361647b45215c826ecb54, type: 3}
   PUNCH_ENABLE_PREFAB: {fileID: 708374798541816703, guid: b796cd1327f1969408e40ca7f901c24f, type: 3}
+--- !u!114 &4606194768031097269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8084770730241588778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1ff998550a300d4aa21324e2dd22c19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &285360771
 SpriteRenderer:
   m_ObjectHideFlags: 0
