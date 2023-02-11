@@ -88,8 +88,8 @@ public class ScenarioSystem : MonoBehaviour
         return dictSwitch[key];
     }
 
-    public GameObject GetWindowCanvasPrefab() {
-        return WindowCanvasPrefab;
+    public GameObject GetMessageTextObject() {
+        return MessageTextObject;
     }
 
     public GameObject GetSelectBoxCanvasPrefab() {

@@ -206,8 +206,12 @@ public class SingletonGeneral : MonoBehaviour
         me.transform.rotation = Quaternion.Lerp(me.transform.rotation, lookRotation, 0.1f);
     }
 
-
-    //顔とターゲットのgameObjectの中点posを返す
+    /// <summary>
+    /// 顔とターゲットのgameObjectの中点posを返す
+    /// </summary>
+    /// <param name="targetGameObject"></param>
+    /// <param name="addPos"></param>
+    /// <returns></returns>
     public Vector3 GetPosBetweenTargetAndFace(GameObject targetGameObject, Vector3 addPos) {
         Vector3 facePos = face.transform.position;
         Vector3 targetPos = targetGameObject.transform.position;

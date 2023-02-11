@@ -1,0 +1,12 @@
+セーブしますか？	Do you save?
+select	select
+yes,はい	yes,Yes
+no,いいえ	no,No
+selectend	selectend
+	
+#yes	#yes
+save	save
+end	end
+	
+#no	#no
+end	end

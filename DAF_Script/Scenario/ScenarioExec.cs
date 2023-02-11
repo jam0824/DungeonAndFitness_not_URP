@@ -202,14 +202,18 @@ public class ScenarioExec : MonoBehaviour
 
     //SELECTBOXçÏê¨
     GameObject MakeSelectBox(int boxCount) {
-        Vector3 addPos = gameObject.transform.forward;
-        addPos.x *= 0.5f;
-        addPos.y = MESSAGE_Y + SELECTBOX_Y - (float)boxCount * 0.35f;
-        addPos.z *= 0.5f;
-        GameObject selectBoxCanvas = SingletonGeneral.instance.MakeInstanceFromTarget(
-            gameObject,
-            scenarioSystem.GetSelectBoxCanvasPrefab(),
-            addPos);
+        float geta = 0.3f;
+        float boxHeight = 0.3f; 
+
+        Transform windowPosTransform = 
+            SingletonGeneral.instance.scenarioSystem.MessageTextObject.transform;
+        Vector3 windowPos = windowPosTransform.position;
+        Quaternion r = windowPosTransform.rotation;
+        windowPos.y += geta + boxCount * boxHeight;
+        GameObject selectBoxCanvas = Instantiate(
+            scenarioSystem.GetSelectBoxCanvasPrefab(), 
+            windowPos, 
+            r);
         return selectBoxCanvas;
     }
 
