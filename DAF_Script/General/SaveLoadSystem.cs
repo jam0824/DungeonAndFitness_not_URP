@@ -22,6 +22,7 @@ public class SaveLoadSystem : MonoBehaviour
     public void Save() {
         SaveStatus();
         SaveItemData();
+        SaveSwitch();
     }
 
     void SaveItemData() {
@@ -39,6 +40,13 @@ public class SaveLoadSystem : MonoBehaviour
         string data = CollectionSaveData();
         FQCommon.Common.SaveStringToFile(
             SingletonGeneral.instance.GetStatusSavePath(),
+            data);
+    }
+
+    void SaveSwitch() {
+        string data = CollectSwitchData();
+        FQCommon.Common.SaveStringToFile(
+            SingletonGeneral.instance.GetSwitchSavePath(),
             data);
     }
 
@@ -88,11 +96,21 @@ public class SaveLoadSystem : MonoBehaviour
         return data;
     }
 
+    string CollectSwitchData() {
+        string data = "";
+        Dictionary<string, string> switchData = SingletonGeneral.instance.scenarioSystem.dictSwitch;
+        foreach (KeyValuePair<string,string> item in switchData) {
+            data += item.Key + "\t" + item.Value + "\n";
+        }
+        return data;
+    }
+
     /// <summary>
     /// これを呼び出すと全部ロードする
     /// </summary>
     public void Load() {
         LoadStatus();
+        LoadSwitch();
         SingletonGeneral.instance.itemDb.ItemDbInit();
         RedrawHud();
     }
@@ -109,7 +127,7 @@ public class SaveLoadSystem : MonoBehaviour
         PlayerConfig config = PlayerView.instance.config;
 
         List<string> statusData = FQCommon.Common.LoadSaveFile(
-            SingletonGeneral.instance.STATUS_SAVE_PATH);
+            SingletonGeneral.instance.GetStatusSavePath());
         foreach (string data in statusData) {
             string[] keyValue = data.Split("\t");
             SetLoadedSatus(
@@ -183,6 +201,17 @@ public class SaveLoadSystem : MonoBehaviour
 
         }
         
+    }
+
+    void LoadSwitch() {
+        Dictionary<string, string> dictSwitch = new Dictionary<string, string>();
+        List<string> switchData = FQCommon.Common.LoadSaveFile(
+            SingletonGeneral.instance.GetSwitchSavePath());
+        foreach (string data in switchData) {
+            string[] keyValue = data.Split("\t");
+            dictSwitch[keyValue[0]] = keyValue[1];
+        }
+        SingletonGeneral.instance.scenarioSystem.dictSwitch = dictSwitch;
     }
 
 }

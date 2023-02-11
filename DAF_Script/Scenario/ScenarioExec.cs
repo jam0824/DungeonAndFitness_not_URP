@@ -127,6 +127,11 @@ public class ScenarioExec : MonoBehaviour
                 no++;
                 continue;
             }
+            else if (command == "save") {
+                CommandSave();
+                no++;
+                continue;
+            }
             else {
                 CommandShowMessage(line);
                 break;
@@ -281,6 +286,15 @@ public class ScenarioExec : MonoBehaviour
     void CommandSe(string seName) {
         DebugWindow.instance.DFDebug("SE:" + seName);
         SingletonGeneral.instance.PlayOneShotNoAudioSource(seName);
+    }
+
+    /// <summary>
+    /// SaveÇ∑ÇÈ
+    /// </summary>
+    void CommandSave() {
+        DebugWindow.instance.DFDebug("SAVE");
+        SingletonGeneral.instance.saveLoadSystem.Save();
+        SingletonGeneral.instance.labelInformationText.SetInformationLabel("Save");
     }
 
     //âÔòbèIóπ

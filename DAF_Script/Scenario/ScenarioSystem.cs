@@ -68,7 +68,9 @@ public class ScenarioSystem : MonoBehaviour
     /// <param name="value"></param>
     public void SetSwitch(string key, string value) {
         dictSwitch[key] = value;
+        DebugWindow.instance.DFDebug("***switch set:" + key + "=" + value);
     }
+
     public void CalcurationSwitch(string key, string sign, string value) {
         switch (sign) {
             case "+":

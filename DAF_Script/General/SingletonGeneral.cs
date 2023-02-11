@@ -27,6 +27,7 @@ public class SingletonGeneral : MonoBehaviour
     public string STATUS_SAVE_PATH;
     public string NORMAL_ITEM_SAVE_PATH;
     public string COLLECTION_ITEM_SAVE_PATH;
+    public string SWITCH_SAVE_PATH;
     public string dugeonRootName;
     public GameObject ItemCanvas;
     public GameObject DamageTextCanvas;
@@ -88,6 +89,10 @@ public class SingletonGeneral : MonoBehaviour
     }
     public string GetCollectionItemSavePath() {
         return COLLECTION_ITEM_SAVE_PATH;
+    }
+
+    public string GetSwitchSavePath() {
+        return SWITCH_SAVE_PATH;
     }
 
     //プレイヤーの外部から必要とされるオブジェクトをロード
