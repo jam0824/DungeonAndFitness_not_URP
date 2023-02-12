@@ -75,12 +75,6 @@ public class ScenarioExec : MonoBehaviour
         isNowLineExecuting = true;
         while (true) {
             DebugWindow.instance.DFDebug("LineNo:" + no);
-            //会話終了のマージンの0.5秒の間に
-            //押されるとindexオーバーになるので処理
-            if (no == listScenarioCsv.Count) {
-                ResetFlag();
-                break;
-            }
             string[] line = listScenarioCsv[no];
             string command = line[0];
             
@@ -152,7 +146,7 @@ public class ScenarioExec : MonoBehaviour
     void CommandShowMessage(string[] line) {
         ShowWindowCanvas();
         nowMessage = FixMessage(line[0]);
-        //会話文だった場合
+        //会話文だった場合は1文字ずつ表示
         if ((line[0][0] == '【') || (line[0][0] == '[')) {
             StartCoroutine(ShowMessage(nowMessage));
         }
