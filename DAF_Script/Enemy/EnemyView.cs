@@ -100,7 +100,7 @@ public class EnemyView : MonoBehaviour
             }
             else {
                 //コントローラーを振動させる
-                handsScript.VivrationArmor(0.5f, 0.5f, 0.2f);
+                handsScript.VivrationArmor(0.5f, 0.5f, 0.1f);
                 enemyAnimation.setDieAnim();
                 makeHitSE("NormalEnemyDie");
                 StartCoroutine(DeleteEnemy(1.5f));
@@ -108,7 +108,7 @@ public class EnemyView : MonoBehaviour
         }
         else {
             //コントローラーを振動させる
-            handsScript.VivrationArmor(0.5f, 0.5f, 0.2f);
+            handsScript.VivrationArmor(0.5f, 0.5f, 0.1f);
             enemyAnimation.SetDamageAnim();
             makeHitSE("NormalHitToEnemy");
         }

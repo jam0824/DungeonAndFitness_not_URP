@@ -7,11 +7,9 @@ using TMPro;
 public class ScenarioExec : MonoBehaviour
 {
     public TextAsset scenario;
-    public string MESSAGE_TYPE = "MessageNormal";
-    public float MESSAGE_Y;
-    float SELECTBOX_Y = 1.2f;
     //アイテムがフルだったときのキー
     string FULL_OF_ITEM_KEY = "FullOfItem";
+    string MESSAGE_SE_KEY = "MessageNormal";
 
     public ScenarioSystem scenarioSystem { set; get; }
     public AudioSource audioSource { set; get; }
@@ -158,7 +156,7 @@ public class ScenarioExec : MonoBehaviour
 
         for (int i = 0; i < message.Length; i++) {
             messageText.text += message[i];
-            SingletonGeneral.instance.PlayOneShot(audioSource, MESSAGE_TYPE);
+            SingletonGeneral.instance.PlayOneShot(audioSource, MESSAGE_SE_KEY);
             yield return new WaitForSeconds(messageSpeed);
         }
         //会話が終わった

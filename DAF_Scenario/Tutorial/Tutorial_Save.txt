@@ -1,0 +1,7 @@
+【女神】「これで最後。セーブストーンの説明よ」	[Goddess] "This is the last one. Let me explain about the save stone."
+【女神】「横にあるセーブストーンで、セーブができるわ」	[Goddess] "You can save with the saving stone on the side."
+【女神】「オートセーブじゃないから気をつけてね」	[Goddess] "Be careful, This game is not an autosave."
+【女神】「あと、このセーブストーンから地上へ帰ることもできるから覚えておいて」	[Goddess] "Also, remember that you can return to the surface from this save stone."
+【女神】「これで私からの基本的な説明は終わりね。また説明が必要なときになったら説明をするわ」	[Goddess] "With this, my basic explanation is over. I'll explain again if necessary."
+【女神】「また死なないようにがんばってね」	[Goddess] "Good luck."
+end	end

@@ -1,0 +1,11 @@
+【女神】「大事な話をするわ」	[Goddess] "I have something important to tell you."
+【女神】「ダンジョンを歩くと……」	[Goddess] "Walking in the Dungeon ......"
+【女神】「お腹がすくわ」	[Goddess] "You're so hungry."
+【女神】「あ、冗談とかじゃなくて大事なことよ。上を見てみて。あなたのHPやMPと満腹度が表示されていると思うの」	[Goddess] "Oh, I'm not kidding or anything, it's important. Look at the top. I think it shows your HP and MP and your satiety level."
+【女神】「お腹がすきすぎると、HPが減っていくわ。そしてHPがゼロになるとゲームオーバーだからね」	[Goddess] "If you're too hungry, your HP will go down. And when your HP reaches zero, it's game over."
+【女神】「ゲームオーバーになると、アイテムボックスの中は空になって地上に戻るわ」	[Goddess] "When the game is over, the item box will be emptied and you will return to the ground. Don't worry, the items you put in your collection won't disappear."
+【女神】「コレクションに入れたアイテムは消えないから安心して」	[Goddess] "Don't worry, the items you put in your collection won't disappear."
+【女神】「MPは魔法を使うと減るわ。まぁ、あなたはもっとレベルを上げないと使えないけどね」	[Goddess] "MP is reduced when you use magic. Well, you need to raise your level more to use it."
+【女神】「そうそう。Yボタンを押すとメニューが開くわ。そこからお肉とかを使えばお腹は膨れるわ」	[Goddess] "Oh yeah, press Y to open the menu. From there you can use meats and stuff to fill you up."
+【女神】「このダンジョンの敵は美味しいらしいから、それを食べてもいいんじゃないかしら」	[Goddess] "I hear the enemies in this dungeon are delicious, so I guess you could eat them."
+end	end

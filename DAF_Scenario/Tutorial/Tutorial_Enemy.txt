@@ -1,0 +1,4 @@
+【女神】「じゃぁ、ちょっと敵を倒してみましょうか」	[Goddess] "Well, let's take down an enemy."
+【女神】「横に敵をおびき出しておいたわ。パンチして倒してみて」	[Goddess] "I've lured the enemy to the side. Punch them and try to take them down."
+【女神】「それができたら、このダンジョンでも進めるんじゃないかしら」	[Goddess] "If you can do that, maybe you can advance in this dungeon."
+end	end

@@ -1,0 +1,8 @@
+【女神】「いきなりダンジョンに入ってもわからないだろうから、この私が少し手ほどきしてあげるわ」	[Goddess] "I'm going to teach you a few things, since you probably don't understand what it's like to go into a dungeon out of the blue."
+【女神】「あなたは敵をパンチすることで敵を攻撃できるわ」	[Goddess] "You can attack your enemies by punching them."
+【女神】「両手のコントローラーのトリガーボタンとグリップボタンを握ってみて」	[Goddess] "Try holding the trigger and grip buttons of the controller in both hands."
+【女神】「どう？私からは見えないけど両手のアーマーが現れたんじゃないかしら」	[Goddess] "Well? I can't see it from me, but I think both armors showed up."
+【女神】「それで敵をパンチするれば攻撃できるから覚えておいて」	[Goddess]"Remember, you can attack the enemy by punching them with it. "
+【女神】「しっかり腕を引いて、パンチを打ち込む。これが基本よ」	[Goddess] "Pull your arm back firmly and punch. That's the basics" 
+【女神】「普通の手だと攻撃できないから気をつけてね」	[Goddess] "Be careful, because you can't attack with a normal hand."
+end	end

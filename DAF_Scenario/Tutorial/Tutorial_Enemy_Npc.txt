@@ -1,0 +1,5 @@
+look	look
+【冒険者】「敵は体や奴らの振る腕に当たってもダメージはない。けどな、奴らは謎の弾を撃ってくる」	[Adventurer] "The enemy can't be damaged by hitting their body or their limbs. However, they shoot mysterious bullets."
+【冒険者】「それに当たると結構なダメージを食らう。俺もなんとか逃げてきたところだ……ハァハァ……」	[Adventurer] "If you get hit by them, you'll take significant damage. I managed to escape somehow... hahah... "
+【冒険者】「と、思ったらなんでここにまで敵がいるんだよ……」	[Adventurer] "And, I thought, why is there an enemy all the way up here...
+end	end
