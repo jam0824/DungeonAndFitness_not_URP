@@ -74,8 +74,16 @@ public class ScenarioExec : MonoBehaviour
     public int exec(int no) {
         isNowLineExecuting = true;
         while (true) {
+            DebugWindow.instance.DFDebug("LineNo:" + no);
+            //会話終了のマージンの0.5秒の間に
+            //押されるとindexオーバーになるので処理
+            if (no == listScenarioCsv.Count) {
+                ResetFlag();
+                break;
+            }
             string[] line = listScenarioCsv[no];
             string command = line[0];
+            
             if (command == "") {
                 no++;
                 continue;
@@ -144,13 +152,23 @@ public class ScenarioExec : MonoBehaviour
     void CommandShowMessage(string[] line) {
         ShowWindowCanvas();
         nowMessage = FixMessage(line[0]);
-        StartCoroutine(ShowMessage(nowMessage));
+        //会話文だった場合
+        if ((line[0][0] == '【') || (line[0][0] == '[')) {
+            StartCoroutine(ShowMessage(nowMessage));
+        }
+        else {
+            ShowMessageInstantly();
+            isNowLineExecuting = false;
+        }
+        
         DebugWindow.instance.DFDebug(line[0]);
     }
 
     //メッセージの編集
     string FixMessage(string line) {
         line = line.Replace("】", "】\n");
+        line = line.Replace("]", "]\n");
+        line = line.Replace("<br>", "\n");
         return line;
     }
 
@@ -158,6 +176,7 @@ public class ScenarioExec : MonoBehaviour
     IEnumerator ShowMessage(string message) {
 
         for (int i = 0; i < message.Length; i++) {
+            if (messageText == null) break;
             if (messageText.text == message) break;
             messageText.text += message[i];
             SingletonGeneral.instance.PlayOneShot(audioSource, MESSAGE_SE_KEY);
@@ -172,8 +191,9 @@ public class ScenarioExec : MonoBehaviour
     /// </summary>
     /// <param name="message"></param>
     public void ShowMessageInstantly() {
+        if(isNowLineExecuting == false) return;
+        if (messageText == null) return;
         StopCoroutine(ShowMessage(""));
-        messageText.text = "";
         messageText.text = nowMessage;
     }
 
@@ -317,6 +337,7 @@ public class ScenarioExec : MonoBehaviour
     //会話終了
    void CommandEnd() {
         CloseWindowCanvas();
+        
         DebugWindow.instance.DFDebug("会話終了");
         //会話終了後、判定と重なっているためすぐ次の話になる。コールチンで待ち時間を入れる
         StartCoroutine("ResetFlag");
