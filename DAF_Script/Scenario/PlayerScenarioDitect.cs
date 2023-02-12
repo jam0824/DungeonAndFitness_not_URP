@@ -27,7 +27,13 @@ public class PlayerScenarioDitect : MonoBehaviour
             if ((Input.GetKeyDown(KeyCode.A)) || (OVRInput.GetDown(OVRInput.RawButton.A))) {
                 ScenarioExec scenarioExec = isNowScenarioExecPrefab.gameObject.GetComponent<ScenarioExec>();
                 //1行実行中に重複で実行させない
-                if (!scenarioExec.GetIsNowLineExecuting()) scenarioExec.ScenarioExecution();
+                if (!scenarioExec.GetIsNowLineExecuting()) {
+                    scenarioExec.ScenarioExecution();
+                }
+                else {
+                    //1行実行中にAをおされたらメッセージの一括表示をする
+                    scenarioExec.ShowMessageInstantly();
+                }
             }
         }
     }

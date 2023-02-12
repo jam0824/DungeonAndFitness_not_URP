@@ -29,6 +29,8 @@ public class ScenarioExec : MonoBehaviour
     
     float messageSpeed = 0.05f;
 
+    string nowMessage = "";
+
 
     // Start is called before the first frame update
     void Start()
@@ -141,7 +143,8 @@ public class ScenarioExec : MonoBehaviour
     //会話だった場合
     void CommandShowMessage(string[] line) {
         ShowWindowCanvas();
-        StartCoroutine(ShowMessage(FixMessage(line[0])));
+        nowMessage = FixMessage(line[0]);
+        StartCoroutine(ShowMessage(nowMessage));
         DebugWindow.instance.DFDebug(line[0]);
     }
 
@@ -155,12 +158,23 @@ public class ScenarioExec : MonoBehaviour
     IEnumerator ShowMessage(string message) {
 
         for (int i = 0; i < message.Length; i++) {
+            if (messageText.text == message) break;
             messageText.text += message[i];
             SingletonGeneral.instance.PlayOneShot(audioSource, MESSAGE_SE_KEY);
             yield return new WaitForSeconds(messageSpeed);
         }
         //会話が終わった
         isNowLineExecuting = false;
+    }
+
+    /// <summary>
+    /// メッセージの一括表示
+    /// </summary>
+    /// <param name="message"></param>
+    public void ShowMessageInstantly() {
+        StopCoroutine(ShowMessage(""));
+        messageText.text = "";
+        messageText.text = nowMessage;
     }
 
     //メッセージキャンバス作成
