@@ -26,29 +26,82 @@ public class EnemyMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //ƒ[ƒh‚ªŠ®—¹‚µ‚Ä‚¢‚È‚©‚Á‚½‚ç–ß‚é
-        if(enemyView.isGameObjectLoaded == false) {
+        //ãƒ­ãƒ¼ãƒ‰ãŒå®Œäº†ã—ã¦ã„ãªã‹ã£ãŸã‚‰æˆ»ã‚‹
+        if (enemyView.isGameObjectLoaded == false) {
             return;
         }
-        //‚ ‚é‚‚³‚æ‚è’á‚­‚È‚Á‚½‚ç—‚¿‚Ä‚¢‚é‚Ì‚Åíœ‚·‚é
+        //ã‚ã‚‹é«˜ã•ã‚ˆã‚Šä½ããªã£ãŸã‚‰è½ã¡ã¦ã„ã‚‹ã®ã§å‰Šé™¤ã™ã‚‹
         if (gameObject.transform.position.y < DELETE_Y) Destroy(gameObject);
 
         state = enemyView.enemyConfig.GetEnemyState();
         float dist = FQCommon.Common.GetDistance(transform.position, enemyView.Player.transform.position);
 
-        switch (state) {
-            case "Walk":
-                WhenWalk(dist, enemyView.enemyConfig);
+        //ActionModeã§åˆ‡ã‚Šæ›¿ãˆã‚‹
+        switch (enemyView.enemyConfig.GetActionMode()) {
+            case "Random":
+                ActionModeRandom(state, dist);
                 break;
-            case "Notice":
-                WhenNotice(dist, enemyView.Player, enemyView.enemyConfig, enemyView.enemyAnimation);
+            case "Stop":
+                ActionModeStop(state, dist);
                 break;
-            case "Battle":
-                WhenBattle(dist, enemyView.enemyConfig, enemyView.enemyAnimation);
+            default:
+                ActionModeRandom(state, dist);
                 break;
-
         }
         
+        
+    }
+
+    /// <summary>
+    /// ActionModeãŒStopã®æ™‚
+    /// </summary>
+    /// <param name="state"></param>
+    /// <param name="dist"></param>
+    void ActionModeStop(string state, float dist) {
+        EnemyConfig config = enemyView.enemyConfig;
+        EnemyAnimation animation = enemyView.enemyAnimation;
+        GameObject player = enemyView.Player;
+        switch (state) {
+            case "Walk":
+                WhenWalk(dist, config);
+                break;
+            case "Notice":
+                WhenNotice(dist, player, config, animation);
+                break;
+            case "Battle":
+                WhenBattle(dist, player, config, animation);
+                break;
+        }
+
+    }
+
+    /// <summary>
+    /// ActionModeãŒRandomã®æ™‚
+    /// </summary>
+    /// <param name="state"></param>
+    /// <param name="dist"></param>
+    void ActionModeRandom(string state, float dist) {
+        EnemyConfig config = enemyView.enemyConfig;
+        EnemyAnimation animation = enemyView.enemyAnimation;
+        GameObject player = enemyView.Player;
+        switch (state) {
+            case "Walk":
+                WhenWalk(dist, config);
+                RandomWalk(config);
+                break;
+            case "Notice":
+                WorkForward(config.GetWalkSpeed());
+                WhenNotice(dist, player, config, animation);
+                break;
+            case "Battle":
+                WhenBattle(dist, player, config, animation);
+                
+                break;
+        }
+        if((state == "Notice") || (state == "Battle")) {
+            if (dist >= config.GetBattleEndDistance())
+                animation.SetWalkAnim(true);
+        }
     }
 
     void WhenNotice(
@@ -58,16 +111,14 @@ public class EnemyMove : MonoBehaviour
         EnemyAnimation enemyAnimation) {
 
         LookAt(player);
-        WorkForward(enemyConfig.GetWalkSpeed());
         
         if(dist <= enemyView.enemyConfig.GetBattleDistance()) {
-            DebugWindow.instance.DFDebug("StateCange:Battle");
             enemyConfig.SetEnemyState("Battle");
+            DebugWindow.instance.DFDebug("StateCange:Battle");
             enemyAnimation.SetWalkAnim(false);
             StartAttack();
         }
-        //ˆê’è‹——£—£‚ê‚½‚çwalk‚É–ß‚é
-        if (dist >= enemyConfig.GetBattleEndDistance()) {
+        if (dist >= enemyView.enemyConfig.GetBattleEndDistance()) {
             ChangeWalkState(enemyConfig, enemyAnimation);
         }
     }
@@ -75,32 +126,30 @@ public class EnemyMove : MonoBehaviour
     void WhenWalk(
         float dist, 
         EnemyConfig enemyConfig) {
-
-        RandomWalk(enemyConfig);
         if (dist <= enemyConfig.GetNoticeDistance()) {
-            DebugWindow.instance.DFDebug("StateCange:Notice");
             //MakeNoticeEffect();
             SingletonGeneral.instance.PlayOneShot(enemyView.audioSource, "EnemyNoticeSE");
             enemyConfig.SetEnemyState("Notice");
+            DebugWindow.instance.DFDebug("StateCange:Notice");
         }
     }
 
     void WhenBattle(
         float dist,
+        GameObject player,
         EnemyConfig enemyConfig,
         EnemyAnimation enemyAnimation) {
-
+        LookAt(player);
         if (dist >= enemyConfig.GetBattleEndDistance()) {
-            ChangeWalkState(enemyConfig, enemyAnimation);
             StopAttack();
+            ChangeWalkState(enemyConfig, enemyAnimation);
         }
     }
 
     void ChangeWalkState(EnemyConfig enemyConfig,
         EnemyAnimation enemyAnimation) {
-        DebugWindow.instance.DFDebug("StateCange:Walk");
         enemyConfig.SetEnemyState("Walk");
-        enemyAnimation.SetWalkAnim(true);
+        DebugWindow.instance.DFDebug("StateCange:Walk");
     }
 
     void RandomWalk(EnemyConfig enemyConfig) {
@@ -124,7 +173,10 @@ public class EnemyMove : MonoBehaviour
         transform.eulerAngles = worldAngle;
     }
 
-    //‘O‚É•à‚­
+    /// <summary>
+    /// å‰ã«æ­©ã
+    /// </summary>
+    /// <param name="walkSpeed"></param>
     void WorkForward(float walkSpeed) {
         transform.position += transform.forward * walkSpeed * Time.deltaTime;
         //enemyView.rigidbody.AddForce(transform.forward * walkSpeed, ForceMode.Force);
@@ -133,9 +185,12 @@ public class EnemyMove : MonoBehaviour
         }
     }
 
-    //ƒIƒuƒWƒFƒNƒg‚Ì•û‚ğŒü‚­
+    /// <summary>
+    /// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æ–¹ã‚’å‘ã
+    /// </summary>
+    /// <param name="target"></param>
     void LookAt(GameObject target) {
-        //‚ ‚éƒIƒuƒWƒFƒNƒg‚©‚çŒ©‚½•Ê‚ÌƒIƒuƒWƒFƒNƒg‚Ì•ûŒü‚ğ‹‚ß‚é
+        //ã‚ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ã‚‰è¦‹ãŸåˆ¥ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æ–¹å‘ã‚’æ±‚ã‚ã‚‹
         var direction = target.transform.position - transform.position;
         direction.y = 0;
 
@@ -143,12 +198,12 @@ public class EnemyMove : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, 0.1f);
     }
 
-    //UŒ‚ŠJn
+    //æ”»æ’ƒé–‹å§‹
     public void StartAttack() {
         StartCoroutine("MakeBullet");
     }
 
-    //UŒ‚I—¹
+    //æ”»æ’ƒçµ‚äº†
     public void StopAttack() {
         StopCoroutine("MakeBullet");
     }
@@ -176,7 +231,7 @@ public class EnemyMove : MonoBehaviour
             enemyBullet.SetATK(atk);
             enemyBullet.SetEnemyGameObject(gameObject);
             enemyBullet.enemyConfig = enemyView.enemyConfig;
-        } 
+        }
     }
 
 }

@@ -1057,14 +1057,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcc0e921597cc214da2a9699df47033b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ACTION_MODE: Random
   MAX_HP: 20
   MAX_MP: 20
   ATK: 20
   DEF: 5
   SPD: 2
-  ATK_INTERVAL: 10
+  ATK_INTERVAL: 5
   ENEMY_STATE: Walk
-  HIGHT: 2
   DELETE_TIME: 3
   WALK_SPEED: 0.5
   NOTICE_DISTANCE: 8

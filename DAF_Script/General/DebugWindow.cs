@@ -43,7 +43,13 @@ public class DebugWindow : MonoBehaviour
     private void OnReceiveLog(string logText, string stackTrace, LogType logType) {
         string m = cText.text;
         if(stackTrace != "") {
-            m = logText + "\n" + stackTrace + "\n" + m;
+            if (logType == LogType.Error) {
+                m = "<color=\"red\">" + logText + "\n" + stackTrace + "</color>\n" + m;
+            }
+            else {
+                m = logText + "\n" + stackTrace + "\n" + m;
+            }
+            
         }
         else {
             m = logText + "\n" + m;

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyConfig : MonoBehaviour
 {
+    public string ACTION_MODE;
     public int MAX_HP;
     public int MAX_MP;
     public int ATK;
@@ -11,7 +12,6 @@ public class EnemyConfig : MonoBehaviour
     public float SPD;
     public float ATK_INTERVAL;
     public string ENEMY_STATE;
-    public float HIGHT;
     public float DELETE_TIME;
     public float WALK_SPEED;
     public float NOTICE_DISTANCE;
@@ -38,6 +38,10 @@ public class EnemyConfig : MonoBehaviour
             nowHp = 0;
         }
         return nowHp;
+    }
+
+    public string GetActionMode() {
+        return ACTION_MODE;
     }
 
     public int GetHP() {
@@ -72,9 +76,6 @@ public class EnemyConfig : MonoBehaviour
         return ATK_INTERVAL;
     }
 
-    public float GetHight() {
-        return HIGHT;
-    }
     public float GetDeleteTime() {
         return DELETE_TIME;
     }

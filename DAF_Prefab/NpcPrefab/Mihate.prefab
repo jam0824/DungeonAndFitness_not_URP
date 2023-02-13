@@ -2848,7 +2848,7 @@ Transform:
   m_GameObject: {fileID: 7900205368286795224}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -2, y: 0, z: 3}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1898318999595638780}
@@ -2911,7 +2911,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 1.5
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -3007,8 +3007,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scenario: {fileID: 4900000, guid: 7dcaa5ca3c16ec04e8f0618b32d258d8, type: 3}
-  MESSAGE_TYPE: MessageNormal
-  MESSAGE_Y: 1.2
 --- !u!1 &7941724269838002564
 GameObject:
   m_ObjectHideFlags: 0

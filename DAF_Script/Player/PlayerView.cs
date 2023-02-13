@@ -127,9 +127,8 @@ public class PlayerView : MonoBehaviour
     void SetPunch(GameObject punch) {
         if (punch.activeSelf == false) {
             punch.SetActive(true);
-            //拳出現の時にtriggerにしてないと、
-            //出現ダメージを与えることができるためtriggerにする
-            punch.GetComponent<HandsScript>().SetIsTrigger(true);
+            HandsScript handsScript = punch.GetComponent<HandsScript>();
+            handsScript.ShowHandsArmor();
             GameObject shot = Instantiate(
                 config.GetPunchEnablePrefab(),
                 punch.transform.position,

@@ -59,6 +59,9 @@ public class EnemyView : MonoBehaviour
     private void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.tag == "PlayerAttack") {
             HandsScript handsScript = collision.gameObject.GetComponent<HandsScript>();
+            //ダメージロック中は計算しない
+            if (handsScript.GetDamageLock()) return;
+
             //ArmorのIsTriggerをtrueにして透過するようにする
             handsScript.SetIsTrigger(true);
             float impact = enemyDamage.GetImpact(collision);
@@ -69,6 +72,8 @@ public class EnemyView : MonoBehaviour
                 int hp = enemyConfig.calcHp(damage);
                 makeHitEffect(contact, damage, impact);
                 SetDamageAnimation(handsScript, contact, hp, impact);
+                //ひとつの腕で複数ダメージがあるときがあるのでロック
+                handsScript.SetDamageLock();
                 DebugWindow.instance.DFDebug("敵は" + damage + "のダメージ！");
             }
         }
@@ -95,8 +100,7 @@ public class EnemyView : MonoBehaviour
                 handsScript.VivrationArmor(0.5f, 1f, 1f);
                 isBlowOff = true;
                 enemyAnimation.SetDamageAnim();
-                //ヒットストップを試してみる。手触りが変わるらしい
-                StartCoroutine(ExecBlowOff(contact, impact, addForce, HIT_STOP));
+                ExecBlowOff(contact, impact, addForce);
             }
             else {
                 //コントローラーを振動させる
@@ -114,13 +118,11 @@ public class EnemyView : MonoBehaviour
         }
     }
     //BlowOff実行
-    IEnumerator ExecBlowOff(
+    void ExecBlowOff(
         ContactPoint contact,
         float impact, 
-        float addForce, 
-        float waitTime) 
+        float addForce) 
     {
-        yield return new WaitForSeconds(waitTime);
         SetBlowOff(contact, addForce, impact);
         makeHitSE("BlowOff");
         StartCoroutine(DeleteEnemy(3.0f));

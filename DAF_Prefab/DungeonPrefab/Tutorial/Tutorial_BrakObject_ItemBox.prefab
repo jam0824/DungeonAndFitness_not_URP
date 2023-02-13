@@ -61,8 +61,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scenario: {fileID: 4900000, guid: f8d5fce878ad6f4488799a87172e23e0, type: 3}
-  MESSAGE_TYPE: MessageNormal
-  MESSAGE_Y: 0
 --- !u!23 &2912097208801919419
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -146,7 +144,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 122
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!82 &2912097208801919423
 AudioSource:
