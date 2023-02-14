@@ -1,0 +1,6 @@
+look	look
+【ジョージ博士】「どうやらここは1万年ほど前の遺跡であることはわかった」	[Dr. George] "Apparently, we know that this is an archaeological site that is about 10,000 years old."
+【ジョージ博士】「だが、まだ文字の解明はできていないのだよ」	[Dr. George] "But we haven't figured out the letters yet."
+【ジョージ博士】「ここの石碑にも何か書かれているが全く読めん」	[Dr. George] "There's something written on the monument here, too, but I can't read it at all."
+【ジョージ博士】「恐らくは墓のようなものだとは思うのだが……」	[Dr. George] "I know it's probably a tomb, but ......"
+end	end

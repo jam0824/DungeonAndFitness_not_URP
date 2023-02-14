@@ -146,6 +146,8 @@ public class ScenarioExec : MonoBehaviour
     void CommandShowMessage(string[] line) {
         ShowWindowCanvas();
         nowMessage = FixMessage(line[0]);
+        StartCoroutine(ShowMessage(nowMessage));
+        /*
         //‰ï˜b•¶‚¾‚Á‚½ê‡‚Í1•¶š‚¸‚Â•\¦
         if ((line[0][0] == 'y') || (line[0][0] == '[')) {
             StartCoroutine(ShowMessage(nowMessage));
@@ -154,7 +156,7 @@ public class ScenarioExec : MonoBehaviour
             ShowMessageInstantly();
             isNowLineExecuting = false;
         }
-        
+        */
         DebugWindow.instance.DFDebug(line[0]);
     }
 

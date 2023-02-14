@@ -1,0 +1,2 @@
+35個ある模様の内、1つ目だけが違う模様だ。	Of the 35 patterns, only the first one is different.
+end	end

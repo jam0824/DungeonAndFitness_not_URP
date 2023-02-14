@@ -1,4 +1,4 @@
-【女神】「アーマーでは物を壊すことも出来るわ。横にタルを置いておいたから壊してみて」	[Goddess] "You can break things in armor. I put a tar next to it so you can break it."
+【女神】「アーマーでは物を壊すことも出来るわ。横に壺を置いておいたから壊してみて」	[Goddess] "You can break things in armor. I put a jar next to this so you can try to break it."
 【女神】「何かを壊さないと進めない場所もあるから色々試してみることをオススメするわ」	[Goddess] "There are places where you can't progress without breaking something, so I recommend trying various things."
 【女神】「あと、アイテムを持った状態でAボタンを押すとアイテムボックスが現れるの」	[Goddess] "Also, if you press the A button while holding an item, an item box will appear."
 【女神】「その中にアイテムを入れればオッケーよ」	[Goddess]"Just put the item in there."
