@@ -4194,7 +4194,7 @@ MonoBehaviour:
   canBeSelected: 1
   canBeMoved: 1
   selected: 0
-  zIndex: 928
+  zIndex: 1239
   inputPins:
   - {fileID: -6240800775929748834}
   outputPins:
@@ -4221,8 +4221,9 @@ MonoBehaviour:
   attachmentProbability: 1
   IsStatic: 0
   affectsNavigation: 1
-  selectionRuleEnabled: 0
-  selectionRuleClassName: 
+  selectionRuleEnabled: 1
+  selectionRuleClassName: FirstFloorWallSelectionRule, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
   transformRuleEnabled: 0
   transformRuleClassName: 
   useSpatialConstraint: 0
@@ -9090,7 +9091,7 @@ MonoBehaviour:
   canBeDeleted: 1
   canBeSelected: 1
   canBeMoved: 1
-  selected: 1
+  selected: 0
   zIndex: 1238
   inputPins:
   - {fileID: 4597048389236438195}
@@ -9618,7 +9619,7 @@ MonoBehaviour:
   indexCounter:
     index: 147
   topZIndex:
-    index: 1238
+    index: 1242
   nodes:
   - {fileID: -4326983767826339498}
   - {fileID: -1130347085873320976}
@@ -10099,8 +10100,8 @@ MonoBehaviour:
   canBeDeleted: 1
   canBeSelected: 1
   canBeMoved: 1
-  selected: 0
-  zIndex: 927
+  selected: 1
+  zIndex: 1242
   inputPins:
   - {fileID: 4586057000950067890}
   outputPins:
@@ -10127,8 +10128,9 @@ MonoBehaviour:
   attachmentProbability: 0.1
   IsStatic: 0
   affectsNavigation: 1
-  selectionRuleEnabled: 0
-  selectionRuleClassName: 
+  selectionRuleEnabled: 1
+  selectionRuleClassName: FirstFloorWallSelectionRule, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
   transformRuleEnabled: 0
   transformRuleClassName: 
   useSpatialConstraint: 0
@@ -15244,7 +15246,7 @@ MonoBehaviour:
   canBeSelected: 1
   canBeMoved: 1
   selected: 0
-  zIndex: 926
+  zIndex: 1241
   inputPins:
   - {fileID: -5456813066832516682}
   outputPins:
@@ -15271,8 +15273,9 @@ MonoBehaviour:
   attachmentProbability: 0.1
   IsStatic: 0
   affectsNavigation: 1
-  selectionRuleEnabled: 0
-  selectionRuleClassName: 
+  selectionRuleEnabled: 1
+  selectionRuleClassName: FirstFloorWallSelectionRule, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
   transformRuleEnabled: 0
   transformRuleClassName: 
   useSpatialConstraint: 0
@@ -18064,7 +18067,7 @@ MonoBehaviour:
   canBeSelected: 1
   canBeMoved: 1
   selected: 0
-  zIndex: 965
+  zIndex: 1240
   inputPins:
   - {fileID: 2724178355371858251}
   outputPins:
@@ -18091,8 +18094,9 @@ MonoBehaviour:
   attachmentProbability: 0.3
   IsStatic: 0
   affectsNavigation: 1
-  selectionRuleEnabled: 0
-  selectionRuleClassName: 
+  selectionRuleEnabled: 1
+  selectionRuleClassName: FirstFloorWallSelectionRule, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
   transformRuleEnabled: 0
   transformRuleClassName: 
   useSpatialConstraint: 0
