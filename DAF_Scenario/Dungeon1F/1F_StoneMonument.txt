@@ -1,2 +1,14 @@
-何かも字らしきものが書いてあるが、読むことができない。	There is something that looks like writing, but I can't read it.
+何か文字らしきものが書いてあるが、読むことができない。	There is something that looks like writing, but I can't read it.
+end	end
+	
+switch,item=1	switch,item=1
+鑑定アイテムによって文字を読むことができた！	I was able to read the text thanks to the appraisal item!
+"未来の子どもたちへ<br>我々の文明の欠片を残す。	"To the children of the future. <br>We leave a fragment of our civilization.
+死んでいった友たちへ<br>安らかに眠れ"	To our deceased friends. <br>Rest in peace."
+set,1F_Appraisal,true	set,1F_Appraisal,true
+end	end
+	
+switch,1F_Appraisal=true	switch,1F_Appraisal=true
+"未来の子どもたちへ<br>我々の文明の欠片を残す。	"To the children of the future. <br>We leave a fragment of our civilization.
+死んでいった友たちへ<br>安らかに眠れ"	To our deceased friends. <br>Rest in peace."
 end	end

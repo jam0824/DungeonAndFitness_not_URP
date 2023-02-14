@@ -145,6 +145,12 @@ public class ScenarioSystem : MonoBehaviour
         return isLock;
     }
 
+    /// <summary>
+    /// スイッチが指定した値を含んでいるか、複数のスイッチのセットを確認
+    /// and条件
+    /// </summary>
+    /// <param name="listValue"></param>
+    /// <returns></returns>
     public bool isSwitch(List<string> listValue) {
         bool isOk = false;
         foreach (string value in listValue) {
@@ -153,13 +159,42 @@ public class ScenarioSystem : MonoBehaviour
             string[] keyAndValue = tmp.Split("=");
             string key = keyAndValue[0];
             string v = keyAndValue[1];
+            //keyがitemだった場合は所持itemを検索
+            if(key == "item") {
+                isOk = isItem(v);
+                if (isOk) continue;
+                break;
+            }
             if (dictSwitch.ContainsKey(key)) {
-                isOk = (dictSwitch[key] == v) ? true : false;
+                if(dictSwitch[key] == v) {
+                    isOk = true;
+                }
+                else {
+                    //条件に1回でもマッチしなければfalseを返す。
+                    isOk = false;
+                    break;
+                }
             }
             else {
+                //そもそもキーが存在しない場合はfalseを返す
                 isOk = false;
+                break;
             }
         }
         return isOk;
+    }
+
+    /// <summary>
+    /// itemNoのアイテムをコレクション、アイテムボックスの
+    /// どちらかに持っていたらtrue
+    /// </summary>
+    /// <param name="itemNo"></param>
+    /// <returns></returns>
+    bool isItem(string itemNo) {
+        if (SingletonGeneral.instance.itemDb.playerItemList.Contains(itemNo)) 
+            return true;
+        if (SingletonGeneral.instance.itemDb.playerCollectionList.Contains(itemNo))
+            return true;
+        return false;
     }
 }
