@@ -5,11 +5,13 @@ using UnityEngine;
 public class FallDownObject : MonoBehaviour
 {
     public int hitCount = 5;
+    public float FALL_POWER;
     public AudioClip fallDownSe;
     public AudioClip fallDownHitSe;
     public AudioSource audioSource;
 
     float colliderDeleteTime = 3.0f;
+    bool isFalling = false;
 
     // Start is called before the first frame update
     void Start()
@@ -33,8 +35,10 @@ public class FallDownObject : MonoBehaviour
             MakeHitEffect(contact);
             makeHitSE("HitObjectSe");
             hitCount--;
-            if (hitCount <= 0) 
+            if ((hitCount <= 0)&&(!isFalling)) {
+                isFalling = true;
                 FallDown(contact);
+            }
         }
     }
 
@@ -43,9 +47,11 @@ public class FallDownObject : MonoBehaviour
     /// </summary>
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other) {
-        if ((other.gameObject.tag == "Ground")||(other.gameObject.tag == "Wall")) {
-            audioSource.PlayOneShot(fallDownHitSe);
-            StartCoroutine(DeleteCollider(colliderDeleteTime));
+        if (isFalling) {
+            if ((other.gameObject.tag == "Ground") || (other.gameObject.tag == "Wall")) {
+                audioSource.PlayOneShot(fallDownHitSe);
+                StartCoroutine(DeleteCollider(colliderDeleteTime));
+            }
         }
     }
 
@@ -60,8 +66,8 @@ public class FallDownObject : MonoBehaviour
         rb.constraints = RigidbodyConstraints.None;
 
         Vector3 direction = contact.normal;
-        direction.x *= 10000f;
-        direction.z *= 10000f;
+        direction.x *= FALL_POWER;
+        direction.z *= FALL_POWER;
         Vector3 pos = gameObject.transform.position;
         pos.y += 4.0f;
         //íåÇÃè„ÇÃï˚Ç…óÕÇâ¡Ç¶ÅAå¸Ç±Ç§ë§Ç…ì|Ç∑
@@ -87,8 +93,9 @@ public class FallDownObject : MonoBehaviour
 
     IEnumerator DeleteCollider(float waitTime) {
         yield return new WaitForSeconds(waitTime);
-        CapsuleCollider cc = GetComponent<CapsuleCollider>();
-        cc.enabled = false;
+        SingletonGeneral.instance.PlayOneShot(audioSource, "NormalEnemyDie");
+        GetComponent<CapsuleCollider>().enabled = false;
+        GetComponent<SphereCollider>().enabled = false;
         yield return new WaitForSeconds(waitTime);
         Destroy(gameObject);
     }

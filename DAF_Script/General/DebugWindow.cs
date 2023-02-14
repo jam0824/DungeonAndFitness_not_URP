@@ -44,7 +44,7 @@ public class DebugWindow : MonoBehaviour
         string m = cText.text;
         if(stackTrace != "") {
             if (logType == LogType.Error) {
-                m = "<color=\"red\">" + logText + "\n" + stackTrace + "</color>\n" + m;
+                m = "<color=red>" + logText + "\n" + stackTrace + "</color>\n" + m;
             }
             else {
                 m = logText + "\n" + stackTrace + "\n" + m;
