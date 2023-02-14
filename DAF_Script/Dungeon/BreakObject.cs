@@ -36,17 +36,20 @@ public class BreakObject : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision) {
-        if ((collision.gameObject.tag == "PlayerAttack")&&(!hasBroken)) {
+        CheckCollider(collision);
+    }
+
+
+    void CheckCollider(Collision collision) {
+        if ((collision.gameObject.tag == "PlayerAttack") && (!hasBroken)) {
             float impact = GetImpact(collision);
-            //インパクトが小さかったら壊れない
-            if (impact < MIN_BREAK_IMPACT) return;
 
             hitCount--;
             ContactPoint contact = collision.contacts[0];
             MakeHitEffect(contact);
             MakeHitSE(HIT_SE);
             if (hitCount <= 0) Break(impact, contact);
-            
+
         }
     }
 
