@@ -140,6 +140,11 @@ public class ScenarioExec : MonoBehaviour
                 no++;
                 continue;
             }
+            else if (command == "information") {
+                CommandInformation(line[1]);
+                no++;
+                continue;
+            }
             else {
                 CommandShowMessage(line);
                 break;
@@ -347,6 +352,14 @@ public class ScenarioExec : MonoBehaviour
             labelFeelIcon = feelObject.GetComponent<LabelFeelIcon>();
         }
         labelFeelIcon.SetIcon(iconKey, transform.rotation);
+    }
+
+    /// <summary>
+    /// 画面下のインフォメーションにメッセージを表示する
+    /// </summary>
+    /// <param name="labelKey"></param>
+    void CommandInformation(string labelKey) {
+        SingletonGeneral.instance.labelInformationText.SetInformationLabel(labelKey);
     }
 
     //会話終了

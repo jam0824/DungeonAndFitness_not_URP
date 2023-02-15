@@ -1,0 +1,14 @@
+【女神】「そこにコレクションアイテムがあるわ」	[Goddess] "There's a collection item over there."
+【女神】「それをつかんで、アイテムボックスに入れれば獲得よ」	[Goddess] "Grab it and put it in the item box to obtain it."
+【女神】「つかむには、アイテムに手を伸ばしてコントローラーのグリップボタンを押せばつかめるから」	[Goddess] "To grab it, reach out for the item and press the grip button on the controller."
+end	
+	
+switch,item=1	switch,item=1
+【女神】「コレクションアイテムをゲットできたわね。おめでとう」	[Goddess] "You've obtained a collection item. Congratulations!"
+【女神】「コレクションアイテムのほとんどはあなたの能力を強化したり、何か新しい機能を追加するものよ」	[Goddess] "Most collection items enhance your abilities or add new features."
+【女神】「けど気をつけて。アイテムボックスに入れたままだと、あなたが死んだときに消えるわ」	[Goddess] "But be careful. If you leave the item in the item box, it will disappear when you die."
+【女神】「メニューからゲットしたコレクションアイテムを選んで、コレクションボタンを押すの」	[Goddess] "Select the collection item you obtained from the menu and press the collection button."
+【女神】「そうすればコレクションメニューに入るわ」	[Goddess] "That will take you to the collection menu."
+【女神】「コレクションアイテムは持っているだけで効果を発揮するの」	[Goddess] "Collection items have an effect just by holding them."
+【女神】「さっきの部屋の石碑をもう一度読んでみて。今度は鑑定アイテムの力で読めるようになってると思うわ」	[Goddess] "Try reading the monument in the previous room again. I think you'll be able to read it with the power of the appraisal item this time."
+end	end
