@@ -24,7 +24,7 @@ public class PlayerScenarioDitect : MonoBehaviour
 
         //lockがかかっているならイベント中なので、確保したprefabのイベントを進める
         if (scenarioSystem.GetLock()) {
-            if ((Input.GetKeyDown(KeyCode.A)) || (OVRInput.GetDown(OVRInput.RawButton.A))) {
+            if (isKeyDown()) {
                 ScenarioExec scenarioExec = isNowScenarioExecPrefab.gameObject.GetComponent<ScenarioExec>();
                 //1行実行中に重複で実行させない
                 if (!scenarioExec.GetIsNowLineExecuting()) {
@@ -39,18 +39,27 @@ public class PlayerScenarioDitect : MonoBehaviour
     }
 
     private void OnTriggerStay(Collider other) {
-        //triggerがNPCで、かつlockがかかっていないなら会話初なのでトリガー
-
         if ((other.gameObject.tag == "NPC") 
             ||(other.gameObject.tag == "Investigate")){
             //初回のみオブジェクトのロード
             if (scenarioSystem == null) ObjectLoad();
+            //triggerがNPCで、かつlockがかかっていないなら会話初なのでトリガー
             if (!scenarioSystem.GetLock()) {
-                if ((Input.GetKeyDown(KeyCode.A)) || (OVRInput.GetDown(OVRInput.RawButton.A))) {
+                if (isKeyDown()) {
                     ExecuteScenario(other);
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// キーがおされたらtrueを返す。
+    /// 何のキーで反応するかまとめてるメソッド
+    /// </summary>
+    /// <returns></returns>
+    bool isKeyDown() {
+        return 
+            ((Input.GetKeyDown(KeyCode.A)) || (OVRInput.GetDown(OVRInput.RawButton.A)));
     }
 
     private void ObjectLoad() {
