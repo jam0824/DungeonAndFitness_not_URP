@@ -38,6 +38,21 @@ public class PlayerScenarioDitect : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// TagがAutoEventの時は、trigger Enterしたらイベントスタート
+    /// </summary>
+    /// <param name="other"></param>
+    private void OnTriggerEnter(Collider other) {
+        if (other.gameObject.tag == "AutoEvent") {
+            //初回のみオブジェクトのロード
+            if (scenarioSystem == null) ObjectLoad();
+            //triggerがNPCで、かつlockがかかっていないなら会話初なのでトリガー
+            if (!scenarioSystem.GetLock()) {
+                ExecuteScenario(other);
+            }
+        }
+    }
+
     private void OnTriggerStay(Collider other) {
         if ((other.gameObject.tag == "NPC") 
             ||(other.gameObject.tag == "Investigate")){
