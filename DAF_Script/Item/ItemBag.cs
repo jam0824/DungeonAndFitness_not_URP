@@ -6,7 +6,8 @@ using TMPro;
 public class ItemBag : MonoBehaviour
 {
     public string itemNo { set; get; }
-    
+
+    public string DECIDED_ITEM_NO = "";
     OVRGrabbable ovrGrabbable;
     DungeonSystem dungeonSystem;
     LabelSystem labelSystem;
@@ -30,7 +31,9 @@ public class ItemBag : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //最初から決まっているアイテムの場合
+        if (DECIDED_ITEM_NO != "") 
+            ItemBagInit(DECIDED_ITEM_NO);
     }
 
     // Update is called once per frame
@@ -66,6 +69,11 @@ public class ItemBag : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// 初期化。
+    /// 引数が文字列-1の場合はdungeonSystemからランダムでitemをset
+    /// </summary>
+    /// <param name="no"></param>
     public void ItemBagInit(string no) {
         if(no == "-1") {
             //noが-1だったときは掴まれた時に何のアイテムか決定する
