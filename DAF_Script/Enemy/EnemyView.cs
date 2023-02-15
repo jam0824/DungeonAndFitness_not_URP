@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyView : MonoBehaviour
 {
     float addForce = 1000.0f;
-    float BLOW_OFF_IMPACT = 2000.0f;
+    float BLOW_OFF_IMPACT = 1500.0f;
     public GameObject Player { get; set; }
     public GameObject Face { get; set; }
     public EnemyConfig enemyConfig { get; set; }
@@ -143,13 +143,14 @@ public class EnemyView : MonoBehaviour
 
     //ç≈å„ÇÃêÅÇ¡îÚÇŒÇµ
     public void SetBlowOff(ContactPoint contact, float addForce, float impact) {
+        Vector3 pos = contact.point;
         Vector3 direction = contact.normal;
         DebugWindow.instance.DFDebug("direction : " + direction);
         direction.y += 0.3f;
         direction.x *= addForce * (1 + impact * 0.0001f);
         direction.y *= addForce * (1 + impact * 0.0001f);
         direction.z *= addForce * (1 + impact * 0.0001f);
-        GetComponent<Rigidbody>().AddForce(direction, ForceMode.Impulse);
+        GetComponent<Rigidbody>().AddForceAtPosition(direction, pos, ForceMode.Impulse);
     }
 
     public void makeHitEffect(ContactPoint contact, int damage, float impact) {
