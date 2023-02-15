@@ -6,6 +6,7 @@ end	end
 	
 switch,1F_BreakWall=true	switch,1F_BreakWall=true
 look	look
+feel,Surprise	feel,Surprise
 【エドガー】「えええええぇぇぇぇッ！？」	[Edgar] "Whaaaaaat?!"
 【エドガー】「いやいや……」	[Edgar] "No, no..."
 【エドガー】「ええええええぇぇぇぇぇぇーーーッ！！」	[Edgar] "Whaaaaaaaaaaaaat?!"

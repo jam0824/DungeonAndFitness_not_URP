@@ -14,6 +14,7 @@ public class ScenarioExec : MonoBehaviour
     public ScenarioSystem scenarioSystem { set; get; }
     public AudioSource audioSource { set; get; }
 
+    LabelFeelIcon labelFeelIcon;
     List<string[]> listScenarioCsv;
     List<GameObject> listSelectBoxCanvas;
 
@@ -131,6 +132,11 @@ public class ScenarioExec : MonoBehaviour
             }
             else if (command == "save") {
                 CommandSave();
+                no++;
+                continue;
+            }
+            else if (command == "feel") {
+                CommandFeel(line[1]);
                 no++;
                 continue;
             }
@@ -328,6 +334,19 @@ public class ScenarioExec : MonoBehaviour
         DebugWindow.instance.DFDebug("SAVE");
         SingletonGeneral.instance.saveLoadSystem.Save();
         SingletonGeneral.instance.labelInformationText.SetInformationLabel("Save");
+    }
+
+    /// <summary>
+    /// FeelIconÇèoÇ∑
+    /// Smile,Angry,Sad,Surprise,Tere
+    /// </summary>
+    /// <param name="iconKey"></param>
+    void CommandFeel(string iconKey) {
+        if(labelFeelIcon == null) {
+            GameObject feelObject = transform.Find("NpcSet/FeelIcon").gameObject;
+            labelFeelIcon = feelObject.GetComponent<LabelFeelIcon>();
+        }
+        labelFeelIcon.SetIcon(iconKey, transform.rotation);
     }
 
     //âÔòbèIóπ

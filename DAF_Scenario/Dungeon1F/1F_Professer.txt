@@ -6,12 +6,15 @@ look	look
 end	end
 	
 switch,1F_Appraisal_2=true	switch,1F_Appraisal_2=true
+look	look
 【ジョージ博士】「さらに下の階で調査すれば、我々の歴史もわかりそうじゃな」	[Dr. George] "If we investigate further down to the lower level, we might be able to learn more about our history."
+feel,Smile	feel,Smile
 【ジョージ博士】「年甲斐もなくワクワクしてきたわい！	[Dr. George] "I'm getting excited like a kid again even though I'm not young anymore!"
 end	end
 	
 switch,1F_Appraisal=true	switch,1F_Appraisal=true
 look	look
+feel,Surprise	feel,Surprise
 【ジョージ博士】「なにぃ！？　鑑定のアイテムで文字を読むことができたって！？」	[Dr. George] "What?! You were able to read the text with the appraisal item!?"
 【ジョージ博士】「はやく！　はやく何を書いていたか教えてくれ！！　さぁ！！」	[Dr. George] "Quickly! Quickly, tell me what it said! Come on!"
 …………	............
