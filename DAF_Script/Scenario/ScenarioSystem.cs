@@ -21,16 +21,17 @@ public class ScenarioSystem : MonoBehaviour
     }
 
     public void ScenarioSystemInit() {
-        LoadMessageTextObject();
-        LoadSelectBoxObject();
+        GameObject player = GameObject.Find("Player");
+        LoadMessageTextObject(player);
+        LoadSelectBoxObject(player);
         dictSwitch = new Dictionary<string, string>();
     }
 
     /// <summary>
     /// 初回のメッセージウィンドウロード
     /// </summary>
-    private void LoadMessageTextObject() {
-        Vector3 pos = new Vector3(-10f, -10f, -10f);
+    private void LoadMessageTextObject(GameObject player) {
+        Vector3 pos = player.transform.position;
         MessageTextObject = Instantiate(WindowCanvasPrefab, pos, transform.rotation);
         MessageTextObject.transform.parent = SingletonGeneral.instance.dungeonRoot.transform;
         messageText = MessageTextObject.GetComponent<TextMeshPro>();
@@ -40,19 +41,33 @@ public class ScenarioSystem : MonoBehaviour
     /// <summary>
     /// 初回のセレクトボックスロード（poolしておく)
     /// </summary>
-    void LoadSelectBoxObject() {
-        poolSelectBox = LoadObjects(SelectBoxCanvasPrefab, SELECT_BOX_MAX);
+    void LoadSelectBoxObject(GameObject player) {
+        poolSelectBox = LoadObjects(SelectBoxCanvasPrefab, SELECT_BOX_MAX, player);
     }
 
-    List<GameObject> LoadObjects(GameObject obj, int max) {
+    List<GameObject> LoadObjects(GameObject obj, int max, GameObject player) {
+        Vector3 pos = player.transform.position;
+        pos.y -= 2f;
         List<GameObject> pool = new List<GameObject>();
         for (int i = 0; i < max; i++) {
             GameObject poolObject = Instantiate(obj);
-            poolObject.transform.position = new Vector3(-10f, -10f, -10f);
-            poolObject.SetActive(false);
+            poolObject.transform.position = pos;
+            //poolObject.SetActive(false);
+            StartCoroutine(UnenablePoolObject(poolObject, 0.5f));
             pool.Add(poolObject);
         }
         return pool;
+    }
+
+    /// <summary>
+    /// 少し表示させてから非アクティブにすることによってメモリーする
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <param name="waitTime"></param>
+    /// <returns></returns>
+    IEnumerator UnenablePoolObject(GameObject obj, float waitTime) {
+        yield return new WaitForSeconds(waitTime);
+        obj.SetActive(false);
     }
 
     /// <summary>
