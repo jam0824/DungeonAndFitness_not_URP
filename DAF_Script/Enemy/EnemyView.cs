@@ -86,7 +86,12 @@ public class EnemyView : MonoBehaviour
         }
     }
 
-    private void SetDamageAnimation(HandsScript handsScript, ContactPoint contact, int hp, float impact) {
+    private void SetDamageAnimation(
+        HandsScript handsScript, 
+        ContactPoint contact, 
+        int hp, 
+        float impact) 
+    {
         //HPがゼロになったら
         if (hp == 0) {
             enemyMove.StopAttack();
@@ -106,6 +111,7 @@ public class EnemyView : MonoBehaviour
                 //コントローラーを振動させる
                 handsScript.VivrationArmor(0.5f, 0.5f, 0.1f);
                 enemyAnimation.setDieAnim();
+                SelectHitSe(impact);
                 makeHitSE("NormalEnemyDie");
                 StartCoroutine(DeleteEnemy(1.5f));
             }
@@ -114,7 +120,7 @@ public class EnemyView : MonoBehaviour
             //コントローラーを振動させる
             handsScript.VivrationArmor(0.5f, 0.5f, 0.1f);
             enemyAnimation.SetDamageAnim();
-            makeHitSE("NormalHitToEnemy");
+            SelectHitSe(impact);
         }
     }
     //BlowOff実行
@@ -172,10 +178,30 @@ public class EnemyView : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// impactで殴る音変更
+    /// </summary>
+    /// <param name="impact"></param>
+    void SelectHitSe(float impact) {
+        string seKey = "";
+        if (impact < 1000f) {
+            seKey = "SmallHitToEnemy";
+        }
+        else if (impact < 1500f) {
+            seKey = "NormalHitToEnemy";
+        }
+        else {
+            seKey = "HardHitToEnemy";
+        }
+        makeHitSE(seKey);
+    }
+
     public void makeHitSE(string SeName) {
         //ダメージ音
         SingletonGeneral.instance.PlayOneShot(audioSource, SeName);
     }
+
+    
 
     //アイテムをドロップする
     void DropItem(ItemDB itemDb) {

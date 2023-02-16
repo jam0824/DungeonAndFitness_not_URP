@@ -181,6 +181,8 @@ public class SingletonGeneral : MonoBehaviour
         dictSeName.Add("BlowOffAndHitWall", 14);
         dictSeName.Add("SaveSe", 15);
         dictSeName.Add("HitObjectSe", 16);
+        dictSeName.Add("SmallHitToEnemy", 17);
+        dictSeName.Add("HardHitToEnemy", 18);
 
         return dictSeName;
     }
