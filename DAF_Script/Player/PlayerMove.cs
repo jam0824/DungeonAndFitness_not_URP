@@ -73,7 +73,8 @@ public class PlayerMove : MonoBehaviour
         movement = new Vector3(moveH, 0, moveV);
 
         Vector3 desiredMove =
-            cameraC.transform.forward * movement.z + cameraC.transform.right * movement.x;
+            cameraC.transform.forward * movement.z + 
+            cameraC.transform.right * movement.x;
         moveDir.x = desiredMove.x * 3f;
         moveDir.z = desiredMove.z * 3f;
         moveDir.y -= gravity * Time.deltaTime;

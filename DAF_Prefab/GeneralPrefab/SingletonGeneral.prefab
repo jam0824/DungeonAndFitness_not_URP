@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 465376485813575324}
   - component: {fileID: 465376485813575327}
   - component: {fileID: 465376485813575326}
+  - component: {fileID: 465376485402737751}
   m_Layer: 0
   m_Name: SingletonGeneral
   m_TagString: Untagged
@@ -48,8 +49,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DEBUG_MODE: 1
+  STATUS_SAVE_PATH: PlayerStatusSave.txt
   NORMAL_ITEM_SAVE_PATH: PlayerItemSave.txt
   COLLECTION_ITEM_SAVE_PATH: PlayerCollectionSave.txt
+  SWITCH_SAVE_PATH: SwitchSave.txt
+  dugeonRootName: DungeonRoot
   ItemCanvas: {fileID: 730003842906308724, guid: 6d91edf4163581a40b2c89096cdc594b, type: 3}
   DamageTextCanvas: {fileID: 5017034250291804884, guid: bfaf566da6e895f468f2302c07adbb52, type: 3}
   PlayerDamageTextCanvas: {fileID: 5113135902472755536, guid: 5b3703508fd944443afbc2274e16cc3d, type: 3}
@@ -57,7 +61,7 @@ MonoBehaviour:
   listBattleSE:
   - {fileID: 8300000, guid: b82393f3e0c83464eb03aeb3cb5921f1, type: 3}
   - {fileID: 8300000, guid: 07a3c532015438242aca6d153e0ca002, type: 3}
-  - {fileID: 8300000, guid: c7bab44aad256b44faa1222ee09b0e66, type: 3}
+  - {fileID: 8300000, guid: 482b04b1bdd148e428ec9bf7e24df141, type: 3}
   - {fileID: 8300000, guid: 1ed9acac33d19cd4bac5ac02fd99aeb1, type: 3}
   - {fileID: 8300000, guid: a1c6d41916e3e52438f733004451cae8, type: 3}
   - {fileID: 8300000, guid: cfec027b15529834dae1a8a066f85699, type: 3}
@@ -68,8 +72,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 64d9e9f7f83ec424bb1c7eda4046ea20, type: 3}
   - {fileID: 8300000, guid: 486b1122ba8652b4e8aaf254881bca5f, type: 3}
   - {fileID: 8300000, guid: fcda781aaf3a48046896a361e582540b, type: 3}
-  - {fileID: 8300000, guid: 16ff64f4371c87a47a79f3b4481d2aa8, type: 3}
+  - {fileID: 8300000, guid: 9c1825cacf57f024ab8d457cf9ca3bb8, type: 3}
   - {fileID: 8300000, guid: 31d43461da62d144c9d69404fe7999a1, type: 3}
+  - {fileID: 8300000, guid: 5ab7ae1cc013be940b20e480fb21aeb7, type: 3}
+  - {fileID: 8300000, guid: 0f83c297f409333499a93f5d355923d7, type: 3}
+  - {fileID: 8300000, guid: a1aa4815a00669545ac2f23e28397a2b, type: 3}
+  - {fileID: 8300000, guid: 35b1537a02a37be42a21ca0622e2c4b7, type: 3}
 --- !u!114 &465376485813575324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,3 +120,15 @@ MonoBehaviour:
   WindowCanvasPrefab: {fileID: 8812617022913101181, guid: 5428646afdfb40846a369e9802b8da0e, type: 3}
   SelectBoxCanvasPrefab: {fileID: 1217089534121423838, guid: 2eada0998e0f8904eb55e5d0e1fd81fe, type: 3}
   MessageTextObject: {fileID: 0}
+--- !u!114 &465376485402737751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 465376485813575315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b45ddf295e4d86849968b28fcdbbd806, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

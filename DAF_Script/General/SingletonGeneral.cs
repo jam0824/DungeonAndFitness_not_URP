@@ -38,6 +38,7 @@ public class SingletonGeneral : MonoBehaviour
     public List<AudioClip> listBattleSE;
 
     Dictionary<string, int> dictSeName;
+    Vector3 dungeonRootPos;
 
     private void Awake() {
         if (instance == null) {
@@ -58,6 +59,7 @@ public class SingletonGeneral : MonoBehaviour
     void SingletonGeneralInit() {
         LanguageMode = "japanese";
         dungeonRoot = GameObject.Find(dugeonRootName);
+        dungeonRootPos = dungeonRoot.transform.position;
         saveLoadSystem = GetComponent<SaveLoadSystem>();
 
         itemDb = LoadItemDb();
@@ -72,11 +74,55 @@ public class SingletonGeneral : MonoBehaviour
         scenarioSystem = LoadScenarioSystem();
 
         SetDictSeName();
+
+        //ダンジョンがずれたときに補正する
+        StartCoroutine(FixDungeonRootPosCorutine(1f));
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+    }
+
+    /// <summary>
+    /// ダンジョンがズレたときに補正する
+    /// </summary>
+    /// <param name="waitTime"></param>
+    /// <returns></returns>
+    IEnumerator FixDungeonRootPosCorutine(float waitTime) {
+        while (true) {
+            yield return new WaitForSeconds(waitTime);
+            FixDungeonRootPos();
+        }
+    }
+    void FixDungeonRootPos() {
+        if (dungeonRoot.transform.position == dungeonRootPos) return;
+
+        
+        Vector3 pos = dungeonRoot.transform.position;
+        Vector3 playerPos = player.transform.position;
+        float x = (pos.x > dungeonRootPos.x) ? -0.01f : 0.01f;
+        float z = (pos.z > dungeonRootPos.z) ? -0.01f : 0.01f;
+        if ((Mathf.Abs(pos.x - dungeonRootPos.x)) > 0.01f) {
+            pos.x += x;
+            playerPos.x += x;
+        }
+        else {
+            pos.x = dungeonRootPos.x;
+        }
+
+        if ((Mathf.Abs(pos.z - dungeonRootPos.z)) > 0.01f) {
+            pos.z += z;
+            playerPos.z += z;
+        }
+
+        else {
+            pos.z = dungeonRootPos.z;
+        }
+        dungeonRoot.transform.position = pos;
+        player.transform.position = playerPos;
+        //DebugWindow.instance.DFDebug("Dungeon:" + dungeonRoot.transform.position);
         
     }
 

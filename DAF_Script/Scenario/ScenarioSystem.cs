@@ -52,6 +52,7 @@ public class ScenarioSystem : MonoBehaviour
         for (int i = 0; i < max; i++) {
             GameObject poolObject = Instantiate(obj);
             poolObject.transform.position = pos;
+            poolObject.transform.parent = SingletonGeneral.instance.dungeonRoot.transform;
             //poolObject.SetActive(false);
             StartCoroutine(UnenablePoolObject(poolObject, 0.5f));
             pool.Add(poolObject);
