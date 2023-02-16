@@ -74,7 +74,9 @@ public class PlayerScenarioDitect : MonoBehaviour
     /// <returns></returns>
     bool isKeyDown() {
         return 
-            ((Input.GetKeyDown(KeyCode.A)) || (OVRInput.GetDown(OVRInput.RawButton.A)));
+            ((Input.GetKeyDown(KeyCode.A)) || 
+            (OVRInput.GetDown(OVRInput.RawButton.A))||
+            (OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger)));
     }
 
     private void ObjectLoad() {
