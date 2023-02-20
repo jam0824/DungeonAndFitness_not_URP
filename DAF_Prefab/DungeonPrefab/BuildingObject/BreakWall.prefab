@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1346397464620986610}
   - component: {fileID: 1317410288535404634}
   - component: {fileID: 1346397464619247953}
+  - component: {fileID: 4298513789783165145}
   - component: {fileID: 1346397464619247952}
   m_Layer: 0
   m_Name: BreakWallObject
@@ -124,6 +125,20 @@ MonoBehaviour:
   item_base_y: 0.5
   peaseNum: 5
   peaseRandomRange: 0.3
+--- !u!114 &4298513789783165145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346397464618966200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53f61520dad59394bb3afdc143e73cb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isStartCheck: 1
+  scenario: {fileID: 0}
 --- !u!54 &1346397464619247952
 Rigidbody:
   m_ObjectHideFlags: 0

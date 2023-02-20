@@ -75,6 +75,9 @@ public class SingletonGeneral : MonoBehaviour
 
         SetDictSeName();
 
+        //デバッグ
+        saveLoadSystem.Load();
+
         //ダンジョンがずれたときに補正する
         StartCoroutine(FixDungeonRootPosCorutine(1f));
     }

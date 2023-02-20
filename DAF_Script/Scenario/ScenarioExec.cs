@@ -6,6 +6,7 @@ using TMPro;
 
 public class ScenarioExec : MonoBehaviour
 {
+    public bool isStartCheck = false;
     public TextAsset scenario;
     //アイテムがフルだったときのキー
     string FULL_OF_ITEM_KEY = "FullOfItem";
@@ -36,7 +37,11 @@ public class ScenarioExec : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //シーンスタート時に起動する場合
+        if (isStartCheck) {
+            scenarioSystem = SingletonGeneral.instance.scenarioSystem;
+            InitMain();
+        }
     }
 
     // Update is called once per frame
@@ -63,11 +68,13 @@ public class ScenarioExec : MonoBehaviour
     public void Init() {
         //全体でイベントロック（誰かとイベント中）だったら何もしない
         if (scenarioSystem.GetLock()) return;
-
+        scenarioSystem.SetLock(true);
+        InitMain();
+    }
+    void InitMain() {
         LoadScenario();
         lineNo = GetScenarioLineNo();
         isNowScenarioExec = true;
-        scenarioSystem.SetLock(true);
         lineNo = exec(lineNo);
     }
 
@@ -144,6 +151,10 @@ public class ScenarioExec : MonoBehaviour
                 CommandInformation(line[1]);
                 no++;
                 continue;
+            }
+            else if (command == "destroy") {
+                CommandDestroy();
+                break;
             }
             else {
                 CommandShowMessage(line);
@@ -371,9 +382,22 @@ public class ScenarioExec : MonoBehaviour
         StartCoroutine("ResetFlag");
     }
 
+    /// <summary>
+    /// ScenarioExecがついたオブジェクトを消去する
+    /// </summary>
+    void CommandDestroy() {
+        DebugWindow.instance.DFDebug("シナリオによるDestroy");
+        ResetFlagMain();
+        Destroy(gameObject);
+    }
+
     //各種フラグリセット
     IEnumerator ResetFlag() {
         yield return new WaitForSeconds(0.5f);
+        ResetFlagMain();
+    }
+
+    void ResetFlagMain() {
         isNowLineExecuting = false;
         isNowScenarioExec = false;
         isLookAt = false;

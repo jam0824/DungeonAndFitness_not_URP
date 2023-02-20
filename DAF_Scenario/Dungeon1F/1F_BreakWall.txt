@@ -1,0 +1,5 @@
+end	end
+	
+switch,1F_BreakWall=true	switch,1F_BreakWall=true
+destroy	destroy
+end	end
