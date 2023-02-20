@@ -229,6 +229,8 @@ public class SingletonGeneral : MonoBehaviour
         dictSeName.Add("HitObjectSe", 16);
         dictSeName.Add("SmallHitToEnemy", 17);
         dictSeName.Add("HardHitToEnemy", 18);
+        dictSeName.Add("RocketPunchCombine", 19);
+        dictSeName.Add("RocketPunchFire", 20);
 
         return dictSeName;
     }
@@ -301,6 +303,22 @@ public class SingletonGeneral : MonoBehaviour
         r.x = 0.0f;
         r.z = 0.0f;
         return r;
+    }
+
+    /// <summary>
+    /// targetObject‚Ìƒ[ƒJƒ‹‚ÌŠp“x‚Éxyz‚Å—^‚¦‚½Šp“x‚ğ‘«‚µ‚½Quaternion‚ğ•Ô‚·
+    /// </summary>
+    /// <param name="targetObject"></param>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <param name="z"></param>
+    /// <returns></returns>
+    public Quaternion GetLocalQuaternionToAddRotation(GameObject targetObject, float x, float y, float z) {
+        Vector3 newRotation = targetObject.transform.localRotation.eulerAngles;
+        newRotation.x += x;
+        newRotation.y += y;
+        newRotation.z += z;
+        return Quaternion.Euler(newRotation);
     }
 
 }

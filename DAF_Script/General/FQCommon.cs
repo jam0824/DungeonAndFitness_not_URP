@@ -19,6 +19,16 @@ namespace FQCommon
             return Mathf.Sqrt(xDist + zDist + yDist);
         }
 
+        /// <summary>
+        /// basePositionからtargetPositionを向く方向のベクトルを返す。
+        /// </summary>
+        /// <param name="basePosition"></param>
+        /// <param name="targetPosition"></param>
+        /// <returns></returns>
+        static public Vector3 GetDirection(Vector3 basePosition, Vector3 targetPosition) {
+            return targetPosition - basePosition;
+        }
+
         static public List<string[]> LoadCsvFile(string fileName) {
             List<string[]> tsvDatas = new List<string[]>();
             TextAsset tsvFile = Resources.Load(fileName) as TextAsset;

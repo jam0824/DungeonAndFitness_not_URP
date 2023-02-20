@@ -26,6 +26,9 @@ public class PlayerView : MonoBehaviour
     //ItemBoxを消してすぐEnableになる状態があるので回避のため。
     bool lockEnableItemBox = false;
 
+    PlayerRocketPanch leftPlayerRocketPunch;
+    PlayerRocketPanch rightPlayerRocketPunch;
+
     private void Awake() {
         if (instance == null) {
             instance = this;
@@ -50,6 +53,9 @@ public class PlayerView : MonoBehaviour
         config.PlayerConfigInit();
         hud.HudInit();
         playerStatusChange.PlayerStatusChangeInit();
+
+        leftPlayerRocketPunch = leftPlayerPunch.GetComponent<PlayerRocketPanch>();
+        rightPlayerRocketPunch = rightPlayerPunch.GetComponent<PlayerRocketPanch>();
         
     }
     
@@ -67,15 +73,26 @@ public class PlayerView : MonoBehaviour
         UnEnableItemBox();
     }
 
+    void DebugRocketPunch() {
+        if (Input.GetKeyDown(KeyCode.W)|| 
+            (OVRInput.GetDown(OVRInput.RawButton.B))) {
+            DebugWindow.instance.DFDebug("Fire");
+            PlayerRocketPanch pr = GameObject.Find("RightArmor").GetComponent<PlayerRocketPanch>();
+            pr.Fire();
+        }
+    }
+
     public void SetEnablePunch() {
         EnablePunch(
             OVRInput.Get(OVRInput.Axis1D.PrimaryHandTrigger),
             OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger),
+            leftPlayerRocketPunch,
             leftPlayerPunch
         );
         EnablePunch(
             OVRInput.Get(OVRInput.Axis1D.SecondaryHandTrigger),
             OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger),
+            rightPlayerRocketPunch,
             rightPlayerPunch
         );
     }
@@ -114,12 +131,23 @@ public class PlayerView : MonoBehaviour
     }
 
     //拳表示
-    void EnablePunch(float flex, float index, GameObject punch) {
+    void EnablePunch(float flex, float index, PlayerRocketPanch rocketPunch, GameObject punch) {
         if ((flex > 0.7)&&(index > 0.7)) {
-            SetPunch(punch);
+            if(!punch.activeSelf) SetPunch(punch);
+            //人差し指が戻されたらロケットパンチのロックを解除する
+            if (rocketPunch.isLock) rocketPunch.isLock = false;
+            return;
+        }
+        //人差し指だけが離されていたらロケットパンチ
+        else if((flex > 0.7f) && (punch.activeSelf)) {
+            rocketPunch.Fire();
+            rocketPunch.isLock = true;
+            return;
         }
         else {
-            punch.SetActive(false);
+            if (punch.activeSelf) {
+                if (!rocketPunch.isFire) UnenablePunch(punch, rocketPunch);
+            }
         }
     }
 
@@ -127,6 +155,8 @@ public class PlayerView : MonoBehaviour
     void SetPunch(GameObject punch) {
         if (punch.activeSelf == false) {
             punch.SetActive(true);
+            PlayerRocketPanch pr = punch.GetComponent<PlayerRocketPanch>();
+            pr.ResetRocketPunch();
             HandsScript handsScript = punch.GetComponent<HandsScript>();
             handsScript.ShowHandsArmor();
             GameObject shot = Instantiate(
@@ -137,6 +167,11 @@ public class PlayerView : MonoBehaviour
                 punch.GetComponent<AudioSource>(),
                 "PunchEnableSE");
         }
+    }
+
+    void UnenablePunch(GameObject punch, PlayerRocketPanch rocketPunch) {
+        rocketPunch.isLock = false;
+        punch.SetActive(false);
     }
 
     

@@ -74,6 +74,8 @@ public class EnemyView : MonoBehaviour
                 SetDamageAnimation(handsScript, contact, hp, impact);
                 //ひとつの腕で複数ダメージがあるときがあるのでロック
                 handsScript.SetDamageLock();
+                //近づいて攻撃した場合ではないときに気づかせる
+                ChangeEnemyStatus();
                 DebugWindow.instance.DFDebug("敵は" + damage + "のダメージ！");
             }
         }
@@ -84,6 +86,14 @@ public class EnemyView : MonoBehaviour
             if (collision.gameObject.tag == "Ground") 
                 DeleteEnemyMain();
         }
+    }
+
+    /// <summary>
+    /// 近づく前にNoticeにする場合に呼ぶ
+    /// </summary>
+    private void ChangeEnemyStatus() {
+        string state = enemyConfig.GetEnemyState();
+        if (state == "Walk") enemyMove.ExternalNotice();
     }
 
     private void SetDamageAnimation(

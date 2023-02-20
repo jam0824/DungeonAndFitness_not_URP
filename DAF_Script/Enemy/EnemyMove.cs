@@ -134,6 +134,15 @@ public class EnemyMove : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 外部から呼び出しでNoticeにする
+    /// </summary>
+    public void ExternalNotice() {
+        SingletonGeneral.instance.PlayOneShot(enemyView.audioSource, "EnemyNoticeSE");
+        enemyView.enemyConfig.SetEnemyState("Notice");
+        DebugWindow.instance.DFDebug("StateCange:Notice");
+    }
+
     void WhenBattle(
         float dist,
         GameObject player,
