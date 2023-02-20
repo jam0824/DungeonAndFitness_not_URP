@@ -177,7 +177,7 @@ public class ScenarioSystem : MonoBehaviour
             string v = keyAndValue[1];
             //keyがitemだった場合は所持itemを検索
             if(key == "item") {
-                isOk = isItem(v);
+                isOk = SingletonGeneral.instance.itemDb.HasItem(v);
                 if (isOk) continue;
                 break;
             }
@@ -198,19 +198,5 @@ public class ScenarioSystem : MonoBehaviour
             }
         }
         return isOk;
-    }
-
-    /// <summary>
-    /// itemNoのアイテムをコレクション、アイテムボックスの
-    /// どちらかに持っていたらtrue
-    /// </summary>
-    /// <param name="itemNo"></param>
-    /// <returns></returns>
-    bool isItem(string itemNo) {
-        if (SingletonGeneral.instance.itemDb.playerItemList.Contains(itemNo)) 
-            return true;
-        if (SingletonGeneral.instance.itemDb.playerCollectionList.Contains(itemNo))
-            return true;
-        return false;
     }
 }

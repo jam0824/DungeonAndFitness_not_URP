@@ -111,4 +111,17 @@ public class ItemDB : MonoBehaviour
         int no = dictItemPrefabName[prefabName];
         return itemPrefab[no];
     }
+
+    /// <summary>
+    /// itemNo‚ğ‚Á‚Ä‚¢‚ê‚Îtrue‚ğ•Ô‚·
+    /// </summary>
+    /// <param name="itemNo"></param>
+    /// <returns></returns>
+    public bool HasItem(string itemNo) {
+        if (playerItemList.Contains(itemNo))
+            return true;
+        if (playerCollectionList.Contains(itemNo))
+            return true;
+        return false;
+    }
 }
