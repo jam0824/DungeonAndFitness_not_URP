@@ -147,8 +147,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scenario: {fileID: 4900000, guid: c8bdcc26f3faa4346afab0664dd01db4, type: 3}
-  MESSAGE_TYPE: MessageNormal
-  MESSAGE_Y: 1.2
 --- !u!65 &3574837484001714302
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -545,6 +543,10 @@ PrefabInstance:
     - target: {fileID: 3196793467755713221, guid: 735c60730345a8f4c9c12589fcbb4e38, type: 3}
       propertyPath: m_Name
       value: UpperGodray
+      objectReference: {fileID: 0}
+    - target: {fileID: 3196793467755713221, guid: 735c60730345a8f4c9c12589fcbb4e38, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 735c60730345a8f4c9c12589fcbb4e38, type: 3}

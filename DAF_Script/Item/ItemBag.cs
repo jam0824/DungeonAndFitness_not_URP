@@ -7,6 +7,7 @@ public class ItemBag : MonoBehaviour
 {
     public string itemNo { set; get; }
 
+    string KANTEI_ITEM_NO = "1";
     public string DECIDED_ITEM_NO = "";
     OVRGrabbable ovrGrabbable;
     DungeonSystem dungeonSystem;
@@ -21,7 +22,6 @@ public class ItemBag : MonoBehaviour
     public string labelKey;
     string label;
 
-    string itemNameDescription;
 
     private void Awake() {
         ovrGrabbable = GetComponent<OVRGrabbable>();
@@ -51,6 +51,8 @@ public class ItemBag : MonoBehaviour
     }
 
     void RotateDescription(GameObject face) {
+        if (itemDescription.enabled == false) return;
+
         Quaternion r = face.transform.rotation;
         r.x = 0.0f;
         r.z = 0.0f;
@@ -63,6 +65,7 @@ public class ItemBag : MonoBehaviour
 
         if(itemDescription.enabled == false) {
             itemDescription.enabled = true;
+            itemDescription.text = MakeDescription(itemData, label);
             CheckGrabber();
         }
 
@@ -87,10 +90,8 @@ public class ItemBag : MonoBehaviour
         labelSystem = SingletonGeneral.instance.labelSystem;
         playerView = GameObject.Find("Player").GetComponent<PlayerView>();
         label = labelSystem.GetLabel(labelKey);
-
         itemData = SingletonGeneral.instance.itemDb.GetItemData(itemNo);
-        itemNameDescription = MakeItemNameRank(itemData);
-        itemDescription.text = AddLabel(itemNameDescription);
+
         face = GameObject.Find("HitArea");
     }
 
@@ -100,13 +101,22 @@ public class ItemBag : MonoBehaviour
         //DebugWindow.instance.DFDebug("hand:" + grabber.gameObject.name);
     }
 
-    string AddLabel(string itemNameDescription) {
-        return itemNameDescription + "<br><br>" + label;
+    string MakeDescription(Dictionary<string, string> itemData, string label) {
+        string returnString = "";
+        if (SingletonGeneral.instance.itemDb.HasItem(KANTEI_ITEM_NO)) {
+            string itemNameDescription = MakeItemNameRank(itemData);
+            returnString = itemNameDescription + "<br><br>" + label;
+        }
+        else {
+            returnString = label;
+        }
+        return returnString;
     }
 
     string MakeItemNameRank(Dictionary<string, string> itemData) {
         string returnData = itemData["Name"] + "\n";
-        returnData += "Rank : " + itemData["Rank"];
+        returnData += "Rank : " + itemData["Rank"] + "\n";
+        returnData += itemData["Description"];
         return returnData;
     }
 

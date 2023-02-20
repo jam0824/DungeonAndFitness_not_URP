@@ -1421,10 +1421,10 @@ Animator:
   m_GameObject: {fileID: 2429576340914467153}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 926d93aa9aa7cb84780d7cd09a43ef7c, type: 3}
-  m_Controller: {fileID: 9100000, guid: 332ae60adb2b6664abcb75f5a751c16b, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6efc61f317914e14484877c09cfbe9c5, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -4156,7 +4156,7 @@ SkinnedMeshRenderer:
   - 0
   - 0
   - 0
-  - 0
+  - 100
   - 0
   - 0
   - 0

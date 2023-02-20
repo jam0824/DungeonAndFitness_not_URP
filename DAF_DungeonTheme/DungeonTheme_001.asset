@@ -4794,8 +4794,8 @@ MonoBehaviour:
   canBeDeleted: 1
   canBeSelected: 1
   canBeMoved: 1
-  selected: 0
-  zIndex: 1259
+  selected: 1
+  zIndex: 1423
   inputPins:
   - {fileID: -6348099102456528360}
   outputPins:
@@ -4822,8 +4822,9 @@ MonoBehaviour:
   attachmentProbability: 1
   IsStatic: 0
   affectsNavigation: 1
-  selectionRuleEnabled: 0
-  selectionRuleClassName: 
+  selectionRuleEnabled: 1
+  selectionRuleClassName: FirstFloorWallSelectionRule, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
   transformRuleEnabled: 0
   transformRuleClassName: 
   useSpatialConstraint: 0
@@ -9886,7 +9887,7 @@ MonoBehaviour:
   indexCounter:
     index: 157
   topZIndex:
-    index: 1421
+    index: 1423
   nodes:
   - {fileID: -4326983767826339498}
   - {fileID: -1130347085873320976}
@@ -13130,7 +13131,7 @@ MonoBehaviour:
   canBeDeleted: 1
   canBeSelected: 1
   canBeMoved: 1
-  selected: 1
+  selected: 0
   zIndex: 1420
   inputPins:
   - {fileID: -7984631132802390483}
@@ -14475,7 +14476,7 @@ MonoBehaviour:
   canBeDeleted: 1
   canBeSelected: 1
   canBeMoved: 1
-  selected: 1
+  selected: 0
   zIndex: 1421
   inputPins:
   - {fileID: -7697352124340008295}
@@ -18415,7 +18416,7 @@ MonoBehaviour:
   canBeSelected: 1
   canBeMoved: 1
   selected: 0
-  zIndex: 1262
+  zIndex: 1422
   inputPins:
   - {fileID: 3633385104036619587}
   outputPins:
@@ -18442,8 +18443,9 @@ MonoBehaviour:
   attachmentProbability: 1
   IsStatic: 0
   affectsNavigation: 1
-  selectionRuleEnabled: 0
-  selectionRuleClassName: 
+  selectionRuleEnabled: 1
+  selectionRuleClassName: FirstFloorWallSelectionRule, Assembly-CSharp, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
   transformRuleEnabled: 0
   transformRuleClassName: 
   useSpatialConstraint: 0
