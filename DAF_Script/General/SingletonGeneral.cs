@@ -28,6 +28,7 @@ public class SingletonGeneral : MonoBehaviour
     public string NORMAL_ITEM_SAVE_PATH;
     public string COLLECTION_ITEM_SAVE_PATH;
     public string SWITCH_SAVE_PATH;
+    public string KANTEI_ITEM_NO;
     public string dugeonRootName;
     public GameObject ItemCanvas;
     public GameObject DamageTextCanvas;
@@ -53,7 +54,8 @@ public class SingletonGeneral : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //デバッグ
+        //saveLoadSystem.Load();
     }
 
     void SingletonGeneralInit() {
@@ -74,9 +76,6 @@ public class SingletonGeneral : MonoBehaviour
         scenarioSystem = LoadScenarioSystem();
 
         SetDictSeName();
-
-        //デバッグ
-        saveLoadSystem.Load();
 
         //ダンジョンがずれたときに補正する
         StartCoroutine(FixDungeonRootPosCorutine(1f));

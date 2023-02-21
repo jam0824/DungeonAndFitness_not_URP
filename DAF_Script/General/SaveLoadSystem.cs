@@ -109,8 +109,8 @@ public class SaveLoadSystem : MonoBehaviour
     /// これを呼び出すと全部ロードする
     /// </summary>
     public void Load() {
-        LoadStatus();
         LoadSwitch();
+        LoadStatus();
         SingletonGeneral.instance.itemDb.ItemDbInit();
         RedrawHud();
     }

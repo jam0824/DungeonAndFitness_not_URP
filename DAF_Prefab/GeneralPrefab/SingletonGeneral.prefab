@@ -53,6 +53,7 @@ MonoBehaviour:
   NORMAL_ITEM_SAVE_PATH: PlayerItemSave.txt
   COLLECTION_ITEM_SAVE_PATH: PlayerCollectionSave.txt
   SWITCH_SAVE_PATH: SwitchSave.txt
+  KANTEI_ITEM_NO: 1
   dugeonRootName: DungeonRoot
   ItemCanvas: {fileID: 730003842906308724, guid: 6d91edf4163581a40b2c89096cdc594b, type: 3}
   DamageTextCanvas: {fileID: 5017034250291804884, guid: bfaf566da6e895f468f2302c07adbb52, type: 3}
@@ -78,6 +79,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0f83c297f409333499a93f5d355923d7, type: 3}
   - {fileID: 8300000, guid: a1aa4815a00669545ac2f23e28397a2b, type: 3}
   - {fileID: 8300000, guid: 35b1537a02a37be42a21ca0622e2c4b7, type: 3}
+  - {fileID: 8300000, guid: 988429a69edb55644ad05ca6d22859d4, type: 3}
+  - {fileID: 8300000, guid: 28a80661e4009644d816ad96d94d1a5f, type: 3}
+  - {fileID: 8300000, guid: 068569360d690d04f9905ebe29eda50b, type: 3}
 --- !u!114 &465376485813575324
 MonoBehaviour:
   m_ObjectHideFlags: 0

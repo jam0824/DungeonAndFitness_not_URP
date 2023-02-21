@@ -44,12 +44,13 @@ public class DebugWindow : MonoBehaviour
         string m = cText.text;
         if(stackTrace != "") {
             if (logType == LogType.Error) {
-                m = "<color=red>" + logText + "\n" + stackTrace + "</color>\n" + m;
+                m = "<color=#ee4444>" + logText + "\n" + stackTrace + "</color>\n" + m;
+                SingletonGeneral.instance.PlayOneShotNoAudioSource("Error");
             }
             else {
                 m = logText + "\n" + stackTrace + "\n" + m;
             }
-            SingletonGeneral.instance.PlayOneShotNoAudioSource("Error");
+            //SingletonGeneral.instance.PlayOneShotNoAudioSource("Error");
         }
         else {
             m = logText + "\n" + m;
