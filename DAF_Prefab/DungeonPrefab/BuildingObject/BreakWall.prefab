@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStartCheck: 1
-  scenario: {fileID: 0}
+  scenario: {fileID: 4900000, guid: afe51cfcea595194a879a25e48f2be02, type: 3}
 --- !u!54 &1346397464619247952
 Rigidbody:
   m_ObjectHideFlags: 0

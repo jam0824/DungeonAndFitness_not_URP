@@ -49,7 +49,7 @@ public class DebugWindow : MonoBehaviour
             else {
                 m = logText + "\n" + stackTrace + "\n" + m;
             }
-            
+            SingletonGeneral.instance.PlayOneShotNoAudioSource("Error");
         }
         else {
             m = logText + "\n" + m;
