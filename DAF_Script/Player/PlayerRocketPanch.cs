@@ -102,7 +102,7 @@ public class PlayerRocketPanch : MonoBehaviour
     /// </summary>
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other) {
-        if(other.gameObject.tag == "Hand") {
+        if((other.gameObject.tag == "Hand")&&(isFire)) {
             ResetRocketPunchWithSe();
         }
     }

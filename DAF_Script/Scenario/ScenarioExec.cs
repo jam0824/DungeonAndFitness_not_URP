@@ -324,7 +324,7 @@ public class ScenarioExec : MonoBehaviour
 
     //通常枠のアイテムを追加
     void CommandNormalItemGet(string itemNo, ItemDB itemDb) {
-        if (itemDb.canAddItem()) {
+        if (itemDb.canAddItem(itemNo)) {
             DebugWindow.instance.DFDebug("アイテム追加：" + itemNo);
             itemDb.AddItem(itemNo);
         }

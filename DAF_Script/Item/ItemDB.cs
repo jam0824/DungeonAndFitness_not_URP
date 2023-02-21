@@ -5,6 +5,7 @@ using System.IO;
 
 public class ItemDB : MonoBehaviour
 {
+    int COLLECTION_MAX = 100;
 
     public List<GameObject> itemPrefab;
     Dictionary<string, int> dictItemPrefabName;
@@ -75,7 +76,8 @@ public class ItemDB : MonoBehaviour
     }
 
     //アイテムが追加可能か判定する
-    public bool canAddItem() {
+    public bool canAddItem(string itemNo) {
+        if (int.Parse(itemNo) < COLLECTION_MAX) return true;
         PlayerConfig playerConfig = GameObject.Find("Player").GetComponent<PlayerConfig>();
         int max = 10 * playerConfig.GetMaxPageNo();
         return (playerItemList.Count < max) ? true : false;
@@ -83,7 +85,12 @@ public class ItemDB : MonoBehaviour
 
     //アイテムをアイテムリストに追加する
     public void AddItem(string itemNo) {
-        playerItemList.Add(itemNo);
+        if(int.Parse(itemNo) < COLLECTION_MAX) {
+            playerCollectionList.Add(itemNo);
+        }
+        else {
+            playerItemList.Add(itemNo);
+        }
     }
 
     //アイテムバッグを指定アイテムNoで作成する

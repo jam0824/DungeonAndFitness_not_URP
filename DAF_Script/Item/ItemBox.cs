@@ -80,7 +80,7 @@ public class ItemBox : MonoBehaviour
     void AddItem(Collider other) {
         ItemBag itemBag = other.gameObject.GetComponent<ItemBag>();
         if (itemBag.itemNo == null) return;
-        if (CanAddItem(FULL_OF_ITEM_KEY) == false) return;
+        if (CanAddItem(itemBag.itemNo,FULL_OF_ITEM_KEY) == false) return;
 
         itemDb.AddItem(itemBag.itemNo);
         itemBag.DestroyItem();
@@ -90,8 +90,8 @@ public class ItemBox : MonoBehaviour
     }
 
     //アイテムが追加できるかの判定と、出来ないときはインフォメーション表示
-    bool CanAddItem(string key) {
-        if (itemDb.canAddItem()) return true;
+    bool CanAddItem(string itemNo, string key) {
+        if (itemDb.canAddItem(itemNo)) return true;
         SingletonGeneral.instance.labelInformationText.SetInformationLabel(key);
         PlayOneShot(FULL_SOUND);
         StartCoroutine(CoroutineDestroyItemBox(WAIT_TIME_DELETE));
