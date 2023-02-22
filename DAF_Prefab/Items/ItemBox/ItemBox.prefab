@@ -14625,6 +14625,7 @@ MonoBehaviour:
   ITEM_GET_SOUND: {fileID: 8300000, guid: fcda781aaf3a48046896a361e582540b, type: 3}
   END_SOUND: {fileID: 8300000, guid: ed0d17ab7f254714bbab0fab42d611c1, type: 3}
   FULL_SOUND: {fileID: 8300000, guid: efa49870cd43d0b4290462955b844cbe, type: 3}
+  COLLECTION_GET_SOUND: {fileID: 8300000, guid: b71d0d8eb7a91134c88cf7c11f32e5d2, type: 3}
   activeCount: 0
 --- !u!1 &1677014883482664576
 GameObject:

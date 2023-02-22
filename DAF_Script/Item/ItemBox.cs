@@ -11,6 +11,7 @@ public class ItemBox : MonoBehaviour
     public AudioClip ITEM_GET_SOUND;
     public AudioClip END_SOUND;
     public AudioClip FULL_SOUND;
+    public AudioClip COLLECTION_GET_SOUND;
     public int activeCount = 0;
     ItemDB itemDb;
 
@@ -84,7 +85,14 @@ public class ItemBox : MonoBehaviour
 
         itemDb.AddItem(itemBag.itemNo);
         itemBag.DestroyItem();
-        PlayOneShot(ITEM_GET_SOUND);
+
+        if(int.Parse(itemBag.itemNo) < 100) {
+            PlayOneShot(COLLECTION_GET_SOUND);
+        }
+        else {
+            PlayOneShot(ITEM_GET_SOUND);
+        }
+        
         
         StartCoroutine(CoroutineDestroyItemBox(WAIT_TIME_DELETE));
     }
