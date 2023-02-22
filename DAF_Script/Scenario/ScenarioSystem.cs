@@ -33,7 +33,7 @@ public class ScenarioSystem : MonoBehaviour
     private void LoadMessageTextObject(GameObject player) {
         Vector3 pos = player.transform.position;
         MessageTextObject = Instantiate(WindowCanvasPrefab, pos, transform.rotation);
-        MessageTextObject.transform.parent = SingletonGeneral.instance.dungeonRoot.transform;
+        MessageTextObject.transform.SetParent(SingletonGeneral.instance.dungeonRoot.transform);
         messageText = MessageTextObject.GetComponent<TextMeshPro>();
         MessageTextObject.SetActive(false);
     }
@@ -52,7 +52,7 @@ public class ScenarioSystem : MonoBehaviour
         for (int i = 0; i < max; i++) {
             GameObject poolObject = Instantiate(obj);
             poolObject.transform.position = pos;
-            poolObject.transform.parent = SingletonGeneral.instance.dungeonRoot.transform;
+            poolObject.transform.SetParent(SingletonGeneral.instance.dungeonRoot.transform);
             //poolObject.SetActive(false);
             StartCoroutine(UnenablePoolObject(poolObject, 0.5f));
             pool.Add(poolObject);

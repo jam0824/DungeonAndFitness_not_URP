@@ -10,6 +10,8 @@ public class DebugWindow : MonoBehaviour
     Text cText;
     Text fpsText;
 
+    string logFileName = "log.txt";
+
     private void Awake() {
         if(instance == null) {
             instance = this;
@@ -27,6 +29,10 @@ public class DebugWindow : MonoBehaviour
 
     }
 
+    private void OnApplicationPause(bool pause) {
+        SaveLog();
+    }
+
     public void DFDebug(string message) {
         Debug.Log(message);
         /*
@@ -42,20 +48,32 @@ public class DebugWindow : MonoBehaviour
 
     private void OnReceiveLog(string logText, string stackTrace, LogType logType) {
         string m = cText.text;
+        string line = "";
         if(stackTrace != "") {
             if (logType == LogType.Error) {
-                m = "<color=#ee4444>" + logText + "\n" + stackTrace + "</color>\n" + m;
+                line = "Error\t<color=#ee4444>" + logText + "\n" + stackTrace + "</color>\n";
                 SingletonGeneral.instance.PlayOneShotNoAudioSource("Error");
             }
-            else {
-                m = logText + "\n" + stackTrace + "\n" + m;
+            else if (logType == LogType.Exception) {
+                line = "Exception\t<color=#ee4444>" + logText + "\n" + stackTrace + "</color>\n";
+                SingletonGeneral.instance.PlayOneShotNoAudioSource("Error");
             }
-            //SingletonGeneral.instance.PlayOneShotNoAudioSource("Error");
+            else if (logType == LogType.Warning) {
+                line = "Warning\t<color=#ff8c00>" + logText + "\n" + stackTrace + "</color>\n";
+            }
+            else {
+                line = "Log\t" + logText + "\n" + stackTrace + "\n";
+            }
         }
         else {
-            m = logText + "\n" + m;
+            line = "Log\t" + logText + "\n";
         }
-        
+        m = line + m;
         cText.text = m;
+    }
+
+    void SaveLog() {
+        string data = cText.text;
+        FQCommon.Common.SaveStringToFile(logFileName,data);
     }
 }

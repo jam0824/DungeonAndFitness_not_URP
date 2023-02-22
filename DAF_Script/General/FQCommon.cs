@@ -94,7 +94,6 @@ namespace FQCommon
         //追記でセーブする
         static public void AppendStringFile(string fileName, string addString) {
             string path = Application.persistentDataPath + "/" + fileName;
-            Debug.Log("save path:" + path);
             File.AppendAllText(path, addString + "\n");
         }
 
