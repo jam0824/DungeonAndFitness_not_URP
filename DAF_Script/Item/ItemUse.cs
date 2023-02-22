@@ -36,6 +36,22 @@ public class ItemUse : MonoBehaviour
         string key = "RecoverSatiation";
         float recover = float.Parse(itemData["EffectSize"]);
         PlayerView.instance.config.RecoverSatiation(recover);
+        //インフォメーションに表示
         SingletonGeneral.instance.labelInformationText.SetInformationLabel(key);
+        SingletonGeneral.instance.PlayOneShotNoAudioSource("RecoverSmall");
+        MakeEffect("RecoverSmall");
+    }
+
+    /// <summary>
+    /// Effectを作成
+    /// </summary>
+    /// <param name="effectName"></param>
+    void MakeEffect(string effectName) {
+        GameObject prefab = SingletonGeneral.instance.GetEffect(effectName);
+        Vector3 addPos = new Vector3(1f, 0.5f, 1f);
+        SingletonGeneral.instance.MakeInstanceFromTarget(
+            SingletonGeneral.instance.face, 
+            prefab, 
+            addPos);
     }
 }

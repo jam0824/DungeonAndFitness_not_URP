@@ -37,8 +37,10 @@ public class SingletonGeneral : MonoBehaviour
     
 
     public List<AudioClip> listBattleSE;
+    public List<GameObject> listEffectPrefab;
 
     Dictionary<string, int> dictSeName;
+    Dictionary<string, int> dictEffectName;
     Vector3 dungeonRootPos;
 
     private void Awake() {
@@ -76,6 +78,7 @@ public class SingletonGeneral : MonoBehaviour
         scenarioSystem = LoadScenarioSystem();
 
         SetDictSeName();
+        SetDictEffectName();
 
         //ダンジョンがずれたときに補正する
         StartCoroutine(FixDungeonRootPosCorutine(1f));
@@ -234,8 +237,22 @@ public class SingletonGeneral : MonoBehaviour
         dictSeName.Add("RocketPunchCombine", 19);
         dictSeName.Add("RocketPunchFire", 20);
         dictSeName.Add("Error", 21);
+        dictSeName.Add("RecoverSmall", 22);
 
         return dictSeName;
+    }
+
+
+    public GameObject GetEffect(string effectName) {
+        int no = dictEffectName[effectName];
+        return listEffectPrefab[no];
+    }
+
+    Dictionary<string, int> SetDictEffectName() {
+        dictEffectName = new Dictionary<string, int>();
+        dictEffectName.Add("RecoverSmall", 0);
+
+        return dictEffectName;
     }
 
     //コントローラーを振動させる

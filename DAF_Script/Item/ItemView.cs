@@ -172,11 +172,11 @@ public class ItemView : MonoBehaviour
     /// Use‚ð‰Ÿ‚µ‚½‚Æ‚«‚ÉŒÄ‚Î‚ê‚é
     /// </summary>
     public void OnClickUseButton() {
-        if (selectedItemData != null) {
-            itemUse.Use(selectedItemData);
-            itemDb.DeleteWithItemIndex(selectedItemIndex);
-            RedrawItemList();
-        }
+        if (selectedItemData == null) return;
+
+        itemUse.Use(selectedItemData);
+        itemDb.DeleteWithItemIndex(selectedItemIndex);
+        RedrawItemList();
     }
 
     /// <summary>
