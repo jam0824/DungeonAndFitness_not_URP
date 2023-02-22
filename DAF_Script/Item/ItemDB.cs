@@ -131,4 +131,12 @@ public class ItemDB : MonoBehaviour
             return true;
         return false;
     }
+
+    /// <summary>
+    /// アイテムリストのindexでアイテムを削除する
+    /// </summary>
+    /// <param name="index"></param>
+    public void DeleteWithItemIndex(int index) {
+        playerItemList.RemoveAt(index);
+    }
 }

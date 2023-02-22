@@ -98,6 +98,7 @@ public class ItemLoad : MonoBehaviour
             Dictionary<string, string> itemData = itemDB.GetItemData(stringItemNo);
             ItemListItem[i].SetItemName(itemData["Name"]);
             ItemListItem[i].SetItemData(itemData);
+            ItemListItem[i].itemIndex = index;
         }
 
     }

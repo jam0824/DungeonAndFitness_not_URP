@@ -124,4 +124,14 @@ public class PlayerConfig : MonoBehaviour
         if (nowSatiation > 100f) nowSatiation = 100f;
         return nowSatiation;
     }
+
+    /// <summary>
+    /// –ž• “x‚ð‰ñ•œ‚·‚é
+    /// </summary>
+    /// <param name="recoverPercent"></param>
+    public void RecoverSatiation(float recoverPercent) {
+        float recover = 100f * recoverPercent;
+        nowSatiation += recover;
+        if (nowSatiation > 100f) nowSatiation = 100f;
+    }
 }

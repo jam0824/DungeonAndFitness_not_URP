@@ -7,13 +7,18 @@ public class ItemView : MonoBehaviour
 {
     ItemLoad itemLoad;
     ItemDB itemDb;
+    ItemUse itemUse;
     //アイテム表示のそれぞれの項目
     List<ItemList> itemListItem;
     ItemButtonAnimation itemButtonAnimation;
     GameObject itemList;
     PlayerConfig playerConfig;
     Text itemListPagingText;
-    
+
+    //今選択しているアイテム
+    public Dictionary<string, string> selectedItemData { set; get; }
+    public int selectedItemIndex { set; get; }
+
     public Text itemDescriptionText { set; get; }
     string nowListName = "Backpack";
     int pageNo = 0;
@@ -29,6 +34,7 @@ public class ItemView : MonoBehaviour
 
         itemListItem = GetItemListeItemText(this);
         itemLoad = GetComponent<ItemLoad>();
+        itemUse = GetComponent<ItemUse>();
         itemButtonAnimation = GetComponent<ItemButtonAnimation>();
         itemButtonAnimation.Init();
         itemList = GameObject.Find("ItemList");
@@ -73,6 +79,8 @@ public class ItemView : MonoBehaviour
     void EnableItemWindowInit() {
         nowListName = "Backpack";
         pageNo = 0;
+        selectedItemData = null;
+        selectedItemIndex = 0;
         OnClickBackpack();
     }
 
@@ -86,6 +94,8 @@ public class ItemView : MonoBehaviour
     public bool ActiveSelf() {
         return gameObject.activeSelf;
     }
+
+    
 
     public void OnClickItemListNext() {
         SingletonGeneral.instance.PlayOneShotNoAudioSource("ItemSmallSelect");
@@ -156,6 +166,27 @@ public class ItemView : MonoBehaviour
         nowListName = "System";
         itemList.SetActive(false);
         ChangeHeaderButtonActive(nowListName);
+    }
+
+    /// <summary>
+    /// Useを押したときに呼ばれる
+    /// </summary>
+    public void OnClickUseButton() {
+        if (selectedItemData != null) {
+            itemUse.Use(selectedItemData);
+            itemDb.DeleteWithItemIndex(selectedItemIndex);
+            RedrawItemList();
+        }
+    }
+
+    /// <summary>
+    /// ItemListを再描画する
+    /// </summary>
+    void RedrawItemList() {
+        itemLoad.LoadItem(pageNo, itemDb, this, itemListItem);
+        selectedItemData = null;
+        selectedItemIndex = 0;
+        itemDescriptionText.text = "";
     }
 
     void ChangeHeaderButtonActive(string nowListName) {

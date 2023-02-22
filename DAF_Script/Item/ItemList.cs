@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class ItemList : MonoBehaviour
 {
+    //持っているアイテムリストでのアイテムの位置
+    public int itemIndex { set; get; }
+
     Dictionary<string, string> itemData;
     Text description;
     ItemView itemView;
@@ -34,8 +37,16 @@ public class ItemList : MonoBehaviour
     public void OnClick() {
         if (itemNameText.text == "") return;
         if (HasInString(itemNameText.text,"????")) return;
-        description.text = MakeDescription(itemData);
+
+        OnClickInit();
         itemView.PlayOneShot("ItemSmallSelect");
+    }
+
+    void OnClickInit() {
+        description.text = MakeDescription(itemData);
+        //itemViewに選んだアイテムのデータを登録する
+        itemView.selectedItemData = itemData;
+        itemView.selectedItemIndex = itemIndex;
     }
 
     bool HasInString(string targetString, string searchString) {
