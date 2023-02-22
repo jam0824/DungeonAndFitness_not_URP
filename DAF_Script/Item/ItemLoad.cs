@@ -75,6 +75,8 @@ public class ItemLoad : MonoBehaviour
             Dictionary<string, string> itemData = itemDB.GetItemData((index + 1).ToString());
             ItemListItem[i].SetItemName("No." + AddZeroString(index + 1) + " : " + itemData["Name"]);
             ItemListItem[i].SetItemData(itemData);
+            ItemListItem[i].itemIndex = index;
+            ItemListItem[i].type = "Collection";
         }
     }
 
@@ -99,6 +101,7 @@ public class ItemLoad : MonoBehaviour
             ItemListItem[i].SetItemName(itemData["Name"]);
             ItemListItem[i].SetItemData(itemData);
             ItemListItem[i].itemIndex = index;
+            ItemListItem[i].type = "Normal";
         }
 
     }

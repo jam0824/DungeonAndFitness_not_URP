@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class ItemView : MonoBehaviour
 {
+    public GameObject itemUseButton;
+
     ItemLoad itemLoad;
     ItemDB itemDb;
     ItemUse itemUse;
@@ -48,6 +50,7 @@ public class ItemView : MonoBehaviour
         itemList.SetActive(true);
         itemButtonAnimation.ChangeHeaderButtonsActive(nowListName);
         itemLoad.LoadItem(pageNo, itemDb, this, itemListItem);
+        UnenableItemUseButton();
     }
 
     void Start()
@@ -95,7 +98,15 @@ public class ItemView : MonoBehaviour
         return gameObject.activeSelf;
     }
 
-    
+    //使うボタンをアクティブにする
+    public void EnableItemUseButton() {
+        itemUseButton.SetActive(true);
+    }
+
+    //使うボタンを非アクティブにする
+    public void UnenableItemUseButton() {
+        itemUseButton.SetActive(false);
+    }
 
     public void OnClickItemListNext() {
         SingletonGeneral.instance.PlayOneShotNoAudioSource("ItemSmallSelect");
@@ -106,7 +117,7 @@ public class ItemView : MonoBehaviour
             else {
                 pageNo = 0;
             }
-            itemLoad.LoadItem(pageNo, itemDb, this, itemListItem);
+            RedrawItemList();
         }
         else if (nowListName == "Collection") {
             if (collectionPageNo < 9) {
@@ -116,6 +127,7 @@ public class ItemView : MonoBehaviour
                 collectionPageNo = 0;
             }
             itemLoad.LoadCollection(collectionPageNo, itemDb, this, itemListItem);
+            RedrawItemDataInit();
         }
     }
 
@@ -128,7 +140,7 @@ public class ItemView : MonoBehaviour
             else {
                 pageNo = playerConfig.GetMaxPageNo() - 1;
             }
-            itemLoad.LoadItem(pageNo, itemDb, this, itemListItem);
+            RedrawItemList();
         }
         else if (nowListName == "Collection") {
             if (collectionPageNo > 0) {
@@ -138,6 +150,7 @@ public class ItemView : MonoBehaviour
                 collectionPageNo = 9;
             }
             itemLoad.LoadCollection(collectionPageNo, itemDb, this, itemListItem);
+            RedrawItemDataInit();
         }
         
     }
@@ -146,7 +159,7 @@ public class ItemView : MonoBehaviour
         nowListName = "Backpack";
         itemList.SetActive(true);
         ChangeHeaderButtonActive(nowListName);
-        itemLoad.LoadItem(pageNo, itemDb, this, itemListItem);
+        RedrawItemList();
     }
 
     public void OnClickCollection() {
@@ -154,6 +167,7 @@ public class ItemView : MonoBehaviour
         itemList.SetActive(true);
         ChangeHeaderButtonActive(nowListName);
         itemLoad.LoadCollection(collectionPageNo, itemDb, this, itemListItem);
+        RedrawItemDataInit();
     }
 
     public void OnClickStatus() {
@@ -184,9 +198,13 @@ public class ItemView : MonoBehaviour
     /// </summary>
     void RedrawItemList() {
         itemLoad.LoadItem(pageNo, itemDb, this, itemListItem);
+        RedrawItemDataInit();
+    }
+    void RedrawItemDataInit() {
         selectedItemData = null;
         selectedItemIndex = 0;
         itemDescriptionText.text = "";
+        UnenableItemUseButton();
     }
 
     void ChangeHeaderButtonActive(string nowListName) {

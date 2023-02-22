@@ -7,6 +7,7 @@ public class ItemList : MonoBehaviour
 {
     //持っているアイテムリストでのアイテムの位置
     public int itemIndex { set; get; }
+    public string type { set; get; }
 
     Dictionary<string, string> itemData;
     Text description;
@@ -47,6 +48,7 @@ public class ItemList : MonoBehaviour
         //itemViewに選んだアイテムのデータを登録する
         itemView.selectedItemData = itemData;
         itemView.selectedItemIndex = itemIndex;
+        if (type == "Normal") itemView.EnableItemUseButton();
     }
 
     bool HasInString(string targetString, string searchString) {
