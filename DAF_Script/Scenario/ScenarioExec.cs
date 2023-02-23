@@ -27,7 +27,7 @@ public class ScenarioExec : MonoBehaviour
     bool isLookAt = false;
     
 
-    TextMeshPro messageText;
+    TextMeshProUGUI messageText;
     
     float messageSpeed = 0.05f;
 
@@ -317,9 +317,16 @@ public class ScenarioExec : MonoBehaviour
     //スイッチの値のセット。
     //コマンド,スイッチNo,値
     void CommandSwitchSet(string[] line) {
-        string key = line[1];
-        string value = line[2];
-        scenarioSystem.SetSwitch(key, value);
+        if (line[1].Contains("=")) {
+            line[1] = line[1].Replace(" ", "");
+            string[] values = line[1].Split('=');
+            scenarioSystem.SetSwitch(values[0], values[1]);
+        }
+        else {
+            string key = line[1];
+            string value = line[2];
+            scenarioSystem.SetSwitch(key, value);
+        }
     }
 
     //通常枠のアイテムを追加

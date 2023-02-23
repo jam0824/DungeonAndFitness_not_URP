@@ -1,0 +1,104 @@
+look	look
+【女神】「いらっしゃい」	[Goddess]: "Welcome."
+	
+information,OpSelectBox	information, OpSelectBox
+	
+select	select
+here,ここは……？	here, "Where is this...?"
+who,あなたは……？	who, "Who are you...?"
+	
+	
+#here	#here
+【女神】「ここは命のある世界と死の世界の狭間です」	[Goddess]: "This is the space between the world of the living and the world of the dead."
+【女神】「そして私は人々からは運命の女神と呼ばれております」	[Goddess]: "And I am known as the goddess of destiny by the people."
+goto,#hata_1	goto,#hata_1
+	
+#who	#who
+【女神】「私は人々からは運命の女神と呼ばれております」	[Goddess]: "I am known as the goddess of destiny by the people."
+【女神】「そしてここは、命のある世界と死の世界の狭間です」	[Goddess]: "And this is the space between the world of the living and the world of the dead."
+goto,#hata_1	goto,#hata_1
+	
+#hata_1	#hata_1
+【女神】「あなたにつらい話をしなければなりません……」	[Goddess]: "I have to tell you something painful..."
+【女神】「あなたは今、死の世界へ向かおうとしています」	[Goddess]: "You are on your way to the world of the dead."
+【女神】「大きな病気……そう、生活習慣病から発症した合併症で死にかけているのです」	[Goddess]: "You are dying from a severe illness... yes, complications that arose from lifestyle diseases."
+	
+select	select
+hata_2,生活習慣病……！	hata_2, "Lifestyle disease...!"
+hata_2,……。	hata_2, "..."
+	
+#hata_2	#hata_2
+【女神】「あなどっているからこうなるのです。もう手の施しようがなく、あなたは死へ向かっています」	[Goddess]: "This is what happens when you underestimate it. There is nothing more that can be done, and you are heading towards death."
+【女神】「普段でしたら手は貸しません。ですが信仰があついあなたのご家族が必至で祈るものですから、チャンスを与えようと思います」	[Goddess]: "Normally, I would not lend a hand. However, because your family has strong faith and is praying desperately, I will give you a chance."
+【女神】「あなたがいる世界とは違う世界があります」	[Goddess]: "There is a world different from the one you are in."
+【女神】「その世界にある遺跡の最深部に、どんな病気も治す神秘の薬が人知れず眠っています」	[Goddess]: "Deep within the ruins of that world lies a mysterious medicine that can cure any disease, unknown to the world."
+【女神】「その薬さえあれば、あなたも回復できるでしょう」	[Goddess]: "With that medicine, you can recover as well."
+【女神】「その世界に行って薬をとってきてください。そうしたら私があなたを元の世界にもどします」	[Goddess]: "Please go to that world and get the medicine. Then, I will send you back to your original world."
+【女神】「どうでしょう？」	[Goddess]: "How about it?"
+	
+select	select
+letsgo,わかりました。行ってきます。	letsgo, "I understand. I will go get it."
+BadEnd_1,嫌です。死んだほうがマシです。	BadEnd_1, "No, I don't want to. It's better to die."
+	
+#letsgo	#letsgo
+【女神】「わかりました。私の後ろに扉があります。そこからその世界にいくことができます」	[Goddess]: "Understood. There is a door behind me. You can go to that world through there."
+【女神】「早速そこから行ってきてください……」	[Goddess]: "Please go right away..."
+【女神】「…………」	[Goddess]: "............"
+【女神】「……忘れてました。あなたをそのまま遺跡に送ったら、そこにいるゴーレムたちにすぐ殺されてしまいますね」	[Goddess]: "Oh, I forgot. If I just send you to the ruins, the golems there will kill you immediately."
+【女神】「私の加護を授けましょう」	[Goddess]: "I will give you my protection."
+	
+se,NormalItemGet	se, NormalItemGet
+	
+【女神】「魔法のナックルダスターを授けました」	[Goddess]: "I have granted you the magic knuckle dusters."
+【女神】「そうですね……要は強化されたパンチです」	[Goddess]: "Let's see... in short, it's a reinforced punch. "
+【女神】「遺跡にいるゴーレムたちは剣くらいではびくともしないのですよ。パンチの方が衝撃を与えられて効果的です」	[Goddess]: "The golems in the ruins won't even flinch from a sword. Punches are more effective in delivering an impact."
+【女神】「遺跡の攻略ついでに運動をしてきましょうね♪」	[Goddess]: "Let's exercise while conquering the ruins, shall we♪"
+【女神】「それではがんばってきてください」	[Goddess]: "Well then, please do your best."
+【女神】「私が言うのもおかしいけど、神のご加護を」	[Goddess]: "It's strange for me to say this, but may God's blessing be with you."
+set,OpMegami=1	set,OpMegami=1
+end	end
+	
+#BadEnd_1	#BadEnd_1
+【女神】「そうですか……。せっかくチャンスを与えたのに残念です」	[Goddess]: "I see... It's a shame, even though I gave you a chance."
+【女神】「それでは、おやすみなさい」	[Goddess]: "Well then, good night."
+【女神】「あなたに永遠の眠りを……」	[Goddess]: "May you rest in eternal sleep..."
+■暗転	■Fade to black
+■タイトルに戻る	■Return to title screen
+	
+switch,OpMegami=1	switch, OpMegami = 1
+look	look
+【女神】「さぁ、早くいってきなさい。あなたなら大丈夫よ」	[Goddess]: "Now, go quickly. You'll be fine."
+【女神】「たぶん」	[Goddess]: "Probably."
+set,OpMegami=2	set, OpMegami, 2
+end	end
+	
+switch,OpMegami=2	switch, OpMegami = 2
+look	look
+【女神】「大丈夫大丈夫。いってきなさい。向こうの世界であなたを受け入れる準備も整ってるわ」	[Goddess]: "It's okay, it's okay. Go ahead. The other world is ready to accept you."
+set,OpMegami,3	set,OpMegami,3
+end	end
+	
+switch,OpMegami=3	switch,OpMegami=3
+look	look
+【女神】「そんなに私に話しかけても、これ以上の加護もあげないわよ？」	[Goddess]: "Even if you talk to me so much, I won't give you any more blessings, you know?"
+set,OpMegami,4	set,OpMegami,4
+end	end
+	
+switch,OpMegami=4	switch,OpMegami=4
+look	look
+【女神】「……私と話したいのはよくわかるわ。女神だもの。けどね、もう行きなさい」	[Goddess]: "...I understand that you want to talk to me. After all, I am a goddess. But, please, go now."
+set,OpMegami,5	set,OpMegami,5
+end	end
+	
+switch,OpMegami=5	switch,OpMegami=5
+【女神】「…………」	[Goddess]: "............"
+【女神】「……」	[Goddess]: "......"
+【女神】「む、無視しちゃいますからね！」	[Goddess]: "I'll ignore you!"
+set,OpMegami,6	set,OpMegami,6
+end	end
+	
+switch,OpMegami=6	switch,OpMegami=6
+【女神】「…………」	[Goddess]: "............"
+【女神】「…………」	[Goddess]: "............"
+【女神】「……私、今、無視をがんばってますからね！」	[Goddess]: "...I'm doing my best to ignore you, you know!"
+end	end

@@ -10,7 +10,7 @@ public class ScenarioSystem : MonoBehaviour
     public GameObject MessageTextObject;
     List<GameObject> poolSelectBox;
     int SELECT_BOX_MAX = 5;
-    TextMeshPro messageText;
+    TextMeshProUGUI messageText;
     public Dictionary<string, string> dictSwitch { set; get; }
     bool isLock = false;
 
@@ -34,7 +34,7 @@ public class ScenarioSystem : MonoBehaviour
         Vector3 pos = player.transform.position;
         MessageTextObject = Instantiate(WindowCanvasPrefab, pos, transform.rotation);
         MessageTextObject.transform.SetParent(SingletonGeneral.instance.dungeonRoot.transform);
-        messageText = MessageTextObject.GetComponent<TextMeshPro>();
+        messageText = MessageTextObject.transform.Find("MessageText").GetComponent<TextMeshProUGUI>();
         MessageTextObject.SetActive(false);
     }
 
@@ -77,7 +77,7 @@ public class ScenarioSystem : MonoBehaviour
     /// <param name="pos"></param>
     /// <param name="r"></param>
     /// <returns></returns>
-    public TextMeshPro ShowMessageWindow(Vector3 pos, Quaternion r) {
+    public TextMeshProUGUI ShowMessageWindow(Vector3 pos, Quaternion r) {
         MessageTextObject.SetActive(true);
         MessageTextObject.transform.position = pos;
         MessageTextObject.transform.rotation = r;
