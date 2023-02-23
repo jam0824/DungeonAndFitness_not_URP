@@ -1,5 +1,6 @@
 look	look
 【女神】「いらっしゃい」	[Goddess]: "Welcome."
+scene,Dungeon01F	scene,Dungeon01F
 	
 information,OpSelectBox	information, OpSelectBox
 	

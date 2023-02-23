@@ -855,10 +855,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SingletonGeneral
       objectReference: {fileID: 0}
-    - target: {fileID: 465376485813575326, guid: c50750c60204771409e1554861282be5, type: 3}
-      propertyPath: WindowCanvasPrefab
-      value: 
-      objectReference: {fileID: 6748459792377102989, guid: 530e426237264314387e0fe5cb527e63, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c50750c60204771409e1554861282be5, type: 3}
 --- !u!1001 &848266010
@@ -1424,10 +1420,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 640356896, guid: 07243395f9400ce4b9008041c8f0b81c, type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 8084770730241588778, guid: 07243395f9400ce4b9008041c8f0b81c, type: 3}
       propertyPath: m_Name
       value: Player

@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 152240af99ac2804bba68dfa45375cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WindowCanvasPrefab: {fileID: 8812617022913101181, guid: 5428646afdfb40846a369e9802b8da0e, type: 3}
+  WindowCanvasPrefab: {fileID: 6748459792377102989, guid: 530e426237264314387e0fe5cb527e63, type: 3}
   SelectBoxCanvasPrefab: {fileID: 1217089534121423838, guid: 2eada0998e0f8904eb55e5d0e1fd81fe, type: 3}
   MessageTextObject: {fileID: 0}
 --- !u!114 &465376485402737751

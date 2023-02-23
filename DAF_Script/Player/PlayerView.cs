@@ -32,11 +32,11 @@ public class PlayerView : MonoBehaviour
     private void Awake() {
         if (instance == null) {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
             playerViewInit();
         }
         else {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 

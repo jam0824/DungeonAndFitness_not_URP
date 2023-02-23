@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class ScenarioExec : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class ScenarioExec : MonoBehaviour
     //アイテムがフルだったときのキー
     string FULL_OF_ITEM_KEY = "FullOfItem";
     string MESSAGE_SE_KEY = "MessageNormal";
+
+    float FADE_TIME = 0.5f;
 
     public ScenarioSystem scenarioSystem { set; get; }
     public AudioSource audioSource { set; get; }
@@ -154,6 +157,10 @@ public class ScenarioExec : MonoBehaviour
             }
             else if (command == "destroy") {
                 CommandDestroy();
+                break;
+            }
+            else if (command == "scene") {
+                CommandScene(line[1]);
                 break;
             }
             else {
@@ -398,6 +405,19 @@ public class ScenarioExec : MonoBehaviour
         Destroy(gameObject);
     }
 
+    void CommandScene(string sceneName) {
+        DebugWindow.instance.DFDebug("シーン切り替え：" + sceneName);
+        OVRScreenFade ovrScreenFade = GameObject.Find("CenterEyeAnchor").GetComponent<OVRScreenFade>();
+        ovrScreenFade.FadeOut();
+        StartCoroutine(ChangeScene(sceneName, FADE_TIME));
+    }
+
+    IEnumerator ChangeScene(string sceneName, float waitTime) {
+        yield return new WaitForSeconds(waitTime);
+        ResetFlagMain();
+        SceneManager.LoadScene(sceneName);
+    }
+
     //各種フラグリセット
     IEnumerator ResetFlag() {
         yield return new WaitForSeconds(0.5f);
@@ -463,4 +483,6 @@ public class ScenarioExec : MonoBehaviour
     public bool GetIsNowLineExecuting() {
         return isNowLineExecuting;
     }
+
+
 }

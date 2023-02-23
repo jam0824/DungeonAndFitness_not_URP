@@ -46,11 +46,11 @@ public class SingletonGeneral : MonoBehaviour
     private void Awake() {
         if (instance == null) {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
             SingletonGeneralInit();
         }
         else {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
     // Start is called before the first frame update

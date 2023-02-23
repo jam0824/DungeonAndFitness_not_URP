@@ -15,10 +15,10 @@ public class DebugWindow : MonoBehaviour
     private void Awake() {
         if(instance == null) {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
         //ÉçÉOÇ™î≠çsÇ≥ÇÍÇΩéûÇ…OnReceiveLogÇ™é¿çsÇ≥ÇÍÇÈÇÊÇ§Ç…Ç∑ÇÈ
         Application.logMessageReceived += OnReceiveLog;
@@ -47,6 +47,8 @@ public class DebugWindow : MonoBehaviour
     }
 
     private void OnReceiveLog(string logText, string stackTrace, LogType logType) {
+        if (cText == null) return;
+
         string m = cText.text;
         string line = "";
         if(stackTrace != "") {
