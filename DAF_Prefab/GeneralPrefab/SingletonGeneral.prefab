@@ -82,6 +82,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 988429a69edb55644ad05ca6d22859d4, type: 3}
   - {fileID: 8300000, guid: 28a80661e4009644d816ad96d94d1a5f, type: 3}
   - {fileID: 8300000, guid: 068569360d690d04f9905ebe29eda50b, type: 3}
+  - {fileID: 8300000, guid: ed62eb839ebc4d748b1c0cb60360379c, type: 3}
+  listEffectPrefab:
+  - {fileID: 2151716690488679645, guid: 96a20d3f97119394e991bb9d9e26fb6b, type: 3}
 --- !u!114 &465376485813575324
 MonoBehaviour:
   m_ObjectHideFlags: 0

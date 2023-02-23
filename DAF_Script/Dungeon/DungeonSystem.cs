@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DungeonSystem : MonoBehaviour
 {
+    public bool isDungeon = true;
     public GameObject[] Enemies;
     public int ENEMY_MAX;
     //fixupdate = 0.02秒　1分で3000
@@ -30,8 +31,10 @@ public class DungeonSystem : MonoBehaviour
         PoolPlayerDamageText = LoadPrefabs(PlayerDamageTextPrefab, PLAYER_DAMAGE_TEXT_NUM);
         Floors = GameObject.FindGameObjectsWithTag("Ground");
         DebugWindow.instance.DFDebug("Floor数" + Floors.Length);
-
         dungeonRoot = SingletonGeneral.instance.dungeonRoot;
+
+        //ダンジョンじゃないときは処理しない
+        if (!isDungeon) return;
 
         //実際に使うときにFPSが1度だけ下がるので、一旦ここで再生をやっておく
         PlayDamageObject(PoolDamageText);
@@ -48,6 +51,8 @@ public class DungeonSystem : MonoBehaviour
     }
 
     private void FixedUpdate() {
+        if (!isDungeon) return;
+
         spawnCount += 1;
         if (spawnCount >= SPAWN_WAIT) {
             spawnCount = 0;
@@ -112,6 +117,14 @@ public class DungeonSystem : MonoBehaviour
             if (obj.activeSelf == false) return obj;
         }
         return null;
+    }
+
+    /// <summary>
+    /// HUDが有効かを返す
+    /// </summary>
+    /// <returns></returns>
+    public bool GetIsDungeon() {
+        return isDungeon;
     }
 
     List<GameObject> LoadPrefabs(GameObject obj, int max) {

@@ -20,19 +20,27 @@ public class HUD : MonoBehaviour
     SpriteRenderer hpBarSpriteRenderer;
     SpriteRenderer mpBarSpriteRenderer;
     SpriteRenderer satiationBarSpriteRenderer;
+    DungeonSystem dungeonSystem;
 
     // Start is called before the first frame update
     void Start()
     {
-        HudInit();
+        //HudInit();
     }
 
-    public void HudInit() {
+    public void HudInit(DungeonSystem ds) {
         face = GameObject.Find("HitArea");
         config = PlayerView.instance.config;
         hpBarSpriteRenderer = hpBar.GetComponent<SpriteRenderer>();
         mpBarSpriteRenderer = mpBar.GetComponent<SpriteRenderer>();
         satiationBarSpriteRenderer = satiationBar.GetComponent<SpriteRenderer>();
+        dungeonSystem = ds;
+
+        if (!dungeonSystem.GetIsDungeon()) {
+            gameObject.SetActive(false);
+            return;
+        }
+
         RedrawHp();
         RedrawMp();
         RedrawSatiation();
@@ -41,6 +49,8 @@ public class HUD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!dungeonSystem.GetIsDungeon()) return;
+
         RotationHud(face);
         HudLookAt(hudRig, face);
     }

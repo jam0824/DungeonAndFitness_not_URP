@@ -47,11 +47,13 @@ public class PlayerView : MonoBehaviour
         playerDamage = face.GetComponent<PlayerDamage>();
 
         hud = transform.Find("HUD").GetComponent<HUD>();
-        dungeonSystem = GameObject.Find("DungeonSystem").GetComponent<DungeonSystem>();
+        GameObject dungeonSystemObject = GameObject.Find("DungeonSystem");
+        if(dungeonSystemObject != null) 
+            dungeonSystem = dungeonSystemObject.GetComponent<DungeonSystem>();
         audioSource = CameraC.GetComponent<AudioSource>();
 
         config.PlayerConfigInit();
-        hud.HudInit();
+        hud.HudInit(dungeonSystem);
         playerStatusChange.PlayerStatusChangeInit();
 
         leftPlayerRocketPunch = leftPlayerPunch.GetComponent<PlayerRocketPanch>();
