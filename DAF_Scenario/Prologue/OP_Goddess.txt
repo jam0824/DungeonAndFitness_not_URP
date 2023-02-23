@@ -1,6 +1,5 @@
 look	look
 【女神】「いらっしゃい」	[Goddess]: "Welcome."
-scene,Dungeon01F	scene,Dungeon01F
 	
 information,OpSelectBox	information, OpSelectBox
 	
@@ -56,6 +55,7 @@ se,NormalItemGet	se, NormalItemGet
 【女神】「遺跡の攻略ついでに運動をしてきましょうね♪」	[Goddess]: "Let's exercise while conquering the ruins, shall we♪"
 【女神】「それではがんばってきてください」	[Goddess]: "Well then, please do your best."
 【女神】「私が言うのもおかしいけど、神のご加護を」	[Goddess]: "It's strange for me to say this, but may God's blessing be with you."
+set,OpDoor=true	set,OpDoor=true
 set,OpMegami=1	set,OpMegami=1
 end	end
 	
