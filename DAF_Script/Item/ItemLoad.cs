@@ -25,7 +25,7 @@ public class ItemLoad : MonoBehaviour
     {
         Init(itemDb, itemView);
         ItemListItem = itemListItem;
-        MakeItemList(ItemListItem, itemDb.playerItemList, pageNo);
+        MakeItemList(ItemListItem, itemDb.GetPlayerItemList(), pageNo);
         itemView.ChangePagingText();
     }
 
@@ -38,7 +38,7 @@ public class ItemLoad : MonoBehaviour
     {
         Init(itemDb, itemView);
         ItemListItem = itemListItem;
-        List<bool> listHasCollection = GetListHasCollection(itemDb.playerCollectionList);
+        List<bool> listHasCollection = GetListHasCollection(itemDb.GetPlayerCollectionList());
         MakeCollectionList(ItemListItem, listHasCollection, collectionPageNo);
         itemView.ChangePagingText();
     }

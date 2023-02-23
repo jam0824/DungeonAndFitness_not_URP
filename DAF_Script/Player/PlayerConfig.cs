@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerConfig : MonoBehaviour
 {
+    DataPlayer dataPlayer;
+
     public int MAX_HP;
     public int MAX_MP;
     public int ATK;
@@ -12,88 +14,94 @@ public class PlayerConfig : MonoBehaviour
     public int MAX_PAGE_NO;
     public GameObject PUNCH_HIT_PREFAB;
     public GameObject PUNCH_ENABLE_PREFAB;
-    private int nowHp;
-    private int nowMp;
-    private float nowSatiation = 100.0f;
 
-    private void Start() {
+    private void Awake() {
         
     }
 
     public void PlayerConfigInit() {
-        nowHp = MAX_HP;
-        nowMp = MAX_MP;
+        dataPlayer = DataSystem.instance.dataPlayer;
+        if (dataPlayer.nowHp != 0) return;
+
+        dataPlayer.nowHp = MAX_HP;
+        dataPlayer.nowMp = MAX_MP;
+        dataPlayer.MAX_HP = MAX_HP;
+        dataPlayer.MAX_MP = MAX_MP;
+        dataPlayer.ATK = ATK;
+        dataPlayer.DEF = DEF;
+        dataPlayer.DEC_SATIATION = DEC_SATIATION;
+        dataPlayer.MAX_PAGE_NO = MAX_PAGE_NO;
         ResetSatiation();
     }
 
     public int GetHP() {
-        return nowHp;
+        return dataPlayer.nowHp;
     }
     public void SetHP(int setHp) {
-        nowHp = setHp;
+        dataPlayer.nowHp = setHp;
     }
     public int GetMaxHP() {
-        return MAX_HP;
+        return dataPlayer.MAX_HP;
     }
     public int GetMP() {
-        return nowMp;
+        return dataPlayer.nowMp;
     }
     public void SetMP(int setMp) {
-        nowMp = setMp;
+        dataPlayer.nowMp = setMp;
     }
     public int GetMaxMP() {
-        return MAX_MP;
+        return dataPlayer.MAX_MP;
     }
 
     public int GetATK() {
-        return ATK;
+        return dataPlayer.ATK;
     }
     public int GetDEF() {
-        return DEF;
+        return dataPlayer.DEF;
     }
     public int GetMaxPageNo() {
-        return MAX_PAGE_NO;
+        return dataPlayer.MAX_PAGE_NO;
     }
 
     public float GetSatiation() {
-        return nowSatiation;
+        return dataPlayer.nowSatiation;
     }
 
     public float GetDecreaseSatiation() {
-        return DEC_SATIATION;
+        return dataPlayer.DEC_SATIATION;
     }
 
     public void SetMaxHp(int maxHp) {
-        MAX_HP = maxHp;
+        dataPlayer.MAX_HP = maxHp;
     }
 
     public void SetMaxMp(int maxMp) {
-        MAX_MP = maxMp;
+        dataPlayer.MAX_MP = maxMp;
     }
 
     public void SetHp(int hp) {
-        nowHp = hp;
+        dataPlayer.nowHp = hp;
     }
     public void SetMp(int mp) {
-        nowMp = mp;
+        dataPlayer.nowMp = mp;
     }
 
     public void SetAtk(int atk) {
-        ATK = atk;
+        dataPlayer.ATK = atk;
     }
     public void SetDef(int def) {
-        DEF = def;
+        dataPlayer.DEF = def;
     }
     public void SetSatiation(float satiation) {
-        nowSatiation = satiation;
+        dataPlayer.nowSatiation = satiation;
     }
     public void ResetSatiation() {
-        nowSatiation = 100f;
+        dataPlayer.nowSatiation = 100f;
         return;
     }
 
     public void SetMaxPageNo(int pageNo) {
-        MAX_PAGE_NO = pageNo;
+        dataPlayer.MAX_PAGE_NO = pageNo;
     }
 
     public void SetPunchHitPrefab(GameObject prefab) {
@@ -111,18 +119,18 @@ public class PlayerConfig : MonoBehaviour
     }
 
     public int CalcHp(int damage) {
-        nowHp = nowHp - damage;
-        if(nowHp < 0) {
-            nowHp = 0;
+        dataPlayer.nowHp = dataPlayer.nowHp - damage;
+        if(dataPlayer.nowHp < 0) {
+            dataPlayer.nowHp = 0;
         }
-        return nowHp;
+        return dataPlayer.nowHp;
     }
 
     public float CalcSatiation(float value) {
-        nowSatiation += value;
-        if (nowSatiation < 0) nowSatiation = 0;
-        if (nowSatiation > 100f) nowSatiation = 100f;
-        return nowSatiation;
+        dataPlayer.nowSatiation += value;
+        if (dataPlayer.nowSatiation < 0) dataPlayer.nowSatiation = 0;
+        if (dataPlayer.nowSatiation > 100f) dataPlayer.nowSatiation = 100f;
+        return dataPlayer.nowSatiation;
     }
 
     /// <summary>
@@ -131,7 +139,7 @@ public class PlayerConfig : MonoBehaviour
     /// <param name="recoverPercent"></param>
     public void RecoverSatiation(float recoverPercent) {
         float recover = 100f * recoverPercent;
-        nowSatiation += recover;
-        if (nowSatiation > 100f) nowSatiation = 100f;
+        dataPlayer.nowSatiation += recover;
+        if (dataPlayer.nowSatiation > 100f) dataPlayer.nowSatiation = 100f;
     }
 }

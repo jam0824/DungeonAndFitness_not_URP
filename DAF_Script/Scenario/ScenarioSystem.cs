@@ -5,13 +5,13 @@ using TMPro;
 
 public class ScenarioSystem : MonoBehaviour
 {
+    DataScenario dataScenario;
     public GameObject WindowCanvasPrefab;
     public GameObject SelectBoxCanvasPrefab;
     public GameObject MessageTextObject;
     List<GameObject> poolSelectBox;
     int SELECT_BOX_MAX = 5;
     TextMeshProUGUI messageText;
-    public Dictionary<string, string> dictSwitch { set; get; }
     bool isLock = false;
 
     // Start is called before the first frame update
@@ -21,10 +21,10 @@ public class ScenarioSystem : MonoBehaviour
     }
 
     public void ScenarioSystemInit() {
+        dataScenario = DataSystem.instance.dataScenario;
         GameObject player = GameObject.Find("Player");
         LoadMessageTextObject(player);
         LoadSelectBoxObject(player);
-        dictSwitch = new Dictionary<string, string>();
     }
 
     /// <summary>
@@ -125,25 +125,25 @@ public class ScenarioSystem : MonoBehaviour
     /// <param name="key"></param>
     /// <param name="value"></param>
     public void SetSwitch(string key, string value) {
-        dictSwitch[key] = value;
+        dataScenario.dictSwitch[key] = value;
         DebugWindow.instance.DFDebug("***switch set:" + key + "=" + value);
     }
 
     public void CalcurationSwitch(string key, string sign, string value) {
         switch (sign) {
             case "+":
-                dictSwitch[key] = 
-                    (int.Parse(dictSwitch[key]) + int.Parse(value)).ToString();
+                dataScenario.dictSwitch[key] = 
+                    (int.Parse(dataScenario.dictSwitch[key]) + int.Parse(value)).ToString();
                 break;
             case "-":
-                dictSwitch[key] = 
-                    (int.Parse(dictSwitch[key]) - int.Parse(value)).ToString();
+                dataScenario.dictSwitch[key] = 
+                    (int.Parse(dataScenario.dictSwitch[key]) - int.Parse(value)).ToString();
                 break;
         }
     }
 
     public string GetSwitch(string key) {
-        return dictSwitch[key];
+        return dataScenario.dictSwitch[key];
     }
 
     public GameObject GetMessageTextObject() {
@@ -181,8 +181,8 @@ public class ScenarioSystem : MonoBehaviour
                 if (isOk) continue;
                 break;
             }
-            if (dictSwitch.ContainsKey(key)) {
-                if(dictSwitch[key] == v) {
+            if (dataScenario.dictSwitch.ContainsKey(key)) {
+                if(dataScenario.dictSwitch[key] == v) {
                     isOk = true;
                 }
                 else {

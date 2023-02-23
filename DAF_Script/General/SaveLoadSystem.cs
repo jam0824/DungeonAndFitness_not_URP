@@ -29,11 +29,11 @@ public class SaveLoadSystem : MonoBehaviour
         //通常のアイテムの保存
         FQCommon.Common.SaveStringToFile(
             SingletonGeneral.instance.GetNormalItemSavePath(),
-            CollectionListData(SingletonGeneral.instance.itemDb.playerItemList));
+            CollectionListData(SingletonGeneral.instance.itemDb.GetPlayerItemList()));
         //コレクションアイテムの保存
         FQCommon.Common.SaveStringToFile(
             SingletonGeneral.instance.GetCollectionItemSavePath(),
-            CollectionListData(SingletonGeneral.instance.itemDb.playerCollectionList));
+            CollectionListData(SingletonGeneral.instance.itemDb.GetPlayerCollectionList()));
     }
 
     void SaveStatus() {
@@ -98,7 +98,7 @@ public class SaveLoadSystem : MonoBehaviour
 
     string CollectSwitchData() {
         string data = "";
-        Dictionary<string, string> switchData = SingletonGeneral.instance.scenarioSystem.dictSwitch;
+        Dictionary<string, string> switchData = DataSystem.instance.dataScenario.dictSwitch;
         foreach (KeyValuePair<string,string> item in switchData) {
             data += item.Key + "\t" + item.Value + "\n";
         }
@@ -211,7 +211,7 @@ public class SaveLoadSystem : MonoBehaviour
             string[] keyValue = data.Split("\t");
             dictSwitch[keyValue[0]] = keyValue[1];
         }
-        SingletonGeneral.instance.scenarioSystem.dictSwitch = dictSwitch;
+        DataSystem.instance.dataScenario.dictSwitch = dictSwitch;
     }
 
 }

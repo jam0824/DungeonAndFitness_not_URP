@@ -64,6 +64,7 @@ public class PlayerView : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         //FQCommon.Common.AppendStringFile("PlayerItemSave.txt", "101");
     }
 

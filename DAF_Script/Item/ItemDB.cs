@@ -7,11 +7,15 @@ public class ItemDB : MonoBehaviour
 {
     int COLLECTION_MAX = 100;
 
+    DataItem dataItem;
+
     public List<GameObject> itemPrefab;
     Dictionary<string, int> dictItemPrefabName;
     List<Dictionary<string, string>> itemDB = new List<Dictionary<string, string>>();
-    public List<string> playerItemList { set; get; }
-    public List<string> playerCollectionList { set; get; }
+
+    private void Awake() {
+        dataItem = DataSystem.instance.dataItem;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -25,19 +29,26 @@ public class ItemDB : MonoBehaviour
         
     }
 
+    public List<string> GetPlayerItemList() {
+        return dataItem.playerItemList;
+    }
+    public List<string> GetPlayerCollectionList() {
+        return dataItem.playerCollectionList;
+    }
+
     public void ItemDbInit() {
         itemDB = MakeItemDB(
             FQCommon.Common.LoadCsvFile("ItemDB/ItemDB")
         );
-        LoadPlayerItems();
+        //LoadPlayerItems();
         dictItemPrefabName = SetDictItemPrefabName();
     }
 
     //プレイヤーのアイテムをファイルからロードする
     void LoadPlayerItems() {
-        playerItemList = FQCommon.Common.LoadSaveFile(
+        dataItem.playerItemList = FQCommon.Common.LoadSaveFile(
             SingletonGeneral.instance.GetNormalItemSavePath());
-        playerCollectionList = FQCommon.Common.LoadSaveFile(
+        dataItem.playerCollectionList = FQCommon.Common.LoadSaveFile(
             SingletonGeneral.instance.GetCollectionItemSavePath()) ;
     }
 
@@ -80,16 +91,16 @@ public class ItemDB : MonoBehaviour
         if (int.Parse(itemNo) < COLLECTION_MAX) return true;
         PlayerConfig playerConfig = GameObject.Find("Player").GetComponent<PlayerConfig>();
         int max = 10 * playerConfig.GetMaxPageNo();
-        return (playerItemList.Count < max) ? true : false;
+        return (dataItem.playerItemList.Count < max) ? true : false;
     }
 
     //アイテムをアイテムリストに追加する
     public void AddItem(string itemNo) {
         if(int.Parse(itemNo) < COLLECTION_MAX) {
-            playerCollectionList.Add(itemNo);
+            dataItem.playerCollectionList.Add(itemNo);
         }
         else {
-            playerItemList.Add(itemNo);
+            dataItem.playerItemList.Add(itemNo);
         }
     }
 
@@ -125,9 +136,9 @@ public class ItemDB : MonoBehaviour
     /// <param name="itemNo"></param>
     /// <returns></returns>
     public bool HasItem(string itemNo) {
-        if (playerItemList.Contains(itemNo))
+        if (dataItem.playerItemList.Contains(itemNo))
             return true;
-        if (playerCollectionList.Contains(itemNo))
+        if (dataItem.playerCollectionList.Contains(itemNo))
             return true;
         return false;
     }
@@ -137,6 +148,6 @@ public class ItemDB : MonoBehaviour
     /// </summary>
     /// <param name="index"></param>
     public void DeleteWithItemIndex(int index) {
-        playerItemList.RemoveAt(index);
+        dataItem.playerItemList.RemoveAt(index);
     }
 }
