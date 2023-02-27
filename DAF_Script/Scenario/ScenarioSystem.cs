@@ -9,6 +9,8 @@ public class ScenarioSystem : MonoBehaviour
     public GameObject WindowCanvasPrefab;
     public GameObject SelectBoxCanvasPrefab;
     public GameObject MessageTextObject;
+    public GameObject player { set; get; }
+    public GameObject CameraC { set; get; }
     List<GameObject> poolSelectBox;
     int SELECT_BOX_MAX = 5;
     TextMeshProUGUI messageText;
@@ -22,7 +24,8 @@ public class ScenarioSystem : MonoBehaviour
 
     public void ScenarioSystemInit() {
         dataScenario = DataSystem.instance.dataScenario;
-        GameObject player = GameObject.Find("Player");
+        player = GameObject.Find("Player");
+        CameraC = GameObject.Find("CenterEyeAnchor");
         LoadMessageTextObject(player);
         LoadSelectBoxObject(player);
     }

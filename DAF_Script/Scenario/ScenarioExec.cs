@@ -163,6 +163,10 @@ public class ScenarioExec : MonoBehaviour
                 CommandScene(line[1]);
                 break;
             }
+            else if (command == "move") {
+                CommandMove(line[1], no);
+                break;
+            }
             else {
                 CommandShowMessage(line);
                 break;
@@ -416,6 +420,35 @@ public class ScenarioExec : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         ResetFlagMain();
         SceneManager.LoadScene(sceneName);
+    }
+
+    void CommandMove(string targetObjectName, int no) {
+        DebugWindow.instance.DFDebug("移動：" + targetObjectName);
+        StartCoroutine(Move(targetObjectName, no));
+    }
+    //コールチンでフェード処理
+    IEnumerator Move(string targetObjectName, int no) {
+        scenarioSystem.CameraC.GetComponent<OVRScreenFade>().FadeOut();
+        yield return new WaitForSeconds(FADE_TIME);
+        MoveToTargetObject(targetObjectName);
+        scenarioSystem.CameraC.GetComponent<OVRScreenFade>().FadeIn();
+        yield return new WaitForSeconds(FADE_TIME);
+        //シナリオはbreakしてるので、フェードが終わった後に再度シナリオを呼び出す
+        lineNo = exec(no + 1);
+    }
+
+    //Playerを指定したオブジェクトと同じ位置、角度で移動する
+    void MoveToTargetObject(string targetObjectName) {
+        GameObject targetObject = GameObject.Find(targetObjectName);
+        Vector3 pos = targetObject.transform.position;
+        DebugWindow.instance.DFDebug("taretPos:" + pos);
+        GameObject player = GameObject.Find("Player");
+        //キャラクターコントローラーを切らないと移動しないことがある
+        player.GetComponent<CharacterController>().enabled = false;
+        player.transform.position = pos;
+        player.transform.rotation = targetObject.transform.rotation;
+        DebugWindow.instance.DFDebug("playerPos:" + GameObject.Find("Player").transform.position);
+        player.GetComponent<CharacterController>().enabled = true;
     }
 
     //各種フラグリセット

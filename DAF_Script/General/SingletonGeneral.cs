@@ -239,6 +239,7 @@ public class SingletonGeneral : MonoBehaviour
         dictSeName.Add("Error", 21);
         dictSeName.Add("RecoverSmall", 22);
         dictSeName.Add("OpenTheBigDoor", 23);
+        dictSeName.Add("OpenTheSmallDoor", 24);
 
         return dictSeName;
     }

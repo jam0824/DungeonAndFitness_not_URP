@@ -1,0 +1,3 @@
+se,OpenTheSmallDoor	se,OpenTheSmallDoor
+move,Anchor_1	move,Anchor_1
+end	end
