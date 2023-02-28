@@ -7,6 +7,57 @@ select_1,服が気になる	select_1,服が気になる
 select_2,酒場が気になる	select_2,酒場が気になる
 select_3,宿屋が気になる	select_3,宿屋が気になる
 	
+//選択肢2番目	//選択肢2番目
+#select_2	#select_2
+case,prologue_01_fei_select_2	case,prologue_01_fei_select_2
+1,#select_2_1	1,#select_2_1
+2,#select_2_2	2,#select_2_2
+3,#select_2_3	3,#select_2_3
+4,#select_2_4	4,#select_2_4
+default,#select_2_0	default,#select_2_0
+	
+#select_2_0	#select_2_0
+Face,Fei,FUN	Face,Fei,FUN
+【フェイ】「この酒場兼宿屋は「海賊のアジト」だな」	【フェイ】「この酒場兼宿屋は「海賊のアジト」だな」
+【フェイ】「酒も飲めるし泊まることだってできるぞ」	【フェイ】「酒も飲めるし泊まることだってできるぞ」
+【フェイ】「ま、小さい店だけどアタシの居場所ってとこだ」	【フェイ】「ま、小さい店だけどアタシの居場所ってとこだ」
+set,prologue_01_fei_select_2=1	set,prologue_01_fei_select_2=1
+end	end
+	
+#select_2_1	#select_2_1
+【フェイ】「いっつも飲みに来る常連もいるな」	【フェイ】「いっつも飲みに来る常連もいるな」
+【フェイ】「ソルに、ジョージ博士だろ。それにロバートとか……」	【フェイ】「ソルに、ジョージ博士だろ。それにロバートとか……」
+Face,Fei,DOYA	Face,Fei,DOYA
+【フェイ】「みんなアタシの料理の腕にメロメロなわけだ」	【フェイ】「みんなアタシの料理の腕にメロメロなわけだ」
+set,prologue_01_fei_select_2=2	set,prologue_01_fei_select_2=2
+end	end
+	
+#select_2_2	#select_2_2
+【フェイ】「料理は街で買ったものがほとんどだけどな、ウチの売りは……」	【フェイ】「料理は街で買ったものがほとんどだけどな、ウチの売りは……」
+【フェイ】「ダンジョンのモンスターの肉だな！」	【フェイ】「ダンジョンのモンスターの肉だな！」
+【フェイ】「……だからそんな顔するなって。けっこう美味いんだぞ」	【フェイ】「……だからそんな顔するなって。けっこう美味いんだぞ」
+Face,Fei,SMILE	Face,Fei,SMILE
+【フェイ】「マズイ肉もあるけど、まぁ、アタシの腕にかかればどんな肉だって一級の料理に変わるな」	【フェイ】「マズイ肉もあるけど、まぁ、アタシの腕にかかればどんな肉だって一級の料理に変わるな」
+set,prologue_01_fei_select_2=3	set,prologue_01_fei_select_2=3
+end	end
+	
+#select_2_3	#select_2_3
+【フェイ】「肉は客に獲ってきてもらってる」	【フェイ】「肉は客に獲ってきてもらってる」
+Face,Fei,JITO	Face,Fei,JITO
+【フェイ】「……オイ、おまえ今、アタシが客から巻き上げてると思っただろ」	【フェイ】「……オイ、おまえ今、アタシが客から巻き上げてると思っただろ」
+【フェイ】「ちゃんと仕入れ代ってことで金は払ってるからな」	【フェイ】「ちゃんと仕入れ代ってことで金は払ってるからな」
+set,prologue_01_fei_select_2=4	set,prologue_01_fei_select_2=4
+end	end
+	
+#select_2_4	#select_2_4
+Face,Fei,FUN	Face,Fei,FUN
+【フェイ】「さて、今日は何を店で出すかな」	【フェイ】「さて、今日は何を店で出すかな」
+end	end
+	
+	
+	
+	
+//選択肢1番目	//選択肢1番目
 #select_1	#select_1
 if,fei_first_flag=5,#select_1_5,#select_1_4	if,fei_first_flag=5,#select_1_5,#select_1_4
 	

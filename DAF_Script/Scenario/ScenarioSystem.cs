@@ -212,4 +212,17 @@ public class ScenarioSystem : MonoBehaviour
         }
         return isOk;
     }
+
+    /// <summary>
+    /// ひとつのキーがtrueかfalseかを返す
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    public bool GetIsOneSwitch(string key, string value) {
+        //キーが存在しない場合はfalse
+        if (!dataScenario.dictSwitch.ContainsKey(key)) return false;
+
+        return (dataScenario.dictSwitch[key] == value) ? true : false;
+    }
 }

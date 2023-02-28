@@ -97,6 +97,12 @@ public class ScenarioExec : MonoBehaviour
                 no++;
                 continue;
             }
+            else if (command[0] == '/') {
+                //コメントをログ表示
+                DebugWindow.instance.DFDebug(line[0]);
+                no++;
+                continue;
+            }
             else if (command == "look") {
                 isLookAt = true;
                 CommandLookAt(gameObject);
@@ -114,12 +120,21 @@ public class ScenarioExec : MonoBehaviour
                 no++;
                 continue;
             }
+            else if (command == "lookofffromcharacter") {
+                CommandLookOffFromCharacter(line[1]);
+                no++;
+                continue;
+            }
             else if (command == "goto") {
                 no = CommandGoto(line[1], listScenarioCsv);
                 continue;
             }
             else if (command == "if") {
                 no = CommandIf(line[1], line[2], line[3],listScenarioCsv);
+                continue;
+            }
+            else if (command == "case") {
+                no = CommandCase(line[1], no, listScenarioCsv);
                 continue;
             }
             else if (command == "set") {
@@ -355,6 +370,37 @@ public class ScenarioExec : MonoBehaviour
         return no;
     }
 
+    /// <summary>
+    /// case,key名
+    /// value,#hata1
+    /// value,#hata2
+    /// default,#hata_n
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="no"></param>
+    /// <param name="scenario"></param>
+    /// <returns></returns>
+    int CommandCase(string key, int no, List<string[]> scenario) {
+        int returnNo = 0;
+        for (int i = no + 1; i < scenario.Count; i++) {
+            string[] line = scenario[i];
+            //空だったらブレイク
+            if (line[0] == "") break;
+            //defaultだったらそのままgoto
+            if(line[0] == "default") {
+                returnNo = CommandGoto(line[1], scenario);
+                break;
+            }
+            //それ以外なら判定
+            bool isOk = scenarioSystem.GetIsOneSwitch(key, line[0]);
+            if (isOk) {
+                returnNo = CommandGoto(line[1], scenario);
+                break;
+            }
+        }
+        return returnNo;
+    }
+
     //Playerを見るようにする
     void CommandLookAt(GameObject obj) {
         SingletonGeneral.instance.LookAt(
@@ -370,7 +416,14 @@ public class ScenarioExec : MonoBehaviour
         GameObject obj = GameObject.Find(objName);
         AnimationSystem animationSystem = obj.GetComponent<AnimationSystem>();
         animationSystem.isLook = true;
-        DebugWindow.instance.DFDebug("LookFromObject : " + objName);
+        DebugWindow.instance.DFDebug("LookFromCharacter : " + objName);
+    }
+
+    void CommandLookOffFromCharacter(string objName) {
+        GameObject obj = GameObject.Find(objName);
+        AnimationSystem animationSystem = obj.GetComponent<AnimationSystem>();
+        animationSystem.isLook = false;
+        DebugWindow.instance.DFDebug("LookOffFromCharacter : " + objName);
     }
 
     //スイッチの数字の計算。+と-のみ。
