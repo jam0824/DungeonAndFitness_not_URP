@@ -37,8 +37,8 @@ hata_2,……。	hata_2, "..."
 【女神】「どうでしょう？」	[Goddess]: "How about it?"
 	
 select	select
-letsgo,わかりました。行ってきます。	letsgo, "I understand. I will go get it."
-BadEnd_1,嫌です。死んだほうがマシです。	BadEnd_1, "No, I don't want to. It's better to die."
+letsgo,ああ、わかった	letsgo, oh, I see.
+BadEnd_1,イヤだ！	BadEnd_1, No way!
 	
 #letsgo	#letsgo
 【女神】「わかりました。私の後ろに扉があります。そこからその世界にいくことができます」	[Goddess]: "Understood. There is a door behind me. You can go to that world through there."

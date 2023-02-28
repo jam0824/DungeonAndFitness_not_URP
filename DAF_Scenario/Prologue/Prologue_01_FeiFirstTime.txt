@@ -3,7 +3,7 @@ lookFromObject,Fei	lookFromObject,Fei
 【女性】「お、ようやく起きた」	[Female] "Oh, you finally woke up."
 CharacterMove,Fei,Anchor_3	CharacterMove,Fei,Anchor_3
 Face,Fei,SMILE	Face, Fei, SMILE
-	
+MessageMove,Fei,Center	MessageMove,Fei,Center
 【女性】「おまえ、この酒場の前で倒れてたんだ」	[Female] "You were collapsed in front of this tavern."
 【女性】「放っておこうと思ったけど、店の前で倒れられてたら人来なくなっちゃうだろ？」	[Female] "I was going to leave you there, but if you collapsed in front of the store, no one would come."
 【女性】「で、仕方ないから空き部屋で寝かせておいたってわけ」	[Female] "So, I had no choice but to let you sleep in a vacant room."

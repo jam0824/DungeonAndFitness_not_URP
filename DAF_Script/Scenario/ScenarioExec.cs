@@ -173,6 +173,11 @@ public class ScenarioExec : MonoBehaviour
                 no++;
                 continue;
             }
+            else if (command == "messagemove") {
+                CommandMessageMove(line[1], line[2]);
+                no++;
+                continue;
+            }
             else if (command == "destroy") {
                 CommandDestroy();
                 break;
@@ -202,16 +207,6 @@ public class ScenarioExec : MonoBehaviour
         ShowWindowCanvas();
         nowMessage = FixMessage(string.Join(",", line));
         StartCoroutine(ShowMessage(nowMessage));
-        /*
-        //会話文だった場合は1文字ずつ表示
-        if ((line[0][0] == '【') || (line[0][0] == '[')) {
-            StartCoroutine(ShowMessage(nowMessage));
-        }
-        else {
-            ShowMessageInstantly();
-            isNowLineExecuting = false;
-        }
-        */
         DebugWindow.instance.DFDebug(line[0]);
     }
 
@@ -436,10 +431,16 @@ public class ScenarioExec : MonoBehaviour
     /// </summary>
     void CommandDestroy() {
         DebugWindow.instance.DFDebug("シナリオによるDestroy");
+        CloseWindowCanvas();
         ResetFlagMain();
         Destroy(gameObject);
     }
 
+    /// <summary>
+    /// 指定した名前のシーンに切り替える
+    /// フェード付き
+    /// </summary>
+    /// <param name="sceneName"></param>
     void CommandScene(string sceneName) {
         DebugWindow.instance.DFDebug("シーン切り替え：" + sceneName);
         OVRScreenFade ovrScreenFade = GameObject.Find("CenterEyeAnchor").GetComponent<OVRScreenFade>();
@@ -523,10 +524,29 @@ public class ScenarioExec : MonoBehaviour
         DebugWindow.instance.DFDebug(characterName + "移動開始。" + anchorName + "まで");
     }
 
+
+    //キャラクター移動時、キャラクター側から呼ばれてストップする
     public void StopCharacterMove(int no) {
         DebugWindow.instance.DFDebug("キャラクター移動完了。シナリオ再開:" + (no + 1));
         //シナリオはbreakしてるので、フェードが終わった後に再度シナリオを呼び出す
         lineNo = exec(no + 1);
+    }
+
+    /// <summary>
+    /// メッセージウィンドウを移動する
+    /// </summary>
+    /// <param name="characterName"></param>
+    /// <param name="positionName"></param>
+    void CommandMessageMove(string characterName, string positionName) {
+        GameObject obj = GameObject.Find(characterName);
+        Quaternion r = SingletonGeneral.instance.GetQuaternionFace();
+        positionName = positionName.ToLower();
+        switch (positionName) {
+            case "center":
+                Vector3 pos = SingletonGeneral.instance.GetPosBetweenTargetAndFace(obj, Vector3.zero);
+                scenarioSystem.MoveMessageWindow(pos, r);
+                break;
+        }
     }
 
 

@@ -88,6 +88,16 @@ public class ScenarioSystem : MonoBehaviour
     }
 
     /// <summary>
+    /// メッセージウィンドウを移動する
+    /// </summary>
+    /// <param name="pos"></param>
+    /// <param name="r"></param>
+    public void MoveMessageWindow(Vector3 pos, Quaternion r) {
+        MessageTextObject.transform.position = pos;
+        MessageTextObject.transform.rotation = r;
+    }
+
+    /// <summary>
     /// メッセージウィンドウの非表示
     /// </summary>
     public void CloseMessageWindow() {

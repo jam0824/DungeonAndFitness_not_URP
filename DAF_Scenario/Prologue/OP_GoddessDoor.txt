@@ -3,5 +3,5 @@ end	end
 	
 switch,OpDoor=true	switch,OpDoor=true
 se,OpenTheBigDoor	se,OpenTheBigDoor
-scene,Dungeon01F	scene,Dungeon01F
+scene,Prologue_FeiFirstTime	scene,Prologue_FeiFirstTime
 end	end
