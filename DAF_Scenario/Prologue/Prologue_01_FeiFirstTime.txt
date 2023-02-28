@@ -57,5 +57,8 @@ goto,#hata_2	goto,#hata_2
 #hata_2	#hata_2
 【フェイ】「ま。あぶなくなったらウチに帰ってきなさいな」	[Fei] "Well, if you're in danger, come back to us."
 【フェイ】「じゃ、気をつけて」	[Fei] "Alright, take care."
-destroy	destroy
+set,FeiFirstTime=true	set,FeiFirstTime=true
+end	end
+	
+switch,FeiFirstTime=true	switch,FeiFirstTime=true
 end	end

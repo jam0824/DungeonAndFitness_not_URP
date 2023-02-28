@@ -120,6 +120,10 @@ public class ScenarioExec : MonoBehaviour
                 no = CommandGoto(line[1], listScenarioCsv);
                 continue;
             }
+            else if (command == "if") {
+                no = CommandIf(line[1], line[2], line[3],listScenarioCsv);
+                continue;
+            }
             else if (command == "set") {
                 CommandSwitchSet(line);
                 no++;
@@ -327,6 +331,32 @@ public class ScenarioExec : MonoBehaviour
         return lineNo;
     }
 
+    /// <summary>
+    /// 条件がヒットしたときはtrueFlagへ、違うときはfalseFlagに飛ぶ
+    /// 条件は&でつなげることができる
+    /// </summary>
+    /// <param name="condition"></param>
+    /// <param name="trueFlag"></param>
+    /// <param name="falseFlag"></param>
+    /// <param name="scenario"></param>
+    /// <returns></returns>
+    int CommandIf(
+        string condition,
+        string trueFlag,
+        string falseFlag,
+        List<string[]> scenario) {
+        int no = 0;
+        string[] arrayCondition = condition.Split('&');
+        bool isOk = scenarioSystem.isSwitch(new List<string>(arrayCondition));
+        if (isOk) {
+            no = CommandGoto(trueFlag, scenario);
+        }
+        else {
+            no = CommandGoto(falseFlag, scenario);
+        }
+        return no;
+    }
+
     //Playerを見るようにする
     void CommandLookAt(GameObject obj) {
         SingletonGeneral.instance.LookAt(
@@ -374,6 +404,8 @@ public class ScenarioExec : MonoBehaviour
             scenarioSystem.SetSwitch(key, value);
         }
     }
+
+    
 
     //通常枠のアイテムを追加
     void CommandNormalItemGet(string itemNo, ItemDB itemDb) {

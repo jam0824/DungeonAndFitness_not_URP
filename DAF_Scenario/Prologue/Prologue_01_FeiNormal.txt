@@ -1,0 +1,63 @@
+look	look
+Face,Fei,FUN	Face,Fei,FUN
+【フェイ】「ん？ どうした？」	【フェイ】「ん？ どうした？」
+	
+select	select
+select_1,服が気になる	select_1,服が気になる
+select_2,酒場が気になる	select_2,酒場が気になる
+select_3,宿屋が気になる	select_3,宿屋が気になる
+	
+#select_1	#select_1
+if,fei_first_flag=5,#select_1_5,#select_1_4	if,fei_first_flag=5,#select_1_5,#select_1_4
+	
+#select_1_5	#select_1_5
+Face,Fei,JITO	Face,Fei,JITO
+【フェイ】「おまえな」	【フェイ】「おまえな」
+【フェイ】「踏むぞ」	【フェイ】「踏むぞ」
+end	end
+	
+#select_1_4	#select_1_4
+if,fei_first_flag=4,#select_1_4_1,#select_1_3	if,fei_first_flag=4,#select_1_4_1,#select_1_3
+#select_1_4_1	#select_1_4_1
+Face,Fei,JITO	Face,Fei,JITO
+【フェイ】「…………おい」	【フェイ】「…………おい」
+【フェイ】「そろそろ見学料をもらうぞ」	【フェイ】「そろそろ見学料をもらうぞ」
+set,fei_first_flag=5	set,fei_first_flag=5
+end	end
+	
+#select_1_3	#select_1_3
+if,fei_first_flag=3,#select_1_3_1,#select_1_2	if,fei_first_flag=3,#select_1_3_1,#select_1_2
+#select_1_3_1	#select_1_3_1
+Face,Fei,JITO	Face,Fei,JITO
+【フェイ】「…………」	【フェイ】「…………」
+【フェイ】「見たいのはわかる。けどな」	【フェイ】「見たいのはわかる。けどな」
+【フェイ】「凝視するな」	【フェイ】「凝視するな」
+set,fei_first_flag=4	set,fei_first_flag=4
+end	end
+	
+#select_1_2	#select_1_2
+if,fei_first_flag=2,#select_1_2_1,#select_1_1	if,fei_first_flag=2,#select_1_2_1,#select_1_1
+#select_1_2_1	#select_1_2_1
+Face,Fei,JITO	Face,Fei,JITO
+【フェイ】「……どこ見てんだよ？」	【フェイ】「……どこ見てんだよ？」
+【フェイ】「目線には敏感なんだからな」	【フェイ】「目線には敏感なんだからな」
+set,fei_first_flag=3	set,fei_first_flag=3
+end	end
+	
+#select_1_1	#select_1_1
+if,fei_first_flag=1,#select_1_1_1,#select_1_0	if,fei_first_flag=1,#select_1_1_1,#select_1_0
+#select_1_1_1	#select_1_1_1
+Face,Fei,DOYA	Face,Fei,DOYA
+【フェイ】「ふふーん、結構アタシを見たいから来る客も多いんだぞ」	【フェイ】「ふふーん、結構アタシを見たいから来る客も多いんだぞ」
+【フェイ】「美人の女主人とか、海賊フェイ様、とか言われてるな」	【フェイ】「美人の女主人とか、海賊フェイ様、とか言われてるな」
+set,fei_first_flag=2	set,fei_first_flag=2
+end	end
+	
+	
+	
+#select_1_0	#select_1_0
+【フェイ】「この服か？ かっこいいだろ？」	【フェイ】「この服か？ かっこいいだろ？」
+【フェイ】「このリーベンの街も酒場が多いからな。差別化が必要なんだよ」	【フェイ】「このリーベンの街も酒場が多いからな。差別化が必要なんだよ」
+【フェイ】「この酒場は海賊の女主人が売りってわけさ」	【フェイ】「この酒場は海賊の女主人が売りってわけさ」
+set,fei_first_flag=1	set,fei_first_flag=1
+end	end
