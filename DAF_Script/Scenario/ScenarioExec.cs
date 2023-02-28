@@ -102,6 +102,7 @@ public class ScenarioExec : MonoBehaviour
             else if (command == "look") {
                 isLookAt = true;
                 CommandLookAt(gameObject);
+                DebugWindow.instance.DFDebug("Look");
                 no++;
                 continue;
             }
@@ -182,6 +183,10 @@ public class ScenarioExec : MonoBehaviour
             }
             else if (command == "move") {
                 CommandMove(line[1], no);
+                break;
+            }
+            else if (command == "charactermove") {
+                CommandCharacterMove(line[1], line[2], no);
                 break;
             }
             else {
@@ -341,6 +346,7 @@ public class ScenarioExec : MonoBehaviour
     void ComandLookFromObject(string objName) {
         GameObject obj = GameObject.Find(objName);
         listLookCharacter.Add(obj);
+        DebugWindow.instance.DFDebug("LookFromObject : " + objName);
     }
 
     //登録されている全キャラクターをPlayerを見るようにする
@@ -481,21 +487,47 @@ public class ScenarioExec : MonoBehaviour
         player.GetComponent<CharacterController>().enabled = true;
     }
 
+    /// <summary>
+    /// Playerのコントローラーでの移動を禁止する
+    /// </summary>
     void CommandNoControll() {
         PlayerView.instance.canControll = false;
         DebugWindow.instance.DFDebug("Playerの操作無効化");
     }
 
+    /// <summary>
+    /// 指定したオブジェクト名の表情を変える
+    /// </summary>
+    /// <param name="characterName"></param>
+    /// <param name="emotion"></param>
     void CommandFace(string characterName, string emotion) {
         //表情は大文字で。
         emotion = emotion.ToUpper();
 
         GameObject.Find(characterName)
-            .GetComponent<FaceSystem>()
+            .GetComponent<AnimationSystem>()
             .SetFace(characterName, emotion);
         DebugWindow.instance.DFDebug("表情変更:" + characterName + "->" + emotion);
     }
 
+    /// <summary>
+    /// 指定したキャラクターをanchorまで移動させる
+    /// </summary>
+    /// <param name="characterName"></param>
+    /// <param name="anchorName"></param>
+    /// <param name="no"></param>
+    void CommandCharacterMove(string characterName, string anchorName, int no) {
+        GameObject anchor = GameObject.Find(anchorName);
+        GameObject character = GameObject.Find(characterName);
+        character.GetComponent<AnimationSystem>().MoveToObject(this, no, anchor);
+        DebugWindow.instance.DFDebug(characterName + "移動開始。" + anchorName + "まで");
+    }
+
+    public void StopCharacterMove(int no) {
+        DebugWindow.instance.DFDebug("キャラクター移動完了。シナリオ再開:" + (no + 1));
+        //シナリオはbreakしてるので、フェードが終わった後に再度シナリオを呼び出す
+        lineNo = exec(no + 1);
+    }
 
 
 

@@ -1,7 +1,7 @@
 NoControll	NoControll
 lookFromObject,Fei	lookFromObject,Fei
 【女性】「お、ようやく起きた」	[Female] "Oh, you finally woke up."
-■主人公のところまで歩かせる	■Make the protagonist walk over.
+CharacterMove,Fei,Anchor_3	CharacterMove,Fei,Anchor_3
 Face,Fei,SMILE	Face, Fei, SMILE
 	
 【女性】「おまえ、この酒場の前で倒れてたんだ」	[Female] "You were collapsed in front of this tavern."
@@ -23,14 +23,14 @@ dontknow,わからない……	dontknow, don't know......
 【フェイ】「ダンジョンならこの店を出て右手に真っすぐ」	[Fei] "If you're looking for a dungeon, leave this store and go straight to the right."
 【フェイ】「で、文無しさん。宿のあてとかあるのか？」	[Fei] "Oh, by the way, do you have a place to stay?"
 【フェイ】「…………その顔はないんだろ」	[Fei] "............I guess not with that expression on your face."
-goto,hata_1	goto, hata_1
+goto,#hata_1	goto,#hata_1
 	
 #dontknow	#dontknow
 【フェイ】「わからないって……。もしかして記憶喪失？」	[Fei] "You don't know... Could it be amnesia?"
 【フェイ】「まぁこの街に来るヤツは大抵ダンジョン目当てだけどな」	[Fei] "Well, most people who come to this town are after the dungeon anyway."
 【フェイ】「ダンジョンならこの店を出て右手に真っすぐ」	[Fei] "If you're looking for a dungeon, leave this store and go straight to the right."
 【フェイ】「で……その調子だと宿ももちろんなさそうだよな」	[Fei] "And... if things continue like this, you probably don't have a place to stay either."
-goto,hata_1	goto, hata_1
+goto,#hata_1	goto,#hata_1
 	
 #hata_1	#hata_1
 【フェイ】「さっきの部屋、貸しておいてもいいぞ」	[Fei] "You can use the room from earlier if you want."
@@ -47,12 +47,12 @@ myfoot,人の足元見やがって……	myfoot, looking down on me......
 #gotit	#gotit
 Face,Fei,SMILE	Face, Fei, SMILE
 【フェイ】「交渉成立」	[Fei] "Negotiation complete."
-goto,hata_2	goto, hata_2
+goto,#hata_2	goto,#hata_2
 	
 #myfoot	#myfoot
 Face,Fei,SMILE	Face, Fei, SMILE
 【フェイ】「人聞きが悪い。交渉だ、交渉」	[Fei] "You're being rude. It's a negotiation, a negotiation."
-goto,hata_2	goto, hata_2
+goto,#hata_2	goto,#hata_2
 	
 #hata_2	#hata_2
 【フェイ】「ま。あぶなくなったらウチに帰ってきなさいな」	[Fei] "Well, if you're in danger, come back to us."
