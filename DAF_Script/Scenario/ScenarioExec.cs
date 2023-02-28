@@ -28,7 +28,6 @@ public class ScenarioExec : MonoBehaviour
     //今1行実行中か
     bool isNowLineExecuting = false;
     bool isLookAt = false;
-    List<GameObject> listLookCharacter = new List<GameObject>();
     
 
     TextMeshProUGUI messageText;
@@ -52,7 +51,6 @@ public class ScenarioExec : MonoBehaviour
     void Update()
     {
         if (isLookAt) CommandLookAt(gameObject);
-        if (listLookCharacter.Count != 0) LookFromObject(listLookCharacter);
            
     }
 
@@ -106,8 +104,8 @@ public class ScenarioExec : MonoBehaviour
                 no++;
                 continue;
             }
-            else if (command == "lookfromobject") {
-                ComandLookFromObject(line[1]);
+            else if (command == "lookfromcharacter") {
+                ComandLookFromCharacter(line[1]);
                 no++;
                 continue;
             }
@@ -368,17 +366,11 @@ public class ScenarioExec : MonoBehaviour
     /// 指定したオブジェクトがPlayerを見るようにする
     /// </summary>
     /// <param name="objName"></param>
-    void ComandLookFromObject(string objName) {
+    void ComandLookFromCharacter(string objName) {
         GameObject obj = GameObject.Find(objName);
-        listLookCharacter.Add(obj);
+        AnimationSystem animationSystem = obj.GetComponent<AnimationSystem>();
+        animationSystem.isLook = true;
         DebugWindow.instance.DFDebug("LookFromObject : " + objName);
-    }
-
-    //登録されている全キャラクターをPlayerを見るようにする
-    void LookFromObject(List<GameObject> listLookCharacter) {
-        foreach(GameObject obj in listLookCharacter) {
-            CommandLookAt(obj);
-        }
     }
 
     //スイッチの数字の計算。+と-のみ。
@@ -603,7 +595,6 @@ public class ScenarioExec : MonoBehaviour
         isNowScenarioExec = false;
         isLookAt = false;
         messageText = null;
-        listLookCharacter = new List<GameObject>();
         PlayerView.instance.canControll = true;
         scenarioSystem.SetLock(false);
     }

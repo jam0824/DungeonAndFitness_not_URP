@@ -1,5 +1,5 @@
 NoControll	NoControll
-lookFromObject,Fei	lookFromObject,Fei
+lookFromCharacter,Fei	lookFromCharacter,Fei
 【女性】「お、ようやく起きた」	[Female] "Oh, you finally woke up."
 CharacterMove,Fei,Anchor_3	CharacterMove,Fei,Anchor_3
 Face,Fei,SMILE	Face, Fei, SMILE

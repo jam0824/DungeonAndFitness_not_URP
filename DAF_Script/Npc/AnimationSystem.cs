@@ -14,10 +14,28 @@ public class AnimationSystem : MonoBehaviour
     ScenarioExec scenarioExec;
     int lineNo;
 
+    public bool isLook { set; get; }
+
     private void Update() {
         if (toAnchor != null) Move(toAnchor);
+        if (isLook) LookAt(gameObject);
     }
 
+    /// <summary>
+    /// Playerの顔の方を見る
+    /// </summary>
+    /// <param name="me"></param>
+    void LookAt(GameObject me) {
+        SingletonGeneral.instance.LookAt(
+            SingletonGeneral.instance.face,
+            me);
+    }
+
+    /// <summary>
+    /// キャラクターの移動
+    /// anchorとの距離が既定以内なら止まる
+    /// </summary>
+    /// <param name="anchor"></param>
     private void Move(GameObject anchor) {
         SingletonGeneral.instance.LookAt(anchor, gameObject);
         Vector3 moveDir = gameObject.transform.forward;
@@ -29,7 +47,12 @@ public class AnimationSystem : MonoBehaviour
         
         if (IsDistanceAnchor(anchor, gameObject)) StopMove();
     }
-
+    /// <summary>
+    /// 2つのオブジェクト間の距離を測定して、既定距離以内でtrueを返す
+    /// </summary>
+    /// <param name="anchor"></param>
+    /// <param name="me"></param>
+    /// <returns></returns>
     bool IsDistanceAnchor(GameObject anchor, GameObject me) {
         float dist = FQCommon.Common.GetDistance(
             me.transform.position,
@@ -37,9 +60,12 @@ public class AnimationSystem : MonoBehaviour
         return (dist <= stopDistance) ? true : false;
     }
 
-    
-
-
+    /// <summary>
+    /// 表情を変える
+    /// キャラによって呼び出すファイルが違う
+    /// </summary>
+    /// <param name="characterName"></param>
+    /// <param name="emotion"></param>
     public void SetFace(string characterName, string emotion) {
         switch (characterName) {
             case "Fei":
@@ -58,6 +84,10 @@ public class AnimationSystem : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 歩きアニメーションのオンオフ
+    /// </summary>
+    /// <param name="isWalk"></param>
     public void SetWalk(bool isWalk) {
         Animator animator = GetComponent<Animator>();
         animator.SetBool("Walk", isWalk);
@@ -77,6 +107,9 @@ public class AnimationSystem : MonoBehaviour
         SetWalk(true);
     }
 
+    /// <summary>
+    /// Moveを止めるときに呼ばれる
+    /// </summary>
     void StopMove() {
         toAnchor = null;
         SetWalk(false);
