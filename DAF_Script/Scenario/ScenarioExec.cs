@@ -87,7 +87,7 @@ public class ScenarioExec : MonoBehaviour
         while (true) {
             DebugWindow.instance.DFDebug("LineNo:" + no);
             string[] line = listScenarioCsv[no];
-            string command = line[0];
+            string command = line[0].ToLower();
             
             if (command == "") {
                 no++;
@@ -155,6 +155,11 @@ public class ScenarioExec : MonoBehaviour
                 no++;
                 continue;
             }
+            else if (command == "nocontroll") {
+                CommandNoControll();
+                no++;
+                continue;
+            }
             else if (command == "destroy") {
                 CommandDestroy();
                 break;
@@ -178,7 +183,7 @@ public class ScenarioExec : MonoBehaviour
     //会話だった場合
     void CommandShowMessage(string[] line) {
         ShowWindowCanvas();
-        nowMessage = FixMessage(line[0]);
+        nowMessage = FixMessage(string.Join(",", line));
         StartCoroutine(ShowMessage(nowMessage));
         /*
         //会話文だった場合は1文字ずつ表示
@@ -198,6 +203,7 @@ public class ScenarioExec : MonoBehaviour
         line = line.Replace("】", "】\n");
         line = line.Replace("]", "]\n");
         line = line.Replace("<br>", "\n");
+        line = line.Replace(":", "");
         return line;
     }
 
@@ -391,15 +397,6 @@ public class ScenarioExec : MonoBehaviour
         SingletonGeneral.instance.labelInformationText.SetInformationLabel(labelKey);
     }
 
-    //会話終了
-   void CommandEnd() {
-        CloseWindowCanvas();
-        
-        DebugWindow.instance.DFDebug("会話終了");
-        //会話終了後、判定と重なっているためすぐ次の話になる。コールチンで待ち時間を入れる
-        StartCoroutine("ResetFlag");
-    }
-
     /// <summary>
     /// ScenarioExecがついたオブジェクトを消去する
     /// </summary>
@@ -422,6 +419,11 @@ public class ScenarioExec : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
+    /// <summary>
+    /// キャラクターの同じシーン内の移動。フェード付き
+    /// </summary>
+    /// <param name="targetObjectName"></param>
+    /// <param name="no"></param>
     void CommandMove(string targetObjectName, int no) {
         DebugWindow.instance.DFDebug("移動：" + targetObjectName);
         StartCoroutine(Move(targetObjectName, no));
@@ -451,6 +453,23 @@ public class ScenarioExec : MonoBehaviour
         player.GetComponent<CharacterController>().enabled = true;
     }
 
+    void CommandNoControll() {
+        DebugWindow.instance.DFDebug("Playerの操作無効化");
+        PlayerView.instance.canControll = false;
+    }
+
+
+
+
+    //会話終了
+    void CommandEnd() {
+        CloseWindowCanvas();
+
+        DebugWindow.instance.DFDebug("会話終了");
+        //会話終了後、判定と重なっているためすぐ次の話になる。コールチンで待ち時間を入れる
+        StartCoroutine("ResetFlag");
+    }
+
     //各種フラグリセット
     IEnumerator ResetFlag() {
         yield return new WaitForSeconds(0.5f);
@@ -462,6 +481,7 @@ public class ScenarioExec : MonoBehaviour
         isNowScenarioExec = false;
         isLookAt = false;
         messageText = null;
+        PlayerView.instance.canControll = true;
         scenarioSystem.SetLock(false);
     }
 

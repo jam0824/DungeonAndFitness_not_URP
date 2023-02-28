@@ -30,8 +30,8 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MoveToUseController();
-        MoveToUseKeyboard();
+        MoveToUseController(PlayerView.instance.canControll);
+        MoveToUseKeyboard(PlayerView.instance.canControll);
         WalkSE();
 
         DebugSave();
@@ -66,7 +66,9 @@ public class PlayerMove : MonoBehaviour
         oldPos = transform.position;
     }
 
-    private void MoveToUseController() {
+    private void MoveToUseController(bool isControll) {
+        if (!isControll) return;
+
         moveH = OVRInput.Get(OVRInput.RawAxis2D.LThumbstick).x;
         moveV = OVRInput.Get(OVRInput.RawAxis2D.LThumbstick).y;
         rotateH = OVRInput.Get(OVRInput.RawAxis2D.RThumbstick).x;
@@ -85,7 +87,9 @@ public class PlayerMove : MonoBehaviour
 
     }
 
-    private void MoveToUseKeyboard() {
+    private void MoveToUseKeyboard(bool isControll) {
+        if (!isControll) return;
+
         moveH = 0.0f;
         moveV = 0.0f;
         if (Input.GetKey(KeyCode.LeftArrow)) {

@@ -9420,6 +9420,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2b3d9efccc849e42855d72eb1be4710, type: 3}
+--- !u!1 &1590474137 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1095434146202472896, guid: b2b3d9efccc849e42855d72eb1be4710, type: 3}
+  m_PrefabInstance: {fileID: 1590474136}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &1590474138 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1095434146214042938, guid: b2b3d9efccc849e42855d72eb1be4710, type: 3}
+  m_PrefabInstance: {fileID: 1590474136}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1590474139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590474137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da406277b6d1bf142a08847067e5b47c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skinedMeshRenderer: {fileID: 1590474138}
 --- !u!1001 &1612482798
 PrefabInstance:
   m_ObjectHideFlags: 0

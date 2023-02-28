@@ -13,6 +13,8 @@ public class PlayerView : MonoBehaviour
     public AudioSource audioSource { get; set; }
     public GameObject face { get; set; }
 
+    public bool canControll = true;
+
     [SerializeField]
     public GameObject CameraC;
     public GameObject rightPlayerPunch;
