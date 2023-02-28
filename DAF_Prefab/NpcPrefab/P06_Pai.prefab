@@ -3586,6 +3586,8 @@ GameObject:
   - component: {fileID: 1095434146202570144}
   - component: {fileID: 1095434146209735674}
   - component: {fileID: 2940979936951844977}
+  - component: {fileID: 1590474139}
+  - component: {fileID: 1590474143}
   m_Layer: 0
   m_Name: P06_Pai
   m_TagString: Untagged
@@ -3600,7 +3602,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1095434146202472896}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 209.827, y: -2.4, z: -23.7462}
   m_LocalScale: {x: 1.15, y: 1.15, z: 1.15}
   m_ConstrainProportionsScale: 0
@@ -3625,7 +3627,7 @@ Animator:
   m_GameObject: {fileID: 1095434146202472896}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 57b3fa2c2257eba44ad1d12f6272e542, type: 3}
-  m_Controller: {fileID: 9100000, guid: 332ae60adb2b6664abcb75f5a751c16b, type: 2}
+  m_Controller: {fileID: 9100000, guid: e8da1b652c448d44b831aeaa306bd8f4, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -3653,6 +3655,31 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.75, z: 0}
+--- !u!114 &1590474139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095434146202472896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da406277b6d1bf142a08847067e5b47c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skinedMeshRenderer: {fileID: 1095434146214042938}
+--- !u!114 &1590474143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095434146202472896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd3be4bd60dbee14582677cd11ed2159, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1095434146202472898
 GameObject:
   m_ObjectHideFlags: 0
@@ -4932,7 +4959,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: -0.17570011, y: 0.9938812, z: 0.11222914}
   m_RotationAtRest: {x: -45.42014, y: 179.99998, z: -180}
   m_TranslationOffsets:
-  - {x: 0.13502884, y: -0.07784617, z: -0.106796265}
+  - {x: 0.13502955, y: -0.07784641, z: -0.10679424}
   m_RotationOffsets:
   - {x: 45.288315, y: -90.22325, z: 0.41269147}
   m_AffectTranslationX: 1
@@ -5054,7 +5081,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8612005570793576595}
   m_LocalRotation: {x: -0.92201614, y: -0.004670106, z: -0.00000095181167, w: 0.3871233}
-  m_LocalPosition: {x: -0.1776123, y: 0.9903842, z: 0.110239774}
+  m_LocalPosition: {x: -0.17760754, y: 0.9903842, z: 0.11023915}
   m_LocalScale: {x: 0.9858598, y: 0.9858611, z: 0.9858612}
   m_ConstrainProportionsScale: 0
   m_Children:

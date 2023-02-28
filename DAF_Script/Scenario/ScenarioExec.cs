@@ -28,6 +28,7 @@ public class ScenarioExec : MonoBehaviour
     //今1行実行中か
     bool isNowLineExecuting = false;
     bool isLookAt = false;
+    List<GameObject> listLookCharacter = new List<GameObject>();
     
 
     TextMeshProUGUI messageText;
@@ -50,7 +51,8 @@ public class ScenarioExec : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isLookAt) CommandLookAt();
+        if (isLookAt) CommandLookAt(gameObject);
+        if (listLookCharacter.Count != 0) LookFromObject(listLookCharacter);
            
     }
 
@@ -99,7 +101,12 @@ public class ScenarioExec : MonoBehaviour
             }
             else if (command == "look") {
                 isLookAt = true;
-                CommandLookAt();
+                CommandLookAt(gameObject);
+                no++;
+                continue;
+            }
+            else if (command == "lookfromobject") {
+                ComandLookFromObject(line[1]);
                 no++;
                 continue;
             }
@@ -157,6 +164,11 @@ public class ScenarioExec : MonoBehaviour
             }
             else if (command == "nocontroll") {
                 CommandNoControll();
+                no++;
+                continue;
+            }
+            else if (command == "face") {
+                CommandFace(line[1], line[2]);
                 no++;
                 continue;
             }
@@ -316,10 +328,26 @@ public class ScenarioExec : MonoBehaviour
     }
 
     //Playerを見るようにする
-    void CommandLookAt() {
+    void CommandLookAt(GameObject obj) {
         SingletonGeneral.instance.LookAt(
             SingletonGeneral.instance.face, 
-            gameObject);
+            obj);
+    }
+
+    /// <summary>
+    /// 指定したオブジェクトがPlayerを見るようにする
+    /// </summary>
+    /// <param name="objName"></param>
+    void ComandLookFromObject(string objName) {
+        GameObject obj = GameObject.Find(objName);
+        listLookCharacter.Add(obj);
+    }
+
+    //登録されている全キャラクターをPlayerを見るようにする
+    void LookFromObject(List<GameObject> listLookCharacter) {
+        foreach(GameObject obj in listLookCharacter) {
+            CommandLookAt(obj);
+        }
     }
 
     //スイッチの数字の計算。+と-のみ。
@@ -454,8 +482,18 @@ public class ScenarioExec : MonoBehaviour
     }
 
     void CommandNoControll() {
-        DebugWindow.instance.DFDebug("Playerの操作無効化");
         PlayerView.instance.canControll = false;
+        DebugWindow.instance.DFDebug("Playerの操作無効化");
+    }
+
+    void CommandFace(string characterName, string emotion) {
+        //表情は大文字で。
+        emotion = emotion.ToUpper();
+
+        GameObject.Find(characterName)
+            .GetComponent<FaceSystem>()
+            .SetFace(characterName, emotion);
+        DebugWindow.instance.DFDebug("表情変更:" + characterName + "->" + emotion);
     }
 
 
@@ -481,6 +519,7 @@ public class ScenarioExec : MonoBehaviour
         isNowScenarioExec = false;
         isLookAt = false;
         messageText = null;
+        listLookCharacter = new List<GameObject>();
         PlayerView.instance.canControll = true;
         scenarioSystem.SetLock(false);
     }

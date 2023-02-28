@@ -1,0 +1,61 @@
+NoControll	NoControll
+lookFromObject,Fei	lookFromObject,Fei
+【女性】「お、ようやく起きた」	[Female] "Oh, you finally woke up."
+■主人公のところまで歩かせる	■Make the protagonist walk over.
+Face,Fei,SMILE	Face, Fei, SMILE
+	
+【女性】「おまえ、この酒場の前で倒れてたんだ」	[Female] "You were collapsed in front of this tavern."
+【女性】「放っておこうと思ったけど、店の前で倒れられてたら人来なくなっちゃうだろ？」	[Female] "I was going to leave you there, but if you collapsed in front of the store, no one would come."
+【女性】「で、仕方ないから空き部屋で寝かせておいたってわけ」	[Female] "So, I had no choice but to let you sleep in a vacant room."
+【女性】「何も取ったりしてないから安心してくれ。というかあんたは何も持ってなかったけど」	[Female] "Don't worry, I didn't take anything from you. Actually, you didn't have anything on you."
+【女性】「ここはアタシがやってる酒場兼宿屋」	[Female] "This place is a tavern and inn run by me."
+【フェイ】「で、アタシはフェイ。あんたは？」	[Fei] "By the way, I'm Fei. And you are?"
+	
+Face,Fei,NORMAL	Face, Fei, NORMAL
+【フェイ】「カイルね。で、そのぶっ倒れてたカイルはどうしたわけさ？」	[Fei] "Kyle, right? So, what happened to the collapsed Kyle?"
+	
+select	select
+iseki,遺跡にきた	iseki, came to the ruins
+dontknow,わからない……	dontknow, don't know......
+	
+#iseki	#iseki
+【フェイ】「遺跡……あぁ、やっぱりダンジョン目当てか。一攫千金ってやつ」	[Fei] "Ruins... I see, you must be after the dungeon for the big payout."
+【フェイ】「ダンジョンならこの店を出て右手に真っすぐ」	[Fei] "If you're looking for a dungeon, leave this store and go straight to the right."
+【フェイ】「で、文無しさん。宿のあてとかあるのか？」	[Fei] "Oh, by the way, do you have a place to stay?"
+【フェイ】「…………その顔はないんだろ」	[Fei] "............I guess not with that expression on your face."
+goto,hata_1	goto, hata_1
+	
+#dontknow	#dontknow
+【フェイ】「わからないって……。もしかして記憶喪失？」	[Fei] "You don't know... Could it be amnesia?"
+【フェイ】「まぁこの街に来るヤツは大抵ダンジョン目当てだけどな」	[Fei] "Well, most people who come to this town are after the dungeon anyway."
+【フェイ】「ダンジョンならこの店を出て右手に真っすぐ」	[Fei] "If you're looking for a dungeon, leave this store and go straight to the right."
+【フェイ】「で……その調子だと宿ももちろんなさそうだよな」	[Fei] "And... if things continue like this, you probably don't have a place to stay either."
+goto,hata_1	goto, hata_1
+	
+#hata_1	#hata_1
+【フェイ】「さっきの部屋、貸しておいてもいいぞ」	[Fei] "You can use the room from earlier if you want."
+【フェイ】「ダンジョンで稼いで宿代を払ってくれ。あと……」	[Fei] "Earn money in the dungeon and pay for your stay. Also..."
+【フェイ】「この店、料理にはダンジョンのモンスターも使ってるんだ」	[Fei] "This store uses monsters from the dungeon in their dishes."
+【フェイ】「……変な顔するなよ。旨い肉も多いんだ、あのダンジョンのモンスター」	[Fei] ".....Don't make a weird face. There's also delicious meat from those dungeon monsters."
+【フェイ】「だからダンジョンに行ったらモンスターの肉も持って帰ってきてほしい」	[Fei] "So, when you go to the dungeon, please bring back some monster meat for us."
+【フェイ】「どうだ？」	[Fei] "What do you say?"
+	
+select	select
+gotit,わかった	gotit, understood
+myfoot,人の足元見やがって……	myfoot, looking down on me......
+	
+#gotit	#gotit
+Face,Fei,SMILE	Face, Fei, SMILE
+【フェイ】「交渉成立」	[Fei] "Negotiation complete."
+goto,hata_2	goto, hata_2
+	
+#myfoot	#myfoot
+Face,Fei,SMILE	Face, Fei, SMILE
+【フェイ】「人聞きが悪い。交渉だ、交渉」	[Fei] "You're being rude. It's a negotiation, a negotiation."
+goto,hata_2	goto, hata_2
+	
+#hata_2	#hata_2
+【フェイ】「ま。あぶなくなったらウチに帰ってきなさいな」	[Fei] "Well, if you're in danger, come back to us."
+【フェイ】「じゃ、気をつけて」	[Fei] "Alright, take care."
+destroy	destroy
+end	end
