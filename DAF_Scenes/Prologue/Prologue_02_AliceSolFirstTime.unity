@@ -1024,7 +1024,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8224956343171326964}
-  m_LocalRotation: {x: -0.4511846, y: -0.54445606, z: 0.5456686, w: 0.4497175}
+  m_LocalRotation: {x: -0.45524698, y: -0.54106396, z: 0.54228556, w: 0.4537911}
   m_LocalPosition: {x: -0.018460466, y: -0.03826488, z: -0.0015869892}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1032,7 +1032,7 @@ Transform:
   - {fileID: 5024368288719997987}
   m_Father: {fileID: 7440349400031721086}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 10, y: -90, z: 90.154}
 --- !u!4 &362705790735462540
 Transform:
   m_ObjectHideFlags: 0
@@ -7491,7 +7491,7 @@ GameObject:
   m_Component:
   - component: {fileID: 292557094210662235}
   m_Layer: 0
-  m_Name: Jaw
+  m_Name: Jaw_Sol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7698,6 +7698,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9165252964750639156}
   - component: {fileID: 3013376368952154702}
+  - component: {fileID: 9165252964750639157}
   m_Layer: 0
   m_Name: Sol
   m_TagString: Untagged
@@ -9991,6 +9992,19 @@ Transform:
   m_Father: {fileID: 43347716}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9165252964750639157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8393115068119554702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 786371e726b7cff468c1029671ae8045, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jaw: {fileID: 8224956343171326964}
 --- !u!4 &9173717874046645076
 Transform:
   m_ObjectHideFlags: 0
