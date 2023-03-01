@@ -14,20 +14,22 @@ public class AnimationSystem : MonoBehaviour
     ScenarioExec scenarioExec;
     int lineNo;
 
+
     public bool isLook { set; get; }
+    public GameObject lookTarget { set; get; }
 
     private void Update() {
         if (toAnchor != null) Move(toAnchor);
-        if (isLook) LookAt(gameObject);
+        if (isLook) LookAt(lookTarget, gameObject);
     }
 
     /// <summary>
     /// Player‚ÌŠç‚Ì•û‚ðŒ©‚é
     /// </summary>
     /// <param name="me"></param>
-    void LookAt(GameObject me) {
+    void LookAt(GameObject target, GameObject me) {
         SingletonGeneral.instance.LookAt(
-            SingletonGeneral.instance.face,
+            target,
             me);
     }
 

@@ -125,6 +125,11 @@ public class ScenarioExec : MonoBehaviour
                 no++;
                 continue;
             }
+            else if (command == "lookcharactertocharacter") {
+                CommandLookCharaceterToCharacter(line[1], line[2]);
+                no++;
+                continue;
+            }
             else if (command == "goto") {
                 no = CommandGoto(line[1], listScenarioCsv);
                 continue;
@@ -416,6 +421,7 @@ public class ScenarioExec : MonoBehaviour
     void ComandLookFromCharacter(string objName) {
         GameObject obj = GameObject.Find(objName);
         AnimationSystem animationSystem = obj.GetComponent<AnimationSystem>();
+        animationSystem.lookTarget = SingletonGeneral.instance.face;
         animationSystem.isLook = true;
         DebugWindow.instance.DFDebug("LookFromCharacter : " + objName);
     }
@@ -425,6 +431,19 @@ public class ScenarioExec : MonoBehaviour
         AnimationSystem animationSystem = obj.GetComponent<AnimationSystem>();
         animationSystem.isLook = false;
         DebugWindow.instance.DFDebug("LookOffFromCharacter : " + objName);
+    }
+
+    /// <summary>
+    /// LookCharacterToCharacter,動作対象,見るキャラ
+    /// </summary>
+    /// <param name="characterName"></param>
+    /// <param name="targetName"></param>
+    void CommandLookCharaceterToCharacter(string characterName, string targetName) {
+        GameObject obj = GameObject.Find(characterName);
+        AnimationSystem animationSystem = obj.GetComponent<AnimationSystem>();
+        animationSystem.lookTarget = GameObject.Find(targetName);
+        animationSystem.isLook = true;
+        DebugWindow.instance.DFDebug("LookCharacterToCharacter : " + characterName + "->" + targetName);
     }
 
     //スイッチの数字の計算。+と-のみ。
