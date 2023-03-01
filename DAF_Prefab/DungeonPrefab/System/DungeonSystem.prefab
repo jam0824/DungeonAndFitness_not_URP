@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7d9dccf771081047a6234e0446557db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDungeon: 0
   Enemies:
   - {fileID: 7216672471935525616, guid: c9ae018435723d145876f9c35af2a49b, type: 3}
   ENEMY_MAX: 20
@@ -67,7 +68,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 8dfc3ed2b341d754c9b23504914eb4a9, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ac5ecfe949129024e8c2a604f4264d1a, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.8
   m_Pitch: 1

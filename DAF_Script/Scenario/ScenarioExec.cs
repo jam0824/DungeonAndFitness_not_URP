@@ -345,6 +345,7 @@ public class ScenarioExec : MonoBehaviour
     }
 
     /// <summary>
+    /// if,条件,trueの時,falseの時
     /// 条件がヒットしたときはtrueFlagへ、違うときはfalseFlagに飛ぶ
     /// 条件は&でつなげることができる
     /// </summary>
@@ -581,6 +582,8 @@ public class ScenarioExec : MonoBehaviour
     void CommandFace(string characterName, string emotion) {
         //表情は大文字で。
         emotion = emotion.ToUpper();
+        //英訳にピリオドがついていることがある
+        emotion = emotion.Replace(".", "");
 
         GameObject.Find(characterName)
             .GetComponent<AnimationSystem>()

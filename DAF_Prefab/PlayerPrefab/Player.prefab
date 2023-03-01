@@ -4727,7 +4727,7 @@ CharacterController:
   serializedVersion: 2
   m_Height: 1
   m_Radius: 0.01
-  m_SlopeLimit: 45
+  m_SlopeLimit: 60
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
@@ -4759,6 +4759,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e9e801ed8c0fce4b896d30d2d049d41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canControll: 1
   CameraC: {fileID: 8084770729159884677}
   rightPlayerPunch: {fileID: 8084770729635542817}
   leftPlayerPunch: {fileID: 7759126702173369851}

@@ -1,78 +1,121 @@
 look	look
-Face,Fei,FUN	Face,Fei,FUN
-【フェイ】「ん？ どうした？」	【フェイ】「ん？ どうした？」
+Face,Fei,FUN	Face, Fei, FUN.
+【フェイ】「ん？ どうした？」	[Fei]: "Hm? What's up?"
 	
 select	select
-select_1,服が気になる	select_1,服が気になる
-select_2,酒場が気になる	select_2,酒場が気になる
-select_3,宿屋が気になる	select_3,宿屋が気になる
+select_1,服が気になる	select_1, Worried about clothes.
+select_2,酒場が気になる	select_2, Interested in the tavern.
+select_3,宿屋が気になる	select_3, Interested in the inn.
 	
-//選択肢2番目	//選択肢2番目
+//選択肢3番目	// Third option
+#select_3	#select_3
+case,prologue_01_fei_select_3	case, prologue_01_fei_select_3
+1,#select_3_1	1, #select_3_1
+2,#select_3_2	2, #select_3_2
+3,#select_3_3	3, #select_3_3
+4,#select_3_4	4, #select_3_4
+default,#select_3_0	default, #select_3_0
+	
+#select_3_0	#select_3_0
+【フェイ】「ここは2階が宿屋になってるな」	[Fei]: "The second floor of this place is an inn."
+【フェイ】「おまえの部屋は二階の一番奥の「つばめの部屋」な。間違えるなよ」	[Fei]: "Your room is the 'Swallow Room' at the far end of the second floor. Don't get lost."
+set,prologue_01_fei_select_3=1	set, prologue_01_fei_select_3=1
+end	end
+	
+#select_3_1	#select_3_1
+【フェイ】「酒場で酔いつぶれた客は空き部屋に放り込む」	[Fei]: "Any drunken customers in the tavern will be thrown into an empty room."
+Face,Fei,DOYA	Face, Fei, DOYA.
+【フェイ】「そして次の日に宿泊代金をもらう」	[Fei]: "Then, the next day, we'll collect the lodging fee."
+【フェイ】「どうだ、一石二鳥だろ？」	[Fei]: "How's that for killing two birds with one stone?"
+set,prologue_01_fei_select_3=2	set, prologue_01_fei_select_3=2
+end	end
+	
+#select_3_2	#select_3_2
+【フェイ】「無理やり宿泊させられて宿代を踏み倒そうとするやつはいないのか、って？」	[Fei]: "Is there anyone trying to stay without paying, even if they are forced to stay here?"
+Face,Fei,JOY	Face, Fei, JOY.
+【フェイ】「アタシは腕っぷしも強いんだ」	[Fei]: "I'm pretty strong, you know."
+【フェイ】「もし宿代を踏み倒そうっていうなら、相応の覚悟があるってことだな」	[Fei]: "If someone tries to skip out on their bill, they'd better be ready for the consequences."
+set,prologue_01_fei_select_3=3	set, prologue_01_fei_select_3=3
+end	end
+	
+#select_3_3	#select_3_3
+【フェイ】「今日の宿泊客はまだおまえだけだな」	[Fei]: "You're the only guest today."
+【フェイ】「この街には他にも宿屋があるからな。宿泊客殺到なんてことはないから、今の部屋をしばらく使っていいぞ」	[Fei]: "There are other inns in this town, so don't worry about a rush of guests. You can use this room for a while."
+Face,Fei,JITO	Face, Fei, JITO.
+【フェイ】「さっきのダンジョンのモンスターの肉を持ってくる約束、忘れんなよ」	[Fei]: "Don't forget the promise to bring the monster meat from the dungeon earlier."
+set,prologue_01_fei_select_3=4	set, prologue_01_fei_select_3=4
+end	end
+	
+#select_3_4	#select_3_4
+【フェイ】「部屋にあるタンスも使っていいぞ。持ちきれない荷物を入れたりすればいい」	[Fei]: "You can use the chest in the room too. Put anything you can't carry in there."
+【フェイ】「部屋は好きに使っていいけどな……」	[Fei]: "Feel free to use the room however you want..."
+Face,Fei,JITO	Face, Fei, JITO.
+【フェイ】「部屋を汚したら自分で掃除しろよ」	[Fei]: "But if you make a mess, clean it up yourself."
+end	end
+	
+//選択肢2番目	// Second option
 #select_2	#select_2
-case,prologue_01_fei_select_2	case,prologue_01_fei_select_2
-1,#select_2_1	1,#select_2_1
-2,#select_2_2	2,#select_2_2
-3,#select_2_3	3,#select_2_3
-4,#select_2_4	4,#select_2_4
-default,#select_2_0	default,#select_2_0
+case,prologue_01_fei_select_2	case, prologue_01_fei_select_2
+1,#select_2_1	1, #select_2_1
+2,#select_2_2	2, #select_2_2
+3,#select_2_3	3, #select_2_3
+4,#select_2_4	4, #select_2_4
+default,#select_2_0	default, #select_2_0
 	
 #select_2_0	#select_2_0
-Face,Fei,FUN	Face,Fei,FUN
-【フェイ】「この酒場兼宿屋は「海賊のアジト」だな」	【フェイ】「この酒場兼宿屋は「海賊のアジト」だな」
-【フェイ】「酒も飲めるし泊まることだってできるぞ」	【フェイ】「酒も飲めるし泊まることだってできるぞ」
-【フェイ】「ま、小さい店だけどアタシの居場所ってとこだ」	【フェイ】「ま、小さい店だけどアタシの居場所ってとこだ」
-set,prologue_01_fei_select_2=1	set,prologue_01_fei_select_2=1
+Face,Fei,FUN	Face, Fei, FUN.
+【フェイ】「この酒場兼宿屋は「海賊のアジト」だな」	[Fei]: "This tavern is also an inn, and it's the 'Pirate's Hideout.'"
+【フェイ】「酒も飲めるし泊まることだってできるぞ」	[Fei]: "You can drink and stay here."
+【フェイ】「ま、小さい店だけどアタシの居場所ってとこだ」	[Fei]: "Well, it's a small place, but it's where I belong."
+set,prologue_01_fei_select_2=1	set, prologue_01_fei_select_2=1
 end	end
 	
 #select_2_1	#select_2_1
-【フェイ】「いっつも飲みに来る常連もいるな」	【フェイ】「いっつも飲みに来る常連もいるな」
-【フェイ】「ソルに、ジョージ博士だろ。それにロバートとか……」	【フェイ】「ソルに、ジョージ博士だろ。それにロバートとか……」
-Face,Fei,DOYA	Face,Fei,DOYA
-【フェイ】「みんなアタシの料理の腕にメロメロなわけだ」	【フェイ】「みんなアタシの料理の腕にメロメロなわけだ」
-set,prologue_01_fei_select_2=2	set,prologue_01_fei_select_2=2
+【フェイ】「いっつも飲みに来る常連もいるな」	[Fei]: "There are regulars who come here to drink all the time."
+【フェイ】「ソルに、ジョージ博士だろ。それにロバートとか……」	[Fei]: "Like Sol, Dr. George, and Robert..."
+Face,Fei,DOYA	Face, Fei, DOYA.
+【フェイ】「みんなアタシの料理の腕にメロメロなわけだ」	[Fei]: "They're all smitten with my cooking skills."
+set,prologue_01_fei_select_2=2	set, prologue_01_fei_select_2=2
 end	end
 	
 #select_2_2	#select_2_2
-【フェイ】「料理は街で買ったものがほとんどだけどな、ウチの売りは……」	【フェイ】「料理は街で買ったものがほとんどだけどな、ウチの売りは……」
-【フェイ】「ダンジョンのモンスターの肉だな！」	【フェイ】「ダンジョンのモンスターの肉だな！」
-【フェイ】「……だからそんな顔するなって。けっこう美味いんだぞ」	【フェイ】「……だからそんな顔するなって。けっこう美味いんだぞ」
+【フェイ】「料理は街で買ったものがほとんどだけどな、ウチの売りは……」	[Fei]: "Most of the dishes I serve are bought from the town, but our specialty is..."
+【フェイ】「ダンジョンのモンスターの肉だな！」	[Fei]: "Meat from dungeon monsters!"
+【フェイ】「……だからそんな顔するなって。けっこう美味いんだぞ」	[Fei]: "...so don't make that face. It's actually quite delicious."
 Face,Fei,SMILE	Face,Fei,SMILE
-【フェイ】「マズイ肉もあるけど、まぁ、アタシの腕にかかればどんな肉だって一級の料理に変わるな」	【フェイ】「マズイ肉もあるけど、まぁ、アタシの腕にかかればどんな肉だって一級の料理に変わるな」
+【フェイ】「マズイ肉もあるけど、まぁ、アタシの腕にかかればどんな肉だって一級の料理に変わるな」	[Fei]: "There are some bad cuts of meat, but with my skills, any meat can become a first-class dish."
 set,prologue_01_fei_select_2=3	set,prologue_01_fei_select_2=3
 end	end
 	
 #select_2_3	#select_2_3
-【フェイ】「肉は客に獲ってきてもらってる」	【フェイ】「肉は客に獲ってきてもらってる」
+【フェイ】「肉は客に獲ってきてもらってる」	[Fei]: "I have my customers bring me the meat."
 Face,Fei,JITO	Face,Fei,JITO
-【フェイ】「……オイ、おまえ今、アタシが客から巻き上げてると思っただろ」	【フェイ】「……オイ、おまえ今、アタシが客から巻き上げてると思っただろ」
-【フェイ】「ちゃんと仕入れ代ってことで金は払ってるからな」	【フェイ】「ちゃんと仕入れ代ってことで金は払ってるからな」
+【フェイ】「……オイ、おまえ今、アタシが客から巻き上げてると思っただろ」	[Fei]: "...Hey, you're not thinking that I'm robbing my customers, are you?"
+【フェイ】「ちゃんと仕入れ代ってことで金は払ってるからな」	[Fei]: "I pay for the meat, so don't worry."
 set,prologue_01_fei_select_2=4	set,prologue_01_fei_select_2=4
 end	end
 	
 #select_2_4	#select_2_4
 Face,Fei,FUN	Face,Fei,FUN
-【フェイ】「さて、今日は何を店で出すかな」	【フェイ】「さて、今日は何を店で出すかな」
+【フェイ】「さて、今日は何を店で出すかな」	[Fei]: "Now, what should I serve today?"
 end	end
 	
-	
-	
-	
-//選択肢1番目	//選択肢1番目
+//選択肢1番目	// Choice 1
 #select_1	#select_1
 if,fei_first_flag=5,#select_1_5,#select_1_4	if,fei_first_flag=5,#select_1_5,#select_1_4
 	
 #select_1_5	#select_1_5
 Face,Fei,JITO	Face,Fei,JITO
-【フェイ】「おまえな」	【フェイ】「おまえな」
-【フェイ】「踏むぞ」	【フェイ】「踏むぞ」
+【フェイ】「おまえな」	[Fei]: "Hey, you."
+【フェイ】「踏むぞ」	[Fei]: "I'll step on you."
 end	end
 	
 #select_1_4	#select_1_4
 if,fei_first_flag=4,#select_1_4_1,#select_1_3	if,fei_first_flag=4,#select_1_4_1,#select_1_3
 #select_1_4_1	#select_1_4_1
 Face,Fei,JITO	Face,Fei,JITO
-【フェイ】「…………おい」	【フェイ】「…………おい」
-【フェイ】「そろそろ見学料をもらうぞ」	【フェイ】「そろそろ見学料をもらうぞ」
+【フェイ】「…………おい」	[Fei]: "............Hey."
+【フェイ】「そろそろ見学料をもらうぞ」	[Fei]: "It's about time I collect the admission fee for watching."
 set,fei_first_flag=5	set,fei_first_flag=5
 end	end
 	
@@ -80,9 +123,9 @@ end	end
 if,fei_first_flag=3,#select_1_3_1,#select_1_2	if,fei_first_flag=3,#select_1_3_1,#select_1_2
 #select_1_3_1	#select_1_3_1
 Face,Fei,JITO	Face,Fei,JITO
-【フェイ】「…………」	【フェイ】「…………」
-【フェイ】「見たいのはわかる。けどな」	【フェイ】「見たいのはわかる。けどな」
-【フェイ】「凝視するな」	【フェイ】「凝視するな」
+【フェイ】「…………」	[Fei]: "............"
+【フェイ】「見たいのはわかる。けどな」	[Fei]: "I understand you want to watch, but..."
+【フェイ】「凝視するな」	[Fei]: "Don't stare at me like that."
 set,fei_first_flag=4	set,fei_first_flag=4
 end	end
 	
@@ -90,25 +133,23 @@ end	end
 if,fei_first_flag=2,#select_1_2_1,#select_1_1	if,fei_first_flag=2,#select_1_2_1,#select_1_1
 #select_1_2_1	#select_1_2_1
 Face,Fei,JITO	Face,Fei,JITO
-【フェイ】「……どこ見てんだよ？」	【フェイ】「……どこ見てんだよ？」
-【フェイ】「目線には敏感なんだからな」	【フェイ】「目線には敏感なんだからな」
+【フェイ】「……どこ見てんだよ？」	[Fei]: ".....What are you looking at?"
+【フェイ】「目線には敏感なんだからな」	[Fei] "I'm sensitive to where people are looking."
 set,fei_first_flag=3	set,fei_first_flag=3
 end	end
 	
 #select_1_1	#select_1_1
 if,fei_first_flag=1,#select_1_1_1,#select_1_0	if,fei_first_flag=1,#select_1_1_1,#select_1_0
-#select_1_1_1	#select_1_1_1
-Face,Fei,DOYA	Face,Fei,DOYA
-【フェイ】「ふふーん、結構アタシを見たいから来る客も多いんだぞ」	【フェイ】「ふふーん、結構アタシを見たいから来る客も多いんだぞ」
-【フェイ】「美人の女主人とか、海賊フェイ様、とか言われてるな」	【フェイ】「美人の女主人とか、海賊フェイ様、とか言われてるな」
+#select_1_1_1	Face,Fei,DOYA
+Face,Fei,DOYA	
+【フェイ】「ふふーん、結構アタシを見たいから来る客も多いんだぞ」	[Fei]: "Hehe, a lot of customers come here just to see me."
+【フェイ】「美人の女主人とか、海賊フェイ様、とか言われてるな」	[Fei]: "They call me the beautiful proprietress or Pirate Fei-sama."
 set,fei_first_flag=2	set,fei_first_flag=2
 end	end
 	
-	
-	
 #select_1_0	#select_1_0
-【フェイ】「この服か？ かっこいいだろ？」	【フェイ】「この服か？ かっこいいだろ？」
-【フェイ】「このリーベンの街も酒場が多いからな。差別化が必要なんだよ」	【フェイ】「このリーベンの街も酒場が多いからな。差別化が必要なんだよ」
-【フェイ】「この酒場は海賊の女主人が売りってわけさ」	【フェイ】「この酒場は海賊の女主人が売りってわけさ」
+【フェイ】「この服か？ かっこいいだろ？」	[Fei]: "This outfit? It looks cool, right?"
+【フェイ】「このリーベンの街も酒場が多いからな。差別化が必要なんだよ」	[Fei]: "There are many bars in this Leeben town, so I need to differentiate myself."
+【フェイ】「この酒場は海賊の女主人が売りってわけさ」	[Fei]: "This bar's selling point is having a pirate proprietress."
 set,fei_first_flag=1	set,fei_first_flag=1
 end	end

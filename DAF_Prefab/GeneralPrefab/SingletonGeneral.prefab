@@ -84,6 +84,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 068569360d690d04f9905ebe29eda50b, type: 3}
   - {fileID: 8300000, guid: ed62eb839ebc4d748b1c0cb60360379c, type: 3}
   - {fileID: 8300000, guid: eee283f55158ad643b1b80bcb219b22b, type: 3}
+  - {fileID: 8300000, guid: 0919d975f94e29c4194615a5f67535fd, type: 3}
   listEffectPrefab:
   - {fileID: 2151716690488679645, guid: 96a20d3f97119394e991bb9d9e26fb6b, type: 3}
 --- !u!114 &465376485813575324
