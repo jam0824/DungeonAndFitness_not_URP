@@ -79,6 +79,8 @@ public class FaceFei : MonoBehaviour
         animationEff["FUNYA"] = new float[] { 100f,100f,100f,100f,100f};
         animationSet["JITO"] = new int[] { CHEEK,DOWN_BROWS,FLAT_BROWS,JITO_EYE,NEGA_MOUTH,SHIRINK_EYE,TROUBLE_BROWS};
         animationEff["JITO"] = new float[] { 100f,100f,100f,100f,100f,60f,10f};
+        animationSet["JITO_N"] = new int[] { DOWN_BROWS, FLAT_BROWS, JITO_EYE, NEGA_MOUTH, SHIRINK_EYE, TROUBLE_BROWS };
+        animationEff["JITO_N"] = new float[] { 100f, 100f, 100f, 100f, 60f, 10f };
         animationSet["JOY"] = new int[] { LARGE_EYE, LIP_II_02_DUPE,SMILE_MOUTH,UP_BROWS};
         animationEff["JOY"] = new float[] { 100f,100f,100f,100f};
         animationSet["KYOTON"] = new int[] { LARGE_EYE, LIP_UU_02_DUPE,UP_BROWS};

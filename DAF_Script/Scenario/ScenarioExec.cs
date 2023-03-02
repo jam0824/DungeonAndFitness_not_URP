@@ -223,6 +223,18 @@ public class ScenarioExec : MonoBehaviour
                 CommandCharacterMove(line[1], line[2], no);
                 break;
             }
+            else if (command == "fadeout") {
+                CommandFadeOut(no);
+                break;
+            }
+            else if (command == "fadein") {
+                CommandFadeIn(no);
+                break;
+            }
+            else if (command == "wait") {
+                CommandWait(line[1], no);
+                break;
+            }
             else {
                 CommandShowMessage(line);
                 break;
@@ -607,6 +619,37 @@ public class ScenarioExec : MonoBehaviour
         player.transform.rotation = targetObject.transform.rotation;
         DebugWindow.instance.DFDebug("playerPos:" + GameObject.Find("Player").transform.position);
         player.GetComponent<CharacterController>().enabled = true;
+    }
+
+    void CommandFadeOut(int no) {
+        StartCoroutine(Fade(no, true));
+    }
+    void CommandFadeIn(int no) {
+        StartCoroutine(Fade(no, false));
+    }
+
+    //コールチンでフェード処理
+    IEnumerator Fade(int no, bool isFadeStart) {
+        if (isFadeStart) {
+            scenarioSystem.CameraC.GetComponent<OVRScreenFade>().FadeOut();
+        }
+        else {
+            scenarioSystem.CameraC.GetComponent<OVRScreenFade>().FadeIn();
+        }
+        yield return new WaitForSeconds(FADE_TIME);
+        //シナリオはbreakしてるので、フェードが終わった後に再度シナリオを呼び出す
+        lineNo = exec(no + 1);
+    }
+
+    void CommandWait(string stringWaitTime, int no) {
+        float waitTime = float.Parse(stringWaitTime);
+        StartCoroutine(WaitTime(waitTime, no));
+    }
+
+    IEnumerator WaitTime(float waitTime, int no) {
+        yield return new WaitForSeconds(waitTime);
+        //シナリオはbreakしてるので、フェードが終わった後に再度シナリオを呼び出す
+        lineNo = exec(no + 1);
     }
 
     /// <summary>
