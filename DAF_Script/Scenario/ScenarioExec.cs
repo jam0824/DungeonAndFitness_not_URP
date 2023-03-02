@@ -36,6 +36,8 @@ public class ScenarioExec : MonoBehaviour
 
     string nowMessage = "";
 
+    bool isMessageTop = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -127,6 +129,11 @@ public class ScenarioExec : MonoBehaviour
             }
             else if (command == "lookcharactertocharacter") {
                 CommandLookCharaceterToCharacter(line[1], line[2]);
+                no++;
+                continue;
+            }
+            else if (command == "automessagetop") {
+                CommandAutoMessageTop(line[1]);
                 no++;
                 continue;
             }
@@ -228,8 +235,25 @@ public class ScenarioExec : MonoBehaviour
     void CommandShowMessage(string[] line) {
         ShowWindowCanvas();
         nowMessage = FixMessage(string.Join(",", line));
+        if(isMessageTop) AutoMessageTop(nowMessage);
         StartCoroutine(ShowMessage(nowMessage));
         DebugWindow.instance.DFDebug(line[0]);
+    }
+
+    //オートメッセージトップがtrueだったら自動でMessageBoxをtopにする
+    void AutoMessageTop(string nowMessage) {
+        if((nowMessage.Contains("【フェイ】")) || (nowMessage.Contains("[Fei]"))) {
+            CommandMessageMove("Fei", "Top");
+            return;
+        }
+        else if ((nowMessage.Contains("【アリス】")) || (nowMessage.Contains("[Alice]"))) {
+            CommandMessageMove("Alice", "Top");
+            return;
+        }
+        else if ((nowMessage.Contains("【ソル】")) || (nowMessage.Contains("[Sol]"))) {
+            CommandMessageMove("Sol", "Top");
+            return;
+        }
     }
 
     //メッセージの編集
@@ -421,7 +445,7 @@ public class ScenarioExec : MonoBehaviour
     void ComandLookFromCharacter(string objName) {
         GameObject obj = GameObject.Find(objName);
         AnimationSystem animationSystem = obj.GetComponent<AnimationSystem>();
-        animationSystem.lookTarget = SingletonGeneral.instance.face;
+        animationSystem.lookTarget = GameObject.Find("HitArea");
         animationSystem.isLook = true;
         DebugWindow.instance.DFDebug("LookFromCharacter : " + objName);
     }
@@ -638,17 +662,36 @@ public class ScenarioExec : MonoBehaviour
     /// <param name="positionName"></param>
     void CommandMessageMove(string characterName, string positionName) {
         GameObject obj = GameObject.Find(characterName);
-        Quaternion r = SingletonGeneral.instance.GetQuaternionFace();
+        Quaternion r = SingletonGeneral.instance.GetQuaternionLookAt(
+            SingletonGeneral.instance.face, 
+            obj);
         positionName = positionName.ToLower();
+        Vector3 pos = new Vector3();
         switch (positionName) {
             case "center":
-                Vector3 pos = SingletonGeneral.instance.GetPosBetweenTargetAndFace(obj, Vector3.zero);
+                pos = SingletonGeneral.instance.GetPosBetweenTargetAndFace(obj, Vector3.zero);
+                scenarioSystem.MoveMessageWindow(pos, r);
+                break;
+            case "top":
+                GameObject topObject = GameObject.Find(characterName + "Top");
+                pos = topObject.transform.position;
+                pos.y += 0.2f;
                 scenarioSystem.MoveMessageWindow(pos, r);
                 break;
         }
     }
 
-
+    /// <summary>
+    /// AutoMessageTop,flag
+    /// trueだと自動的にキャラクターの頭の上にメッセージを出す
+    /// </summary>
+    /// <param name="flag"></param>
+    void CommandAutoMessageTop(string flag) {
+        flag = flag.ToLower();
+        bool f = (flag == "true") ? true : false;
+        isMessageTop = f;
+        DebugWindow.instance.DFDebug("AutoMessageTop : " + isMessageTop);
+    }
 
     //会話終了
     void CommandEnd() {
@@ -669,6 +712,7 @@ public class ScenarioExec : MonoBehaviour
         isNowLineExecuting = false;
         isNowScenarioExec = false;
         isLookAt = false;
+        isMessageTop = false;
         messageText = null;
         PlayerView.instance.canControll = true;
         scenarioSystem.SetLock(false);

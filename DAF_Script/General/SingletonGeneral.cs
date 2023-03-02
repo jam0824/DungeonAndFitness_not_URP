@@ -280,6 +280,14 @@ public class SingletonGeneral : MonoBehaviour
         me.transform.rotation = Quaternion.Lerp(me.transform.rotation, lookRotation, 0.1f);
     }
 
+    //あるオブジェクトから見た別のオブジェクトの方向を求める
+    public Quaternion GetQuaternionLookAt(GameObject target, GameObject me) {
+        var direction = target.transform.position - me.transform.position;
+        direction.y = 0;
+        //メッセージだと逆になってしまうので反転させる
+        return Quaternion.LookRotation(-direction, Vector3.up);
+    }
+
     /// <summary>
     /// 顔とターゲットのgameObjectの中点posを返す
     /// </summary>
