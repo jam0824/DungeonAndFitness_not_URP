@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AnimationSystem : MonoBehaviour
 {
-    public AnimationClip walkAnimation;
     float speed = 1f;
     private float gravity = 9.8f;
 

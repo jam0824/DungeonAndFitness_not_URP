@@ -964,7 +964,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd3be4bd60dbee14582677cd11ed2159, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkAnimation: {fileID: 0}
 --- !u!1001 &1543048271
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6457,6 +6456,7 @@ GameObject:
   - component: {fileID: 6225976937603002052}
   - component: {fileID: 6532036781404732506}
   - component: {fileID: 6532036781404732505}
+  - component: {fileID: 6532036781404732507}
   m_Layer: 0
   m_Name: Alice
   m_TagString: Player
@@ -6572,7 +6572,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd3be4bd60dbee14582677cd11ed2159, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkAnimation: {fileID: 0}
+--- !u!114 &6532036781404732507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6532036781404732504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a2d251d868410143b96f5e53150dd7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skinedMeshRenderer: {fileID: 663586300554106936}
 --- !u!1 &6539547386612930284
 GameObject:
   m_ObjectHideFlags: 0
@@ -10487,7 +10499,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd3be4bd60dbee14582677cd11ed2159, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkAnimation: {fileID: 0}
 --- !u!4 &9173717874046645076
 Transform:
   m_ObjectHideFlags: 0
