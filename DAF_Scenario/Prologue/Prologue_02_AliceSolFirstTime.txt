@@ -12,23 +12,28 @@ lookFromCharacter,Alice	lookFromCharacter,Alice
 【フェイ】「コイツは今日ウチの前で倒れていたカイルだ。多分冒険者」	【フェイ】「コイツは今日ウチの前で倒れていたカイルだ。多分冒険者」
 【フェイ】「しばらくウチの宿に泊まることになったからよろしくな」	【フェイ】「しばらくウチの宿に泊まることになったからよろしくな」
 	
+AnimationSet,Sol,bool,SitIdle,true	AnimationSet,Sol,bool,SitIdle,true
 lookFromCharacter,Sol	lookFromCharacter,Sol
-【ソル】「俺はソルだ。そこのフェイの幼馴染な」	【ソル】「俺はソルだ。そこのフェイの幼馴染な」
-LookCharacterToCharacter,Fei,Sol	LookCharacterToCharacter,Fei,Sol
+【ソル】「俺はソルだ。そこのフェイの幼馴染」	【ソル】「俺はソルだ。そこのフェイの幼馴染」
 Face,Fei,JITO_N	Face,Fei,JITO_N
 【フェイ】「腐れ縁」	【フェイ】「腐れ縁」
 【ソル】「長い付き合いってやつな。近くの店で武器屋をやってる」	【ソル】「長い付き合いってやつな。近くの店で武器屋をやってる」
 lookFromCharacter,Fei	lookFromCharacter,Fei
 Face,Fei,FUN	Face,Fei,FUN
 【フェイ】「こんな見た目でこいつ、本業は魔法使いだから」	【フェイ】「こんな見た目でこいつ、本業は魔法使いだから」
+LookCharacterToCharacter,Sol,Fei	LookCharacterToCharacter,Sol,Fei
 【ソル】「見た目は関係ないだろ」	【ソル】「見た目は関係ないだろ」
+lookFromCharacter,Sol	lookFromCharacter,Sol
 【ソル】「魔法がエンチャントされた武器も扱っている。興味があったらウチにくればいい」	【ソル】「魔法がエンチャントされた武器も扱っている。興味があったらウチにくればいい」
 【ソル】「趣味はな、筋トレだ！」	【ソル】「趣味はな、筋トレだ！」
 【ソル】「カイル、お前はどうだ？ 筋トレはいいぞ！ 武器や魔法より筋肉が大事だと思うだろう？」	【ソル】「カイル、お前はどうだ？ 筋トレはいいぞ！ 武器や魔法より筋肉が大事だと思うだろう？」
+	
 LookCharacterToCharacter,Fei,Alice	LookCharacterToCharacter,Fei,Alice
 【フェイ】「次、アリス」	【フェイ】「次、アリス」
 【ソル】「待て。ここからが大事なところなんだが」	【ソル】「待て。ここからが大事なところなんだが」
 【アリス】「…………」	【アリス】「…………」
+LookCharacterToCharacter,Sol,Fei	LookCharacterToCharacter,Sol,Fei
+AnimationSet,Sol,bool,SitIdle,false	AnimationSet,Sol,bool,SitIdle,false
 【アリス】「……アリス。フェイの家族」	【アリス】「……アリス。フェイの家族」
 【アリス】「…………」	【アリス】「…………」
 【アリス】「……ぬいぐるみはフェルトさん」	【アリス】「……ぬいぐるみはフェルトさん」
@@ -43,7 +48,6 @@ lookFromCharacter,Fei	lookFromCharacter,Fei
 【フェイ】「ま、そんなわけでよろしくだ」	【フェイ】「ま、そんなわけでよろしくだ」
 lookFromCharacter,Alice	lookFromCharacter,Alice
 【アリス】「……カイルはどこから来たの？」	【アリス】「……カイルはどこから来たの？」
-goto,#hata_1	goto,#hata_1
 	
 select	select
 isekai,異世界からだ	isekai,異世界からだ
@@ -53,7 +57,6 @@ forget,覚えてない	forget,覚えてない
 Face,Fei,KYOTON	Face,Fei,KYOTON
 【フェイ】「おー、突拍子もないこと言い出したな」	【フェイ】「おー、突拍子もないこと言い出したな」
 【アリス】「……異世界……かっこいい……！」	【アリス】「……異世界……かっこいい……！」
-lookFromCharacter,Sol	lookFromCharacter,Sol
 【ソル】「違う世界に行きたい。誰もが通る道だ」	【ソル】「違う世界に行きたい。誰もが通る道だ」
 LookCharacterToCharacter,Fei,Sol	LookCharacterToCharacter,Fei,Sol
 【フェイ】「あんたも小さいときに、体に暗黒の力を宿してるとか言ってなかったか？」	【フェイ】「あんたも小さいときに、体に暗黒の力を宿してるとか言ってなかったか？」
@@ -65,34 +68,60 @@ Face,Fei,JITO_N	Face,Fei,JITO_N
 【フェイ】「アリス、こういう大人たちになっちゃダメだからな」	【フェイ】「アリス、こういう大人たちになっちゃダメだからな」
 LookCharacterToCharacter,Alice,Fei	LookCharacterToCharacter,Alice,Fei
 【アリス】「……えー……」	【アリス】「……えー……」
+AnimationSet,Sol,bool,SitIdle,true	AnimationSet,Sol,bool,SitIdle,true
+lookFromCharacter,Sol	lookFromCharacter,Sol
 【ソル】「カイル、言われてるぞ」	【ソル】「カイル、言われてるぞ」
+LookCharacterToCharacter,Sol,Fei	LookCharacterToCharacter,Sol,Fei
 goto,#hata_1	goto,#hata_1
 	
 	
 #forget	#forget
 lookFromCharacter,Sol	lookFromCharacter,Sol
+AnimationSet,Sol,bool,SitIdle,true	AnimationSet,Sol,bool,SitIdle,true
 【ソル】「記憶喪失なのか？ 話には聞いたことがあるが本当にいるんだな」	【ソル】「記憶喪失なのか？ 話には聞いたことがあるが本当にいるんだな」
 【アリス】「……衝撃があると思い出すことがあるって、アリス、本で読んだ」	【アリス】「……衝撃があると思い出すことがあるって、アリス、本で読んだ」
 Face,Fei,SMILE	Face,Fei,SMILE
+lookFromCharacter,Fei	lookFromCharacter,Fei
 【フェイ】「殴ればいいのか？」	【フェイ】「殴ればいいのか？」
+LookCharacterToCharacter,Sol,Fei	LookCharacterToCharacter,Sol,Fei
 【ソル】「待て。それをやったらもう一回忘れる可能性もあるんじゃないか？」	【ソル】「待て。それをやったらもう一回忘れる可能性もあるんじゃないか？」
 【アリス】「……え、じゃぁ、もう一回自己紹介しなきゃダメ……？」	【アリス】「……え、じゃぁ、もう一回自己紹介しなきゃダメ……？」
+Face,Fei,JITO_N	Face,Fei,JITO_N
 【フェイ】「面倒くさいな。やめておこう」	【フェイ】「面倒くさいな。やめておこう」
 goto,#hata_1	goto,#hata_1
 	
 #hata_1	#hata_1
 FadeOut	FadeOut
+destroyObject,BarDishes	destroyObject,BarDishes
 wait,1	wait,1
 FadeIn	FadeIn
 	
+Face,Fei,FUN	Face,Fei,FUN
+LookCharacterToCharacter,Fei,Alice	LookCharacterToCharacter,Fei,Alice
 【フェイ】「アリス、そろそろ寝る時間」	【フェイ】「アリス、そろそろ寝る時間」
+LookCharacterToCharacter,Alice,Fei	LookCharacterToCharacter,Alice,Fei
 【アリス】「……はーい……」	【アリス】「……はーい……」
+lookFromCharacter,Sol	lookFromCharacter,Sol
 【ソル】「俺もそろそろ帰るか。カイル、今後ともよろしくな」	【ソル】「俺もそろそろ帰るか。カイル、今後ともよろしくな」
 【フェイ】「アタシも今日はそろそろ店じまいにするか」	【フェイ】「アタシも今日はそろそろ店じまいにするか」
+LookCharacterToCharacter,Sol,Fei	LookCharacterToCharacter,Sol,Fei
 【ソル】「ずっとサボってただろ」	【ソル】「ずっとサボってただろ」
 【フェイ】「セルフサービスみたいなもんだから、ウチ」	【フェイ】「セルフサービスみたいなもんだから、ウチ」
+lookFromCharacter,Fei	lookFromCharacter,Fei
 【フェイ】「あんたも今日は疲れただろ？ 部屋はさっきと同じで2階の一番奥の「つばめの部屋」な」	【フェイ】「あんたも今日は疲れただろ？ 部屋はさっきと同じで2階の一番奥の「つばめの部屋」な」
+FadeOut	FadeOut
 lookOffFromCharacter,Fei	lookOffFromCharacter,Fei
 lookOffFromCharacter,Alice	lookOffFromCharacter,Alice
 lookOffFromCharacter,Sol	lookOffFromCharacter,Sol
+set,AliceSolFirstTime=true	set,AliceSolFirstTime=true
+destroyObject,Sol	destroyObject,Sol
+destroyObject,Alice	destroyObject,Alice
+controll	controll
+FadeIn	FadeIn
+end	end
+	
+	
+switch,AliceSolFirstTime=true	switch,AliceSolFirstTime=true
+end	end
+	
 end	end

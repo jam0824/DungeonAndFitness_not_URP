@@ -197,6 +197,11 @@ public class ScenarioExec : MonoBehaviour
                 no++;
                 continue;
             }
+            else if (command == "controll") {
+                CommandControll();
+                no++;
+                continue;
+            }
             else if (command == "face") {
                 CommandFace(line[1], line[2]);
                 no++;
@@ -204,6 +209,16 @@ public class ScenarioExec : MonoBehaviour
             }
             else if (command == "messagemove") {
                 CommandMessageMove(line[1], line[2]);
+                no++;
+                continue;
+            }
+            else if (command == "animationset") {
+                CommandAnimationSet(line);
+                no++;
+                continue;
+            }
+            else if (command == "destroyobject") {
+                CommandDestroyObject(line[1]);
                 no++;
                 continue;
             }
@@ -641,6 +656,11 @@ public class ScenarioExec : MonoBehaviour
         lineNo = exec(no + 1);
     }
 
+    /// <summary>
+    /// wait,waitTime
+    /// </summary>
+    /// <param name="stringWaitTime"></param>
+    /// <param name="no"></param>
     void CommandWait(string stringWaitTime, int no) {
         float waitTime = float.Parse(stringWaitTime);
         StartCoroutine(WaitTime(waitTime, no));
@@ -653,11 +673,32 @@ public class ScenarioExec : MonoBehaviour
     }
 
     /// <summary>
+    /// AnimationSet,charName,type(bool/triger),key,value(true/false : boolのとき)
+    /// </summary>
+    /// <param name="line"></param>
+    void CommandAnimationSet(string[] line) {
+        string type = line[2].ToLower();
+        string key = line[3];
+        AnimationSystem animationSystem = GameObject.Find(line[1]).GetComponent<AnimationSystem>();
+        if (type == "bool") {
+            bool value = (line[4] == "true") ? true : false;
+            animationSystem.SetBoolAnimation(key, value);
+        }
+        else {
+            animationSystem.SetTriggerAnimation(key);
+        }
+    }
+
+    /// <summary>
     /// Playerのコントローラーでの移動を禁止する
     /// </summary>
     void CommandNoControll() {
         PlayerView.instance.canControll = false;
         DebugWindow.instance.DFDebug("Playerの操作無効化");
+    }
+    void CommandControll() {
+        PlayerView.instance.canControll = true;
+        DebugWindow.instance.DFDebug("Playerの操作可能");
     }
 
     /// <summary>
@@ -734,6 +775,15 @@ public class ScenarioExec : MonoBehaviour
         bool f = (flag == "true") ? true : false;
         isMessageTop = f;
         DebugWindow.instance.DFDebug("AutoMessageTop : " + isMessageTop);
+    }
+
+    /// <summary>
+    /// 指定したオブジェクトをdestroyする
+    /// </summary>
+    /// <param name="objName"></param>
+    void CommandDestroyObject(string objName) {
+        GameObject obj = GameObject.Find(objName);
+        Destroy(obj);
     }
 
     //会話終了

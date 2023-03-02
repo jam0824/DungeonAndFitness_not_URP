@@ -76,7 +76,6 @@ public class AnimationSystem : MonoBehaviour
         }
 
     }
-
     void FaceFei(string emotion) {
         if (emotion == "NORMAL") {
             GetComponent<FaceFei>().ResetFace();
@@ -93,6 +92,25 @@ public class AnimationSystem : MonoBehaviour
     public void SetWalk(bool isWalk) {
         Animator animator = GetComponent<Animator>();
         animator.SetBool("Walk", isWalk);
+    }
+
+    /// <summary>
+    /// AnimatorÇÃBoolÇê›íËÇ∑ÇÈ
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="isStart"></param>
+    public void SetBoolAnimation(string key, bool isStart) {
+        Animator animator = GetComponent<Animator>();
+        animator.SetBool(key, isStart);
+    }
+
+    /// <summary>
+    /// AnimatorÇÃTriggerÇê›íËÇ∑ÇÈ
+    /// </summary>
+    /// <param name="key"></param>
+    public void SetTriggerAnimation(string key) {
+        Animator animator = GetComponent<Animator>();
+        animator.SetTrigger(key);
     }
 
     /// <summary>
