@@ -25,15 +25,19 @@ LookCharacterToCharacter,Sol,Fei	LookCharacterToCharacter,Sol,Fei
 【ソル】「見た目は関係ないだろ」	【ソル】「見た目は関係ないだろ」
 lookFromCharacter,Sol	lookFromCharacter,Sol
 【ソル】「魔法がエンチャントされた武器も扱っている。興味があったらウチにくればいい」	【ソル】「魔法がエンチャントされた武器も扱っている。興味があったらウチにくればいい」
+Face,Sol,SHINKEN	Face,Sol,SHINKEN
 【ソル】「趣味はな、筋トレだ！」	【ソル】「趣味はな、筋トレだ！」
+Face,Sol,BIG_SMILE	Face,Sol,BIG_SMILE
 【ソル】「カイル、お前はどうだ？ 筋トレはいいぞ！ 武器や魔法より筋肉が大事だと思うだろう？」	【ソル】「カイル、お前はどうだ？ 筋トレはいいぞ！ 武器や魔法より筋肉が大事だと思うだろう？」
 	
 LookCharacterToCharacter,Fei,Alice	LookCharacterToCharacter,Fei,Alice
 【フェイ】「次、アリス」	【フェイ】「次、アリス」
+Face,Sol,SHINKEN	Face,Sol,SHINKEN
 【ソル】「待て。ここからが大事なところなんだが」	【ソル】「待て。ここからが大事なところなんだが」
 【アリス】「…………」	【アリス】「…………」
 LookCharacterToCharacter,Sol,Fei	LookCharacterToCharacter,Sol,Fei
 AnimationSet,Sol,bool,SitIdle,false	AnimationSet,Sol,bool,SitIdle,false
+Face,Sol,NORMAL	Face,Sol,NORMAL
 【アリス】「……アリス。フェイの家族」	【アリス】「……アリス。フェイの家族」
 【アリス】「…………」	【アリス】「…………」
 【アリス】「……ぬいぐるみはフェルトさん」	【アリス】「……ぬいぐるみはフェルトさん」
@@ -41,9 +45,11 @@ AnimationSet,Sol,bool,SitIdle,false	AnimationSet,Sol,bool,SitIdle,false
 Face,Fei,SMILE	Face,Fei,SMILE
 【フェイ】「アリスはアタシの娘だ。照れてるところもまた可愛いだろ？」	【フェイ】「アリスはアタシの娘だ。照れてるところもまた可愛いだろ？」
 LookCharacterToCharacter,Alice,Fei	LookCharacterToCharacter,Alice,Fei
+Face,Alice,Angry	Face,Alice,Angry
 【アリス】「……むぅ……」	【アリス】「……むぅ……」
 Face,Fei,FUN	Face,Fei,FUN
 【フェイ】「ごめんって」	【フェイ】「ごめんって」
+Face,Alice,NORMAL	Face,Alice,NORMAL
 lookFromCharacter,Fei	lookFromCharacter,Fei
 【フェイ】「ま、そんなわけでよろしくだ」	【フェイ】「ま、そんなわけでよろしくだ」
 lookFromCharacter,Alice	lookFromCharacter,Alice
@@ -56,6 +62,7 @@ forget,覚えてない	forget,覚えてない
 #isekai	#isekai
 Face,Fei,KYOTON	Face,Fei,KYOTON
 【フェイ】「おー、突拍子もないこと言い出したな」	【フェイ】「おー、突拍子もないこと言い出したな」
+Face,Alice,Surprise	Face,Alice,Surprise
 【アリス】「……異世界……かっこいい……！」	【アリス】「……異世界……かっこいい……！」
 【ソル】「違う世界に行きたい。誰もが通る道だ」	【ソル】「違う世界に行きたい。誰もが通る道だ」
 LookCharacterToCharacter,Fei,Sol	LookCharacterToCharacter,Fei,Sol
@@ -67,10 +74,12 @@ LookCharacterToCharacter,Fei,Alice	LookCharacterToCharacter,Fei,Alice
 Face,Fei,JITO_N	Face,Fei,JITO_N
 【フェイ】「アリス、こういう大人たちになっちゃダメだからな」	【フェイ】「アリス、こういう大人たちになっちゃダメだからな」
 LookCharacterToCharacter,Alice,Fei	LookCharacterToCharacter,Alice,Fei
+Face,Alice,sad	Face,Alice,sad
 【アリス】「……えー……」	【アリス】「……えー……」
 AnimationSet,Sol,bool,SitIdle,true	AnimationSet,Sol,bool,SitIdle,true
 lookFromCharacter,Sol	lookFromCharacter,Sol
 【ソル】「カイル、言われてるぞ」	【ソル】「カイル、言われてるぞ」
+Face,Alice,Normal	Face,Alice,Normal
 LookCharacterToCharacter,Sol,Fei	LookCharacterToCharacter,Sol,Fei
 goto,#hata_1	goto,#hata_1
 	
@@ -80,7 +89,7 @@ lookFromCharacter,Sol	lookFromCharacter,Sol
 AnimationSet,Sol,bool,SitIdle,true	AnimationSet,Sol,bool,SitIdle,true
 【ソル】「記憶喪失なのか？ 話には聞いたことがあるが本当にいるんだな」	【ソル】「記憶喪失なのか？ 話には聞いたことがあるが本当にいるんだな」
 【アリス】「……衝撃があると思い出すことがあるって、アリス、本で読んだ」	【アリス】「……衝撃があると思い出すことがあるって、アリス、本で読んだ」
-Face,Fei,SMILE	Face,Fei,SMILE
+Face,Fei,JOY	Face,Fei,JOY
 lookFromCharacter,Fei	lookFromCharacter,Fei
 【フェイ】「殴ればいいのか？」	【フェイ】「殴ればいいのか？」
 LookCharacterToCharacter,Sol,Fei	LookCharacterToCharacter,Sol,Fei
@@ -122,6 +131,4 @@ end	end
 	
 	
 switch,AliceSolFirstTime=true	switch,AliceSolFirstTime=true
-end	end
-	
 end	end
