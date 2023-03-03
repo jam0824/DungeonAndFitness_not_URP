@@ -72,6 +72,12 @@ public class AnimationSystem : MonoBehaviour
             case "Fei":
                 FaceFei(emotion);
                 break;
+            case "Alice":
+                FaceAlice(emotion);
+                break;
+            case "Sol":
+                FaceSol(emotion);
+                break;
         }
 
     }
@@ -81,6 +87,22 @@ public class AnimationSystem : MonoBehaviour
         }
         else {
             GetComponent<FaceFei>().SetFace(emotion);
+        }
+    }
+    void FaceAlice(string emotion) {
+        if (emotion == "NORMAL") {
+            GetComponent<FaceAlice>().ResetFace();
+        }
+        else {
+            GetComponent<FaceAlice>().SetFace(emotion);
+        }
+    }
+    void FaceSol(string emotion) {
+        if (emotion == "NORMAL") {
+            GetComponent<FaceSol>().ResetFace();
+        }
+        else {
+            GetComponent<FaceSol>().SetFace(emotion);
         }
     }
 

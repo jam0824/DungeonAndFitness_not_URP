@@ -108,11 +108,12 @@ public class ScenarioExec : MonoBehaviour
             else if (command == "look") {
                 isLookAt = true;
                 CommandLookAt(gameObject);
+                //lookatはupdateで呼び出されるのでログはココで出す
                 DebugWindow.instance.DFDebug("Look");
                 no++;
                 continue;
             }
-            else if (command == "lookfromcharacter") {
+            else if ((command == "lookfromcharacter")|| (command == "lookc")) {
                 ComandLookFromCharacter(line[1]);
                 no++;
                 continue;
@@ -127,7 +128,7 @@ public class ScenarioExec : MonoBehaviour
                 no++;
                 continue;
             }
-            else if (command == "lookcharactertocharacter") {
+            else if ((command == "lookcharactertocharacter")|| (command == "lookc2c")) {
                 CommandLookCharaceterToCharacter(line[1], line[2]);
                 no++;
                 continue;
