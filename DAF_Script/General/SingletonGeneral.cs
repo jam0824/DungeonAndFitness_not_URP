@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class SingletonGeneral : MonoBehaviour
 {
@@ -56,8 +57,22 @@ public class SingletonGeneral : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        RenderingLevel();
         //デバッグ
         //saveLoadSystem.Load();
+    }
+
+    void RenderingLevel() {
+        //https://framesynthesis.jp/tech/unity/oculusquest/
+        //視野全体の解像度の変更
+        //XRSettings.eyeTextureResolutionScale = 0.9f;
+        //周辺視野の描画を抑える
+        
+        OVRManager.useDynamicFixedFoveatedRendering = true;
+        OVRManager.fixedFoveatedRenderingLevel =
+            OVRManager.FixedFoveatedRenderingLevel.High;
+        
+
     }
 
     void SingletonGeneralInit() {
