@@ -63,15 +63,13 @@ public class SingletonGeneral : MonoBehaviour
     }
 
     void RenderingLevel() {
-        //https://framesynthesis.jp/tech/unity/oculusquest/
         //‹–ì‘S‘Ì‚Ì‰ğ‘œ“x‚Ì•ÏX
-        //XRSettings.eyeTextureResolutionScale = 0.9f;
+        //XRSettings.eyeTextureResolutionScale = 0.85f;
         //ü•Ó‹–ì‚Ì•`‰æ‚ğ—}‚¦‚é
-        
-        OVRManager.useDynamicFixedFoveatedRendering = true;
-        OVRManager.fixedFoveatedRenderingLevel =
-            OVRManager.FixedFoveatedRenderingLevel.High;
-        
+
+        //OVRManager.useDynamicFixedFoveatedRendering = true;
+        //OVRManager.fixedFoveatedRenderingLevel = OVRManager.FixedFoveatedRenderingLevel.High;
+        OVRManager.tiledMultiResLevel = OVRManager.TiledMultiResLevel.LMSHighTop;
 
     }
 
