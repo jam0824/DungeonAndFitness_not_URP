@@ -570,6 +570,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1095434146378701906, guid: b2b3d9efccc849e42855d72eb1be4710, type: 3}
+      propertyPath: m_RotationOffsets.Array.data[0].x
+      value: 45.288307
+      objectReference: {fileID: 0}
+    - target: {fileID: 1095434146378701906, guid: b2b3d9efccc849e42855d72eb1be4710, type: 3}
+      propertyPath: m_RotationOffsets.Array.data[0].y
+      value: -90.22326
+      objectReference: {fileID: 0}
+    - target: {fileID: 1095434146378701906, guid: b2b3d9efccc849e42855d72eb1be4710, type: 3}
+      propertyPath: m_RotationOffsets.Array.data[0].z
+      value: 0.4126793
+      objectReference: {fileID: 0}
+    - target: {fileID: 5685052927133476535, guid: b2b3d9efccc849e42855d72eb1be4710, type: 3}
+      propertyPath: m_RotationOffset.x
+      value: -0.0015124992
+      objectReference: {fileID: 0}
+    - target: {fileID: 5685052927133476535, guid: b2b3d9efccc849e42855d72eb1be4710, type: 3}
+      propertyPath: m_RotationOffset.y
+      value: -0.10598611
+      objectReference: {fileID: 0}
+    - target: {fileID: 5685052927133476535, guid: b2b3d9efccc849e42855d72eb1be4710, type: 3}
+      propertyPath: m_RotationOffset.z
+      value: -92.586
+      objectReference: {fileID: 0}
+    - target: {fileID: 8612005570793276595, guid: b2b3d9efccc849e42855d72eb1be4710, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.9220162
+      objectReference: {fileID: 0}
+    - target: {fileID: 8612005570793276595, guid: b2b3d9efccc849e42855d72eb1be4710, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.004670192
+      objectReference: {fileID: 0}
+    - target: {fileID: 8612005570793276595, guid: b2b3d9efccc849e42855d72eb1be4710, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.0000009879004
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2b3d9efccc849e42855d72eb1be4710, type: 3}
 --- !u!1 &2065093851
@@ -753,6 +789,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 43347716}
     m_Modifications:
+    - target: {fileID: 485753253, guid: bde4e3fbb79ce284fb72dbac8f4e4007, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 946337675, guid: bde4e3fbb79ce284fb72dbac8f4e4007, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1787816650, guid: bde4e3fbb79ce284fb72dbac8f4e4007, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1910445073, guid: bde4e3fbb79ce284fb72dbac8f4e4007, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1716254440026900016, guid: bde4e3fbb79ce284fb72dbac8f4e4007, type: 3}
       propertyPath: m_RootOrder
       value: 0

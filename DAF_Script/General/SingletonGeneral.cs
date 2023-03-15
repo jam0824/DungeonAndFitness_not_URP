@@ -57,14 +57,13 @@ public class SingletonGeneral : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        RenderingLevel();
+        //周辺視野の画像変更
+        //RenderingLevel();
         //デバッグ
         //saveLoadSystem.Load();
     }
 
     void RenderingLevel() {
-        //視野全体の解像度の変更
-        //XRSettings.eyeTextureResolutionScale = 0.85f;
         //周辺視野の描画を抑える
 
         //OVRManager.useDynamicFixedFoveatedRendering = true;
@@ -142,6 +141,10 @@ public class SingletonGeneral : MonoBehaviour
         player.transform.position = playerPos;
         //DebugWindow.instance.DFDebug("Dungeon:" + dungeonRoot.transform.position);
         
+    }
+
+    public bool GetDebugMode() {
+        return DEBUG_MODE;
     }
 
     public string GetStatusSavePath() {

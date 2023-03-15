@@ -48,6 +48,7 @@ public class DebugWindow : MonoBehaviour
 
     private void OnReceiveLog(string logText, string stackTrace, LogType logType) {
         if (cText == null) return;
+        
 
         string m = cText.text;
         string line = "";
@@ -71,6 +72,10 @@ public class DebugWindow : MonoBehaviour
             line = "Log\t" + logText + "\n";
         }
         m = line + m;
+        if (!SingletonGeneral.instance.GetDebugMode()) {
+            if(gameObject.activeSelf) gameObject.SetActive(false);
+            return;
+        }
         cText.text = m;
     }
 

@@ -38,6 +38,8 @@ public class ScenarioExec : MonoBehaviour
 
     bool isMessageTop = false;
 
+    ScenarioCommand scenarioCommand = new ScenarioCommand();
+
 
     // Start is called before the first frame update
     void Start()
@@ -52,7 +54,7 @@ public class ScenarioExec : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isLookAt) CommandLookAt(gameObject);
+        if (isLookAt) scenarioCommand.CommandLookAt(gameObject);
            
     }
 
@@ -107,14 +109,14 @@ public class ScenarioExec : MonoBehaviour
             }
             else if (command == "look") {
                 isLookAt = true;
-                CommandLookAt(gameObject);
+                scenarioCommand.CommandLookAt(gameObject);
                 //lookatはupdateで呼び出されるのでログはココで出す
                 DebugWindow.instance.DFDebug("Look");
                 no++;
                 continue;
             }
             else if ((command == "lookfromcharacter")|| (command == "lookc")) {
-                ComandLookFromCharacter(line[1]);
+                scenarioCommand.ComandLookFromCharacter(line[1]);
                 no++;
                 continue;
             }
@@ -124,17 +126,17 @@ public class ScenarioExec : MonoBehaviour
                 continue;
             }
             else if (command == "lookofffromcharacter") {
-                CommandLookOffFromCharacter(line[1]);
+                scenarioCommand.CommandLookOffFromCharacter(line[1]);
                 no++;
                 continue;
             }
             else if ((command == "lookcharactertocharacter")|| (command == "lookc2c")) {
-                CommandLookCharaceterToCharacter(line[1], line[2]);
+                scenarioCommand.CommandLookCharaceterToCharacter(line[1], line[2]);
                 no++;
                 continue;
             }
             else if (command == "automessagetop") {
-                CommandAutoMessageTop(line[1]);
+                isMessageTop = scenarioCommand.CommandAutoMessageTop(line[1]);
                 no++;
                 continue;
             }
@@ -169,42 +171,45 @@ public class ScenarioExec : MonoBehaviour
                 break;
             }
             else if (command == "itemget") {
-                CommandNormalItemGet(line[1], SingletonGeneral.instance.itemDb);
+                scenarioCommand.CommandNormalItemGet(
+                    line[1], 
+                    SingletonGeneral.instance.itemDb,
+                    FULL_OF_ITEM_KEY);
                 no++;
                 continue;
             }
             else if (command == "se") {
-                CommandSe(line[1]);
+                scenarioCommand.CommandSe(line[1]);
                 no++;
                 continue;
             }
             else if (command == "save") {
-                CommandSave();
+                scenarioCommand.CommandSave();
                 no++;
                 continue;
             }
             else if (command == "feel") {
-                CommandFeel(line[1]);
+                labelFeelIcon = scenarioCommand.CommandFeel(line[1], labelFeelIcon);
                 no++;
                 continue;
             }
             else if (command == "information") {
-                CommandInformation(line[1]);
+                scenarioCommand.CommandInformation(line[1]);
                 no++;
                 continue;
             }
             else if (command == "nocontroll") {
-                CommandNoControll();
+                scenarioCommand.CommandNoControll();
                 no++;
                 continue;
             }
             else if (command == "controll") {
-                CommandControll();
+                scenarioCommand.CommandControll();
                 no++;
                 continue;
             }
             else if (command == "face") {
-                CommandFace(line[1], line[2]);
+                scenarioCommand.CommandFace(line[1], line[2]);
                 no++;
                 continue;
             }
@@ -214,7 +219,7 @@ public class ScenarioExec : MonoBehaviour
                 continue;
             }
             else if (command == "animationset") {
-                CommandAnimationSet(line);
+                scenarioCommand.CommandAnimationSet(line);
                 no++;
                 continue;
             }
@@ -338,6 +343,8 @@ public class ScenarioExec : MonoBehaviour
         scenarioSystem.CloseMessageWindow();
     }
 
+    // /////////////////////////////////////////////////////////////
+
     //select時の旗にはスクリプトでは#は付けない。飛ぶべきハタと区別がつかなくなるため
     void CommandSelect(int lineNo, List<string[]> scenario) {
         List<GameObject> listSelectBoxCanvas = new List<GameObject>();
@@ -459,45 +466,6 @@ public class ScenarioExec : MonoBehaviour
         return returnNo;
     }
 
-    //Playerを見るようにする
-    void CommandLookAt(GameObject obj) {
-        SingletonGeneral.instance.LookAt(
-            SingletonGeneral.instance.face, 
-            obj);
-    }
-
-    /// <summary>
-    /// 指定したオブジェクトがPlayerを見るようにする
-    /// </summary>
-    /// <param name="objName"></param>
-    void ComandLookFromCharacter(string objName) {
-        GameObject obj = GameObject.Find(objName);
-        AnimationSystem animationSystem = obj.GetComponent<AnimationSystem>();
-        animationSystem.lookTarget = GameObject.Find("HitArea");
-        animationSystem.isLook = true;
-        DebugWindow.instance.DFDebug("LookFromCharacter : " + objName);
-    }
-
-    void CommandLookOffFromCharacter(string objName) {
-        GameObject obj = GameObject.Find(objName);
-        AnimationSystem animationSystem = obj.GetComponent<AnimationSystem>();
-        animationSystem.isLook = false;
-        DebugWindow.instance.DFDebug("LookOffFromCharacter : " + objName);
-    }
-
-    /// <summary>
-    /// LookCharacterToCharacter,動作対象,見るキャラ
-    /// </summary>
-    /// <param name="characterName"></param>
-    /// <param name="targetName"></param>
-    void CommandLookCharaceterToCharacter(string characterName, string targetName) {
-        GameObject obj = GameObject.Find(characterName);
-        AnimationSystem animationSystem = obj.GetComponent<AnimationSystem>();
-        animationSystem.lookTarget = GameObject.Find(targetName);
-        animationSystem.isLook = true;
-        DebugWindow.instance.DFDebug("LookCharacterToCharacter : " + characterName + "->" + targetName);
-    }
-
     //スイッチの数字の計算。+と-のみ。
     //コマンド,スイッチNo,符号,値
     void CommandSwitchCalcuration(string[] line) {
@@ -520,87 +488,6 @@ public class ScenarioExec : MonoBehaviour
             string value = line[2];
             scenarioSystem.SetSwitch(key, value);
         }
-    }
-
-    
-
-    //通常枠のアイテムを追加
-    void CommandNormalItemGet(string itemNo, ItemDB itemDb) {
-        if (itemDb.canAddItem(itemNo)) {
-            DebugWindow.instance.DFDebug("アイテム追加：" + itemNo);
-            itemDb.AddItem(itemNo);
-        }
-        else {
-            SingletonGeneral.instance.labelInformationText.SetInformationLabel(FULL_OF_ITEM_KEY);
-            Vector3 pos = gameObject.transform.position;
-            pos.y += 1f;
-            itemDb.MakeItemBag(itemNo, pos, gameObject.transform.rotation);
-            DebugWindow.instance.DFDebug("アイテムバッグ作成：" + itemNo);
-        }
-    }
-
-    //SEを鳴らす
-    void CommandSe(string seName) {
-        DebugWindow.instance.DFDebug("SE:" + seName);
-        SingletonGeneral.instance.PlayOneShotNoAudioSource(seName);
-    }
-
-    /// <summary>
-    /// Saveする
-    /// </summary>
-    void CommandSave() {
-        DebugWindow.instance.DFDebug("SAVE");
-        SingletonGeneral.instance.saveLoadSystem.Save();
-        SingletonGeneral.instance.labelInformationText.SetInformationLabel("Save");
-    }
-
-    /// <summary>
-    /// FeelIconを出す
-    /// Smile,Angry,Sad,Surprise,Tere
-    /// </summary>
-    /// <param name="iconKey"></param>
-    void CommandFeel(string iconKey) {
-        if(labelFeelIcon == null) {
-            GameObject feelObject = transform.Find("NpcSet/FeelIcon").gameObject;
-            labelFeelIcon = feelObject.GetComponent<LabelFeelIcon>();
-        }
-        labelFeelIcon.SetIcon(iconKey, transform.rotation);
-    }
-
-    /// <summary>
-    /// 画面下のインフォメーションにメッセージを表示する
-    /// </summary>
-    /// <param name="labelKey"></param>
-    void CommandInformation(string labelKey) {
-        SingletonGeneral.instance.labelInformationText.SetInformationLabel(labelKey);
-    }
-
-    /// <summary>
-    /// ScenarioExecがついたオブジェクトを消去する
-    /// </summary>
-    void CommandDestroy() {
-        DebugWindow.instance.DFDebug("シナリオによるDestroy");
-        CloseWindowCanvas();
-        ResetFlagMain();
-        Destroy(gameObject);
-    }
-
-    /// <summary>
-    /// 指定した名前のシーンに切り替える
-    /// フェード付き
-    /// </summary>
-    /// <param name="sceneName"></param>
-    void CommandScene(string sceneName) {
-        DebugWindow.instance.DFDebug("シーン切り替え：" + sceneName);
-        OVRScreenFade ovrScreenFade = GameObject.Find("CenterEyeAnchor").GetComponent<OVRScreenFade>();
-        ovrScreenFade.FadeOut();
-        StartCoroutine(ChangeScene(sceneName, FADE_TIME));
-    }
-
-    IEnumerator ChangeScene(string sceneName, float waitTime) {
-        yield return new WaitForSeconds(waitTime);
-        ResetFlagMain();
-        SceneManager.LoadScene(sceneName);
     }
 
     /// <summary>
@@ -636,6 +523,37 @@ public class ScenarioExec : MonoBehaviour
         DebugWindow.instance.DFDebug("playerPos:" + GameObject.Find("Player").transform.position);
         player.GetComponent<CharacterController>().enabled = true;
     }
+
+    /// <summary>
+    /// 指定した名前のシーンに切り替える
+    /// フェード付き
+    /// </summary>
+    /// <param name="sceneName"></param>
+    public void CommandScene(string sceneName) {
+        DebugWindow.instance.DFDebug("シーン切り替え：" + sceneName);
+        OVRScreenFade ovrScreenFade = GameObject.Find("CenterEyeAnchor").GetComponent<OVRScreenFade>();
+        ovrScreenFade.FadeOut();
+        StartCoroutine(ChangeScene(sceneName, FADE_TIME));
+    }
+
+    IEnumerator ChangeScene(string sceneName, float waitTime) {
+        yield return new WaitForSeconds(waitTime);
+        ResetFlagMain();
+        SceneManager.LoadScene(sceneName);
+    }
+
+
+    /// <summary>
+    /// ScenarioExecがついたオブジェクトを消去する
+    /// </summary>
+    void CommandDestroy() {
+        DebugWindow.instance.DFDebug("シナリオによるDestroy");
+        CloseWindowCanvas();
+        ResetFlagMain();
+        Destroy(gameObject);
+    }
+
+    
 
     void CommandFadeOut(int no) {
         StartCoroutine(Fade(no, true));
@@ -673,51 +591,9 @@ public class ScenarioExec : MonoBehaviour
         lineNo = exec(no + 1);
     }
 
-    /// <summary>
-    /// AnimationSet,charName,type(bool/triger),key,value(true/false : boolのとき)
-    /// </summary>
-    /// <param name="line"></param>
-    void CommandAnimationSet(string[] line) {
-        string type = line[2].ToLower();
-        string key = line[3];
-        AnimationSystem animationSystem = GameObject.Find(line[1]).GetComponent<AnimationSystem>();
-        if (type == "bool") {
-            bool value = (line[4] == "true") ? true : false;
-            animationSystem.SetBoolAnimation(key, value);
-        }
-        else {
-            animationSystem.SetTriggerAnimation(key);
-        }
-    }
+    
 
-    /// <summary>
-    /// Playerのコントローラーでの移動を禁止する
-    /// </summary>
-    void CommandNoControll() {
-        PlayerView.instance.canControll = false;
-        DebugWindow.instance.DFDebug("Playerの操作無効化");
-    }
-    void CommandControll() {
-        PlayerView.instance.canControll = true;
-        DebugWindow.instance.DFDebug("Playerの操作可能");
-    }
-
-    /// <summary>
-    /// 指定したオブジェクト名の表情を変える
-    /// </summary>
-    /// <param name="characterName"></param>
-    /// <param name="emotion"></param>
-    void CommandFace(string characterName, string emotion) {
-        //表情は大文字で。
-        emotion = emotion.ToUpper();
-        //英訳にピリオドがついていることがある
-        emotion = emotion.Replace(".", "");
-
-        GameObject.Find(characterName)
-            .GetComponent<AnimationSystem>()
-            .SetFace(characterName, emotion);
-        DebugWindow.instance.DFDebug("表情変更:" + characterName + "->" + emotion);
-    }
+    
 
     /// <summary>
     /// 指定したキャラクターをanchorまで移動させる
@@ -767,18 +643,6 @@ public class ScenarioExec : MonoBehaviour
     }
 
     /// <summary>
-    /// AutoMessageTop,flag
-    /// trueだと自動的にキャラクターの頭の上にメッセージを出す
-    /// </summary>
-    /// <param name="flag"></param>
-    void CommandAutoMessageTop(string flag) {
-        flag = flag.ToLower();
-        bool f = (flag == "true") ? true : false;
-        isMessageTop = f;
-        DebugWindow.instance.DFDebug("AutoMessageTop : " + isMessageTop);
-    }
-
-    /// <summary>
     /// 指定したオブジェクトをdestroyする
     /// </summary>
     /// <param name="objName"></param>
@@ -802,7 +666,7 @@ public class ScenarioExec : MonoBehaviour
         ResetFlagMain();
     }
 
-    void ResetFlagMain() {
+    public void ResetFlagMain() {
         isNowLineExecuting = false;
         isNowScenarioExec = false;
         isLookAt = false;

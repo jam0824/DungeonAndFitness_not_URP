@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FaceFei : MonoBehaviour
+public class FaceFei : MonoBehaviour, IFace
 {
     int BLINK = 0;
     int BLINK_L = 1;
@@ -60,13 +60,13 @@ public class FaceFei : MonoBehaviour
 
     
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         FaceInit();
         StartCoroutine(EnableBlink(BLINK_WAIT_TIME));
     }
 
-    void FaceInit() {
+    public void FaceInit() {
         animationSet["BLINK"] = new int[] { BLINK };
         animationEff["BLINK"] = new float[] { 100f };
         animationSet["ANGRY"] = new int[] { ANGRY_BROWS_02, ANGRY_EYE, ANGRY_MOUTH,DOWN_BROWS };
@@ -100,7 +100,7 @@ public class FaceFei : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         if (isBlink) blink();
     }
@@ -108,7 +108,7 @@ public class FaceFei : MonoBehaviour
     /// <summary>
     /// Ç‹ÇŒÇΩÇ´ÇÃé¿çs
     /// </summary>
-    void blink() {
+    public void blink() {
         nowBlinkWeight += blinkSpeed;
         int[] animationBlink = animationSet["BLINK"];
         for (int i = 0; i < animationBlink.Length; i++) {
@@ -126,7 +126,7 @@ public class FaceFei : MonoBehaviour
     /// </summary>
     /// <param name="waitTime"></param>
     /// <returns></returns>
-    IEnumerator EnableBlink(float waitTime) {
+    public IEnumerator EnableBlink(float waitTime) {
         while (true) {
             yield return new WaitForSeconds(waitTime);
             nowBlinkWeight = 0f;

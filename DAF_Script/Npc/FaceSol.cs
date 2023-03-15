@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FaceSol : MonoBehaviour
+public class FaceSol : MonoBehaviour,IFace
 {
     int EYES_CLOSED = 0;
     int BLINK_L = 1;
@@ -45,15 +45,15 @@ public class FaceSol : MonoBehaviour
     Dictionary<string, int[]> animationSet = new Dictionary<string, int[]>();
     Dictionary<string, float[]> animationEff = new Dictionary<string, float[]>();
 
-    
+
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         FaceInit();
         StartCoroutine(EnableBlink(BLINK_WAIT_TIME));
     }
 
-    void FaceInit() {
+    public void FaceInit() {
         animationSet["BLINK"] = new int[] { BLINK_L,BLINK_R };
         animationEff["BLINK"] = new float[] { 100f,100f };
         animationSet["SMILE"] = new int[] { SMILE };
@@ -82,7 +82,7 @@ public class FaceSol : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         if (isBlink) blink();
     }
@@ -90,7 +90,7 @@ public class FaceSol : MonoBehaviour
     /// <summary>
     /// Ç‹ÇŒÇΩÇ´ÇÃé¿çs
     /// </summary>
-    void blink() {
+    public void blink() {
         nowBlinkWeight += blinkSpeed;
         int[] animationBlink = animationSet["BLINK"];
         for (int i = 0; i < animationBlink.Length; i++) {
@@ -108,7 +108,7 @@ public class FaceSol : MonoBehaviour
     /// </summary>
     /// <param name="waitTime"></param>
     /// <returns></returns>
-    IEnumerator EnableBlink(float waitTime) {
+    public IEnumerator EnableBlink(float waitTime) {
         while (true) {
             yield return new WaitForSeconds(waitTime);
             nowBlinkWeight = 0f;

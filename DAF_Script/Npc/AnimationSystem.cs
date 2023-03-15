@@ -63,46 +63,19 @@ public class AnimationSystem : MonoBehaviour
 
     /// <summary>
     /// 表情を変える
-    /// キャラによって呼び出すファイルが違う
     /// </summary>
     /// <param name="characterName"></param>
     /// <param name="emotion"></param>
-    public void SetFace(string characterName, string emotion) {
-        switch (characterName) {
-            case "Fei":
-                FaceFei(emotion);
-                break;
-            case "Alice":
-                FaceAlice(emotion);
-                break;
-            case "Sol":
-                FaceSol(emotion);
-                break;
-        }
-
+    public void SetFace(string emotion) {
+        IFace iFace = GetComponent<IFace>();
+        SetIFace(emotion, iFace);
     }
-    void FaceFei(string emotion) {
+    void SetIFace(string emotion, IFace iFace) {
         if (emotion == "NORMAL") {
-            GetComponent<FaceFei>().ResetFace();
+            iFace.ResetFace();
         }
         else {
-            GetComponent<FaceFei>().SetFace(emotion);
-        }
-    }
-    void FaceAlice(string emotion) {
-        if (emotion == "NORMAL") {
-            GetComponent<FaceAlice>().ResetFace();
-        }
-        else {
-            GetComponent<FaceAlice>().SetFace(emotion);
-        }
-    }
-    void FaceSol(string emotion) {
-        if (emotion == "NORMAL") {
-            GetComponent<FaceSol>().ResetFace();
-        }
-        else {
-            GetComponent<FaceSol>().SetFace(emotion);
+            iFace.SetFace(emotion);
         }
     }
 
@@ -157,4 +130,18 @@ public class AnimationSystem : MonoBehaviour
         scenarioExec.StopCharacterMove(lineNo);
     }
 
+}
+
+/// <summary>
+/// 表情変更のインターフェイス
+/// </summary>
+public interface IFace
+{
+    void Start();
+    void Update();
+    void FaceInit();
+    void blink();
+    IEnumerator EnableBlink(float waitTime);
+    public void SetFace(string emotion);
+    public void ResetFace();
 }

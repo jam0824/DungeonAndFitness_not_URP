@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FaceAlice : MonoBehaviour
+public class FaceAlice : MonoBehaviour,IFace
 {
     int IDLE = 0;
     int BLINK = 1;
@@ -31,13 +31,13 @@ public class FaceAlice : MonoBehaviour
 
     
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         FaceInit();
         StartCoroutine(EnableBlink(BLINK_WAIT_TIME));
     }
 
-    void FaceInit() {
+    public void FaceInit() {
         animationSet["BLINK"] = new int[] { BLINK };
         animationEff["BLINK"] = new float[] { 100f };
         animationSet["ANGRY"] = new int[] { BRW_L_ANGRY, BRW_R_ANGRY };
@@ -51,7 +51,7 @@ public class FaceAlice : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         if (isBlink) blink();
     }
@@ -59,7 +59,7 @@ public class FaceAlice : MonoBehaviour
     /// <summary>
     /// Ç‹ÇŒÇΩÇ´ÇÃé¿çs
     /// </summary>
-    void blink() {
+    public void blink() {
         nowBlinkWeight += blinkSpeed;
         int[] animationBlink = animationSet["BLINK"];
         for (int i = 0; i < animationBlink.Length; i++) {
@@ -77,7 +77,7 @@ public class FaceAlice : MonoBehaviour
     /// </summary>
     /// <param name="waitTime"></param>
     /// <returns></returns>
-    IEnumerator EnableBlink(float waitTime) {
+    public IEnumerator EnableBlink(float waitTime) {
         while (true) {
             yield return new WaitForSeconds(waitTime);
             nowBlinkWeight = 0f;
