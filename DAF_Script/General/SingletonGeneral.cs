@@ -58,18 +58,17 @@ public class SingletonGeneral : MonoBehaviour
     void Start()
     {
         //周辺視野の画像変更
-        //RenderingLevel();
+        RenderingLevel();
         //デバッグ
         //saveLoadSystem.Load();
     }
 
     void RenderingLevel() {
         //周辺視野の描画を抑える
-
         //OVRManager.useDynamicFixedFoveatedRendering = true;
         //OVRManager.fixedFoveatedRenderingLevel = OVRManager.FixedFoveatedRenderingLevel.High;
-        OVRManager.tiledMultiResLevel = OVRManager.TiledMultiResLevel.LMSHighTop;
-
+        //OVRManager.tiledMultiResLevel = OVRManager.TiledMultiResLevel.LMSHighTop;
+        OVRManager.tiledMultiResLevel = OVRManager.TiledMultiResLevel.LMSHigh;
     }
 
     void SingletonGeneralInit() {

@@ -1,7 +1,7 @@
 扉は岩のように固く動かない。	The door does not move like a rock.
 end	end
 	
-switch,OpDoor=true	switch,OpDoor=true
+switch,PrologueSwitch=1	switch,PrologueSwitch=1
 se,OpenTheBigDoor	se,OpenTheBigDoor
 scene,Prologue_FeiFirstTime	scene,Prologue_FeiFirstTime
 end	end
