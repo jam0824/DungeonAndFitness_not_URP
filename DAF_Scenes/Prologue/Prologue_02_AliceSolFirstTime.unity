@@ -18418,4 +18418,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5c3c1dda67e57e4c8e719d97e0112b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skinedMeshRenderer: {fileID: 2635874361640299040}
+  childSkinedMeshRenderer: {fileID: 2635874361640299040}

@@ -3701,7 +3701,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da406277b6d1bf142a08847067e5b47c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skinedMeshRenderer: {fileID: 1095434146214042938}
+  childSkinedMeshRenderer: {fileID: 1095434146214042938}
 --- !u!114 &1590474143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3714,7 +3714,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd3be4bd60dbee14582677cd11ed2159, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkAnimation: {fileID: 7400000, guid: f3b53d32bf6f6dd45a8f64952dd92739, type: 2}
 --- !u!114 &1590474138
 MonoBehaviour:
   m_ObjectHideFlags: 0
