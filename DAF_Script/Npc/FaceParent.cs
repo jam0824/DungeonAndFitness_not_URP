@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class FaceParent : MonoBehaviour
 {
+    public SkinnedMeshRenderer skinedMeshRenderer;
     protected int FACE_MAX;
-    protected SkinnedMeshRenderer skinedMeshRenderer;
     protected Dictionary<string, int[]> animationSet = new Dictionary<string, int[]>();
     protected Dictionary<string, float[]> animationEff = new Dictionary<string, float[]>();
 
@@ -81,5 +81,17 @@ public class FaceParent : MonoBehaviour
         for (int i = 0; i < FACE_MAX; i++) {
             skinedMeshRenderer.SetBlendShapeWeight(i, 0f);
         }
+    }
+
+    public void SetAnimationSet(Dictionary<string, int[]> dictAnimationSet) {
+        animationSet = dictAnimationSet;
+    }
+
+    public void SetAnimationEff(Dictionary<string, float[]> dictAnimationEff) {
+        animationEff = dictAnimationEff;
+    }
+
+    public void SetFaceMax(int faceMax) {
+        FACE_MAX = faceMax;
     }
 }
