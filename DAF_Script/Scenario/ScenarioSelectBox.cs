@@ -40,13 +40,10 @@ public class ScenarioSelectBox : MonoBehaviour
             OnClick();
         }
     }
-
-    KeyCode GetKeyCode(int no){
-        if (no == 1) return KeyCode.Alpha1;
-        else if(no == 2) return KeyCode.Alpha2;
-        else if (no == 3) return KeyCode.Alpha3;
-        else if (no == 4) return KeyCode.Alpha4;
-        else if (no == 5) return KeyCode.Alpha5;
+    KeyCode GetKeyCode(int no) {
+        if (no >= 1 && no <= 9) {
+            return (KeyCode)System.Enum.Parse(typeof(KeyCode), "Alpha" + no);
+        }
         return KeyCode.Alpha1;
     }
 }
