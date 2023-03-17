@@ -1,0 +1,3 @@
+se,OpenTheBigDoor	se,OpenTheBigDoor
+scene,Dungeon01F	scene,Dungeon01F
+end	end

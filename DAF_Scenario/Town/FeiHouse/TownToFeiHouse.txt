@@ -1,0 +1,8 @@
+goto,#hata1	goto,#hata1
+end	end
+	
+switch,PrologueSwitch=2	switch,PrologueSwitch=2
+#hata1	#hata1
+se,OpenTheSmallDoor	se,OpenTheSmallDoor
+scene,Prologue_02_AliceSolFirstTime	scene,Prologue_02_AliceSolFirstTime
+end	end

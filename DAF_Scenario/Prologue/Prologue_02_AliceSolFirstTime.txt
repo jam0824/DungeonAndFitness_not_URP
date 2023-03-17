@@ -2,101 +2,99 @@ NoControll	NoControll
 lookFromCharacter,Fei	lookFromCharacter,Fei
 Face,Fei,SMILE	Face,Fei,SMILE
 MessageMove,Fei,Center	MessageMove,Fei,Center
-【フェイ】「お、帰ってきた。おまえを紹介したいからこっちに来てくれ」	【フェイ】「お、帰ってきた。おまえを紹介したいからこっちに来てくれ」
+【フェイ】「お、帰ってきた。おまえを紹介したいからこっちに来てくれ」	【Fei】 "Oh, you're back. Come over here, I want to introduce you."
 move,Anchor_10	move,Anchor_10
-	
 	
 AutoMessageTop,true	AutoMessageTop,true
 lookFromCharacter,Fei	lookFromCharacter,Fei
 lookFromCharacter,Alice	lookFromCharacter,Alice
-【フェイ】「コイツは今日ウチの前で倒れていたカイルだ。多分冒険者」	【フェイ】「コイツは今日ウチの前で倒れていたカイルだ。多分冒険者」
-【フェイ】「しばらくウチの宿に泊まることになったからよろしくな」	【フェイ】「しばらくウチの宿に泊まることになったからよろしくな」
+【フェイ】「コイツは今日ウチの前で倒れていたカイルだ。多分冒険者」	【Fei】 "This guy is Kyle, who was lying in front of our place today. Probably an adventurer."
+【フェイ】「しばらくウチの宿に泊まることになったからよろしくな」	【Fei】 "He's going to stay at our inn for a while, so take care of him."
 	
 AnimationSet,Sol,bool,SitIdle,true	AnimationSet,Sol,bool,SitIdle,true
 lookFromCharacter,Sol	lookFromCharacter,Sol
-【ソル】「俺はソルだ。そこのフェイの幼馴染」	【ソル】「俺はソルだ。そこのフェイの幼馴染」
+【ソル】「俺はソルだ。そこのフェイの幼馴染」	【Sol】 "I'm Sol, Fei's childhood friend."
 Face,Fei,JITO_N	Face,Fei,JITO_N
-【フェイ】「腐れ縁」	【フェイ】「腐れ縁」
-【ソル】「長い付き合いってやつな。近くの店で武器屋をやってる」	【ソル】「長い付き合いってやつな。近くの店で武器屋をやってる」
+【フェイ】「腐れ縁」	【Fei】 "My old-time partner in crime."
+【ソル】「長い付き合いってやつな。近くの店で武器屋をやってる」	【Sol】 "It's been a long time. I run a weapon shop at a nearby store."
 lookFromCharacter,Fei	lookFromCharacter,Fei
 Face,Fei,FUN	Face,Fei,FUN
-【フェイ】「こんな見た目でこいつ、本業は魔法使いだから」	【フェイ】「こんな見た目でこいつ、本業は魔法使いだから」
+【フェイ】「こんな見た目でこいつ、本業は魔法使いだから」	【Fei】 "Despite his appearance, he's actually a mage by profession."
 LookCharacterToCharacter,Sol,Fei	LookCharacterToCharacter,Sol,Fei
-【ソル】「見た目は関係ないだろ」	【ソル】「見た目は関係ないだろ」
+【ソル】「見た目は関係ないだろ」	【Sol】 "Appearance doesn't matter, does it?"
 lookFromCharacter,Sol	lookFromCharacter,Sol
-【ソル】「魔法がエンチャントされた武器も扱っている。興味があったらウチにくればいい」	【ソル】「魔法がエンチャントされた武器も扱っている。興味があったらウチにくればいい」
+【ソル】「魔法がエンチャントされた武器も扱っている。興味があったらウチにくればいい」	【Sol】 "I also handle weapons enchanted with magic. If you're interested, come visit me."
 Face,Sol,SHINKEN	Face,Sol,SHINKEN
-【ソル】「趣味はな、筋トレだ！」	【ソル】「趣味はな、筋トレだ！」
+【ソル】「趣味はな、筋トレだ！」	【Sol】 "My hobby is, you know, working out!"
 Face,Sol,BIG_SMILE	Face,Sol,BIG_SMILE
-【ソル】「カイル、お前はどうだ？ 筋トレはいいぞ！ 武器や魔法より筋肉が大事だと思うだろう？」	【ソル】「カイル、お前はどうだ？ 筋トレはいいぞ！ 武器や魔法より筋肉が大事だと思うだろう？」
+【ソル】「カイル、お前はどうだ？ 筋トレはいいぞ！ 武器や魔法より筋肉が大事だと思うだろう？」	【Sol】 "What about you, Kyle? Working out is great! I think muscles are more important than weapons or magic, don't you?"
 	
 LookCharacterToCharacter,Fei,Alice	LookCharacterToCharacter,Fei,Alice
-【フェイ】「次、アリス」	【フェイ】「次、アリス」
+【フェイ】「次、アリス」	【Fei】 "Next, Alice."
 Face,Sol,SHINKEN	Face,Sol,SHINKEN
-【ソル】「待て。ここからが大事なところなんだが」	【ソル】「待て。ここからが大事なところなんだが」
-【アリス】「…………」	【アリス】「…………」
+【ソル】「待て。ここからが大事なところなんだが」	【Sol】 "Wait. This is where it gets important."
+【アリス】「…………」	【Alice】 "............"
 LookCharacterToCharacter,Sol,Fei	LookCharacterToCharacter,Sol,Fei
 AnimationSet,Sol,bool,SitIdle,false	AnimationSet,Sol,bool,SitIdle,false
 Face,Sol,NORMAL	Face,Sol,NORMAL
-【アリス】「……アリス。フェイの家族」	【アリス】「……アリス。フェイの家族」
-【アリス】「…………」	【アリス】「…………」
-【アリス】「……ぬいぐるみはフェルトさん」	【アリス】「……ぬいぐるみはフェルトさん」
-【アリス】「…………おわり」	【アリス】「…………おわり」
+【アリス】「……アリス。フェイの家族」	【Alice】 "......Alice. Fei's family."
+【アリス】「…………」	【Alice】 "............"
+【アリス】「……ぬいぐるみはフェルトさん」	【Alice】 "......The stuffed animal is Mr. Felt."
+【アリス】「…………おわり」	【Alice】 "............The end."
 Face,Fei,SMILE	Face,Fei,SMILE
-【フェイ】「アリスはアタシの娘だ。照れてるところもまた可愛いだろ？」	【フェイ】「アリスはアタシの娘だ。照れてるところもまた可愛いだろ？」
+【フェイ】「アリスはアタシの娘だ。照れてるところもまた可愛いだろ？」	【Fei】 "Alice is my daughter. Isn't it cute when she's embarrassed?"
 LookCharacterToCharacter,Alice,Fei	LookCharacterToCharacter,Alice,Fei
 Face,Alice,Angry	Face,Alice,Angry
-【アリス】「……むぅ……」	【アリス】「……むぅ……」
+【アリス】「……むぅ……」	【Alice】 "....Muu...."
 Face,Fei,FUN	Face,Fei,FUN
-【フェイ】「ごめんって」	【フェイ】「ごめんって」
+【フェイ】「ごめんって」	【Fei】 "Sorry about that."
 Face,Alice,NORMAL	Face,Alice,NORMAL
 lookFromCharacter,Fei	lookFromCharacter,Fei
-【フェイ】「ま、そんなわけでよろしくだ」	【フェイ】「ま、そんなわけでよろしくだ」
+【フェイ】「ま、そんなわけでよろしくだ」	【Fei】 "Anyway, nice to meet you."
 lookFromCharacter,Alice	lookFromCharacter,Alice
-【アリス】「……カイルはどこから来たの？」	【アリス】「……カイルはどこから来たの？」
+【アリス】「……カイルはどこから来たの？」	【Alice】 "....Where did you come from, Kyle?"
 	
 select	select
-isekai,異世界からだ	isekai,異世界からだ
-forget,覚えてない	forget,覚えてない
+isekai,異世界からだ	isekai,From another world.
+forget,覚えてない	forget,I don't remember.
 	
 #isekai	#isekai
 Face,Fei,KYOTON	Face,Fei,KYOTON
-【フェイ】「おー、突拍子もないこと言い出したな」	【フェイ】「おー、突拍子もないこと言い出したな」
+【フェイ】「おー、突拍子もないこと言い出したな」	【Fei】 "Oh, you're saying something unexpected."
 Face,Alice,Surprise	Face,Alice,Surprise
-【アリス】「……異世界……かっこいい……！」	【アリス】「……異世界……かっこいい……！」
-【ソル】「違う世界に行きたい。誰もが通る道だ」	【ソル】「違う世界に行きたい。誰もが通る道だ」
+【アリス】「……異世界……かっこいい……！」	【Alice】 "....From another world....That's cool....!"
+【ソル】「違う世界に行きたい。誰もが通る道だ」	【Sol】 "I want to go to a different world too. It's a path that everyone takes."
 LookCharacterToCharacter,Fei,Sol	LookCharacterToCharacter,Fei,Sol
-【フェイ】「あんたも小さいときに、体に暗黒の力を宿してるとか言ってなかったか？」	【フェイ】「あんたも小さいときに、体に暗黒の力を宿してるとか言ってなかったか？」
-【ソル】「俺もその気持ちのまま大人になった。自分には秘められた暗黒の力がある気がしてならない」	【ソル】「俺もその気持ちのまま大人になった。自分には秘められた暗黒の力がある気がしてならない」
+【フェイ】「あんたも小さいときに、体に暗黒の力を宿してるとか言ってなかったか？」	【Fei】 "Didn't you say when you were young that you had the power of darkness in your body?"
+【ソル】「俺もその気持ちのまま大人になった。自分には秘められた暗黒の力がある気がしてならない」	【Sol】 "I grew up with that feeling. I can't help but feel that I have a hidden power of darkness within me."
 LookCharacterToCharacter,Alice,Sol	LookCharacterToCharacter,Alice,Sol
-【アリス】「……暗黒の力……さすがソル……」	【アリス】「……暗黒の力……さすがソル……」
+【アリス】「……暗黒の力……さすがソル……」	【Alice】 "....Power of darkness....as expected of Sol...."
 LookCharacterToCharacter,Fei,Alice	LookCharacterToCharacter,Fei,Alice
 Face,Fei,JITO_N	Face,Fei,JITO_N
-【フェイ】「アリス、こういう大人たちになっちゃダメだからな」	【フェイ】「アリス、こういう大人たちになっちゃダメだからな」
+【フェイ】「アリス、こういう大人たちになっちゃダメだからな」	【Fei】 "Alice, you can't become like these adults."
 LookCharacterToCharacter,Alice,Fei	LookCharacterToCharacter,Alice,Fei
 Face,Alice,sad	Face,Alice,sad
-【アリス】「……えー……」	【アリス】「……えー……」
+【アリス】「……えー……」	【Alice】 "...Uh..."
 AnimationSet,Sol,bool,SitIdle,true	AnimationSet,Sol,bool,SitIdle,true
 lookFromCharacter,Sol	lookFromCharacter,Sol
-【ソル】「カイル、言われてるぞ」	【ソル】「カイル、言われてるぞ」
+【ソル】「カイル、言われてるぞ」	【Sol】 "Kyle, they're talking about you."
 Face,Alice,Normal	Face,Alice,Normal
 LookCharacterToCharacter,Sol,Fei	LookCharacterToCharacter,Sol,Fei
 goto,#hata_1	goto,#hata_1
 	
-	
 #forget	#forget
 lookFromCharacter,Sol	lookFromCharacter,Sol
 AnimationSet,Sol,bool,SitIdle,true	AnimationSet,Sol,bool,SitIdle,true
-【ソル】「記憶喪失なのか？ 話には聞いたことがあるが本当にいるんだな」	【ソル】「記憶喪失なのか？ 話には聞いたことがあるが本当にいるんだな」
-【アリス】「……衝撃があると思い出すことがあるって、アリス、本で読んだ」	【アリス】「……衝撃があると思い出すことがあるって、アリス、本で読んだ」
+【ソル】「記憶喪失なのか？ 話には聞いたことがあるが本当にいるんだな」	【Sol】 "Memory loss, huh? I've heard of it, but didn't think it actually existed."
+【アリス】「……衝撃があると思い出すことがあるって、アリス、本で読んだ」	【Alice】 "...There are times when you remember things if you experience a shock. Alice read that in a book."
 Face,Fei,JOY	Face,Fei,JOY
 lookFromCharacter,Fei	lookFromCharacter,Fei
-【フェイ】「殴ればいいのか？」	【フェイ】「殴ればいいのか？」
+【フェイ】「殴ればいいのか？」	【Fei】 "Should I punch him?"
 LookCharacterToCharacter,Sol,Fei	LookCharacterToCharacter,Sol,Fei
-【ソル】「待て。それをやったらもう一回忘れる可能性もあるんじゃないか？」	【ソル】「待て。それをやったらもう一回忘れる可能性もあるんじゃないか？」
-【アリス】「……え、じゃぁ、もう一回自己紹介しなきゃダメ……？」	【アリス】「……え、じゃぁ、もう一回自己紹介しなきゃダメ……？」
+【ソル】「待て。それをやったらもう一回忘れる可能性もあるんじゃないか？」	【Sol】 "Wait. If you do that, there's a possibility he'll forget again."
+【アリス】「……え、じゃぁ、もう一回自己紹介しなきゃダメ……？」	【Alice】 "...So, do we have to introduce ourselves again...?"
 Face,Fei,JITO_N	Face,Fei,JITO_N
-【フェイ】「面倒くさいな。やめておこう」	【フェイ】「面倒くさいな。やめておこう」
+【フェイ】「面倒くさいな。やめておこう」	【Fei】 "What a pain. Let's just leave it."
 goto,#hata_1	goto,#hata_1
 	
 #hata_1	#hata_1
@@ -107,18 +105,19 @@ FadeIn	FadeIn
 	
 Face,Fei,FUN	Face,Fei,FUN
 LookCharacterToCharacter,Fei,Alice	LookCharacterToCharacter,Fei,Alice
-【フェイ】「アリス、そろそろ寝る時間」	【フェイ】「アリス、そろそろ寝る時間」
+【フェイ】「アリス、そろそろ寝る時間」	【Fei】 "Alice, it's time for bed soon."
 LookCharacterToCharacter,Alice,Fei	LookCharacterToCharacter,Alice,Fei
-【アリス】「……はーい……」	【アリス】「……はーい……」
+【アリス】「……はーい……」	【Alice】 "...Okay..."
 lookFromCharacter,Sol	lookFromCharacter,Sol
-【ソル】「俺もそろそろ帰るか。カイル、今後ともよろしくな」	【ソル】「俺もそろそろ帰るか。カイル、今後ともよろしくな」
-【フェイ】「アタシも今日はそろそろ店じまいにするか」	【フェイ】「アタシも今日はそろそろ店じまいにするか」
+【ソル】「俺もそろそろ帰るか。カイル、今後ともよろしくな」	【Sol】 "I should head home soon too. Take care, Kyle."
+【フェイ】「アタシも今日はそろそろ店じまいにするか」	【Fei】 "I should close up shop soon too."
 LookCharacterToCharacter,Sol,Fei	LookCharacterToCharacter,Sol,Fei
-【ソル】「ずっとサボってただろ」	【ソル】「ずっとサボってただろ」
-【フェイ】「セルフサービスみたいなもんだから、ウチ」	【フェイ】「セルフサービスみたいなもんだから、ウチ」
+【ソル】「ずっとサボってただろ」	【Sol】 "You were slacking off the whole time."
+【フェイ】「セルフサービスみたいなもんだから、ウチ」	【Fei】 "It's like self-service, so it's fine at home."
 lookFromCharacter,Fei	lookFromCharacter,Fei
-【フェイ】「あんたも今日は疲れただろ？ 部屋はさっきと同じで2階の一番奥の「つばめの部屋」な」	【フェイ】「あんたも今日は疲れただろ？ 部屋はさっきと同じで2階の一番奥の「つばめの部屋」な」
+【フェイ】「あんたも今日は疲れただろ？ 部屋はさっきと同じで2階の一番奥の「つばめの部屋」な」	【Fei】 "You're tired too, right? The room is the same as before, in the back of the second floor, in the 'Swallow's Room'."
 FadeOut	FadeOut
+set,PrologueSwitch=3	set,PrologueSwitch=3
 lookOffFromCharacter,Fei	lookOffFromCharacter,Fei
 lookOffFromCharacter,Alice	lookOffFromCharacter,Alice
 lookOffFromCharacter,Sol	lookOffFromCharacter,Sol
@@ -128,7 +127,6 @@ destroyObject,Alice	destroyObject,Alice
 controll	controll
 FadeIn	FadeIn
 end	end
-	
 	
 switch,AliceSolFirstTime=true	switch,AliceSolFirstTime=true
 end	end
