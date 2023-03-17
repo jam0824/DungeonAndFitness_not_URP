@@ -354,7 +354,7 @@ public class ScenarioExec : MonoBehaviour
             string flagName = "#" + line[0];
             string message = line[1];
             GameObject selectBoxCanvas = MakeSelectBox(i);
-            selectBoxCanvas.GetComponent<ScenarioSelectBox>().SetValues(gameObject, flagName, message);
+            selectBoxCanvas.GetComponent<ScenarioSelectBox>().SetValues(gameObject, flagName, message, i+1);
             listSelectBoxCanvas.Add(selectBoxCanvas);
         }
         this.listSelectBoxCanvas = listSelectBoxCanvas;
