@@ -76,9 +76,11 @@ public class PlayerView : MonoBehaviour
     /// </summary>
     /// <param name="anchorName"></param>
     void SetPlayerPosition(string anchorName) {
-        Vector3 pos = GameObject.Find(anchorName).transform.position;
+        GameObject anchor = GameObject.Find(anchorName);
+        Vector3 pos = anchor.transform.position;
         DebugWindow.instance.DFDebug("プレイヤー初期位置AnchorName : " + anchorName);
         transform.position = pos;
+        transform.rotation = anchor.transform.rotation;
     }
     
     // Start is called before the first frame update
