@@ -23,9 +23,7 @@ public class DebugWindow : MonoBehaviour
         //ÉçÉOÇ™î≠çsÇ≥ÇÍÇΩéûÇ…OnReceiveLogÇ™é¿çsÇ≥ÇÍÇÈÇÊÇ§Ç…Ç∑ÇÈ
         Application.logMessageReceived += OnReceiveLog;
         cText = GameObject.Find("DebugText").GetComponent<Text>();
-        cText.text = "testtesttest";
-
-        fpsText = GameObject.Find("FpsText").GetComponent<Text>();
+        cText.text = DataSystem.instance.log;
 
     }
 
@@ -35,11 +33,6 @@ public class DebugWindow : MonoBehaviour
 
     public void DFDebug(string message) {
         Debug.Log(message);
-        /*
-        string m = cText.text;
-        m = message + "\n" + m;
-        cText.text = m;
-        */
     }
 
     public void DFFps(float fps) {
@@ -49,8 +42,6 @@ public class DebugWindow : MonoBehaviour
     private void OnReceiveLog(string logText, string stackTrace, LogType logType) {
         if (cText == null) return;
         
-
-        string m = cText.text;
         string line = "";
         if(stackTrace != "") {
             if (logType == LogType.Error) {
@@ -71,16 +62,17 @@ public class DebugWindow : MonoBehaviour
         else {
             line = "Log\t" + logText + "\n";
         }
-        m = line + m;
+        DataSystem.instance.log = line + DataSystem.instance.log;
+
         if (!SingletonGeneral.instance.GetDebugMode()) {
             if(gameObject.activeSelf) gameObject.SetActive(false);
             return;
         }
-        cText.text = m;
+        cText.text = DataSystem.instance.log;
     }
 
     void SaveLog() {
-        string data = cText.text;
+        string data = DataSystem.instance.log;
         FQCommon.Common.SaveStringToFile(logFileName,data);
     }
 }

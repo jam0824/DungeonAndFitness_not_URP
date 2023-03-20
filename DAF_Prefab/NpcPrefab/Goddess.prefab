@@ -1387,7 +1387,7 @@ GameObject:
   - component: {fileID: 388608794}
   - component: {fileID: 388608797}
   - component: {fileID: 388608798}
-  - component: {fileID: 388608799}
+  - component: {fileID: 388608803}
   m_Layer: 0
   m_Name: Goddess
   m_TagString: NPC
@@ -1578,7 +1578,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skinedMeshRenderer: {fileID: 0}
   charSkinedMeshRenderer: {fileID: 2732726975232478028}
---- !u!114 &388608799
+--- !u!114 &388608803
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1591,6 +1591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jaw: {fileID: 2875875293762570283}
+  DEFAULT_JAW: {x: 4.757, y: -90, z: 90.156}
 --- !u!1 &2449642486802139544
 GameObject:
   m_ObjectHideFlags: 0

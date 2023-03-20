@@ -8,6 +8,7 @@ public class DataSystem : MonoBehaviour
     public DataPlayer dataPlayer { set; get; }
     public DataItem dataItem { set; get; }
     public DataScenario dataScenario { set; get; }
+    public string log { set; get; }
 
     private void Awake() {
         if (instance == null) {
@@ -21,6 +22,7 @@ public class DataSystem : MonoBehaviour
     }
 
     void DataSystemInit() {
+        log = "";
         dataPlayer = GetComponent<DataPlayer>();
         dataPlayer.DataPlayerInit();
         dataItem = GetComponent<DataItem>();

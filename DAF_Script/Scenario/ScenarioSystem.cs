@@ -174,6 +174,13 @@ public class ScenarioSystem : MonoBehaviour
         return isLock;
     }
 
+    public void SetAnchorName(string anchorName) {
+        dataScenario.sceneAnchorName = anchorName;
+    }
+    public string GetAnchorName() {
+        return dataScenario.sceneAnchorName;
+    }
+
     /// <summary>
     /// スイッチが指定した値を含んでいるか、複数のスイッチのセットを確認
     /// and条件

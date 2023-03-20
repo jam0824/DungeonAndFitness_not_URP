@@ -233,7 +233,7 @@ public class ScenarioExec : MonoBehaviour
                 break;
             }
             else if (command == "scene") {
-                CommandScene(line[1]);
+                CommandScene(line);
                 break;
             }
             else if (command == "move") {
@@ -525,15 +525,22 @@ public class ScenarioExec : MonoBehaviour
     }
 
     /// <summary>
+    /// scene,シーン名,(移動先Anchor)
     /// 指定した名前のシーンに切り替える
     /// フェード付き
     /// </summary>
-    /// <param name="sceneName"></param>
-    public void CommandScene(string sceneName) {
+    /// <param name="line"></param>
+    public void CommandScene(string[] line) {
+        string sceneName = line[1];
+        if (line.Length == 3) SetAnchorName(line[2]);
+
         DebugWindow.instance.DFDebug("シーン切り替え：" + sceneName);
         OVRScreenFade ovrScreenFade = GameObject.Find("CenterEyeAnchor").GetComponent<OVRScreenFade>();
         ovrScreenFade.FadeOut();
         StartCoroutine(ChangeScene(sceneName, FADE_TIME));
+    }
+    void SetAnchorName(string anchorName) {
+        scenarioSystem.SetAnchorName(anchorName);
     }
 
     IEnumerator ChangeScene(string sceneName, float waitTime) {

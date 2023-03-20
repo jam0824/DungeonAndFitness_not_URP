@@ -62,11 +62,29 @@ public class PlayerView : MonoBehaviour
         rightPlayerRocketPunch = rightPlayerPunch.GetComponent<PlayerRocketPanch>();
         
     }
+
+    /// <summary>
+    /// 初期位置がセットされているときはそのAnchorに移動
+    /// </summary>
+    void MoveToAnchor() {
+        if (DataSystem.instance.dataScenario.sceneAnchorName == null) return;
+        SetPlayerPosition(DataSystem.instance.dataScenario.sceneAnchorName);
+        DataSystem.instance.dataScenario.sceneAnchorName = null;
+    }
+    /// <summary>
+    /// プレイヤーの初期位置の変更
+    /// </summary>
+    /// <param name="anchorName"></param>
+    void SetPlayerPosition(string anchorName) {
+        Vector3 pos = GameObject.Find(anchorName).transform.position;
+        DebugWindow.instance.DFDebug("プレイヤー初期位置AnchorName : " + anchorName);
+        transform.position = pos;
+    }
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        MoveToAnchor();
         //FQCommon.Common.AppendStringFile("PlayerItemSave.txt", "101");
     }
 
