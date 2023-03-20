@@ -352,12 +352,22 @@ public class ScenarioExec : MonoBehaviour
             string[] line = scenario[lineNo + i];
             if ((line[0] == "selectend")|| (line[0] == "")) break;
             string flagName = "#" + line[0];
-            string message = line[1];
+            string message = MakeSelectMessage(line);
             GameObject selectBoxCanvas = MakeSelectBox(i);
             selectBoxCanvas.GetComponent<ScenarioSelectBox>().SetValues(gameObject, flagName, message, i+1);
             listSelectBoxCanvas.Add(selectBoxCanvas);
         }
         this.listSelectBoxCanvas = listSelectBoxCanvas;
+    }
+
+    //英語でカンマで区切られていた時のセレクトの処理
+    string MakeSelectMessage(string[] line) {
+        if (line.Length <= 2) return line[1];
+        string message = line[1];
+        for(int i = 2; i < line.Length; i++) {
+            message += "," + line[i];
+        }
+        return message;
     }
 
     //SELECTBOX作成
