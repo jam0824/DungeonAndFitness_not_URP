@@ -5,16 +5,10 @@ using UnityEngine;
 public class JawFix : MonoBehaviour
 {
     public GameObject jaw;
-    Vector3 DEFAULT_JAW = new Vector3(4.757f, -90f, 90.156f);
+    public Vector3 DEFAULT_JAW;
 
-    private void Start() {
-        StartCoroutine(IEJawFix());
-    }
-
-    IEnumerator IEJawFix() {
-        while (true) {
-            yield return new WaitForEndOfFrame();
-            jaw.transform.localEulerAngles = DEFAULT_JAW;
-        }
+    void LateUpdate() {
+        //Ç†Ç≤ÇÃã∏ê≥
+        jaw.transform.localEulerAngles = DEFAULT_JAW;
     }
 }
