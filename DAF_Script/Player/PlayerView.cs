@@ -66,7 +66,7 @@ public class PlayerView : MonoBehaviour
     /// <summary>
     /// 初期位置がセットされているときはそのAnchorに移動
     /// </summary>
-    void MoveToAnchor() {
+    public void MoveToAnchor() {
         if (DataSystem.instance.dataScenario.sceneAnchorName == null) return;
         SetPlayerPosition(DataSystem.instance.dataScenario.sceneAnchorName);
         DataSystem.instance.dataScenario.sceneAnchorName = null;

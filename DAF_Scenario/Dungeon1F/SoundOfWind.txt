@@ -1,2 +1,0 @@
-information,SoundOfWind	information,SoundOfWind
-end	end

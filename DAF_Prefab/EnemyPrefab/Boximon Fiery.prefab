@@ -841,6 +841,7 @@ GameObject:
   - component: {fileID: 7215260341367631804}
   - component: {fileID: 7215260341367631807}
   - component: {fileID: 7215260341367631806}
+  - component: {fileID: 7215260341231829735}
   m_Layer: 8
   m_Name: Boximon Fiery
   m_TagString: Untagged
@@ -1102,6 +1103,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGameObjectLoaded: 0
+--- !u!114 &7215260341231829735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7216672471935525616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0450b1b7640e004d9718371130689ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7216689656749828598
 GameObject:
   m_ObjectHideFlags: 0

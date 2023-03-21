@@ -1,5 +1,0 @@
-end	end
-	
-switch,item=1	switch,item=1
-destroy	destroy
-end	end

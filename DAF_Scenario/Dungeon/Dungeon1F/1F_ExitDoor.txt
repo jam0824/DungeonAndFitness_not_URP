@@ -1,0 +1,3 @@
+se,OpenTheBigDoor	se,OpenTheBigDoor
+scene,Town_02,Anchor_DungeonExit	scene,Town_02,Anchor_DungeonExit
+end	end

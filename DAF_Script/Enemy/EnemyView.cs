@@ -10,7 +10,8 @@ public class EnemyView : MonoBehaviour
     public GameObject Face { get; set; }
     public EnemyConfig enemyConfig { get; set; }
     public EnemyDamage enemyDamage { get; set; }
-    public EnemyMove enemyMove { get; set; }
+    public IEnemyMove enemyMove { get; set; }
+    public IEnemyAttack enemyAttack { get; set; }
     public EnemyAnimation enemyAnimation { get; set; }
     public GameObject PunchHitPrefab { get; set; }
     public AudioSource audioSource { get; set; }
@@ -38,10 +39,12 @@ public class EnemyView : MonoBehaviour
 
         enemyConfig = GetComponent<EnemyConfig>();
         enemyDamage = GetComponent<EnemyDamage>();
-        enemyMove = GetComponent<EnemyMove>();
+        enemyMove = GetComponent<IEnemyMove>();
+        enemyAttack = GetComponent<IEnemyAttack>();
         enemyAnimation = GetComponent<EnemyAnimation>();
         audioSource = GetComponent<AudioSource>();
         rigidbody = GetComponent<Rigidbody>();
+        enemyMove.EnemyMoveInit(this);
         isGameObjectLoaded = true;
     }
 
@@ -104,7 +107,7 @@ public class EnemyView : MonoBehaviour
     {
         //HPがゼロになったら
         if (hp == 0) {
-            enemyMove.StopAttack();
+            enemyAttack.StopAttack();
             //Freeze rotationを解除する
             rigidbody.constraints = RigidbodyConstraints.None;
             //アイテムドロップ
@@ -240,4 +243,33 @@ public class EnemyView : MonoBehaviour
     }
 
     
+}
+
+public interface IEnemyAttack
+{
+    public void StartAttack(EnemyView enemyView);
+    public void StopAttack();
+    IEnumerator MakeBullet(EnemyView enemyView);
+}
+
+public interface IEnemyMove
+{
+    public void EnemyMoveInit(EnemyView ev);
+    void WhenNotice(
+        float dist, 
+        GameObject player, 
+        EnemyConfig enemyConfig, 
+        EnemyAnimation enemyAnimation);
+    void WhenWalk(
+        float dist,
+        EnemyConfig enemyConfig);
+    void WhenBattle(
+        float dist,
+        GameObject player,
+        EnemyConfig enemyConfig,
+        EnemyAnimation enemyAnimation);
+    void ExternalNotice();
+    public void ChangeBattleState(EnemyConfig enemyConfig);
+    void ChangeNoticeState(EnemyConfig enemyConfig);
+    void ChangeWalkState(EnemyConfig enemyConfig);
 }
