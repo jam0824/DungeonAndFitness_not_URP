@@ -13,7 +13,7 @@ public class EnemyBullet : MonoBehaviour
     float speed = 1.0f;
     int count = 0;
     float waitCount = 120.0f;
-    float destroyCount = 1400.0f;
+    float destroyCount = 2000.0f;
     Vector3 scale = new Vector3(0.01f, 0.01f, 0.01f);
     Vector3 addScale;
     AudioSource audioSource;

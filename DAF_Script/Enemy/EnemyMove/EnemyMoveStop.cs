@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class EnemyMoveStop : EnemyMoveParent, IEnemyMove
 {
-    
-    int walkCount = 0;
-    int MAX_WALK_COUNT = 600;
-
-
-
     /// <summary>
     /// ActionModeがStopの時
     /// </summary>
