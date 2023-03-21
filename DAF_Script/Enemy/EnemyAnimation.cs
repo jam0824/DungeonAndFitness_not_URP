@@ -19,7 +19,12 @@ public class EnemyAnimation : MonoBehaviour
     {
         
     }
-
+    public void SetRunAnim(bool isRun) {
+        anim.SetBool("Run Forward", isRun);
+    }
+    public bool GetBoolRunAnim() {
+        return anim.GetBool("Run Forward");
+    }
     public void SetWalkAnim(bool isWalk) {
         anim.SetBool("Walk Forward", isWalk);
     }

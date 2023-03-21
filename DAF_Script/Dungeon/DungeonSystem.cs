@@ -7,7 +7,6 @@ public class DungeonSystem : MonoBehaviour
     public bool isDungeon = true;
     public GameObject[] Enemies;
     public int ENEMY_MAX;
-    //fixupdate = 0.02秒　1分で3000
     public int SPAWN_WAIT;
     public string[] DUNGEON_DROP_ITEMS_NO;
     public GameObject DamageTextPrefab;
@@ -42,6 +41,7 @@ public class DungeonSystem : MonoBehaviour
 
         //満腹度スタート
         PlayerView.instance.playerStatusChange.StartSatiation();
+        StartCoroutine(IESpawn());
     }
 
     // Update is called once per frame
@@ -50,12 +50,10 @@ public class DungeonSystem : MonoBehaviour
         
     }
 
-    private void FixedUpdate() {
-        if (!isDungeon) return;
-
-        spawnCount += 1;
-        if (spawnCount >= SPAWN_WAIT) {
-            spawnCount = 0;
+    IEnumerator IESpawn() {
+        while (true) {
+            if (!isDungeon) break;
+            yield return new WaitForSeconds(SPAWN_WAIT);
             Spawn();
         }
     }

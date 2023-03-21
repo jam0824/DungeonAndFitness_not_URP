@@ -72,7 +72,7 @@ public class EnemyMoveParent : MonoBehaviour
             ChangeNoticeState(enemyConfig);
         }
     }
-    public void ChangeNoticeState(EnemyConfig enemyConfig) {
+    public virtual void ChangeNoticeState(EnemyConfig enemyConfig) {
         SingletonGeneral.instance.PlayOneShot(enemyView.audioSource, "EnemyNoticeSE");
         enemyConfig.SetEnemyState("Notice");
         DebugWindow.instance.DFDebug("StateCange:Notice");
@@ -93,7 +93,7 @@ public class EnemyMoveParent : MonoBehaviour
             ChangeWalkState(enemyConfig);
         }
     }
-    public void ChangeBattleState(EnemyConfig enemyConfig) {
+    public virtual void ChangeBattleState(EnemyConfig enemyConfig) {
         enemyConfig.SetEnemyState("Battle");
         DebugWindow.instance.DFDebug("StateCange:Battle");
         enemyAnimation.SetWalkAnim(false);
@@ -113,7 +113,7 @@ public class EnemyMoveParent : MonoBehaviour
         }
     }
 
-    public void ChangeWalkState(EnemyConfig enemyConfig) {
+    public virtual void ChangeWalkState(EnemyConfig enemyConfig) {
         enemyConfig.SetEnemyState("Walk");
         DebugWindow.instance.DFDebug("StateCange:Walk");
     }

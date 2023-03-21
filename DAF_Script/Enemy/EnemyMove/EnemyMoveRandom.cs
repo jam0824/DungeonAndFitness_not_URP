@@ -30,10 +30,8 @@ public class EnemyMoveRandom : EnemyMoveParent, IEnemyMove
                 
                 break;
         }
-        if((state == "Notice") || (state == "Battle")) {
-            if (dist >= config.GetBattleEndDistance())
-                enemyAnimation.SetWalkAnim(true);
-        }
+        STATE_TYPE nowState = DetermineStatusByDistance(dist, config);
+        if (nowState == STATE_TYPE.WALK) enemyAnimation.SetWalkAnim(true);
     }
     public override void WhenWalk(
         float dist,
