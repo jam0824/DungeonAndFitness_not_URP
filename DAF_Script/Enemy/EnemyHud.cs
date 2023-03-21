@@ -6,7 +6,6 @@ using TMPro;
 public class EnemyHud : MonoBehaviour
 {
     GameObject face;
-    GameObject parentObject;
     EnemyConfig config;
     GameObject hpBar;
     SpriteRenderer hpBarSpriteRenderer;
@@ -29,8 +28,9 @@ public class EnemyHud : MonoBehaviour
             return;
         }
         face = GameObject.Find("HitArea");
-        parentObject = transform.parent.gameObject;
-        config = parentObject.GetComponent<EnemyConfig>();
+        GameObject parentObject = transform.parent.gameObject;
+        GameObject grandParentObject = parentObject.transform.parent.gameObject;
+        config = grandParentObject.GetComponent<EnemyConfig>();
         hpBar = transform.Find("HpBar").gameObject;
         hpBarSpriteRenderer = hpBar.GetComponent<SpriteRenderer>();
         hpNumber = transform.Find("HpNumber").GetComponent<TextMeshPro>();

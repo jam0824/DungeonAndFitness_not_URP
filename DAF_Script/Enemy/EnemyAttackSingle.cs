@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyAttackSingle : MonoBehaviour, IEnemyAttack
 {
     IEnumerator routine;
+    const string firePositionPath = "EnemyAttachment/FirePosition";
 
     //çUåÇäJén
     public void StartAttack(EnemyView enemyView) {
@@ -41,11 +42,8 @@ public class EnemyAttackSingle : MonoBehaviour, IEnemyAttack
     }
 
     Vector3 GetShotPos() {
-        Vector3 pos = transform.position;
-        Vector3 addPos = -transform.forward;
-        pos = pos + addPos;
-        pos.y += 3.5f;
-        return pos;
+        GameObject firePosition = transform.Find(firePositionPath).gameObject;
+        return firePosition.transform.position;
     }
 
     EnemyBullet SetEnemyBullet(
