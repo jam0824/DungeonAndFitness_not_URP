@@ -15,6 +15,7 @@ public class EnemyAttackSingle : MonoBehaviour, IEnemyAttack
 
     //UŒ‚I—¹
     public void StopAttack() {
+        if (routine == null) return;
         StopCoroutine(routine);
         routine = null;
     }
