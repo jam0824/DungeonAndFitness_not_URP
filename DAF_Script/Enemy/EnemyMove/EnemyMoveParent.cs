@@ -130,6 +130,14 @@ public class EnemyMoveParent : MonoBehaviour
         else if (dist <= enemyConfig.GetNoticeDistance()) {
             return STATE_TYPE.NOTICE;
         }
+        switch (state) {
+            case "Notice":
+                return STATE_TYPE.NOTICE;
+            case "Battle":
+                return STATE_TYPE.BATTLE;
+            default:
+                return STATE_TYPE.WALK;
+        }
         return STATE_TYPE.WALK;
     }
 
