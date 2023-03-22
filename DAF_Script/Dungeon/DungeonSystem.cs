@@ -66,9 +66,16 @@ public class DungeonSystem : MonoBehaviour
             Vector3 pos = Floors[floorNo].transform.position;
             pos.y = 1.0f;
             GameObject enemy = Instantiate(Enemies[enemyNo], pos, transform.rotation);
+            enemy.transform.eulerAngles = ChangeDirection(enemy);
             enemy.transform.parent = dungeonRoot.transform;
             ListEnemy.Add(enemy);
         }
+    }
+    Vector3 ChangeDirection(GameObject obj) {
+        int rnd = Random.Range(0, 359);
+        Vector3 worldAngle = obj.transform.eulerAngles;
+        worldAngle.y = rnd;
+        return worldAngle;
     }
 
     //“GƒLƒƒƒ‰‚ªMAX‚¾‚Á‚½‚çfalse‚ğ•Ô‚·B
