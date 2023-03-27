@@ -3,6 +3,7 @@ ifauto,#auto,#notauto	ifauto,#auto,#notauto
 end	end
 	
 #notauto	#notauto
+se,ComeBackStone	se,ComeBackStone
 ChangeObject,ComeBackStoneFalse,0	ChangeObject,ComeBackStoneFalse,0
 set,1FComeBackStone=true	set,1FComeBackStone=true
 石が青く輝いた！	The stone shone blue!

@@ -712,7 +712,7 @@ public class ScenarioExec : MonoBehaviour
     void CommandEnd() {
         CloseWindowCanvas();
 
-        DebugWindow.instance.DFDebug("会話終了");
+        DebugWindow.instance.DFDebug("会話終了:" + gameObject.name);
         //会話終了後、判定と重なっているためすぐ次の話になる。コールチンで待ち時間を入れる
         StartCoroutine("ResetFlag");
     }
@@ -735,7 +735,7 @@ public class ScenarioExec : MonoBehaviour
 
     //シナリオファイルのロード。シナリオはprefabにアタッチされたもの。
     public void LoadScenario() {
-        DebugWindow.instance.DFDebug("シナリオ呼び出し");
+        DebugWindow.instance.DFDebug("シナリオ呼び出し:" + gameObject.name);
         List<string[]> tsvData = FQCommon.Common.LoadTsvFileFromTextAsset(scenario);
 
         listScenarioCsv = GetLanguageText(tsvData, SingletonGeneral.instance.LanguageMode);
