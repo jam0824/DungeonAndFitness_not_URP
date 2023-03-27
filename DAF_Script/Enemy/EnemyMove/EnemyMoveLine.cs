@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class EnemyMoveLine : EnemyMoveParent, IEnemyMove
 {
+    Vector3 oldPos = Vector3.zero;
+    const float CHANGE_DIRECTION_TIME = 5f;
+    const float MOVE_CRITERIA = 2f;
 
-
+    private void Start() {
+        StartCoroutine(IEChangeDirection(CHANGE_DIRECTION_TIME));
+    }
 
     /// <summary>
     /// ActionModeがRandomの時
@@ -89,6 +94,13 @@ public class EnemyMoveLine : EnemyMoveParent, IEnemyMove
         transform.eulerAngles = worldAngle;
     }
 
+    void ChangeRandomDirection() {
+        int rnd = Random.Range(0, 359);
+        Vector3 worldAngle = transform.eulerAngles;
+        worldAngle.y = rnd;
+        transform.eulerAngles = worldAngle;
+    }
+
     /// <summary>
     /// 前に歩く
     /// </summary>
@@ -101,8 +113,24 @@ public class EnemyMoveLine : EnemyMoveParent, IEnemyMove
     }
 
     private void OnCollisionEnter(Collision collision) {
-        if(collision.gameObject.tag == "Wall") {
+        if(collision.gameObject.tag != "Ground") {
             ChangeDirection();
         }
+    }
+
+    IEnumerator IEChangeDirection(float waitTime) {
+        while (true) {
+            yield return new WaitForSeconds(waitTime);
+            bool isOk = isMove(oldPos, transform.position);
+            if (!isOk) ChangeRandomDirection();
+            oldPos = transform.position;
+        }
+    }
+
+    bool isMove(Vector3 oldPos, Vector3 nowPos) {
+        float x = Mathf.Abs(nowPos.x - oldPos.x);
+        float z = Mathf.Abs(nowPos.z - oldPos.z);
+        if ((x < MOVE_CRITERIA) && (z < MOVE_CRITERIA)) return false;
+        return true;
     }
 }
