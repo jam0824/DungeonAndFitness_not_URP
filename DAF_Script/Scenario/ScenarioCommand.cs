@@ -144,6 +144,37 @@ public class ScenarioCommand : MonoBehaviour
         DebugWindow.instance.DFDebug("表情変更:" + characterName + "->" + emotion);
     }
 
+    /// <summary>
+    /// ChangeObject,targetObjName,objNo
+    /// ChangeObjectコマンドを使うオブジェクトに予め変更用オブジェクトを登録。
+    /// それにobjNoでアクセスして取り換える
+    /// </summary>
+    /// <param name="targetObjName"></param>
+    /// <param name="obj"></param>
+    /// <param name="objNo"></param>
+    public void CommandChangeObject(
+        string targetObjName, 
+        List<GameObject> obj, 
+        int objNo) 
+    {
+        if(objNo >= obj.Count) {
+            DebugWindow.instance.DFDebug("CommandChangeObjectに渡すobjNoが不正です：" + objNo);
+            return;
+        }
+        GameObject targetObj = GameObject.Find(targetObjName);
+        if(targetObj == null) {
+            DebugWindow.instance.DFDebug(targetObjName + "が見つかりませんでした。");
+            return;
+        }
+        GameObject ChangedObj = Instantiate(
+            obj[objNo], 
+            targetObj.transform.position, 
+            targetObj.transform.rotation);
+        ChangedObj.transform.parent = targetObj.transform.parent;
+        Destroy(targetObj);
+        DebugWindow.instance.DFDebug("ChangeObject:objNo" + objNo);
+    }
+
 
     
 
@@ -159,4 +190,7 @@ public class ScenarioCommand : MonoBehaviour
         DebugWindow.instance.DFDebug("AutoMessageTop : " + f);
         return f;
     }
+
+
+
 }

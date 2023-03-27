@@ -1,0 +1,13 @@
+ifauto,#auto,#notauto	ifauto,#auto,#notauto
+#auto	#auto
+end	end
+	
+#notauto	#notauto
+ChangeObject,ComeBackStoneFalse,0	ChangeObject,ComeBackStoneFalse,0
+set,1FComeBackStone=true	set,1FComeBackStone=true
+石が青く輝いた！	The stone shone blue!
+end	end
+	
+switch,1FComeBackStone=true	switch,1FComeBackStone=true
+ChangeObject,ComeBackStoneFalse,0	ChangeObject,ComeBackStoneFalse,0
+end	end

@@ -9,6 +9,8 @@ public class ScenarioExec : MonoBehaviour
 {
     public bool isStartCheck = false;
     public TextAsset scenario;
+    public List<GameObject> useObjects;
+
     //アイテムがフルだったときのキー
     string FULL_OF_ITEM_KEY = "FullOfItem";
     string MESSAGE_SE_KEY = "MessageNormal";
@@ -28,6 +30,9 @@ public class ScenarioExec : MonoBehaviour
     //今1行実行中か
     bool isNowLineExecuting = false;
     bool isLookAt = false;
+
+    //スタート時にオートでスタートしたイベントか
+    bool isAutoStart { set; get; }
     
 
     TextMeshProUGUI messageText;
@@ -47,7 +52,7 @@ public class ScenarioExec : MonoBehaviour
         //シーンスタート時に起動する場合
         if (isStartCheck) {
             scenarioSystem = SingletonGeneral.instance.scenarioSystem;
-            InitMain();
+            InitMain(true);
         }
     }
 
@@ -76,9 +81,10 @@ public class ScenarioExec : MonoBehaviour
         //全体でイベントロック（誰かとイベント中）だったら何もしない
         if (scenarioSystem.GetLock()) return;
         scenarioSystem.SetLock(true);
-        InitMain();
+        InitMain(false);
     }
-    void InitMain() {
+    void InitMain(bool isAuto) {
+        isAutoStart = isAuto;
         LoadScenario();
         lineNo = GetScenarioLineNo();
         isNowScenarioExec = true;
@@ -148,6 +154,10 @@ public class ScenarioExec : MonoBehaviour
                 no = CommandIf(line[1], line[2], line[3],listScenarioCsv);
                 continue;
             }
+            else if (command == "ifauto") {
+                no = CommandIfAuto(line[1], line[2], isAutoStart, listScenarioCsv);
+                continue;
+            }
             else if (command == "case") {
                 no = CommandCase(line[1], no, listScenarioCsv);
                 continue;
@@ -180,6 +190,14 @@ public class ScenarioExec : MonoBehaviour
             }
             else if (command == "se") {
                 scenarioCommand.CommandSe(line[1]);
+                no++;
+                continue;
+            }
+            else if (command == "changeobject") {
+                scenarioCommand.CommandChangeObject(
+                    line[1], 
+                    useObjects, 
+                    int.Parse(line[2]));
                 no++;
                 continue;
             }
@@ -441,6 +459,28 @@ public class ScenarioExec : MonoBehaviour
         }
         else {
             no = CommandGoto(falseFlag, scenario);
+        }
+        return no;
+    }
+
+    /// <summary>
+    /// ifauto,autoスタートの時,autoスタートじゃない時
+    /// シーン読み込み時のシナリオ自動実行判断
+    /// </summary>
+    /// <param name="trueFlag"></param>
+    /// <param name="falseFlag"></param>
+    /// <param name="isAuto"></param>
+    /// <param name="scenario"></param>
+    /// <returns></returns>
+    int CommandIfAuto(string trueFlag,string falseFlag,bool isAuto,List<string[]> scenario) {
+        int no = 0;
+        if (isAuto) {
+            no = CommandGoto(trueFlag, scenario);
+            DebugWindow.instance.DFDebug("CommandIfAuto:true:" + trueFlag);
+        }
+        else {
+            no = CommandGoto(falseFlag, scenario);
+            DebugWindow.instance.DFDebug("CommandIfAuto:false:" + falseFlag);
         }
         return no;
     }
