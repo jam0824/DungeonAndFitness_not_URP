@@ -207,7 +207,7 @@ public class ScenarioExec : MonoBehaviour
                 continue;
             }
             else if (command == "feel") {
-                labelFeelIcon = scenarioCommand.CommandFeel(line[1], labelFeelIcon);
+                labelFeelIcon = CommandFeel(line[1], labelFeelIcon);
                 no++;
                 continue;
             }
@@ -538,6 +538,20 @@ public class ScenarioExec : MonoBehaviour
             string value = line[2];
             scenarioSystem.SetSwitch(key, value);
         }
+    }
+
+    /// <summary>
+    /// FeelIconÇèoÇ∑
+    /// Smile,Angry,Sad,Surprise,Tere
+    /// </summary>
+    /// <param name="iconKey"></param>
+    public LabelFeelIcon CommandFeel(string iconKey, LabelFeelIcon labelFeelIcon) {
+        if (labelFeelIcon == null) {
+            GameObject feelObject = transform.Find("NpcSet/FeelIcon").gameObject;
+            labelFeelIcon = feelObject.GetComponent<LabelFeelIcon>();
+        }
+        labelFeelIcon.SetIcon(iconKey, transform.rotation);
+        return labelFeelIcon;
     }
 
     /// <summary>

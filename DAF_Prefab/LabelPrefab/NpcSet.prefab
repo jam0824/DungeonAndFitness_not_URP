@@ -150,6 +150,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FeelIcon
       objectReference: {fileID: 0}
+    - target: {fileID: 4409982024168313587, guid: 0598989a804d3f74da72f479419eae5b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0598989a804d3f74da72f479419eae5b, type: 3}
 --- !u!4 &4869612756271919663 stripped

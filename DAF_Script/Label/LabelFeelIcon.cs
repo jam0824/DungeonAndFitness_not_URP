@@ -18,11 +18,12 @@ public class LabelFeelIcon : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        if (gameObject.activeSelf) {
+        if (isSpriteEnabled) {
             DecreaseAlpha();
             if(alpha <= 0) {
                 alpha = 1.0f;
-                gameObject.SetActive(false);
+                isSpriteEnabled = false;
+                //gameObject.SetActive(false);
             }
         }
     }
@@ -42,11 +43,13 @@ public class LabelFeelIcon : MonoBehaviour
     }
 
     public void SetIcon(string iconKey, Quaternion r) {
+        isSpriteEnabled = true;
         gameObject.transform.rotation = r;
         spriteRenderer = GetComponent<SpriteRenderer>();
         int no = GetIconNo(iconKey);
         Sprite sp = GetSprite(no);
-        ActiveSprite(sp);
+        spriteRenderer.sprite = sp;
+        //ActiveSprite(sp);
     }
 
     int GetIconNo(string iconKey) {

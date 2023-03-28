@@ -74,19 +74,7 @@ public class ScenarioCommand : MonoBehaviour
         SingletonGeneral.instance.labelInformationText.SetInformationLabel("Save");
     }
 
-    /// <summary>
-    /// FeelIconを出す
-    /// Smile,Angry,Sad,Surprise,Tere
-    /// </summary>
-    /// <param name="iconKey"></param>
-    public LabelFeelIcon CommandFeel(string iconKey, LabelFeelIcon labelFeelIcon) {
-        if (labelFeelIcon == null) {
-            GameObject feelObject = transform.Find("NpcSet/FeelIcon").gameObject;
-            labelFeelIcon = feelObject.GetComponent<LabelFeelIcon>();
-        }
-        labelFeelIcon.SetIcon(iconKey, transform.rotation);
-        return labelFeelIcon;
-    }
+    
 
     /// <summary>
     /// 画面下のインフォメーションにメッセージを表示する
