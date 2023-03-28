@@ -1,0 +1,4 @@
+【女神】「そこにある大きな石は"テレポートストーン"ね」	[Goddess] "The large stone over there is called a 'Teleport Stone.'"
+【女神】「その石に触っておくと、地上からその階までワープすることができるわ」	[Goddess] "If you touch the stone, you can warp from the ground to that floor."
+【女神】「便利だから、見つけたら触っておくことをオススメするわ」	[Goddess] "It's convenient, so I recommend touching it when you find one."
+end	end
