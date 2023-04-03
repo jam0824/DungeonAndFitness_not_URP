@@ -8,47 +8,58 @@ public class EnemyBullet : MonoBehaviour
     public GameObject HitPrefab;
     public GameObject player { set; get; }
     GameObject Enemy;
-    Rigidbody rigidBullet;
     int ATK = 0;
     float speed = 1.0f;
-    int count = 0;
-    float waitCount = 120.0f;
-    float destroyCount = 2000.0f;
-    Vector3 scale = new Vector3(0.01f, 0.01f, 0.01f);
+    float bulletWaitTime = 2.0f;
+    float bulletSize = 1.0f;
+    const float DESTROY_COUNT = 20.0f;
     Vector3 addScale;
-    AudioSource audioSource;
     public EnemyConfig enemyConfig { set; get; }
+    bool isBecomeShotBig = false;
     
 
     // Start is called before the first frame update
     void Start()
     {
-        rigidBullet = GetComponent<Rigidbody>();
-        audioSource = GetComponent<AudioSource>();
-        float add = 1.0f / waitCount;
+        
+        float add = bulletSize / (bulletWaitTime * 72f);
         addScale = new Vector3(add, add, add);
-
+        transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
+        StartCoroutine(IEShot());
+        StartCoroutine(IEDestroy());
     }
 
     // Update is called once per frame
     void Update()
     {
+        //ìGÇ™éÄÇÒÇæÇÁíeÇè¡Ç∑
         if (enemyConfig.GetHP() <= 0) HitBullet();
-        if (count == waitCount) {
-            rigidBullet.velocity = transform.forward.normalized * speed;
-            SingletonGeneral.instance.PlayOneShot(audioSource, "NormalShot");
-            Enemy.GetComponent<EnemyAnimation>().setAttackAnim("Attack 01");
-        }
-        else if (count < waitCount) {
-            scale += addScale;
-            transform.localScale = scale;
+        //flagÇ™óßÇ¬Ç‹Ç≈ÇÕíeÇëÂÇ´Ç≠Ç∑ÇÈ
+        if (!isBecomeShotBig) {
+            BecomeShotBig(addScale);
             transform.LookAt(player.transform);
         }
+    }
 
-        count++;
-        if(count >= destroyCount) {
-            Destroy(gameObject);
-        }
+    void BecomeShotBig(Vector3 addScale) {
+        Vector3 scale = transform.localScale;
+        scale += addScale;
+        transform.localScale = scale;
+    }
+
+    IEnumerator IEShot() {
+        yield return new WaitForSeconds(bulletWaitTime);
+
+        isBecomeShotBig = true;
+        Rigidbody rigidBullet = GetComponent<Rigidbody>();
+        AudioSource audioSource = GetComponent<AudioSource>();
+        rigidBullet.velocity = transform.forward.normalized * speed;
+        SingletonGeneral.instance.PlayOneShot(audioSource, "NormalShot");
+        Enemy.GetComponent<EnemyAnimation>().setAttackAnim("Attack 01");
+    }
+    IEnumerator IEDestroy() {
+        yield return new WaitForSeconds(DESTROY_COUNT);
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -80,11 +91,15 @@ public class EnemyBullet : MonoBehaviour
         speed = spd;
     }
 
-    public void SetWaitCount(float count) {
-        waitCount = count;
+    public void SetWaitTime(float second) {
+        bulletWaitTime = second;
     }
 
     public void SetEnemyGameObject(GameObject obj) {
         Enemy = obj;
+    }
+
+    public void SetLocalSize(float size) {
+        bulletSize = size;
     }
 }

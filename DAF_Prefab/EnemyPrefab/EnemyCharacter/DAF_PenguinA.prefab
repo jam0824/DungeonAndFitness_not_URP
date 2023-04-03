@@ -295,7 +295,7 @@ Transform:
   m_GameObject: {fileID: 8184427274928049360}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 207.50888, y: -2.4051332, z: -22.052065}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 1.5000001, y: 1.5, z: 1.5000001}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8184427274928332930}
@@ -487,7 +487,9 @@ MonoBehaviour:
   NOTICE_DISTANCE: 4
   BATTLE_DISTANCE: 3.9
   BATTLE_END_DISTANCE: 4
-  PREFAB_ATTACK: {fileID: 3921183707856065298, guid: 66cc6b2a20984784c838018407898a12, type: 3}
+  BULLET_WAIT_TIME: 2
+  BULLET_LOCAL_SIZE: 0.1
+  PREFAB_ATTACK: {fileID: 5589767380146129556, guid: b89d2a79ab1a60f479c2cac11f580b43, type: 3}
   PREFAB_DIE_EFFECT: {fileID: 1570196509073578064, guid: 0393b5b101d4cd44bb0a76d678476350, type: 3}
   DROP_ITEMS:
   - 502

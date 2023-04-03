@@ -1,0 +1,2 @@
+scene,Dungeon01F,Anchor_DungeonFromNext	scene,Dungeon01F,Anchor_DungeonFromNext
+end	end

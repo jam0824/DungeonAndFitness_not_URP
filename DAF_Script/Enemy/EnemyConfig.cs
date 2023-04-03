@@ -17,6 +17,8 @@ public class EnemyConfig : MonoBehaviour
     public float NOTICE_DISTANCE;
     public float BATTLE_DISTANCE;
     public float BATTLE_END_DISTANCE;
+    public float BULLET_WAIT_TIME = 2f;
+    public float BULLET_LOCAL_SIZE = 1f;
     public GameObject PREFAB_ATTACK;
     public GameObject PREFAB_DIE_EFFECT;
 
@@ -107,6 +109,12 @@ public class EnemyConfig : MonoBehaviour
         return DROP_ITEMS;
     }
 
+    public float GetBulletWaitTime() {
+        return BULLET_WAIT_TIME;
+    }
+    public float GetBulletLocalSize() {
+        return BULLET_LOCAL_SIZE;
+    }
 
     public void SetATK(int atk) {
         ATK = atk;

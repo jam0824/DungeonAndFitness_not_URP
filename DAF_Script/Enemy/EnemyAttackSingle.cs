@@ -53,12 +53,12 @@ public class EnemyAttackSingle : MonoBehaviour, IEnemyAttack
         EnemyView enemyView)
     {
         EnemyBullet enemyBullet = shot.GetComponent<EnemyBullet>();
-        int atk = config.GetATK();
-        float spd = config.GetSPD();
         enemyBullet.player = enemyView.Face;
-        enemyBullet.SetSPD(spd);
-        enemyBullet.SetATK(atk);
+        enemyBullet.SetSPD(config.GetSPD());
+        enemyBullet.SetATK(config.GetATK());
         enemyBullet.SetEnemyGameObject(gameObject);
+        enemyBullet.SetWaitTime(config.GetBulletWaitTime());
+        enemyBullet.SetLocalSize(config.GetBulletLocalSize());
         enemyBullet.enemyConfig = enemyView.enemyConfig;
         return enemyBullet;
     }
