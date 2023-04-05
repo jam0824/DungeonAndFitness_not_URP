@@ -61,6 +61,8 @@ public class EnemyView : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.tag == "PlayerAttack") {
+            //HPがゼロだったら判定させない
+            if (enemyConfig.GetHP() <= 0) return;
             HandsScript handsScript = collision.gameObject.GetComponent<HandsScript>();
             //ダメージロック中は計算しない
             if (handsScript.GetDamageLock()) return;
@@ -231,7 +233,7 @@ public class EnemyView : MonoBehaviour
     //アイテムドロップ率。高い、低い、レアの3パターン
     string SelectDropItem() {
         string itemNo = "";
-        float r = Random.RandomRange(0.0f, 1.0f);
+        float r = Random.Range(0.0f, 1.0f);
         DebugWindow.instance.DFDebug("itemDropRate:" + r);
         if (r <= itemDropProbability["HighProbability"])
             itemNo = enemyConfig.GetDropItems()[0];

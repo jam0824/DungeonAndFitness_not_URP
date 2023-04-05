@@ -121,6 +121,7 @@ public class ItemDB : MonoBehaviour
         Dictionary<string, int> itemPrefabName = new Dictionary<string, int>();
         itemPrefabName.Add("bag", 0);
         itemPrefabName.Add("meat", 1);
+        itemPrefabName.Add("greenpowder", 2);
         return itemPrefabName;
     }
 
