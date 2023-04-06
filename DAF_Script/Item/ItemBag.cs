@@ -7,8 +7,12 @@ public class ItemBag : MonoBehaviour
 {
     public string itemNo { set; get; }
 
-    string KANTEI_ITEM_NO = "1";
+    const string KANTEI_ITEM_NO = "1";
+    const float SECOND_OF_DESCRIPTION_FADE = 4.0f;
+    const float DEC_ALPHA = 1.0f / (SECOND_OF_DESCRIPTION_FADE * 72f);
+
     public string DECIDED_ITEM_NO = "";
+    
     OVRGrabbable ovrGrabbable;
     DungeonSystem dungeonSystem;
     LabelSystem labelSystem;
@@ -21,6 +25,10 @@ public class ItemBag : MonoBehaviour
 
     public string labelKey;
     string label;
+
+    bool isGrabbedMe = false;
+
+    
 
 
     private void Awake() {
@@ -39,15 +47,44 @@ public class ItemBag : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //ó£Ç≥ÇÍÇƒÇ¢ÇÈÇ∆Ç´
         if (ovrGrabbable.isGrabbed == false) {
-            if (itemDescription.enabled == true) itemDescription.enabled = false;
+            ResetState();
             return;
         }
-        
+        //âΩÇ©íÕÇÒÇ≈Ç¢ÇÈÇ∆Ç´
         Grabing();
+        itemDescription = DecreaseColor(itemDescription);
         RotateDescription(face);
         playerView.SetEnableItemBox();
+    }
+
+    void ResetState() {
+        if (isGrabbedMe == true) {
+            isGrabbedMe = false;
+            itemDescription = ResetColor(itemDescription);
+            itemDescription.enabled = false;
+        }
+        return;
+    }
+
+    TextMeshPro ResetColor(TextMeshPro textMeshPro) {
+        Color c = textMeshPro.color;
+        c.a = 1.0f;
+        textMeshPro.color = c;
+        return textMeshPro;
+    }
+
+    void Grabing() {
+        //ÇÕÇ∂ÇﬂÇƒíÕÇ‹ÇÍÇΩéû
+        if (itemNo == null) ItemBagInit("-1");
+
+        if (isGrabbedMe == false) {
+            isGrabbedMe = true;
+            itemDescription.enabled = true;
+            itemDescription.text = MakeDescription(itemData, label);
+            CheckGrabber();
+        }
     }
 
     void RotateDescription(GameObject face) {
@@ -59,18 +96,7 @@ public class ItemBag : MonoBehaviour
         ItemBagDescriptionObject.transform.rotation = r;
     }
 
-    void Grabing() {
-        //ÇÕÇ∂ÇﬂÇƒíÕÇ‹ÇÍÇΩéû
-        if (itemNo == null) ItemBagInit("-1");
-
-        if(itemDescription.enabled == false) {
-            itemDescription.enabled = true;
-            itemDescription.text = MakeDescription(itemData, label);
-            CheckGrabber();
-        }
-
-        
-    }
+    
 
     /// <summary>
     /// èâä˙âªÅB
@@ -122,5 +148,14 @@ public class ItemBag : MonoBehaviour
 
     public void DestroyItem() {
         Destroy(gameObject);
+    }
+
+    TextMeshPro DecreaseColor(TextMeshPro textMeshPro) {
+        if (textMeshPro.color.a <= 0.0f) return textMeshPro;
+        Color c = textMeshPro.color;
+        c.a -= DEC_ALPHA;
+        if (c.a < 0f) c.a = 0f;
+        textMeshPro.color = c;
+        return textMeshPro;
     }
 }
