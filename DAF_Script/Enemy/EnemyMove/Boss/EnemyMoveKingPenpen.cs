@@ -9,7 +9,8 @@ public class EnemyMoveKingPenpen : EnemyMoveParent, IEnemyMove
     bool canWalk = true;
     bool isLook = false;
     const float CAN_WALK_INTERVAL_AFTER_SHOT = 6f;
-
+    const string ANIMATION_ATTACK = "Attack 01";
+    [SerializeField] private GameObject spawnEnemy;
 
     /// <summary>
     /// ActionModeがRandomの時
@@ -114,7 +115,15 @@ public class EnemyMoveKingPenpen : EnemyMoveParent, IEnemyMove
         while (true) {
             yield return new WaitForSeconds(waitTime);
             canWalk = false;
-            AttackShot(enemyView);
+
+            float randomValue = Random.Range(0f, 1f);
+
+            if (randomValue < 0.5f) {
+                AttackShot(enemyView);
+            }
+            else {
+                Spawn(spawnEnemy, enemyAnimation);
+            }
         }
     }
 
@@ -123,6 +132,40 @@ public class EnemyMoveKingPenpen : EnemyMoveParent, IEnemyMove
         enemyView.enemyAnimation.SetWalkAnim(false);
         enemyAttack.StartAttack(view);
         StartCoroutine(ChangeCanWalk(CAN_WALK_INTERVAL_AFTER_SHOT));
+    }
+
+    void Spawn(GameObject enemy, EnemyAnimation enemyAnimation) {
+        
+        GameObject instancedEnemy = Instantiate(
+            enemy,
+            GetRandomPositionWithinRadius(gameObject.transform.position, 5f), 
+            GetRandomYRotation());
+        enemyAnimation.setAttackAnim(ANIMATION_ATTACK);
+    }
+
+    /// <summary>
+    /// 指定したpositionからradiusの範囲でランダムな位置を返す。
+    /// ただしyは+1mで固定
+    /// </summary>
+    /// <param name="origin"></param>
+    /// <param name="radius"></param>
+    /// <returns></returns>
+    Vector3 GetRandomPositionWithinRadius(Vector3 origin, float radius) {
+        Vector3 randomDirection = Random.insideUnitSphere * radius;
+        randomDirection.y = 0; // y方向の成分を0にリセット
+        Vector3 randomPosition = origin + randomDirection;
+        randomPosition.y += 1f; // y座標を+1mに固定
+        return randomPosition;
+    }
+
+    /// <summary>
+    /// yがランダムなQuaternionを返す
+    /// </summary>
+    /// <returns></returns>
+    Quaternion GetRandomYRotation() {
+        float randomYAngle = Random.Range(0f, 360f); // 0から360度の範囲でランダムなy軸の角度を生成
+        Quaternion randomYRotation = Quaternion.Euler(0, randomYAngle, 0); // y軸の角度を使用してQuaternionを生成
+        return randomYRotation;
     }
 
     IEnumerator ChangeCanWalk(float waitTime) {
