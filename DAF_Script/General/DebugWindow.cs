@@ -64,10 +64,12 @@ public class DebugWindow : MonoBehaviour
         }
         DataSystem.instance.log = line + DataSystem.instance.log;
 
+        /*
         if (!SingletonGeneral.instance.GetDebugMode()) {
             if(gameObject.activeSelf) gameObject.SetActive(false);
             return;
         }
+        */
         cText.text = DataSystem.instance.log;
     }
 

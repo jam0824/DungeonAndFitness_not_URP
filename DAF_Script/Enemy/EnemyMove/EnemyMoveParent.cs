@@ -8,6 +8,7 @@ public class EnemyMoveParent : MonoBehaviour
     [HideInInspector] public EnemyConfig config;
     [HideInInspector] public EnemyAnimation enemyAnimation;
     [HideInInspector] public IEnemyAttack enemyAttack;
+    [HideInInspector] public string state = "Walk";
 
     public enum STATE_TYPE
     {
@@ -16,7 +17,7 @@ public class EnemyMoveParent : MonoBehaviour
         BATTLE
     };
 
-    public string state = "Walk";
+    
 
     float DELETE_Y = -30.0f;
 

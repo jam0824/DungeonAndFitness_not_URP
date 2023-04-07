@@ -104,5 +104,20 @@ namespace FQCommon
             File.WriteAllText(path, text);
         }
 
+        /// <summary>
+        /// SourcePosition‚©‚çtargetPosition‚ÉŒü‚©‚Á‚Ädistance‚¾‚¯‹ß‚Ã‚¢‚½ˆÊ’u‚ð•Ô‚·
+        /// </summary>
+        /// <param name="distance"></param>
+        /// <param name="sourcePosition"></param>
+        /// <param name="targetPosition"></param>
+        /// <returns></returns>
+        static public Vector3 GetPositionCloserToPoint(
+            float distance,
+            Vector3 sourcePosition,
+            Vector3 targetPosition) 
+        {
+            Vector3 direction = (targetPosition - sourcePosition).normalized * distance;
+            return sourcePosition + direction;
+        }
     }
 }

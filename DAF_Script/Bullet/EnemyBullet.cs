@@ -15,6 +15,7 @@ public class EnemyBullet : MonoBehaviour
     const float DESTROY_COUNT = 20.0f;
     Vector3 addScale;
     public EnemyConfig enemyConfig { set; get; }
+    public GameObject firePosition { set; get; }
     bool isBecomeShotBig = false;
     
 
@@ -37,6 +38,7 @@ public class EnemyBullet : MonoBehaviour
         //flag‚ª—§‚Â‚Ü‚Å‚Í’e‚ð‘å‚«‚­‚·‚é
         if (!isBecomeShotBig) {
             BecomeShotBig(addScale);
+            gameObject.transform.position = firePosition.transform.position;
             transform.LookAt(player.transform);
         }
     }

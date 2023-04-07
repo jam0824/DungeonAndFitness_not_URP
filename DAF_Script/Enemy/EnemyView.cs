@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class EnemyView : MonoBehaviour
 {
-    float addForce = 1000.0f;
-    float BLOW_OFF_IMPACT = 1500.0f;
+    const float MAX_DAMAGE_TEXT_SCALE = 1.2f;//MINと合計なので1.7fまで
+    const float MIN_DAMAGE_TEXT_SCALE = 0.5f;
+    const float OFFSET_DAMAGE_TEXT_POS = 0.3f;
+    const float ADD_FORCE = 1000.0f;
+    const float BLOW_OFF_IMPACT = 1500.0f;
     public GameObject Player { get; set; }
     public GameObject Face { get; set; }
     public EnemyConfig enemyConfig { get; set; }
@@ -22,10 +25,9 @@ public class EnemyView : MonoBehaviour
         {"MiddleProbability", 0.1f },
         {"RareProbability", 0.01f }
     };
-    float HIT_STOP = 0.1f;
     bool isBlowOff = false;
 
-    public bool isGameObjectLoaded = false;
+    [HideInInspector] public bool isGameObjectLoaded = false;
     DungeonSystem dungeonSystem;
 
     private void Awake() {
@@ -66,31 +68,48 @@ public class EnemyView : MonoBehaviour
             HandsScript handsScript = collision.gameObject.GetComponent<HandsScript>();
             //ダメージロック中は計算しない
             if (handsScript.GetDamageLock()) return;
-
             //ArmorのIsTriggerをtrueにして透過するようにする
             handsScript.SetIsTrigger(true);
-            float impact = enemyDamage.GetImpact(collision);
-            int damage = enemyDamage.Damage(collision, impact, Player, enemyConfig);
-            DebugWindow.instance.DFDebug("impact:" + impact);
-            if (damage > 0) {
-                ContactPoint contact = collision.contacts[0];
-                int hp = enemyConfig.calcHp(damage);
-                makeHitEffect(contact, damage, impact);
-                SetDamageAnimation(handsScript, contact, hp, impact);
-                //ひとつの腕で複数ダメージがあるときがあるのでロック
-                handsScript.SetDamageLock();
-                //近づいて攻撃した場合ではないときに気づかせる
-                ChangeEnemyStatus();
-                DebugWindow.instance.DFDebug("敵は" + damage + "のダメージ！");
-            }
+            //ダメージ計算
+            DamageCalculation(collision, handsScript, Player, enemyConfig);
         }
-        //吹っ飛んでいる最中なら
-        if (isBlowOff) {
-            if (collision.gameObject.tag == "Wall") 
-                makeHitSE("BlowOffAndHitWall");
-            if (collision.gameObject.tag == "Ground") 
-                DeleteEnemyMain();
+        //吹っ飛んでいる最中かチェック
+        CheckBlowOff(collision, isBlowOff);
+    }
+
+    /// <summary>
+    /// ダメージ計算
+    /// </summary>
+    /// <param name="collision"></param>
+    /// <param name="handsScript"></param>
+    /// <param name="player"></param>
+    /// <param name="config"></param>
+    void DamageCalculation(
+        Collision collision, 
+        HandsScript handsScript, 
+        GameObject player, 
+        EnemyConfig config) 
+    {
+        float impact = enemyDamage.GetImpact(collision);
+        int damage = enemyDamage.Damage(collision, impact, player, config);
+        DebugWindow.instance.DFDebug("impact:" + impact);
+        if (damage > 0) {
+            ContactPoint contact = collision.contacts[0];
+            int hp = enemyConfig.calcHp(damage);
+            MakeHitEffectAndText(contact, damage, impact);
+            SetDamageAnimation(handsScript, contact, hp, impact);
+            //ひとつの腕で複数ダメージがあるときがあるのでロック
+            handsScript.SetDamageLock();
+            //近づいて攻撃した場合ではないときに気づかせる
+            ChangeEnemyStatus();
+            DebugWindow.instance.DFDebug("敵は" + damage + "のダメージ！");
         }
+    }
+
+    void CheckBlowOff(Collision collision, bool isBlowOff) {
+        if (!isBlowOff) return;
+        if (collision.gameObject.tag == "Wall") makeHitSE("BlowOffAndHitWall");
+        if (collision.gameObject.tag == "Ground") DeleteEnemyMain();
     }
 
     /// <summary>
@@ -120,7 +139,7 @@ public class EnemyView : MonoBehaviour
                 handsScript.VivrationArmor(0.5f, 1f, 1f);
                 isBlowOff = true;
                 enemyAnimation.SetDamageAnim();
-                ExecBlowOff(contact, impact, addForce);
+                ExecBlowOff(contact, impact, ADD_FORCE);
             }
             else {
                 //コントローラーを振動させる
@@ -174,7 +193,7 @@ public class EnemyView : MonoBehaviour
         GetComponent<Rigidbody>().AddForceAtPosition(direction, pos, ForceMode.Impulse);
     }
 
-    public void makeHitEffect(ContactPoint contact, int damage, float impact) {
+    public void MakeHitEffectAndText(ContactPoint contact, int damage, float impact) {
         //向きは顔の向きを取る
         Quaternion r = Face.transform.rotation;
         r.x = 0.0f;
@@ -184,13 +203,19 @@ public class EnemyView : MonoBehaviour
         GameObject hit = Instantiate(PunchHitPrefab, contact.point, r);
         //ダメージ数字
         GameObject damageText = dungeonSystem.GetDamageTextFromPool();
-        float scaleTimes = 1 + (impact * 0.0001f);
-        damageText.GetComponent<TMP_AlphaAndDestroy>().SetDamage(
-            damage, 
-            contact.point, 
-            r, 
-            scaleTimes);
+        float scaleTimes = MIN_DAMAGE_TEXT_SCALE + Mathf.Min(impact * 0.0001f, MAX_DAMAGE_TEXT_SCALE);
         
+        // ダメージテキストの位置を調整するオフセットを設定
+        Vector3 adjustedPosition = FQCommon.Common.GetPositionCloserToPoint(
+            OFFSET_DAMAGE_TEXT_POS, 
+            contact.point, 
+            Face.transform.position);
+        //ダメージ表示
+        damageText.GetComponent<TMP_AlphaAndDestroy>().SetDamage(
+            damage,
+            adjustedPosition,
+            r,
+            scaleTimes);
     }
 
     /// <summary>
