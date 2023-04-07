@@ -5,27 +5,28 @@ using TMPro;
 
 public class ItemBag : MonoBehaviour
 {
+
     public string itemNo { set; get; }
+    public DungeonSystem dungeonSystem { get; set; }
+    public LabelSystem labelSystem { get; set; }
+    public PlayerView playerView { get; set; }
+    [SerializeField] private GameObject itemBagDescriptionObject;
+    [SerializeField] private TextMeshPro itemDescription;
+    public string labelKey;
 
     const string KANTEI_ITEM_NO = "1";
+    const string RANDOM_ITEM = "-1";
     const float SECOND_OF_DESCRIPTION_FADE = 4.0f;
     const float DEC_ALPHA = 1.0f / (SECOND_OF_DESCRIPTION_FADE * 72f);
 
     public string DECIDED_ITEM_NO = "";
     
     OVRGrabbable ovrGrabbable;
-    DungeonSystem dungeonSystem;
-    LabelSystem labelSystem;
+    
     Dictionary<string, string> itemData;
     GameObject face;
-    PlayerView playerView;
-    public GameObject ItemBagDescriptionObject;
-    public TextMeshPro itemDescription;
-
-
-    public string labelKey;
+    
     string label;
-
     bool isGrabbedMe = false;
 
     
@@ -33,7 +34,7 @@ public class ItemBag : MonoBehaviour
 
     private void Awake() {
         ovrGrabbable = GetComponent<OVRGrabbable>();
-        dungeonSystem = GameObject.Find("DungeonSystem").GetComponent<DungeonSystem>();
+        dungeonSystem = dungeonSystem ?? GameObject.Find("DungeonSystem").GetComponent<DungeonSystem>();
     }
 
     // Start is called before the first frame update
@@ -53,9 +54,11 @@ public class ItemBag : MonoBehaviour
             return;
         }
         //何か掴んでいるとき
-        Grabing();
+        Grabbing();
         itemDescription = DecreaseColor(itemDescription);
-        RotateDescription(face);
+        itemBagDescriptionObject.transform.rotation = RotateDescription(
+            itemBagDescriptionObject.transform, 
+            face.transform);
         playerView.SetEnableItemBox();
     }
 
@@ -65,7 +68,6 @@ public class ItemBag : MonoBehaviour
             itemDescription = ResetColor(itemDescription);
             itemDescription.enabled = false;
         }
-        return;
     }
 
     TextMeshPro ResetColor(TextMeshPro textMeshPro) {
@@ -75,9 +77,9 @@ public class ItemBag : MonoBehaviour
         return textMeshPro;
     }
 
-    void Grabing() {
+    void Grabbing() {
         //はじめて掴まれた時
-        if (itemNo == null) ItemBagInit("-1");
+        if (itemNo == null) ItemBagInit(RANDOM_ITEM);
 
         if (isGrabbedMe == false) {
             isGrabbedMe = true;
@@ -87,16 +89,17 @@ public class ItemBag : MonoBehaviour
         }
     }
 
-    void RotateDescription(GameObject face) {
-        if (itemDescription.enabled == false) return;
+    Quaternion RotateDescription(Transform textTransform, Transform faceTransform) {
+        if (itemDescription.enabled == false) return textTransform.rotation;
 
-        Quaternion r = face.transform.rotation;
-        r.x = 0.0f;
-        r.z = 0.0f;
-        ItemBagDescriptionObject.transform.rotation = r;
+        Quaternion r = Quaternion.Euler(
+            0f, 
+            faceTransform.rotation.eulerAngles.y, 
+            0f);
+        return r;
     }
 
-    
+
 
     /// <summary>
     /// 初期化。
@@ -104,17 +107,12 @@ public class ItemBag : MonoBehaviour
     /// </summary>
     /// <param name="no"></param>
     public void ItemBagInit(string no) {
-        if(no == "-1") {
-            //noが-1だったときは掴まれた時に何のアイテムか決定する
-            itemNo = dungeonSystem.GetItemNo();
-        }
-        else {
-            //-1以外だったらアイテムno指定で作成する
-            itemNo = no;
-        }
+        //noが-1だったときは掴まれた時に何のアイテムか決定する
+        //-1以外だったらアイテムno指定で作成する
+        itemNo = (no == RANDOM_ITEM) ? dungeonSystem.GetItemNo() : no;
 
-        labelSystem = SingletonGeneral.instance.labelSystem;
-        playerView = GameObject.Find("Player").GetComponent<PlayerView>();
+        labelSystem = labelSystem ?? SingletonGeneral.instance.labelSystem;
+        playerView = playerView ?? GameObject.Find("Player").GetComponent<PlayerView>();
         label = labelSystem.GetLabel(labelKey);
         itemData = SingletonGeneral.instance.itemDb.GetItemData(itemNo);
 
@@ -153,8 +151,7 @@ public class ItemBag : MonoBehaviour
     TextMeshPro DecreaseColor(TextMeshPro textMeshPro) {
         if (textMeshPro.color.a <= 0.0f) return textMeshPro;
         Color c = textMeshPro.color;
-        c.a -= DEC_ALPHA;
-        if (c.a < 0f) c.a = 0f;
+        c.a = Mathf.Max(c.a - DEC_ALPHA, 0f);
         textMeshPro.color = c;
         return textMeshPro;
     }

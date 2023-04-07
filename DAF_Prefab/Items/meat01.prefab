@@ -116,9 +116,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8aff1ff91127be4d8e265b41133e140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemBagDescriptionObject: {fileID: 4264731454880799747}
+  itemBagDescriptionObject: {fileID: 4264731454880799747}
   itemDescription: {fileID: 4264731454880799746}
   labelKey: OpenItemBox
+  DECIDED_ITEM_NO: 
 --- !u!114 &2440460484108593345
 MonoBehaviour:
   m_ObjectHideFlags: 0

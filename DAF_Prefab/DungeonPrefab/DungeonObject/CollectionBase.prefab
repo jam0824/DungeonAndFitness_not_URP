@@ -113,6 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isStartCheck: 1
   scenario: {fileID: 4900000, guid: 7fde0855101b9e04c9c562474c5d37c5, type: 3}
+  useObjects: []
 --- !u!1001 &8390895947836851395
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -124,6 +125,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CollectionItem
       objectReference: {fileID: 0}
+    - target: {fileID: 64610140226019022, guid: aa04a88ab66940540acc55e07fb3350b, type: 3}
+      propertyPath: itemBagDescriptionObject
+      value: 
+      objectReference: {fileID: 6966142491074600585}
     - target: {fileID: 68941929385609476, guid: aa04a88ab66940540acc55e07fb3350b, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -170,6 +175,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa04a88ab66940540acc55e07fb3350b, type: 3}
+--- !u!1 &6966142491074600585 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1503857886362933834, guid: aa04a88ab66940540acc55e07fb3350b, type: 3}
+  m_PrefabInstance: {fileID: 8390895947836851395}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8396571425921322439 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 68941929385609476, guid: aa04a88ab66940540acc55e07fb3350b, type: 3}
